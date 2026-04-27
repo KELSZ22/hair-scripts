@@ -1,0 +1,464 @@
+<section
+  id="risk-free-guarantee-{{ section.id }}"
+  class="risk-free-guarantee-section"
+  style="
+    --rfg-section-bg: {{ section.settings.section_bg }};
+    --rfg-heading-color: {{ section.settings.heading_color }};
+    --rfg-subheading-color: {{ section.settings.subheading_color }};
+    --rfg-text-color: {{ section.settings.text_color }};
+    --rfg-card-bg: {{ section.settings.card_bg }};
+    --rfg-card-border: {{ section.settings.card_border }};
+    --rfg-card-number: {{ section.settings.card_number_color }};
+    --rfg-card-title: {{ section.settings.card_title_color }};
+    --rfg-card-text: {{ section.settings.card_text_color }};
+    --rfg-button-bg: {{ section.settings.button_bg }};
+    --rfg-button-text: {{ section.settings.button_text }};
+    --rfg-badge-bg: {{ section.settings.badge_bg }};
+    --rfg-badge-text: {{ section.settings.badge_text }};
+    --rfg-bottom-text: {{ section.settings.bottom_text_color }};
+  "
+>
+  <div class="rfg-wrap">
+    <div class="rfg-header">
+      {% if section.settings.eyebrow != blank %}
+        <div class="rfg-eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="rfg-heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="rfg-subheading">{{ section.settings.subheading }}</div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="rfg-cards">
+        {% for block in section.blocks %}
+          <div class="rfg-card" {{ block.shopify_attributes }}>
+            {% if block.settings.badge != blank %}
+              <div class="rfg-badge">{{ block.settings.badge }}</div>
+            {% endif %}
+
+            {% if block.settings.number != blank %}
+              <div class="rfg-number">{{ block.settings.number }}</div>
+            {% endif %}
+
+            {% if block.settings.unit != blank %}
+              <div class="rfg-unit">{{ block.settings.unit }}</div>
+            {% endif %}
+
+            {% if block.settings.title != blank %}
+              <h3 class="rfg-card-title">{{ block.settings.title }}</h3>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <div class="rfg-card-text">
+                {{ block.settings.text }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.button_label != blank %}
+              <a
+                href="{{ block.settings.button_link | default: '#' }}"
+                class="rfg-button"
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.bottom_text != blank %}
+      <div class="rfg-bottom-text">
+        {{ section.settings.bottom_text }}
+      </div>
+    {% endif %}
+  </div>
+
+  <style>
+    #risk-free-guarantee-{{ section.id }} {
+      background: var(--rfg-section-bg);
+      padding: 44px 20px 38px;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-header {
+      max-width: 640px;
+      margin: 0 auto 26px;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-eyebrow {
+      margin-bottom: 8px;
+      color: var(--rfg-text-color);
+      font-size: 11px;
+      line-height: 1.2;
+      opacity: 0.9;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-heading {
+      margin: 0 0 8px;
+      color: var(--rfg-heading-color);
+      font-size: 36px;
+      line-height: 1;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-subheading {
+      color: var(--rfg-subheading-color);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-cards {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 14px;
+      flex-wrap: wrap;
+      max-width: 760px;
+      margin: 0 auto 22px;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-card {
+      position: relative;
+      width: 100%;
+      max-width: 270px;
+      min-height: 290px;
+      padding: 18px 18px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--rfg-card-border);
+      background: var(--rfg-card-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-badge {
+      position: absolute;
+      top: -10px;
+      left: 18px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--rfg-badge-bg);
+      color: var(--rfg-badge-text);
+      font-size: 9px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-number {
+      color: var(--rfg-card-number);
+      font-size: 64px;
+      line-height: 0.95;
+      font-weight: 400;
+      margin-top: 6px;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-unit {
+      color: var(--rfg-card-text);
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-card-title {
+      margin: 0 0 10px;
+      color: var(--rfg-card-title);
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 400;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-card-text {
+      color: var(--rfg-card-text);
+      font-size: 11px;
+      line-height: 1.55;
+      margin-bottom: 16px;
+      max-width: 210px;
+      flex: 1 1 auto;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-card-text p {
+      margin: 0;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: var(--rfg-button-bg);
+      color: var(--rfg-button-text);
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-button:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    #risk-free-guarantee-{{ section.id }} .rfg-bottom-text {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--rfg-bottom-text);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    @media screen and (max-width: 767px) {
+      #risk-free-guarantee-{{ section.id }} {
+        padding: 34px 14px 30px;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-heading {
+        font-size: 28px;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-subheading {
+        font-size: 13px;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-cards {
+        gap: 16px;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-card {
+        max-width: 100%;
+        min-height: auto;
+        padding: 20px 16px 18px;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-number {
+        font-size: 54px;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-card-text {
+        max-width: 100%;
+      }
+
+      #risk-free-guarantee-{{ section.id }} .rfg-bottom-text {
+        font-size: 11px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Risk free guarantee",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "RISK-FREE."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See the difference, or get every penny back."
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Brya's pharmaceutical background shaped a formula built on real science. She stands behind it with a guarantee most brands won't offer."
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#5aa7a6"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#f7f1e7"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#f4efe7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Small text color",
+      "default": "#edf8f6"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "rgba(255,255,255,0.08)"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border",
+      "default": "#b7d7d4"
+    },
+    {
+      "type": "color",
+      "id": "card_number_color",
+      "label": "Card number color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#f7f1e7"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#edf8f6"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#4a8f8d"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge background",
+      "default": "#d6a539"
+    },
+    {
+      "type": "color",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bottom_text_color",
+      "label": "Bottom text color",
+      "default": "#f4efe7"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "guarantee_card",
+      "name": "Guarantee card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "Recommended"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Big number",
+          "default": "90"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "Unit text",
+          "default": "Days"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "The 90-Day Hair Reset"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Card text",
+          "default": "<p>Hair grows in 90 day cycles. Give the formula time to work your body and roots according to how your body is responding.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Get 90 Days of Haircare"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    {
+      "name": "Risk free guarantee",
+      "blocks": [
+        {
+          "type": "guarantee_card",
+          "settings": {
+            "badge": "Recommended",
+            "number": "90",
+            "unit": "Days",
+            "title": "The 90-Day Hair Reset",
+            "text": "<p>Hair grows in 90 day cycles. Give the formula time to work your body and roots according to how your body is responding.</p>",
+            "button_label": "Get 90 Days of Haircare"
+          }
+        },
+        {
+          "type": "guarantee_card",
+          "settings": {
+            "badge": "",
+            "number": "30",
+            "unit": "Days",
+            "title": "Feel It in Month One",
+            "text": "<p>Try it for 30 days. If you don't notice any meaningful shift in how your hair feels, we'll refund every penny.</p>",
+            "button_label": "I Can Risk This"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

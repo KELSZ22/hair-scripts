@@ -1,0 +1,421 @@
+<section
+  id="real-results-women-{{ section.id }}"
+  class="real-results-women-section"
+  style="
+    --rrw-section-bg: {{ section.settings.section_bg }};
+    --rrw-card-bg: {{ section.settings.card_bg }};
+    --rrw-heading-color: {{ section.settings.heading_color }};
+    --rrw-text-color: {{ section.settings.text_color }};
+    --rrw-muted-color: {{ section.settings.muted_color }};
+    --rrw-border-color: {{ section.settings.border_color }};
+    --rrw-stat-number-color: {{ section.settings.stat_number_color }};
+    --rrw-stat-label-color: {{ section.settings.stat_label_color }};
+  "
+>
+  <div class="real-results-women__wrap">
+    <div class="real-results-women__card">
+      <div class="real-results-women__media">
+        <div class="real-results-women__image-col">
+          <div class="real-results-women__image-wrap">
+            {% if section.settings.before_image != blank %}
+              <img
+                src="{{ section.settings.before_image | image_url: width: 900 }}"
+                alt="{{ section.settings.before_image.alt | default: section.settings.before_label | escape }}"
+                loading="lazy"
+                width="{{ section.settings.before_image.width }}"
+                height="{{ section.settings.before_image.height }}"
+                class="real-results-women__image"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'real-results-women__image real-results-women__placeholder' }}
+            {% endif %}
+          </div>
+
+          {% if section.settings.before_label != blank %}
+            <div class="real-results-women__caption">{{ section.settings.before_label }}</div>
+          {% endif %}
+        </div>
+
+        <div class="real-results-women__image-col">
+          <div class="real-results-women__image-wrap">
+            {% if section.settings.after_image != blank %}
+              <img
+                src="{{ section.settings.after_image | image_url: width: 900 }}"
+                alt="{{ section.settings.after_image.alt | default: section.settings.after_label | escape }}"
+                loading="lazy"
+                width="{{ section.settings.after_image.width }}"
+                height="{{ section.settings.after_image.height }}"
+                class="real-results-women__image"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'real-results-women__image real-results-women__placeholder' }}
+            {% endif %}
+          </div>
+
+          {% if section.settings.after_label != blank %}
+            <div class="real-results-women__caption">{{ section.settings.after_label }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="real-results-women__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="real-results-women__title">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="real-results-women__description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="real-results-women__stats">
+            {% for block in section.blocks %}
+              <div class="real-results-women__stat" {{ block.shopify_attributes }}>
+                {% if block.settings.number != blank %}
+                  <div class="real-results-women__stat-number">{{ block.settings.number }}</div>
+                {% endif %}
+
+                {% if block.settings.label != blank %}
+                  <div class="real-results-women__stat-label">{{ block.settings.label }}</div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #real-results-women-{{ section.id }} {
+      background: var(--rrw-section-bg);
+      padding: 40px 20px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__card {
+      background: var(--rrw-card-bg);
+      border: 1px solid var(--rrw-border-color);
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__media {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__image-col {
+      min-width: 0;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__image-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #f3eee8;
+      aspect-ratio: 0.72 / 1;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__image,
+    #real-results-women-{{ section.id }} .real-results-women__image-wrap svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__caption {
+      margin-top: 8px;
+      text-align: center;
+      color: var(--rrw-muted-color);
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__content {
+      min-width: 0;
+      padding: 6px 4px 4px 0;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__title {
+      margin: 0 0 12px;
+      color: var(--rrw-heading-color);
+      font-size: 32px;
+      line-height: 1.05;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__description {
+      margin: 0 0 18px;
+      color: var(--rrw-text-color);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 620px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__description p {
+      margin: 0;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat {
+      min-height: 95px;
+      border: 1px solid var(--rrw-border-color);
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat-number {
+      color: var(--rrw-stat-number-color);
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat-label {
+      color: var(--rrw-stat-label-color);
+      font-size: 10px;
+      line-height: 1.35;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      max-width: 120px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__placeholder {
+      color: rgba(0, 0, 0, 0.18);
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    @media screen and (max-width: 989px) {
+      #real-results-women-{{ section.id }} .real-results-women__card {
+        grid-template-columns: 1fr;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__content {
+        padding-right: 0;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__title {
+        font-size: 28px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      #real-results-women-{{ section.id }} {
+        padding: 28px 14px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__card {
+        padding: 14px;
+        gap: 16px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__title {
+        font-size: 22px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__description {
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat {
+        min-height: 82px;
+        padding: 12px 8px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-number {
+        font-size: 24px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-label {
+        font-size: 9px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      #real-results-women-{{ section.id }} .real-results-women__media {
+        gap: 8px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__caption {
+        font-size: 10px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Real results women",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "After"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Results, From Real Women"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#f8f4ee"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#5e5147"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description color",
+      "default": "#8b7f74"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Small label color",
+      "default": "#8b7f74"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#d8cfc5"
+    },
+    {
+      "type": "color",
+      "id": "stat_number_color",
+      "label": "Stat number color",
+      "default": "#5e5147"
+    },
+    {
+      "type": "color",
+      "id": "stat_label_color",
+      "label": "Stat label color",
+      "default": "#8b7f74"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "34%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Users saw improvement"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Real results women",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "34%",
+            "label": "Users saw less shedding"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "78%",
+            "label": "Users noticed stronger strands"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "35%",
+            "label": "Users saw improved scalp health"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "9X",
+            "label": "Visible satisfaction"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

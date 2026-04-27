@@ -1,0 +1,733 @@
+{% liquid
+  assign badge_blocks = section.blocks | where: 'type', 'badge'
+  assign proof_blocks = section.blocks | where: 'type', 'proof'
+%}
+
+<section id="hs-hair-hero-{{ section.id }}" class="hs-hair-hero">
+  <div class="hs-hair-hero__media-bg">
+    {% if section.settings.mobile_background_image != blank %}
+      <picture>
+        <source media="(max-width: 767px)" srcset="{{ section.settings.mobile_background_image | image_url: width: 1200 }}">
+        {% if section.settings.background_image != blank %}
+          <img
+            src="{{ section.settings.background_image | image_url: width: 2400 }}"
+            alt="{{ section.settings.title | escape }}"
+            loading="lazy"
+            width="{{ section.settings.background_image.width }}"
+            height="{{ section.settings.background_image.height }}"
+          >
+        {% else %}
+          <img
+            src="{{ section.settings.mobile_background_image | image_url: width: 1200 }}"
+            alt="{{ section.settings.title | escape }}"
+            loading="lazy"
+            width="{{ section.settings.mobile_background_image.width }}"
+            height="{{ section.settings.mobile_background_image.height }}"
+          >
+        {% endif %}
+      </picture>
+    {% elsif section.settings.background_image != blank %}
+      <img
+        src="{{ section.settings.background_image | image_url: width: 2400 }}"
+        alt="{{ section.settings.title | escape }}"
+        loading="lazy"
+        width="{{ section.settings.background_image.width }}"
+        height="{{ section.settings.background_image.height }}"
+      >
+    {% endif %}
+  </div>
+
+  <div class="hs-hair-hero__overlay"></div>
+
+  <div class="page-width">
+    <div class="hs-hair-hero__inner">
+      <div class="hs-hair-hero__content">
+        {% if section.settings.title != blank %}
+          <h2 class="hs-hair-hero__title">{{ section.settings.title | newline_to_br }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="hs-hair-hero__desc">{{ section.settings.description }}</div>
+        {% endif %}
+
+        <div class="hs-hair-hero__buttons">
+          {% if section.settings.primary_button_label != blank %}
+            <a
+              {% if section.settings.primary_button_link != blank %}
+                href="{{ section.settings.primary_button_link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="hs-hair-hero__btn hs-hair-hero__btn--primary"
+            >
+              {{ section.settings.primary_button_label }}
+            </a>
+          {% endif %}
+
+          {% if section.settings.secondary_button_label != blank %}
+            <a
+              {% if section.settings.secondary_button_link != blank %}
+                href="{{ section.settings.secondary_button_link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="hs-hair-hero__btn hs-hair-hero__btn--secondary"
+            >
+              {{ section.settings.secondary_button_label }}
+            </a>
+          {% endif %}
+        </div>
+
+        {% if section.settings.creator_text != blank or proof_blocks.size > 0 %}
+          <div class="hs-hair-hero__meta">
+            {% if section.settings.creator_text != blank %}
+              <div class="hs-hair-hero__creator">
+                {% if section.settings.creator_image != blank %}
+                  <div class="hs-hair-hero__creator-image">
+                    <img
+                      src="{{ section.settings.creator_image | image_url: width: 80 }}"
+                      alt="{{ section.settings.creator_text | escape }}"
+                      loading="lazy"
+                      width="{{ section.settings.creator_image.width }}"
+                      height="{{ section.settings.creator_image.height }}"
+                    >
+                  </div>
+                {% else %}
+                  <div class="hs-hair-hero__creator-image hs-hair-hero__creator-image--placeholder">
+                    <span>✓</span>
+                  </div>
+                {% endif %}
+                <span>{{ section.settings.creator_text }}</span>
+              </div>
+            {% endif %}
+
+            {% if proof_blocks.size > 0 %}
+              <ul class="hs-hair-hero__proof-list" role="list">
+                {% for block in proof_blocks %}
+                  <li class="hs-hair-hero__proof-item" {{ block.shopify_attributes }}>
+                    <span class="hs-hair-hero__proof-icon">✓</span>
+                    <span>{{ block.settings.text }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="hs-hair-hero__visual">
+        {% if badge_blocks.size > 0 %}
+          <div class="hs-hair-hero__badges">
+            {% for block in badge_blocks %}
+              <div class="hs-hair-hero__badge" {{ block.shopify_attributes }}>
+                <div class="hs-hair-hero__badge-icon">
+                  {% if block.settings.icon != blank %}
+                    <img
+                      src="{{ block.settings.icon | image_url: width: 80 }}"
+                      alt="{{ block.settings.title | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.icon.width }}"
+                      height="{{ block.settings.icon.height }}"
+                    >
+                  {% else %}
+                    <span>{{ forloop.index }}</span>
+                  {% endif %}
+                </div>
+
+                <div class="hs-hair-hero__badge-text">
+                  {% if block.settings.title != blank %}
+                    <div class="hs-hair-hero__badge-title">{{ block.settings.title }}</div>
+                  {% endif %}
+                  {% if block.settings.subtitle != blank %}
+                    <div class="hs-hair-hero__badge-subtitle">{{ block.settings.subtitle }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="hs-hair-hero__product-wrap">
+          <div class="hs-hair-hero__glow"></div>
+
+          {% if section.settings.product_image != blank %}
+            <img
+              class="hs-hair-hero__product"
+              src="{{ section.settings.product_image | image_url: width: 1000 }}"
+              alt="{{ section.settings.product_alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.product_image.width }}"
+              height="{{ section.settings.product_image.height }}"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'hs-hair-hero__product hs-hair-hero__product--placeholder' }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #hs-hair-hero-{{ section.id }} {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1f120c 0%, #5f3a24 35%, #876043 70%, #cba27a 100%);
+      border-radius: 0;
+      color: #ffffff;
+    }
+
+    #hs-hair-hero-{{ section.id }} .page-width {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__media-bg,
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__media-bg picture,
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__media-bg img,
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__media-bg img {
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__overlay {
+      background:
+        linear-gradient(90deg, rgba(37, 19, 11, 0.80) 0%, rgba(37, 19, 11, 0.52) 34%, rgba(37, 19, 11, 0.18) 65%, rgba(37, 19, 11, 0.12) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.18) 100%);
+      z-index: 1;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__inner {
+      position: relative;
+      z-index: 2;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__content {
+      width: 48%;
+      max-width: 560px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__title {
+      margin: 0 0 18px;
+      font-size: 42px;
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__desc {
+      max-width: 500px;
+      margin: 0 0 26px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      transition: all 0.25s ease;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__btn--primary {
+      background: #0f8f96;
+      color: #ffffff;
+      border: 1px solid #0f8f96;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__btn--primary:hover {
+      background: #0c7a80;
+      border-color: #0c7a80;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__btn--secondary {
+      background: rgba(90, 56, 36, 0.72);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(4px);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__btn--secondary:hover {
+      background: rgba(108, 68, 44, 0.88);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__creator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__creator-image {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__creator-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__creator-image--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__proof-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__proof-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__proof-icon {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__visual {
+      width: 52%;
+      min-height: 420px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__badges {
+      position: absolute;
+      left: 0;
+      top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 3;
+      max-width: 260px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: rgba(82, 48, 27, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(6px);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__badge-icon {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #d7ad73 0%, #9d703a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__badge-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__badge-title {
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: #f7e1bf;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__badge-subtitle {
+      margin-top: 4px;
+      font-size: 11px;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.70);
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__product-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      z-index: 2;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__glow {
+      position: absolute;
+      right: 70px;
+      bottom: 70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 215, 172, 0.40) 0%, rgba(245, 215, 172, 0.08) 45%, rgba(245, 215, 172, 0) 72%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__product {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 390px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 35px rgba(0, 0, 0, 0.26));
+    }
+
+    #hs-hair-hero-{{ section.id }} .hs-hair-hero__product--placeholder {
+      width: 100%;
+      max-width: 390px;
+      height: 420px;
+      opacity: 0.6;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    @media screen and (max-width: 1199px) {
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__title {
+        font-size: 36px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__badges {
+        left: 10px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__product {
+        max-width: 340px;
+      }
+    }
+
+    @media screen and (max-width: 989px) {
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        min-height: auto;
+        padding-top: 42px;
+        padding-bottom: 42px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__content,
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__visual {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__visual {
+        min-height: 0;
+        justify-content: center;
+        padding-top: 12px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__badges {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 18px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__product-wrap {
+        justify-content: center;
+        max-width: 100%;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__glow {
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 40px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      #hs-hair-hero-{{ section.id }} .page-width {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__overlay {
+        background:
+          linear-gradient(180deg, rgba(37, 19, 11, 0.72) 0%, rgba(37, 19, 11, 0.48) 38%, rgba(37, 19, 11, 0.34) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.18) 100%);
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__title {
+        font-size: 28px;
+        line-height: 1.08;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__desc {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__badge {
+        padding: 10px 12px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__product {
+        max-width: 280px;
+      }
+
+      #hs-hair-hero-{{ section.id }} .hs-hair-hero__glow {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Hair science hero",
+  "tag": "section",
+  "class": "section section-hair-science-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "product_alt",
+      "label": "Product image alt text",
+      "default": "Hair supplement product"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Heading",
+      "default": "SCIENCE DESIGNED FOR VISIBLY\nFULLER, HEALTHIER HAIR"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "HairScript® was built to address what most hair vitamins ignore. The root biological causes of shedding, thinning edges, and reduced density that affect women through stress, hormones, and postpartum recovery."
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Shop The Formula"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "Find My Hair Pair-Free Quiz"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "creator_image",
+      "label": "Creator image"
+    },
+    {
+      "type": "text",
+      "id": "creator_text",
+      "label": "Creator text",
+      "default": "Created by Bevy."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "PHARMA-LED FORMULA"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "High-impact support"
+        }
+      ]
+    },
+    {
+      "type": "proof",
+      "name": "Proof item",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Clinically backed support"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hair science hero",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "title": "PHARMA-LED FORMULA",
+            "subtitle": "High-impact support"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "SCALP + HAIR SUPPORT",
+            "subtitle": "Root-level care"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "DENSITY SUPPORT",
+            "subtitle": "Fuller-looking hair"
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "text": "V3 post menopausal formula"
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "text": "Science informed formulation"
+          }
+        },
+        {
+          "type": "proof",
+          "settings": {
+            "text": "Clinically backed ingredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

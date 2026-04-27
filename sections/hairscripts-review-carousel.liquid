@@ -1,0 +1,784 @@
+<div class="review-carousel-section" id="section-{{ section.id }}">
+  <div class="review-carousel-outer">
+    <div class="review-carousel-wrapper">
+
+      <div class="review-carousel-header">
+        {% if section.settings.show_stars %}
+          <div class="review-carousel-stars" aria-hidden="true">★★★★★</div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="review-carousel-heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+          <p class="review-carousel-subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <div class="review-carousel-button-wrap">
+            <a
+              {% if section.settings.button_link != blank %}
+                href="{{ section.settings.button_link }}"
+              {% else %}
+                role="link"
+                aria-disabled="true"
+              {% endif %}
+              class="review-carousel-button"
+            >
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.blocks.size > 0 %}
+        <div class="review-carousel-slider" data-section-id="{{ section.id }}">
+          <div class="review-carousel-viewport">
+            <div class="review-carousel-track">
+              {% for block in section.blocks %}
+                <div class="review-carousel-slide" {{ block.shopify_attributes }}>
+                  <div class="review-carousel-card">
+                    <div class="review-header-container">
+                      <div class="review-carousel-card-stars" aria-hidden="true">★★★★★</div>
+
+                      {% if block.settings.title != blank %}
+                        <h3 class="review-carousel-card-title">{{ block.settings.title }}</h3>
+                      {% endif %}
+
+                      {% if block.settings.review != blank %}
+                        <div class="review-carousel-card-text">{{ block.settings.review }}</div>
+                      {% endif %}
+                    </div>
+
+                    <div class="review-carousel-card-footer">
+                      {% if block.settings.name != blank or block.settings.age != blank %}
+                        <p class="review-carousel-name">
+                          {{ block.settings.name }}{% if block.settings.age != blank %}, {{ block.settings.age }}{% endif %}
+                        </p>
+                      {% endif %}
+
+                      {% if block.settings.label != blank %}
+                        <p class="review-carousel-label">{{ block.settings.label }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="review-carousel-controls">
+            <button type="button" class="review-carousel-arrow review-carousel-prev" aria-label="Previous reviews">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14.5 6.5L9 12L14.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="review-carousel-dots"></div>
+
+            <button type="button" class="review-carousel-arrow review-carousel-next" aria-label="Next reviews">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9.5 6.5L15 12L9.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<style>
+  #section-{{ section.id }} {
+    width: 100%;
+    background: #EEE9E4;
+  }
+
+  #section-{{ section.id }} .review-carousel-outer {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .review-carousel-wrapper {
+    width: 100%;
+    padding: 56px 0 34px;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} .review-carousel-header {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  #section-{{ section.id }} .review-carousel-stars {
+    margin-bottom: 10px;
+    color: #EDB726;
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  #section-{{ section.id }} .review-carousel-heading {
+    margin: 0 0 8px;
+    color: #2B221E;
+    text-align: center;
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -1.2px;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .review-carousel-subheading {
+    margin: 0;
+    color: #2B221E;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  #section-{{ section.id }} .review-carousel-button-wrap {
+    margin-top: 20px;
+  }
+
+  #section-{{ section.id }} .review-carousel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 15px 25px;
+    border-radius: 999px;
+    background: #C4A882;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  #section-{{ section.id }} .review-carousel-slider {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .review-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    padding: 0 6px;
+    box-sizing: border-box;
+  }
+
+  #section-{{ section.id }} .review-carousel-track {
+    display: flex;
+    gap: 6px;
+    transition: transform 0.35s ease;
+    will-change: transform;
+    align-items: center;
+  }
+
+  #section-{{ section.id }} .review-carousel-slide {
+    flex: 0 0 19%;
+    min-width: 0;
+  }
+
+  #section-{{ section.id }} .review-carousel-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 230px;
+    height: 311px;
+    padding: 25px;
+    border: 1px solid #3D7E7A;
+    border-radius: 5px;
+    background: transparent;
+    transition: background 0.25s ease, border-color 0.25s ease, height 0.25s ease;
+    justify-content: space-between;
+  }
+
+  #section-{{ section.id }} .review-carousel-slide.is-active h3.review-carousel-card-title {
+    color: #fff;
+  }
+
+  #section-{{ section.id }} .review-carousel-slide.is-active .review-carousel-card-text {
+    color: #fff;
+  }
+
+  #section-{{ section.id }} .review-carousel-slide.is-active .review-carousel-card {
+    background: #3D7E7A;
+    border-color: #3D7E7A;
+    height: 371px;
+  }
+
+  #section-{{ section.id }} .review-carousel-card-stars {
+    margin-bottom: 10px;
+    color: #EDB826;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1.8px;
+  }
+
+  #section-{{ section.id }} .review-carousel-card-title {
+    margin: 0;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  #section-{{ section.id }} .review-carousel-card-text {
+    color: #3D3632;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    flex: 0;
+  }
+
+  #section-{{ section.id }} .review-carousel-card-text p {
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .review-carousel-card-footer {
+    margin-top: 20px;
+  }
+
+  #section-{{ section.id }} .review-carousel-name {
+    margin: 0 0 0;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .review-carousel-slide.is-active p.review-carousel-name {
+    color: #fff;
+  }
+
+  #section-{{ section.id }} .review-carousel-label {
+    margin: 0;
+    color: #fff;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3;
+    position: relative;
+    display: inline-block;
+    padding-right: 16px;
+  }
+
+  #section-{{ section.id }} .review-carousel-label::after {
+    content: "✓";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  #section-{{ section.id }} .review-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  #section-{{ section.id }} .review-carousel-arrow {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #6E6660;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #section-{{ section.id }} .review-carousel-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #section-{{ section.id }} .review-carousel-arrow[disabled] {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  #section-{{ section.id }} .review-carousel-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  #section-{{ section.id }} .review-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: rgba(43, 34, 30, 0.24);
+    cursor: pointer;
+  }
+
+  #section-{{ section.id }} .review-carousel-dot.is-active {
+    background: #211B18;
+  }
+
+  @media screen and (max-width: 1199px) {
+    #section-{{ section.id }} .review-carousel-slide {
+      flex: 0 0 32%;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .review-carousel-heading {
+      font-size: 32px;
+      letter-spacing: normal;
+    }
+
+    #section-{{ section.id }} .review-carousel-button {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .review-carousel-wrapper {
+      padding: 40px 15px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .review-carousel-wrapper {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .review-carousel-heading {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .review-carousel-header {
+      padding: 0 16px;
+      margin-bottom: 24px;
+    }
+
+    #section-{{ section.id }} .review-carousel-subheading {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .review-carousel-slide {
+      flex: 0 0 84%;
+    }
+
+    #section-{{ section.id }} .review-carousel-card {
+      min-height: 220px;
+    }
+
+    #section-{{ section.id }} .review-carousel-controls {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .review-carousel-heading {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const sectionId = 'section-{{ section.id }}';
+
+    function initReviewCarousel(section) {
+      if (!section || section.dataset.reviewCarouselInitialized === 'true') return;
+
+      const track = section.querySelector('.review-carousel-track');
+      const viewport = section.querySelector('.review-carousel-viewport');
+      const prevBtn = section.querySelector('.review-carousel-prev');
+      const nextBtn = section.querySelector('.review-carousel-next');
+      const dotsWrap = section.querySelector('.review-carousel-dots');
+
+      if (!track || !viewport || !prevBtn || !nextBtn || !dotsWrap) return;
+
+      section.dataset.reviewCarouselInitialized = 'true';
+
+      const originalSlides = Array.from(track.children).map(function (slide) {
+        return slide.cloneNode(true);
+      });
+
+      const totalSlides = originalSlides.length;
+      if (!totalSlides) return;
+
+      let perView = 1;
+      let centerOffset = 0;
+      let cloneCount = 0;
+      let currentPosition = 0;
+      let dots = [];
+      let isAnimating = false;
+      let resizeTimer;
+      let startX = 0;
+      let endX = 0;
+
+      function mod(value, total) {
+        return ((value % total) + total) % total;
+      }
+
+      function getPerView() {
+        if (window.innerWidth <= 749) return 1;
+        if (window.innerWidth <= 1199) return Math.min(3, totalSlides);
+        return Math.min(5, totalSlides);
+      }
+
+      function getActiveDotIndex() {
+        return mod((currentPosition - cloneCount) + centerOffset, totalSlides);
+      }
+
+      function getActiveSlideTrackIndex() {
+        return currentPosition + centerOffset;
+      }
+
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+
+        if (totalSlides <= 1) {
+          dots = [];
+          return;
+        }
+
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'review-carousel-dot';
+          dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
+
+          dot.addEventListener('click', function () {
+            if (isAnimating) return;
+            isAnimating = true;
+            currentPosition = cloneCount + i - centerOffset;
+            updateSlider(true);
+          });
+
+          dotsWrap.appendChild(dot);
+        }
+
+        dots = Array.from(dotsWrap.querySelectorAll('.review-carousel-dot'));
+      }
+
+      function appendCloneByIndex(index) {
+        const slide = originalSlides[mod(index, totalSlides)].cloneNode(true);
+        track.appendChild(slide);
+      }
+
+      function buildTrack(activeIndex) {
+        perView = getPerView();
+        centerOffset = Math.floor(perView / 2);
+        cloneCount = Math.max(perView + 2, centerOffset + 2);
+
+        track.innerHTML = '';
+
+        for (let i = totalSlides - cloneCount; i < totalSlides; i++) {
+          appendCloneByIndex(i);
+        }
+
+        for (let i = 0; i < totalSlides; i++) {
+          track.appendChild(originalSlides[i].cloneNode(true));
+        }
+
+        for (let i = 0; i < cloneCount; i++) {
+          appendCloneByIndex(i);
+        }
+
+        currentPosition = cloneCount + activeIndex - centerOffset;
+        updateSlider(false);
+      }
+
+      function setActiveCard() {
+        const allSlides = Array.from(track.querySelectorAll('.review-carousel-slide'));
+
+        allSlides.forEach(function (slide) {
+          slide.classList.remove('is-active');
+        });
+
+        const activeIndex = getActiveSlideTrackIndex();
+
+        if (allSlides[activeIndex]) {
+          allSlides[activeIndex].classList.add('is-active');
+        }
+      }
+
+      function updateDots() {
+        const activeIndex = getActiveDotIndex();
+
+        dots.forEach(function (dot, index) {
+          dot.classList.toggle('is-active', index === activeIndex);
+        });
+      }
+
+      function updateSlider(animate) {
+        const allSlides = Array.from(track.querySelectorAll('.review-carousel-slide'));
+        const activeSlide = allSlides[getActiveSlideTrackIndex()];
+        if (!activeSlide) return;
+
+        const viewportWidth = viewport.clientWidth;
+        const activeSlideCenter = activeSlide.offsetLeft + (activeSlide.offsetWidth / 2);
+        const translateX = (viewportWidth / 2) - activeSlideCenter;
+
+        track.style.transition = animate ? 'transform 0.35s ease' : 'none';
+        track.style.transform = 'translateX(' + translateX + 'px)';
+
+        setActiveCard();
+        updateDots();
+
+        if (totalSlides <= 1) {
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+        } else {
+          prevBtn.disabled = false;
+          nextBtn.disabled = false;
+        }
+      }
+
+      function normalizePosition() {
+        let jumped = false;
+
+        if (currentPosition < cloneCount) {
+          currentPosition += totalSlides;
+          jumped = true;
+        } else if (currentPosition >= cloneCount + totalSlides) {
+          currentPosition -= totalSlides;
+          jumped = true;
+        }
+
+        if (jumped) {
+          updateSlider(false);
+        }
+
+        isAnimating = false;
+      }
+
+      prevBtn.addEventListener('click', function () {
+        if (isAnimating || totalSlides <= 1) return;
+        isAnimating = true;
+        currentPosition -= 1;
+        updateSlider(true);
+      });
+
+      nextBtn.addEventListener('click', function () {
+        if (isAnimating || totalSlides <= 1) return;
+        isAnimating = true;
+        currentPosition += 1;
+        updateSlider(true);
+      });
+
+      track.addEventListener('transitionend', function () {
+        normalizePosition();
+      });
+
+      track.addEventListener('touchstart', function (e) {
+        if (isAnimating || totalSlides <= 1) return;
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      track.addEventListener('touchend', function (e) {
+        if (isAnimating || totalSlides <= 1) return;
+
+        endX = e.changedTouches[0].clientX;
+
+        if (startX - endX > 50) {
+          currentPosition += 1;
+          isAnimating = true;
+          updateSlider(true);
+        } else if (endX - startX > 50) {
+          currentPosition -= 1;
+          isAnimating = true;
+          updateSlider(true);
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+          const activeIndex = getActiveDotIndex();
+          isAnimating = false;
+          buildTrack(activeIndex);
+        }, 150);
+      });
+
+      buildDots();
+      buildTrack(0);
+    }
+
+    function runInit() {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        initReviewCarousel(section);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', runInit);
+    } else {
+      runInit();
+    }
+
+    document.addEventListener('shopify:section:load', function (event) {
+      const loadedSection = event.target;
+
+      if (loadedSection && loadedSection.id === sectionId) {
+        loadedSection.dataset.reviewCarouselInitialized = 'false';
+        initReviewCarousel(loadedSection);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Review carousel",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Show stars",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "RESULTS WOMEN ARE TALKING ABOUT"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Thousands are supporting their hair health with HairScripts."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View All Reviews"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review title",
+          "default": "Less Shedding"
+        },
+        {
+          "type": "richtext",
+          "id": "review",
+          "label": "Review text",
+          "default": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Maria L."
+        },
+        {
+          "type": "text",
+          "id": "age",
+          "label": "Age",
+          "default": "36"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Bottom label",
+          "default": "Verified Buyer Review"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review carousel",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "name": "Maria L.",
+            "age": "36"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Healthier Growth",
+            "review": "<p>With consistent use, my hair looks healthier and feels much more resilient.</p>",
+            "name": "Danielle R.",
+            "age": "28"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Stronger Hair",
+            "review": "<p>My hair kept breaking before it could grow longer, and nothing I tried seemed to help. Now my strands feel stronger and healthier, and I’m finally seeing real length.</p>",
+            "name": "Nicole T.",
+            "age": "38"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Fuller Ponytail",
+            "review": "<p>My hair looks fuller and my ponytail finally feels thicker again.</p>",
+            "name": "Jessica P.",
+            "age": "44"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Confidence Back",
+            "review": "<p>I felt self-conscious about my thinning hair and avoided certain hairstyles.</p>",
+            "name": "Ashley M.",
+            "age": "32"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

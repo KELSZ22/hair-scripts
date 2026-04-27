@@ -1,0 +1,471 @@
+<div class="hair-signal-section" id="section-{{ section.id }}">
+  <div class="hair-signal-outer">
+    <div class="hair-signal-wrapper">
+      <div class="hair-signal-grid">
+
+        <div class="hair-signal-content-column">
+          <div class="hair-signal-content">
+
+            {% if section.settings.heading != blank %}
+              <div class="hair-signal-header">
+                <h2 class="hair-signal-heading">{{ section.settings.heading }}</h2>
+              </div>
+            {% endif %}
+
+            {% if section.settings.description != blank %}
+              <div class="hair-signal-description">
+                {{ section.settings.description }}
+              </div>
+            {% endif %}
+
+            {% if section.settings.subheading != blank %}
+              <div class="hair-signal-subheading-wrap">
+                <p class="hair-signal-subheading">{{ section.settings.subheading }}</p>
+              </div>
+            {% endif %}
+
+            {% if section.blocks.size > 0 %}
+              <div class="hair-signal-pills">
+                {% for block in section.blocks %}
+                  <div class="hair-signal-pill-item" {{ block.shopify_attributes }}>
+                    {% if block.settings.label != blank %}
+                      <div class="hair-signal-pill">{{ block.settings.label }}</div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.description != blank %}
+              <div class="hair-signal-description two">
+                {{ section.settings.description2 }}
+              </div>
+            {% endif %}
+
+            {% if section.settings.button_label != blank %}
+              <div class="hair-signal-button-wrap">
+                <a
+                  {% if section.settings.button_link != blank %}
+                    href="{{ section.settings.button_link }}"
+                  {% else %}
+                    role="link"
+                    aria-disabled="true"
+                  {% endif %}
+                  class="hair-signal-button hs-science-hero__button--primary"
+                >
+                  <span class="hair-signal-button-text">{{ section.settings.button_label }}</span>
+                  <span class="hair-signal-button-arrow">→</span>
+                </a>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+        <div class="hair-signal-image-column">
+          <div class="hair-signal-image-wrap">
+            {% if section.settings.image != blank %}
+              {{
+                section.settings.image
+                | image_url: width: 2000
+                | image_tag:
+                  class: 'hair-signal-image',
+                  loading: 'lazy',
+                  widths: '600, 800, 1000, 1200, 1600, 2000',
+                  sizes: '(min-width: 990px) 50vw, 100vw',
+                  alt: section.settings.heading
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'hair-signal-image hair-signal-placeholder' }}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #section-{{ section.id }} {
+    background: #fff;
+  }
+
+  #section-{{ section.id }} .hair-signal-outer {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .hair-signal-wrapper {
+    padding: 0 0 0 40px;
+  }
+
+  #section-{{ section.id }} .hair-signal-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: stretch;
+    min-height: 640px;
+  }
+
+  #section-{{ section.id }} .hair-signal-content-column {
+    display: flex;
+    align-items: center;
+    background: #fff;
+  }
+
+  #section-{{ section.id }} .hair-signal-content {
+    width: 100%;
+    max-width: 660px;
+    padding: 40px 40px 40px 0;
+  }
+
+  #section-{{ section.id }} .hair-signal-header {
+    margin-bottom: 20px;
+  }
+
+  #section-{{ section.id }} .hair-signal-heading {
+    margin: 0;
+    color: #2E2A28;
+    font-size: 32px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond";
+    font-style: normal;
+    line-height: normal;
+  }
+
+  #section-{{ section.id }} .hair-signal-description {
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 40px;
+  }
+
+  #section-{{ section.id }} .hair-signal-description.two {
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .hair-signal-description p {
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .hair-signal-subheading-wrap {
+    margin-bottom: 18px;
+  }
+
+  #section-{{ section.id }} .hair-signal-subheading {
+    font-family: "Cormorant Garamond";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .hair-signal-pills {
+    display: flex;
+    gap: 10px 12px;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  #section-{{ section.id }} .hair-signal-pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 36px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 999px;
+    color: #6C5A4D;
+    text-align: center;
+    background: transparent;
+    z-index: 1;
+    overflow: hidden;
+    font-family: "DM Sans";
+  }
+
+  #section-{{ section.id }} .hair-signal-pill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    padding: 1px;
+    background: linear-gradient(170deg, #FFFFFF 0%, rgba(35, 123, 132, 0.47) 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  #section-{{ section.id }} .hair-signal-pill-item {
+    width: 360px;
+  }
+
+  #section-{{ section.id }} .hair-signal-button-wrap {
+    margin-top: 22px;
+  }
+
+  #section-{{ section.id }} .hair-signal-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 52px;
+    padding: 15px 25px;
+    border-radius: 999px;
+    background: #C4A882;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: normal;
+    transition: all 0.2s ease;
+    font-weight:: 500;
+    font-family: "DM Sans";
+  }
+
+  #section-{{ section.id }} .hair-signal-button:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  #section-{{ section.id }} .hair-signal-image-column {
+    min-width: 0;
+    height: 700px;
+  }
+
+  #section-{{ section.id }} .hair-signal-image-wrap {
+    height: 100%;
+    min-height: 640px;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} .hair-signal-image,
+  #section-{{ section.id }} .hair-signal-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .hair-signal-pill {
+      align-items: center;
+      justify-content: center;
+    }
+
+    #section-{{ section.id }} .hair-signal-pills {
+      align-items: center;
+    }
+
+    #section-{{ section.id }} .hair-signal-image-column {
+      height: 250px;
+    }
+
+    #section-{{ section.id }} .hair-signal-pills {
+      max-width: 100%
+    }
+
+    #section-{{ section.id }} .hair-signal-button-wrap {
+      text-align: center;
+    }
+
+    #section-{{ section.id }} p.hair-signal-subheading {
+      text-align: center;
+    }
+
+    #section-{{ section.id }} .hair-signal-description {
+      text-align: center;
+    }
+
+    #section-{{ section.id }} h2.hair-signal-heading {
+      text-align: center;
+    }
+
+    #section-{{ section.id }} .hair-signal-wrapper {
+      padding: 0px;
+    }
+
+    #section-{{ section.id }} .hair-signal-grid {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    #section-{{ section.id }} .hair-signal-content-column {
+      order: 2;
+    }
+
+    #section-{{ section.id }} .hair-signal-image-column {
+      order: 1;
+    }
+
+    
+
+    #section-{{ section.id }} .hair-signal-image-wrap {
+      min-height: unset;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .hair-signal-content {
+      max-width: 100%;
+      padding: 40px 15px;
+    }
+    #section-{{ section.id }} .hair-signal-heading {
+      font-size: 26px;
+    }
+
+    #section-{{ section.id }} .hair-signal-description {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .hair-signal-subheading {
+      font-size: 18px;
+      width: 75%;
+      margin: 0 auto;
+    }
+
+    #section-{{ section.id }} .hair-signal-pill {
+      font-size: 12px;
+    }
+
+    #section-{{ section.id }} .hair-signal-button {
+      width: 100%;
+    }
+
+    #section-{{ section.id }} .hair-signal-image-wrap {
+      min-height: 320px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .hair-signal-button {
+      font-size: 14px;
+      min-height: 38px;
+      padding: 10px 16px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .hair-signal-heading {
+      font-size: 20px;
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .hair-signal-pill-item {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hair signal assessment",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "ITS A SIGNAL YOUR BODY IS SENDING YOU."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Your hair doesn’t just thin overnight. It’s often the result of multiple underlying factors working against your hair’s natural growth cycle from stress and hormonal shifts, postpartum recovery, and nutritional deficiencies to nutrient gaps and scalp health.</p>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "HAVE YOU BEEN EXPERIENCING ANY OF THESE?"
+    },
+    {
+      "type": "richtext",
+      "id": "description2",
+      "label": "Description 2",
+      "default": "<p>Your hair doesn’t just thin overnight. It’s often the result of multiple underlying factors working against your hair’s natural growth cycle from stress and hormonal shifts, postpartum recovery, and nutritional deficiencies to nutrient gaps and scalp health.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Start My Hair Assessment"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "issue",
+      "name": "Issue",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Issue text",
+          "default": "Hormonal Imbalances"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hair signal assessment",
+      "blocks": [
+        {
+          "type": "issue",
+          "settings": {
+            "label": "Hormonal Imbalances"
+          }
+        },
+        {
+          "type": "issue",
+          "settings": {
+            "label": "Poor Scalp Health"
+          }
+        },
+        {
+          "type": "issue",
+          "settings": {
+            "label": "Stress-Related Shedding"
+          }
+        },
+        {
+          "type": "issue",
+          "settings": {
+            "label": "Weak, Breakage-Prone Strands"
+          }
+        },
+        {
+          "type": "issue",
+          "settings": {
+            "label": "Nutrient Deficiencies"
+          }
+        },
+        {
+          "type": "issue",
+          "settings": {
+            "label": "Postpartum or Life Stage Changes"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

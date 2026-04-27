@@ -1,0 +1,336 @@
+<div class="community-banner-section" id="section-{{ section.id }}">
+  <div class="community-banner-outer">
+    <div class="community-banner-wrapper">
+      <div class="community-banner-inner">
+
+        <div class="community-banner-content">
+          {% if section.settings.heading != blank %}
+            <h2 class="community-banner-heading">{{ section.settings.heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.subheading != blank %}
+            <p class="community-banner-subheading">{{ section.settings.subheading }}</p>
+          {% endif %}
+
+          {% if section.blocks.size > 0 %}
+            <div class="community-banner-points">
+              {% for block in section.blocks %}
+                {% if block.settings.text != blank %}
+                  <div class="community-banner-point" {{ block.shopify_attributes }}>
+                    <span class="community-banner-point-icon">✓</span>
+                    <span class="community-banner-point-text">{{ block.settings.text }}</span>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if section.settings.button_label != blank %}
+            <div class="community-banner-button-wrap">
+              <a
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                {% else %}
+                  role="link"
+                  aria-disabled="true"
+                {% endif %}
+                class="community-banner-button"
+              >
+                {{ section.settings.button_label }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #section-{{ section.id }} {
+    width: 100%;
+    background: #8F654B;
+  }
+
+  #section-{{ section.id }} .community-banner-outer {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .community-banner-wrapper {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .community-banner-inner {
+    position: relative;
+    width: 100%;
+    min-height: 434px;
+    display: flex;
+    align-items: center;
+    padding: 60px 40px;
+    background-color: #8F654B;
+    {% if section.settings.background_image != blank %}
+      background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');
+    {% endif %}
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} .community-banner-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  #section-{{ section.id }} .community-banner-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 431px;
+  }
+
+  #section-{{ section.id }} .community-banner-heading {
+    margin: 0 0 14px;
+    color: #FFFFFF;
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.6px;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .community-banner-subheading {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  #section-{{ section.id }} .community-banner-points {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  #section-{{ section.id }} .community-banner-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  #section-{{ section.id }} .community-banner-point-icon {
+    color: #FFFFFF;
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.4;
+    flex: 0 0 auto;
+  }
+
+  #section-{{ section.id }} .community-banner-point-text {
+    color: #FFFFFF;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  #section-{{ section.id }} .community-banner-button-wrap {
+    margin-top: 2px;
+  }
+
+  #section-{{ section.id }} .community-banner-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 15px 24px;
+    border-radius: 999px;
+    background: #C4A882;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  #section-{{ section.id }} .community-banner-button:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  @media screen and (max-width: 1024px) {
+    #section-{{ section.id }} .community-banner-inner {
+      {% if section.settings.background_image_1024 != blank %}
+        background-image: url('{{ section.settings.background_image_1024 | image_url: width: 1800 }}');
+      {% endif %}
+      min-height: 700px;
+      align-items: flex-start;
+    }
+
+    #section-{{ section.id }} .community-banner-content {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #section-{{ section.id }} .community-banner-heading,
+    #section-{{ section.id }} .community-banner-subheading {
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .community-banner-inner {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .community-banner-heading {
+      font-size: 32px;
+      letter-spacing: normal;
+    }
+
+    #section-{{ section.id }} .community-banner-subheading {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .community-banner-point-text {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .community-banner-button {
+      min-height: 40px;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .community-banner-inner {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .community-banner-heading {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .community-banner-content {
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .community-banner-inner {
+      {% if section.settings.background_image_450 != blank %}
+        background-image: url('{{ section.settings.background_image_450 | image_url: width: 1000 }}');
+      {% endif %}
+    }
+
+    #section-{{ section.id }} .community-banner-heading {
+      font-size: 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Community banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_1024",
+      "label": "Background image 1024px"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_450",
+      "label": "Background image 450px"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "JOIN THE 40,000+ HAIRSCRIPTS COMMUNITY"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Where women learn the science behind healthier, stronger hair."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Join Community"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Bullet point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Personalized Guidance"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community banner",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "text": "Personalized Guidance"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Science-Based Solutions"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Ongoing Support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

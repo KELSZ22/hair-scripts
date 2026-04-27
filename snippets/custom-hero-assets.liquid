@@ -1,0 +1,79 @@
+{%- doc -%}
+  Intended for use in a block similar to the button block.
+
+  @param {object} [block] - The block
+
+  @example
+  {% render 'custom-hero-assets', block: block %}
+{%- enddoc -%}
+
+{% assign block_settings = block.settings %}
+
+<div class="custom-container">
+    <div class="image-text-container">
+        {% if block_settings.image != blank %}
+        <img src="{{ block_settings.image | img_url: 'master' }}">
+        {% endif %}
+        <span>{{ block_settings.name }}</span>
+    </div>
+    <div class="list-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+            <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+        </svg>
+        <span>{{ block_settings.list }}</span>
+    </div>
+    <div class="list-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+            <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+        </svg>
+        <span>{{ block_settings.list2 }}</span>
+    </div>
+    <div class="list-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+            <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+        </svg>
+        <span>{{ block_settings.list3 }}</span>
+    </div>
+</div>
+
+{% stylesheet %}
+.list-container:not(:last-child){
+    margin-bottom: 5px;
+}
+.list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.list-container span{
+    font-family: Fustat;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.image-text-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+  .custom-container {
+    display: flex;
+    flex-direction: column;
+}
+  .image-text-container img {
+    border-radius: 999px;
+    border: 2px solid #fff;
+    width: 39px;
+    height: 39px;
+}
+.image-text-container span {
+    font-family: Fustat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+{% endstylesheet %}

@@ -1,0 +1,651 @@
+<div class="advanced-support-section" id="section-{{ section.id }}">
+  <div class="advanced-support-bg"></div>
+  
+
+  <div class="advanced-support-outer">
+    <div class="advanced-support-wrapper">
+      {% if section.settings.eyebrow != blank or section.settings.heading != blank %}
+        <div class="advanced-support-header">
+          {% if section.settings.eyebrow != blank %}
+            <p class="advanced-support-eyebrow">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h2 class="advanced-support-heading">{{ section.settings.heading }}</h2>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="advanced-support-grid">
+          {% for block in section.blocks %}
+            {% if block.type == 'benefit' %}
+              <div class="advanced-support-item" {{ block.shopify_attributes }}>
+                {% if block.settings.icon != blank %}
+                  <div class="advanced-support-icon-wrap">
+                    {{
+                      block.settings.icon
+                      | image_url: width: 120
+                      | image_tag:
+                        class: 'advanced-support-icon',
+                        loading: 'lazy',
+                        alt: block.settings.title
+                    }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.title != blank %}
+                  <div class="advanced-support-pill">{{ block.settings.title }}</div>
+                {% endif %}
+
+                {% if block.settings.text != blank %}
+                  <p class="advanced-support-text">{{ block.settings.text }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.bottom_heading != blank or section.settings.bottom_text != blank or section.settings.research_label != blank %}
+        <div class="advanced-support-footer">
+          {% if section.settings.bottom_heading != blank %}
+            <p class="advanced-support-footer-heading">{{ section.settings.bottom_heading }}</p>
+          {% endif %}
+
+          {% if section.settings.bottom_text != blank or section.settings.research_label != blank %}
+            <div class="advanced-support-footer-text">
+              {% if section.settings.bottom_text != blank %}
+                <span>{{ section.settings.bottom_text }}</span>
+              {% endif %}
+
+              {% if section.settings.research_label != blank %}
+                <a
+                  {% if section.settings.research_link != blank %}
+                    href="{{ section.settings.research_link }}"
+                  {% else %}
+                    role="link"
+                    aria-disabled="true"
+                  {% endif %}
+                  class="advanced-support-research-link"
+                >
+                  {{ section.settings.research_label }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  #section-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    background-color: #8e5a3b;
+  }
+
+  #section-{{ section.id }} .advanced-support-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      {% if section.settings.background_image != blank %}
+        linear-gradient(180deg, rgba(42, 20, 8, 0.18) 0%, rgba(42, 20, 8, 0.22) 100%),
+        url('{{ section.settings.background_image | image_url: width: 2400 }}');
+      {% else %}
+        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 42%),
+        linear-gradient(180deg, #9b6444 0%, #7d4d33 100%);
+      {% endif %};
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  #section-{{ section.id }} .advanced-support-outer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .advanced-support-wrapper {;
+    padding: 60px 40px;
+  }
+
+  #section-{{ section.id }} .advanced-support-header {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+
+  #section-{{ section.id }} .advanced-support-eyebrow {
+    margin: 0 0 6px;
+    color: #fff;
+    text-align: center;
+    font-family: Fustat, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  #section-{{ section.id }} .advanced-support-heading {
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-family: "Tenor Sans", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.15;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+
+  #section-{{ section.id }} .advanced-support-grid {
+    display: grid;
+    grid-template-columns: repeat(14, minmax(0, 1fr));
+    gap: 26px 14px;
+    align-items: start;
+    margin-bottom: 70px;
+    margin-top: 60px;
+  }
+
+  #section-{{ section.id }} .advanced-support-item {
+    grid-column: span 3;
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  #section-{{ section.id }} .advanced-support-item:nth-child(2),
+  #section-{{ section.id }} .advanced-support-item:nth-child(4) {
+    grid-column: span 2;
+  }
+
+  #section-{{ section.id }} .advanced-support-item:nth-child(3) {
+    grid-column: span 4;
+  }
+
+  #section-{{ section.id }} .advanced-support-item:nth-child(6) {
+    grid-column: 2 / span 3;
+  }
+
+  #section-{{ section.id }} .advanced-support-item:nth-child(7) {
+    grid-column: 5 / span 3;
+  }
+
+  #section-{{ section.id }} .advanced-support-item:nth-child(8) {
+    grid-column: 8 / span 3;
+  }
+
+  #section-{{ section.id }} .advanced-support-item:nth-child(9) {
+    grid-column: 11 / span 3;
+  }
+
+  #section-{{ section.id }} .advanced-support-icon-wrap {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #section-{{ section.id }} .advanced-support-icon {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    display: block;
+  }
+
+  #section-{{ section.id }} .advanced-support-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    max-width: 100%;
+    padding: 10px 25px;
+    border-radius: 999px;
+    background: #3D7E7A;
+    color: #fff;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 auto 8px;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
+  #section-{{ section.id }} .advanced-support-text {
+    margin: 0 auto;
+    max-width: 220px;
+    color: #fff;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.35;
+    opacity: 0.96;
+  }
+
+
+
+  #section-{{ section.id }} .advanced-support-footer {
+    max-width: 980px;
+    margin: 18px auto 0;
+    text-align: center;
+  }
+
+  #section-{{ section.id }} .advanced-support-footer-heading {
+    margin: 0 0 6px;
+    color: #fff9f4;
+    text-align: center;
+    font-family: Fustat, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .advanced-support-footer-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    flex-wrap: wrap;
+    color: #fff9f4;
+    text-align: center;
+    font-family: Fustat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.35;
+    opacity: 0.95;
+  }
+
+  #section-{{ section.id }} .advanced-support-research-link {
+    color: #fff9f4;
+    font-family: Fustat, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media screen and (max-width: 1366px) {
+    #section-{{ section.id }} .advanced-support-wrapper {
+      padding: 24px 20px 28px;
+    }
+
+    #section-{{ section.id }} .advanced-support-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px 16px;
+    }
+
+    #section-{{ section.id }} .advanced-support-item,
+    #section-{{ section.id }} .advanced-support-item:nth-child(2),
+    #section-{{ section.id }} .advanced-support-item:nth-child(3),
+    #section-{{ section.id }} .advanced-support-item:nth-child(4),
+    #section-{{ section.id }} .advanced-support-item:nth-child(6),
+    #section-{{ section.id }} .advanced-support-item:nth-child(7),
+    #section-{{ section.id }} .advanced-support-item:nth-child(8),
+    #section-{{ section.id }} .advanced-support-item:nth-child(9) {
+      grid-column: span 1;
+    }
+
+
+    #section-{{ section.id }} .advanced-support-pill {
+      white-space: normal;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    #section-{{ section.id }} .advanced-support-bg {
+      background-image:
+        {% if section.settings.background_image_1024 != blank %}
+          linear-gradient(180deg, rgba(42, 20, 8, 0.18) 0%, rgba(42, 20, 8, 0.22) 100%),
+          url('{{ section.settings.background_image_1024 | image_url: width: 1800 }}');
+        {% elsif section.settings.background_image != blank %}
+          linear-gradient(180deg, rgba(42, 20, 8, 0.18) 0%, rgba(42, 20, 8, 0.22) 100%),
+          url('{{ section.settings.background_image | image_url: width: 2400 }}');
+        {% else %}
+          radial-gradient(circle at 50% 30%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 42%),
+          linear-gradient(180deg, #9b6444 0%, #7d4d33 100%);
+        {% endif %};
+    }
+
+    #section-{{ section.id }} .advanced-support-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 14px;
+    }
+
+    #section-{{ section.id }} .advanced-support-pill {
+      white-space: normal;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .advanced-support-wrapper {;
+    padding: 40px 15px;
+  }
+
+    #section-{{ section.id }} .advanced-support-header {
+      margin-bottom: 18px;
+    }
+
+    #section-{{ section.id }} .advanced-support-eyebrow {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    #section-{{ section.id }} .advanced-support-heading {
+      font-size: 26px;
+      line-height: 1.12;
+    }
+
+    #section-{{ section.id }} .advanced-support-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px;
+      align-items: start;
+    }
+
+    #section-{{ section.id }} .advanced-support-item,
+    #section-{{ section.id }} .advanced-support-item:nth-child(2),
+    #section-{{ section.id }} .advanced-support-item:nth-child(3),
+    #section-{{ section.id }} .advanced-support-item:nth-child(4),
+    #section-{{ section.id }} .advanced-support-item:nth-child(6),
+    #section-{{ section.id }} .advanced-support-item:nth-child(7),
+    #section-{{ section.id }} .advanced-support-item:nth-child(8),
+    #section-{{ section.id }} .advanced-support-item:nth-child(9) {
+      grid-column: span 1;
+    }
+
+    #section-{{ section.id }} .advanced-support-item:last-child {
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: 180px;
+    }
+
+    #section-{{ section.id }} .advanced-support-icon-wrap {
+      margin-bottom: 6px;
+    }
+
+    #section-{{ section.id }} .advanced-support-pill {
+      padding: 6px 14px;
+      margin: 0 auto 6px;
+      white-space: normal;
+      text-align: center;
+    }
+
+    #section-{{ section.id }} .advanced-support-text,
+    #section-{{ section.id }} .advanced-support-item:nth-child(3) .advanced-support-text {
+      margin: 0 auto;
+      line-height: 1.32;
+    }
+
+    #section-{{ section.id }} .advanced-support-footer {
+      margin-top: 14px;
+    }
+
+    #section-{{ section.id }} .advanced-support-footer-heading {
+      margin-bottom: 6px;
+    }
+
+    #section-{{ section.id }} .advanced-support-footer-heading,
+    #section-{{ section.id }} .advanced-support-footer-text,
+    #section-{{ section.id }} .advanced-support-research-link {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .advanced-support-wrapper {
+      padding: 22px 14px 26px;
+    }
+
+    #section-{{ section.id }} .advanced-support-header {
+      margin-bottom: 22px;
+    }
+
+    #section-{{ section.id }} .advanced-support-eyebrow {
+      margin-bottom: 6px;
+    }
+
+    #section-{{ section.id }} .advanced-support-heading {
+      font-size: 26px;
+    }
+
+    #section-{{ section.id }} .advanced-support-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #section-{{ section.id }} .advanced-support-pill {
+      padding: 6px 16px;
+      margin-bottom: 8px;
+    }
+
+
+
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .advanced-support-bg {
+      background-image:
+        {% if section.settings.background_image_450 != blank %}
+          linear-gradient(180deg, rgba(42, 20, 8, 0.18) 0%, rgba(42, 20, 8, 0.22) 100%),
+          url('{{ section.settings.background_image_450 | image_url: width: 900 }}');
+        {% elsif section.settings.background_image_1024 != blank %}
+          linear-gradient(180deg, rgba(42, 20, 8, 0.18) 0%, rgba(42, 20, 8, 0.22) 100%),
+          url('{{ section.settings.background_image_1024 | image_url: width: 1800 }}');
+        {% elsif section.settings.background_image != blank %}
+          linear-gradient(180deg, rgba(42, 20, 8, 0.18) 0%, rgba(42, 20, 8, 0.22) 100%),
+          url('{{ section.settings.background_image | image_url: width: 2400 }}');
+        {% else %}
+          radial-gradient(circle at 50% 30%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 42%),
+          linear-gradient(180deg, #9b6444 0%, #7d4d33 100%);
+        {% endif %};
+    }
+
+    #section-{{ section.id }} .advanced-support-heading {
+      font-size: 20px;
+    }
+
+    #section-{{ section.id }} .advanced-support-grid {
+      gap: 18px;
+    }
+
+
+    #section-{{ section.id }} .advanced-support-pill {
+      font-size: 12px;
+    }
+
+    #section-{{ section.id }} p.advanced-support-text {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    #section-{{ section.id }} .advanced-support-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Advanced hair support",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_1024",
+      "label": "Background image 1024px"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_450",
+      "label": "Background image 450px"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "9 PATHWAY GRID"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HAIRSCRIPTS™ ADVANCED SHEDDING & THINNING SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "bottom_heading",
+      "label": "Bottom heading",
+      "default": "CLINICIAN-INFORMED + ROOT-CAUSE FORMULA + SCIENCE-BACKED BLEND"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Formulated with clinically studied ingredients from around the world that support hair health and fuller function."
+    },
+    {
+      "type": "text",
+      "id": "research_label",
+      "label": "Research link label",
+      "default": "View Research"
+    },
+    {
+      "type": "url",
+      "id": "research_link",
+      "label": "Research link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "side",
+          "label": "Side",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Hormonal Balance"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Helps calm the internal triggers associated with shedding and thinning."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advanced hair support",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Hormonal Balance",
+            "text": "Helps calm the internal triggers associated with shedding and thinning."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Growth & Evolution",
+            "text": "Helps nourish follicles and support a healthier growth cycle."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Inflammation Control",
+            "text": "Helps calm visible and invisible irritation that can stress the scalp."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Circulation Boost",
+            "text": "Supports nutrient delivery to the scalp and follicle environment."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Stress Regulation",
+            "text": "Supports balance when life stress shows up in your hair."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Energy Support",
+            "text": "Provides nutritional support to help the body do the heavy lifting."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Nutrient Absorption",
+            "text": "Supports the body’s ability to take in and use the essentials."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Strand Repair",
+            "text": "Supports stronger-looking strands and overall resilience."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Scalp Health",
+            "text": "Supports a healthier scalp environment where growth begins."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

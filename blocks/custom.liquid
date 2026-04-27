@@ -1,0 +1,41 @@
+{% render 'custom-hero-assets', link: block.settings.link %}
+
+{% schema %}
+{
+  "name": "Custom",
+  "tag": null,
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+    },
+    {
+        "type": "text",
+        "id": "name",
+        "label": "Name"
+    },
+    {
+        "type": "text",
+        "id": "list",
+        "label": "list"
+    },
+    {
+        "type": "text",
+        "id": "list2",
+        "label": "list 2"
+    },
+    {
+        "type": "text",
+        "id": "list3",
+        "label": "list 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom",
+      "category": "t:categories.basic",
+    }
+  ]
+}
+{% endschema %}

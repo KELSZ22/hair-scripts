@@ -1,0 +1,696 @@
+<div class="hs-video-carousel-section" id="section-{{ section.id }}">
+  <div class="hs-video-carousel-outer">
+    <div class="hs-video-carousel-wrapper">
+
+      {% if section.settings.heading != blank or section.settings.subheading != blank %}
+        <div class="hs-video-carousel-header">
+          {% if section.settings.heading != blank %}
+            <h2 class="hs-video-carousel-heading">{{ section.settings.heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.subheading != blank %}
+            <p class="hs-video-carousel-subheading">{{ section.settings.subheading }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="hs-video-carousel-slider" data-section-id="{{ section.id }}">
+          <div class="hs-video-carousel-viewport">
+            <div class="hs-video-carousel-track">
+              {% for block in section.blocks %}
+                <div class="hs-video-carousel-slide" {{ block.shopify_attributes }}>
+                  {% if block.settings.video_link != blank %}
+                    <a href="{{ block.settings.video_link }}" class="hs-video-carousel-card hs-video-carousel-card-link">
+                  {% else %}
+                    <div class="hs-video-carousel-card">
+                  {% endif %}
+
+                    <div class="hs-video-carousel-thumb-wrap">
+                      {% if block.settings.thumbnail != blank %}
+                        {{
+                          block.settings.thumbnail
+                          | image_url: width: 900
+                          | image_tag:
+                            class: 'hs-video-carousel-thumb',
+                            loading: 'lazy',
+                            widths: '300, 500, 700, 900',
+                            sizes: '(min-width: 1200px) 20vw, (min-width: 750px) 33vw, 82vw',
+                            alt: block.settings.title
+                        }}
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'hs-video-carousel-thumb hs-video-carousel-placeholder' }}
+                      {% endif %}
+
+                      <span class="hs-video-carousel-play" aria-hidden="true">
+                        <span class="hs-video-carousel-play-triangle"></span>
+                      </span>
+                    </div>
+
+                    <div class="hs-video-carousel-content">
+                      {% if block.settings.title != blank %}
+                        <h3 class="hs-video-carousel-title">{{ block.settings.title }}</h3>
+                      {% endif %}
+
+                      {% if block.settings.subtitle != blank %}
+                        <p class="hs-video-carousel-subtitle">{{ block.settings.subtitle }}</p>
+                      {% endif %}
+                    </div>
+
+                  {% if block.settings.video_link != blank %}
+                    </a>
+                  {% else %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          {% if section.blocks.size > 1 %}
+            <div class="review-carousel-controls">
+              <button type="button" class="review-carousel-arrow review-carousel-prev" aria-label="Previous reviews">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M14.5 6.5L9 12L14.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+
+              <div class="review-carousel-dots">
+                {% for block in section.blocks %}
+                  <button
+                    type="button"
+                    class="review-carousel-dot{% if forloop.first %} is-active{% endif %}"
+                    data-index="{{ forloop.index0 }}"
+                    aria-label="Go to review {{ forloop.index }}"
+                    aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                  ></button>
+                {% endfor %}
+              </div>
+
+              <button type="button" class="review-carousel-arrow review-carousel-next" aria-label="Next reviews">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M9.5 6.5L15 12L9.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<style>
+  #section-{{ section.id }} {
+    background: #FAF7F2;
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-outer {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-wrapper {
+    width: 100%;
+    padding: 60px 40px;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-header {
+    padding: 0 0 40px;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-heading {
+    margin: 0 0 10px;
+    color: #2B221E;
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-subheading {
+    margin: 0;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-slider {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-track {
+    display: flex;
+    gap: 14px;
+    will-change: transform;
+    transition: transform 0.35s ease;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-slide {
+    flex: 0 0 calc((100% - 56px) / 4.35);
+    max-width: calc((100% - 56px) / 4.35);
+    min-width: 0;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-card,
+  #section-{{ section.id }} .hs-video-carousel-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-thumb-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #3D7E7A;
+    padding: 5px;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-thumb {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-placeholder {
+    background: #D7ECEA;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-play-triangle {
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    border-left: 11px solid #FFFFFF;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-content {
+    padding-top: 10px;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-title {
+    margin: 0 0 4px;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-subtitle {
+    margin: 0;
+    color: #4B433E;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  #section-{{ section.id }} .review-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  #section-{{ section.id }} .review-carousel-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #2B221E;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  #section-{{ section.id }} .review-carousel-arrow:hover {
+    opacity: 0.7;
+  }
+
+  #section-{{ section.id }} .review-carousel-arrow svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  #section-{{ section.id }} .review-carousel-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  #section-{{ section.id }} .review-carousel-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(43, 34, 30, 0.28);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  #section-{{ section.id }} .review-carousel-dot.is-active {
+    background: #211B18;
+    transform: scale(1.05);
+  }
+
+  @media screen and (max-width: 1024px) {
+    #section-{{ section.id }} .hs-video-carousel-slide {
+      flex: 0 0 calc((100% - 42px) / 3.25);
+      max-width: calc((100% - 42px) / 3.25);
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .hs-video-carousel-heading {
+      text-align: center;
+      font-size: 32px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-subheading {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      max-width: 760px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-header {
+      padding-bottom: 18px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-title {
+      text-align: center;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-subtitle {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .hs-video-carousel-title{
+      font-size: 14px;
+    }
+    #section-{{ section.id }} .hs-video-carousel-wrapper {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-heading {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .hs-video-carousel-wrapper {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-heading {
+      font-size: 26px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-slide {
+      flex: 0 0 calc((100% - 28px) / 2.2);
+      max-width: calc((100% - 28px) / 2.2);
+    }
+
+    #section-{{ section.id }} .review-carousel-controls {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    #section-{{ section.id }} .hs-video-carousel-slide {
+      flex: 0 0 calc((100% - 14px) / 1.18);
+      max-width: calc((100% - 14px) / 1.18);
+    }
+
+    #section-{{ section.id }} .review-carousel-controls {
+      margin-top: 14px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .hs-video-carousel-heading {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    function initHsVideoCarousel(section) {
+      if (!section || section.dataset.carouselReady === 'true') return;
+
+      const slider = section.querySelector('.hs-video-carousel-slider');
+      const viewport = section.querySelector('.hs-video-carousel-viewport');
+      const track = section.querySelector('.hs-video-carousel-track');
+
+      if (!slider || !viewport || !track) return;
+
+      const prevButton = section.querySelector('.review-carousel-prev');
+      const nextButton = section.querySelector('.review-carousel-next');
+      const dots = Array.from(section.querySelectorAll('.review-carousel-dot'));
+
+      const originalSlides = Array.from(track.children).map(function (slide) {
+        return slide.cloneNode(true);
+      });
+
+      const totalSlides = originalSlides.length;
+      if (!totalSlides) return;
+
+      section.dataset.carouselReady = 'true';
+
+      let cloneCount = 0;
+      let currentPosition = 0;
+      let isAnimating = false;
+      let resizeTimer;
+      let startX = 0;
+      let endX = 0;
+
+      function mod(value, total) {
+        return ((value % total) + total) % total;
+      }
+
+      function getVisibleCount() {
+        if (window.innerWidth <= 500) return 2;
+        if (window.innerWidth <= 749) return 3;
+        if (window.innerWidth <= 1024) return 4;
+        return 5;
+      }
+
+      function getStep() {
+        const firstSlide = track.querySelector('.hs-video-carousel-slide');
+        if (!firstSlide) return 0;
+
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+
+        return firstSlide.getBoundingClientRect().width + gap;
+      }
+
+      function appendCloneByIndex(index) {
+        const slide = originalSlides[mod(index, totalSlides)].cloneNode(true);
+        track.appendChild(slide);
+      }
+
+      function setActiveDot() {
+        if (!dots.length) return;
+
+        const activeIndex = mod(currentPosition - cloneCount, totalSlides);
+
+        dots.forEach(function (dot, index) {
+          const isActive = index === activeIndex;
+          dot.classList.toggle('is-active', isActive);
+          dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
+      }
+
+      function updateSlider(animate) {
+        const step = getStep();
+        if (!step) return;
+
+        track.style.transition = animate ? 'transform 0.35s ease' : 'none';
+        track.style.transform = 'translate3d(' + (currentPosition * -step) + 'px, 0, 0)';
+        setActiveDot();
+      }
+
+      function buildTrack(activeIndex) {
+        cloneCount = Math.max(getVisibleCount() + 2, 4);
+
+        track.innerHTML = '';
+
+        for (let i = totalSlides - cloneCount; i < totalSlides; i++) {
+          appendCloneByIndex(i);
+        }
+
+        for (let i = 0; i < totalSlides; i++) {
+          track.appendChild(originalSlides[i].cloneNode(true));
+        }
+
+        for (let i = 0; i < cloneCount; i++) {
+          appendCloneByIndex(i);
+        }
+
+        currentPosition = cloneCount + activeIndex;
+
+        requestAnimationFrame(function () {
+          updateSlider(false);
+        });
+      }
+
+      function normalizePosition() {
+        let jumped = false;
+
+        if (currentPosition < cloneCount) {
+          currentPosition += totalSlides;
+          jumped = true;
+        } else if (currentPosition >= cloneCount + totalSlides) {
+          currentPosition -= totalSlides;
+          jumped = true;
+        }
+
+        if (jumped) {
+          updateSlider(false);
+        }
+
+        isAnimating = false;
+        setActiveDot();
+      }
+
+      function goToPrev() {
+        if (isAnimating) return;
+        isAnimating = true;
+        currentPosition -= 1;
+        updateSlider(true);
+      }
+
+      function goToNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        currentPosition += 1;
+        updateSlider(true);
+      }
+
+      function goToIndex(index) {
+        if (isAnimating) return;
+
+        const targetIndex = mod(index, totalSlides);
+        const activeIndex = mod(currentPosition - cloneCount, totalSlides);
+
+        if (targetIndex === activeIndex) return;
+
+        isAnimating = true;
+        currentPosition = cloneCount + targetIndex;
+        updateSlider(true);
+      }
+
+      track.addEventListener('transitionend', function () {
+        normalizePosition();
+      });
+
+      if (prevButton) {
+        prevButton.addEventListener('click', function () {
+          goToPrev();
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener('click', function () {
+          goToNext();
+        });
+      }
+
+      if (dots.length) {
+        dots.forEach(function (dot) {
+          dot.addEventListener('click', function () {
+            const index = parseInt(dot.getAttribute('data-index'), 10) || 0;
+            goToIndex(index);
+          });
+        });
+      }
+
+      viewport.addEventListener('touchstart', function (e) {
+        if (isAnimating) return;
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', function (e) {
+        if (isAnimating) return;
+
+        endX = e.changedTouches[0].clientX;
+
+        if (startX - endX > 50) {
+          goToNext();
+        } else if (endX - startX > 50) {
+          goToPrev();
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+          const activeIndex = mod(currentPosition - cloneCount, totalSlides);
+          isAnimating = false;
+          buildTrack(activeIndex);
+        }, 150);
+      });
+
+      buildTrack(0);
+    }
+
+    function initAllHsVideoCarousels(scope) {
+      const root = scope || document;
+      const sections = root.querySelectorAll('.hs-video-carousel-section');
+
+      sections.forEach(function (section) {
+        initHsVideoCarousel(section);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initAllHsVideoCarousels(document);
+    });
+
+    document.addEventListener('shopify:section:load', function (event) {
+      initAllHsVideoCarousels(event.target);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "NOT SURE WHAT’S CAUSING YOUR HAIR THINNING?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Watch short, expert-led videos that break down the real reasons behind shedding and what to do next."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail image"
+        },
+        {
+          "type": "url",
+          "id": "video_link",
+          "label": "Video link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Your Hair Isn’t Dry... It’s Leaking"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Moisture"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video carousel",
+      "blocks": [
+        {
+          "type": "video_card",
+          "settings": {
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

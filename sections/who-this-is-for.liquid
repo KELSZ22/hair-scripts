@@ -1,0 +1,673 @@
+<section
+  id="hair-concerns-{{ section.id }}"
+  class="hair-concerns-section"
+  style="
+    background-color: {{ section.settings.section_bg }};
+    {% if section.settings.bg_image != blank %}
+      background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    {% endif %}
+  "
+>
+  <div class="hair-concerns-wrap">
+    <div class="hair-concerns-head">
+      {% if section.settings.heading != blank %}
+        <h2 class="hair-concerns-title">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="hair-concerns-text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div
+          class="hair-concerns-tabs"
+          role="tablist"
+          aria-label="{{ section.settings.heading | escape }}"
+        >
+          {% for block in section.blocks %}
+            <button
+              type="button"
+              class="hair-concerns-tab{% if forloop.first %} is-active{% endif %}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="hair-concerns-panel-{{ section.id }}-{{ block.id }}"
+              id="hair-concerns-tab-{{ section.id }}-{{ block.id }}"
+              data-tab-target="hair-concerns-panel-{{ section.id }}-{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="hair-concerns-panels">
+        {% for block in section.blocks %}
+          <div
+            id="hair-concerns-panel-{{ section.id }}-{{ block.id }}"
+            class="hair-concerns-panel{% if forloop.first %} is-active{% endif %}"
+            role="tabpanel"
+            aria-labelledby="hair-concerns-tab-{{ section.id }}-{{ block.id }}"
+          >
+            <div class="hair-concerns-card">
+              <div class="hair-concerns-media">
+                {% if block.settings.image != blank %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 1400 }}"
+                    alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                  >
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'hair-concerns-placeholder' }}
+                {% endif %}
+              </div>
+
+              <div class="hair-concerns-info">
+                <div class="hair-concerns-box hair-concerns-box--top">
+                  {% if block.settings.problem_label != blank %}
+                    <div class="hair-concerns-label">{{ block.settings.problem_label }}</div>
+                  {% endif %}
+
+                  {% if block.settings.problem_heading != blank %}
+                    <h3 class="hair-concerns-box-title">{{ block.settings.problem_heading }}</h3>
+                  {% endif %}
+
+                  {% if block.settings.problem_text != blank %}
+                    <div class="hair-concerns-box-text">
+                      {{ block.settings.problem_text }}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="hair-concerns-box hair-concerns-box--bottom">
+                  {% if block.settings.solution_label != blank %}
+                    <div class="hair-concerns-label">{{ block.settings.solution_label }}</div>
+                  {% endif %}
+
+                  {% if block.settings.solution_heading != blank %}
+                    <h3 class="hair-concerns-box-title">{{ block.settings.solution_heading }}</h3>
+                  {% endif %}
+
+                  {% if block.settings.solution_text != blank %}
+                    <div class="hair-concerns-box-text">
+                      {{ block.settings.solution_text }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+<style>
+  #hair-concerns-{{ section.id }} {
+    padding: 70px 20px;
+    background: linear-gradient(90deg, #6BAAB1 0%, #3D7E7A 100%);
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-head {
+    text-align: center;
+    max-width: 940px;
+    margin: 0 auto 34px;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-title {
+    margin: 0 0 12px;
+    color: {{ section.settings.heading_color }};
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-text {
+    color: {{ section.settings.text_color }};
+    font-family: "DM Sans";
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 900px;
+    margin: 24px auto 0;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-tab {
+    appearance: none;
+    border: 1px solid {{ section.settings.pill_border_color }};
+    background: {{ section.settings.pill_bg }};
+    color: {{ section.settings.pill_text_color }};
+    border-radius: 999px;
+    min-height: 44px;
+    padding: 10px 18px;
+    font-family: "DM Sans";
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+    width: 100%;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-tab:hover,
+  #hair-concerns-{{ section.id }} .hair-concerns-tab.is-active {
+    background: {{ section.settings.pill_active_bg }};
+    color: {{ section.settings.pill_active_text }};
+    border-color: {{ section.settings.pill_active_border }};
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panels {
+    position: relative;
+    transition: height 0.35s ease;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panel {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panel.is-active {
+    display: block;
+    opacity: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panel.is-current-fade {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panel.is-current-fade.is-fade-out {
+    opacity: 0;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panel.is-next-fade {
+    display: block;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-panel.is-next-fade.is-fade-in {
+    opacity: 1;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
+    border-radius: 18px;
+    overflow: hidden;
+    background: {{ section.settings.card_bg }};
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-media {
+    min-height: 100%;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-media img,
+  #hair-concerns-{{ section.id }} .hair-concerns-media svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-info {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    min-height: 100%;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 34px 28px;
+    text-align: center;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-box--top {
+    background: {{ section.settings.top_box_bg }};
+    color: {{ section.settings.top_box_text }};
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-box--bottom {
+    background: {{ section.settings.bottom_box_bg }};
+    color: {{ section.settings.bottom_box_text }};
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-family: "DM Sans";
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-box-title {
+    margin: 0 0 10px;
+    font-family: "Cormorant Garamond";
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-box-text {
+    font-family: "DM Sans";
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  #hair-concerns-{{ section.id }} .hair-concerns-placeholder {
+    background: rgba(255, 255, 255, 0.25);
+    color: rgba(0, 0, 0, 0.18);
+  }
+
+  @media screen and (max-width: 989px) {
+    #hair-concerns-{{ section.id }} {
+      padding: 56px 18px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-tabs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-card {
+      grid-template-columns: 1fr;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-media {
+      min-height: 360px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-info {
+      grid-template-rows: auto auto;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #hair-concerns-{{ section.id }} {
+      padding: 40px 15px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-title {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    #hair-concerns-{{ section.id }} .hair-concerns-title {
+      font-size: 26px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-text {
+      font-size: 13px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-tabs {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-tab {
+      min-height: 40px;
+      padding: 9px 14px;
+      font-size: 12px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-media {
+      min-height: 280px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-box {
+      padding: 28px 20px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-box-title {
+      font-size: 18px;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-box-text {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #hair-concerns-{{ section.id }} .hair-concerns-title {
+      font-size: 20px;
+    }
+  }
+</style>
+
+  <script>
+    (function() {
+      var section = document.getElementById('hair-concerns-{{ section.id }}');
+      if (!section) return;
+
+      var tabs = section.querySelectorAll('.hair-concerns-tab');
+      var panels = section.querySelectorAll('.hair-concerns-panel');
+      var panelsWrap = section.querySelector('.hair-concerns-panels');
+      var animationDuration = 350;
+      var isAnimating = false;
+
+      function activateTab(tab) {
+        if (isAnimating || tab.classList.contains('is-active')) return;
+
+        var targetId = tab.getAttribute('data-tab-target');
+        var targetPanel = section.querySelector('#' + targetId);
+        var currentTab = section.querySelector('.hair-concerns-tab.is-active');
+        var currentPanel = section.querySelector('.hair-concerns-panel.is-active');
+
+        if (!targetPanel) return;
+
+        if (!currentPanel) {
+          tabs.forEach(function(item) {
+            item.classList.remove('is-active');
+            item.setAttribute('aria-selected', 'false');
+          });
+
+          panels.forEach(function(panel) {
+            panel.classList.remove('is-active');
+          });
+
+          tab.classList.add('is-active');
+          tab.setAttribute('aria-selected', 'true');
+          targetPanel.classList.add('is-active');
+          return;
+        }
+
+        isAnimating = true;
+
+        if (currentTab) {
+          currentTab.classList.remove('is-active');
+          currentTab.setAttribute('aria-selected', 'false');
+        }
+
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+
+        var currentHeight = currentPanel.offsetHeight;
+        panelsWrap.style.height = currentHeight + 'px';
+
+        currentPanel.classList.add('is-current-fade');
+        targetPanel.classList.add('is-next-fade');
+
+        var nextHeight = targetPanel.offsetHeight;
+
+        requestAnimationFrame(function() {
+          panelsWrap.style.height = nextHeight + 'px';
+          currentPanel.classList.add('is-fade-out');
+          targetPanel.classList.add('is-fade-in');
+        });
+
+        setTimeout(function() {
+          currentPanel.classList.remove('is-active', 'is-current-fade', 'is-fade-out');
+          targetPanel.classList.remove('is-next-fade', 'is-fade-in');
+          targetPanel.classList.add('is-active');
+
+          panelsWrap.style.height = '';
+          isAnimating = false;
+        }, animationDuration);
+      }
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          activateTab(tab);
+        });
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Hair concerns split",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WHO THIS IS FOR"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text",
+      "default": "<p>Formulated for her specific experience. Hair thinning has a root cause. This formula was built around the patterns they see most.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#6c9ea2"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#f7f0e6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#f5eee4"
+    },
+    {
+      "type": "color",
+      "id": "pill_bg",
+      "label": "Tab background",
+      "default": "#7fadaf"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Tab text color",
+      "default": "#f7efe4"
+    },
+    {
+      "type": "color",
+      "id": "pill_border_color",
+      "label": "Tab border color",
+      "default": "#d8d1c4"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_bg",
+      "label": "Active tab background",
+      "default": "#f4eee5"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_text",
+      "label": "Active tab text color",
+      "default": "#6c6257"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_border",
+      "label": "Active tab border color",
+      "default": "#f4eee5"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card base background",
+      "default": "#f5efe5"
+    },
+    {
+      "type": "color",
+      "id": "top_box_bg",
+      "label": "Top box background",
+      "default": "#f4eee5"
+    },
+    {
+      "type": "color",
+      "id": "top_box_text",
+      "label": "Top box text color",
+      "default": "#6c6257"
+    },
+    {
+      "type": "color",
+      "id": "bottom_box_bg",
+      "label": "Bottom box background",
+      "default": "#c7d8d5"
+    },
+    {
+      "type": "color",
+      "id": "bottom_box_text",
+      "label": "Bottom box text color",
+      "default": "#4d4d45"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab text",
+          "default": "Postpartum shedding"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Left image"
+        },
+        {
+          "type": "text",
+          "id": "problem_label",
+          "label": "Top box label",
+          "default": "THE PROBLEM"
+        },
+        {
+          "type": "text",
+          "id": "problem_heading",
+          "label": "Top box heading",
+          "default": "Hair Loss"
+        },
+        {
+          "type": "richtext",
+          "id": "problem_text",
+          "label": "Top box text",
+          "default": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>"
+        },
+        {
+          "type": "text",
+          "id": "solution_label",
+          "label": "Bottom box label",
+          "default": "HAIRSCRIPT"
+        },
+        {
+          "type": "text",
+          "id": "solution_heading",
+          "label": "Bottom box heading",
+          "default": "More Than One Formula"
+        },
+        {
+          "type": "richtext",
+          "id": "solution_text",
+          "label": "Bottom box text",
+          "default": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "presets": [
+    {
+      "name": "Hair concerns split",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Postpartum shedding"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Hormonal thinning & perimenopause"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Stress-related shedding"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Textured & natural hair"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Nutrient deficiency-driven thinning"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Women who have tried everything else"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

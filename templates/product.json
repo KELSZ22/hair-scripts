@@ -1,0 +1,1029 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron_large",
+            "slideshow_controls_style": "dots",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 28,
+            "sticky_details_desktop": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "scheme-1",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "Header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_xrnftG": {
+                  "type": "text",
+                  "name": "Product title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-primary--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "Product description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "text_aEtTtq"
+          ]
+        }
+      },
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>You may also like </h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_M7MJkb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_gLWgA6": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "product_title_M7MJkb",
+            "price_gLWgA6"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "disabled": true,
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "who_this_is_for_HXUUtf": {
+      "type": "who-this-is-for",
+      "blocks": {
+        "tab_HT6hPz": {
+          "type": "tab",
+          "settings": {
+            "label": "Postpartum shedding",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "solution_label": "HAIRSCRIPT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_ybTrBa": {
+          "type": "tab",
+          "settings": {
+            "label": "Postpartum shedding",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "solution_label": "HAIRSCRIPT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tab_HT6hPz",
+        "tab_ybTrBa"
+      ],
+      "name": "Who this is for",
+      "settings": {
+        "heading": "WHO THIS IS FOR",
+        "text": "<p>Formulated for her specific experience. Hair thinning has a root cause. This formula was built around the patterns they see most.</p>",
+        "bg_image": "shopify://shop_images/Frame_1000009020.png",
+        "section_bg": "#6e9fa4",
+        "heading_color": "#f7f0e6",
+        "text_color": "#f5f0e8",
+        "pill_bg": "#7faeb2",
+        "pill_text_color": "#f7efe4",
+        "pill_border_color": "#d8d1c4",
+        "pill_active_bg": "#f4eee5",
+        "pill_active_text": "#6c6257",
+        "pill_active_border": "#f4eee5",
+        "card_bg": "#f5efe5",
+        "top_box_bg": "#f4eee5",
+        "top_box_text": "#6c6257",
+        "bottom_box_bg": "#c7d8d5",
+        "bottom_box_text": "#4d4d45"
+      }
+    },
+    "hair_assessment_banner_aHjkyY": {
+      "type": "hair-assessment-banner",
+      "name": "Hair assessment banner bg",
+      "settings": {
+        "badge_text": "FREE • TAKES 2 MINUTES",
+        "heading": "NOT SURE WHAT’S CAUSING YOUR HAIR THINNING? LET’S FIND OUT.",
+        "subheading": "In just 10 questions, unlock a biological blueprint tailored to your life stage and hair type. Get the exact root-cause analysis you need to get the best results.",
+        "button_label": "Take the Free Hair Assessment",
+        "button_link": "",
+        "button_label2": "Take the Free Hair Assessment",
+        "button_link2": ""
+      }
+    },
+    "hairscripts_change_JNxQ9p": {
+      "type": "hairscripts-change",
+      "blocks": {
+        "item_ekiraQ": {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "✺",
+            "title": "More hair collecting in the shower drain than ever before each morning",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        "item_YiiALV": {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "〰",
+            "title": "Edges and temples visibly thinning after every wash and blow before time",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        "item_iKxAXz": {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "〽",
+            "title": "Painful sensitivity when hair is tied every day for years ago",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        "item_XLtQGG": {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "◔",
+            "title": "Postpartum shedding or hormones have shifted and recovered",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        "item_hntUbb": {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "⌬",
+            "title": "Tried oils, supplements, and vitamins without relief or answers",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_ekiraQ",
+        "item_YiiALV",
+        "item_iKxAXz",
+        "item_XLtQGG",
+        "item_hntUbb"
+      ],
+      "name": "HairScripts change",
+      "settings": {
+        "top_heading": "IS THIS WHAT YOU'RE GOING THROUGH?",
+        "bottom_text": "Without addressing the root cause, whether hormonal, nutrient, or stress-related shedding continues.",
+        "main_heading": "HAIRSCRIPT'S WAS BUILT TO CHANGE THAT.",
+        "section_bg": "#f5efe7",
+        "top_bar_color": "#2d6a68",
+        "heading_color": "#6a5c50",
+        "item_title_color": "#4f453d",
+        "item_text_color": "#6d6259",
+        "subtext_color": "#6d6259",
+        "main_heading_color": "#6a5c50",
+        "icon_color": "#6a5c50"
+      }
+    },
+    "brand_comparison_split_r8L9fH": {
+      "type": "brand-comparison-split",
+      "blocks": {
+        "comparison_row_hgrmkz": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Science-informed, root-cause approach",
+            "right_text": "Surface-level, symptom-focused"
+          }
+        },
+        "comparison_row_m3rLyc": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Multi-ingredient, comprehensive formula",
+            "right_text": "Often built-in one or single-focus"
+          }
+        },
+        "comparison_row_HtU47m": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Transparent ingredient education",
+            "right_text": "Limited explanation of ingredients"
+          }
+        },
+        "comparison_row_MindPY": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Supports hair cycle & follicle health",
+            "right_text": "Focuses mainly on appearance"
+          }
+        },
+        "comparison_row_4b9NTa": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Targets stress, hormones & nutrient gaps",
+            "right_text": "Generic \"hair growth\" claims"
+          }
+        },
+        "comparison_row_kmpRhw": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Backed by pharmacology expertise",
+            "right_text": "Often trend or influencer-driven"
+          }
+        },
+        "comparison_row_cpyq3r": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Education-led brand",
+            "right_text": "Marketing-first approach"
+          }
+        },
+        "comparison_row_DYR9PN": {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Designed for long-term results",
+            "right_text": "Positioned as quick fix"
+          }
+        }
+      },
+      "block_order": [
+        "comparison_row_hgrmkz",
+        "comparison_row_m3rLyc",
+        "comparison_row_HtU47m",
+        "comparison_row_MindPY",
+        "comparison_row_4b9NTa",
+        "comparison_row_kmpRhw",
+        "comparison_row_cpyq3r",
+        "comparison_row_DYR9PN"
+      ],
+      "name": "Brand comparison split",
+      "settings": {
+        "left_heading": "HAIRSCRIPTS",
+        "right_heading": "OTHER BRANDS",
+        "section_bg": "#3b8b88",
+        "card_bg": "#2f7e7a",
+        "card_border": "#b9d6d3",
+        "divider_color": "#78aba7",
+        "title_color": "#ffffff",
+        "row_text_color": "#eef8f7",
+        "left_header_bg": "#366f6c",
+        "left_header_border": "#8fc2be",
+        "left_icon_bg": "#5d9f9b",
+        "left_icon_color": "#ffffff",
+        "right_icon_color": "#ffffff"
+      }
+    },
+    "key_ingredients_grid_JqJxJf": {
+      "type": "key-ingredients-grid",
+      "blocks": {
+        "ingredient_n3bMJY": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Ashwagandha Root Extract",
+            "text": "<p>Helps reduce stress-related hair loss by supporting cortisol balance.</p>"
+          }
+        },
+        "ingredient_qc3ADF": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Saw Palmetto Extract",
+            "text": "<p>Helps reduce DHT by supporting healthy hormone balance.</p>"
+          }
+        },
+        "ingredient_iLynnK": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Hydrolyzed Marine Collagen",
+            "text": "<p>Supports skin elasticity, follicles, and hair structure.</p>"
+          }
+        },
+        "ingredient_XRkHpG": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Hyaluronic Acid",
+            "text": "<p>Helps hydrate the scalp and support elasticity.</p>"
+          }
+        },
+        "ingredient_dLzb78": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Methylsulfonylmethane",
+            "text": "<p>Supports natural keratin production for stronger hair.</p>"
+          }
+        },
+        "ingredient_fKinDL": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Coenzyme Q10 (CoQ10)",
+            "text": "<p>Supports cellular energy and healthier scalp function.</p>"
+          }
+        },
+        "ingredient_EPtNay": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Zinc Bisglycinate Chelate",
+            "text": "<p>Supports growth, oil balance, and immune resilience.</p>"
+          }
+        },
+        "ingredient_jW4tf7": {
+          "type": "ingredient",
+          "settings": {
+            "icon_symbol": "✦",
+            "title": "Grape Seed Extract",
+            "text": "<p>Helps protect follicles through antioxidant support.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_n3bMJY",
+        "ingredient_qc3ADF",
+        "ingredient_iLynnK",
+        "ingredient_XRkHpG",
+        "ingredient_dLzb78",
+        "ingredient_fKinDL",
+        "ingredient_EPtNay",
+        "ingredient_jW4tf7"
+      ],
+      "name": "Key ingredients grid",
+      "settings": {
+        "eyebrow": "KEY INGREDIENTS",
+        "heading": "Key Ingredients",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+        "section_bg": "#2f6665",
+        "heading_color": "#f5efe4",
+        "text_color": "#d9e7e2",
+        "item_title_color": "#f5efe4",
+        "item_text_color": "#d9e7e2",
+        "icon_bg": "#f5efe4",
+        "icon_color": "#2f6665",
+        "divider_color": "#4e817f"
+      }
+    },
+    "real_results_women_rznViw": {
+      "type": "real-results-women",
+      "blocks": {
+        "stat_UUzPJR": {
+          "type": "stat",
+          "settings": {
+            "number": "34%",
+            "label": "Users saw less shedding"
+          }
+        },
+        "stat_VMxEfe": {
+          "type": "stat",
+          "settings": {
+            "number": "78%",
+            "label": "Users noticed stronger strands"
+          }
+        },
+        "stat_B69EbH": {
+          "type": "stat",
+          "settings": {
+            "number": "35%",
+            "label": "Users saw improved scalp health"
+          }
+        },
+        "stat_xpGjre": {
+          "type": "stat",
+          "settings": {
+            "number": "9X",
+            "label": "Visible satisfaction"
+          }
+        }
+      },
+      "block_order": [
+        "stat_UUzPJR",
+        "stat_VMxEfe",
+        "stat_B69EbH",
+        "stat_xpGjre"
+      ],
+      "name": "Real results women",
+      "settings": {
+        "before_label": "Before",
+        "after_label": "After",
+        "heading": "Real Results, From Real Women",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>",
+        "section_bg": "#ffffff",
+        "card_bg": "#f8f4ee",
+        "heading_color": "#5e5147",
+        "text_color": "#8b7f74",
+        "muted_color": "#8b7f74",
+        "border_color": "#d8cfc5",
+        "stat_number_color": "#5e5147",
+        "stat_label_color": "#8b7f74"
+      }
+    },
+    "risk_free_guarantee_w3iinq": {
+      "type": "risk-free-guarantee",
+      "blocks": {
+        "guarantee_card_K67y9r": {
+          "type": "guarantee_card",
+          "settings": {
+            "badge": "Recommended",
+            "number": "90",
+            "unit": "Days",
+            "title": "The 90-Day Hair Reset",
+            "text": "<p>Hair grows in 90 day cycles. Give the formula time to work your body and roots according to how your body is responding.</p>",
+            "button_label": "Get 90 Days of Haircare",
+            "button_link": ""
+          }
+        },
+        "guarantee_card_pxxfnk": {
+          "type": "guarantee_card",
+          "settings": {
+            "badge": "Recommended",
+            "number": "30",
+            "unit": "Days",
+            "title": "Feel It in Month One",
+            "text": "<p>Try it for 30 days. If you don't notice any meaningful shift in how your hair feels, we'll refund every penny.</p>",
+            "button_label": "I Can Risk This",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "guarantee_card_K67y9r",
+        "guarantee_card_pxxfnk"
+      ],
+      "name": "Risk free guarantee",
+      "settings": {
+        "eyebrow": "Our Guarantee",
+        "heading": "RISK-FREE.",
+        "subheading": "See the difference, or get every penny back.",
+        "bottom_text": "Brya's pharmaceutical background shaped a formula built on real science. She stands behind it with a guarantee most brands won't offer.",
+        "section_bg": "#5aa7a6",
+        "heading_color": "#f7f1e7",
+        "subheading_color": "#f4efe7",
+        "text_color": "#edf8f6",
+        "card_bg": "#ffffff14",
+        "card_border": "#b7d7d4",
+        "card_number_color": "#ffffff",
+        "card_title_color": "#f7f1e7",
+        "card_text_color": "#edf8f6",
+        "button_bg": "#4a8f8d",
+        "button_text": "#ffffff",
+        "badge_bg": "#d6a539",
+        "badge_text": "#ffffff",
+        "bottom_text_color": "#f4efe7"
+      }
+    },
+    "faq_category_tabs_g3iPAk": {
+      "type": "faq-category-tabs",
+      "blocks": {
+        "faq_item_y9G46i": {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-1",
+            "question": "Is this for all hair types and textures?",
+            "answer": "<p>Yes. This formula is designed for a wide range of hair types, textures, and concerns, from shedding to hormonal or stress-related thinning.</p>"
+          }
+        },
+        "faq_item_f9kX8M": {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-1",
+            "question": "How is HairScript different from other brands?",
+            "answer": "<p>HairScript focuses on root-cause support with a more complete, science-led approach instead of surface-level claims.</p>"
+          }
+        },
+        "faq_item_GKB4im": {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-1",
+            "question": "How soon will I see results?",
+            "answer": "<p>Some people notice early changes in how their hair feels within the first month, while fuller visible changes often take longer.</p>"
+          }
+        },
+        "faq_item_PTjY4e": {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-2",
+            "question": "Will this make me shed more before it gets better?",
+            "answer": "<p>Not usually, but everyone is different. Hair cycles take time, so consistency matters more than overnight expectations.</p>"
+          }
+        },
+        "faq_item_BCMQHb": {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-3",
+            "question": "Can men use this too?",
+            "answer": "<p>This depends on the formula and positioning of the product, but many of the supportive ingredients can be relevant more broadly.</p>"
+          }
+        },
+        "faq_item_dxcBVP": {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-4",
+            "question": "What if I've had shedding for years?",
+            "answer": "<p>Long-term shedding can have several causes. That is exactly why a root-cause, long-view approach matters.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_y9G46i",
+        "faq_item_f9kX8M",
+        "faq_item_GKB4im",
+        "faq_item_PTjY4e",
+        "faq_item_BCMQHb",
+        "faq_item_dxcBVP"
+      ],
+      "name": "FAQ category tabs",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "<p>Answers to your most important questions about hair thinning, ingredients, and results.</p>",
+        "category_1_label": "Category 1",
+        "category_2_label": "Category 2",
+        "category_3_label": "Category 3",
+        "category_4_label": "Category 4",
+        "footer_text": "Still have questions?",
+        "button_label": "Contact us",
+        "button_link": "",
+        "section_bg": "#d8e6e3",
+        "heading_color": "#6a5b51",
+        "subtext_color": "#75685f",
+        "tab_bg": "#eef4f2",
+        "tab_text": "#6a5b51",
+        "tab_active_bg": "#3d7f7d",
+        "tab_active_text": "#ffffff",
+        "item_border": "#a9bbb7",
+        "item_bg": "rgba(0,0,0,0)",
+        "item_active_bg": "#3d7f7d",
+        "question_color": "#6a5b51",
+        "question_active_color": "#ffffff",
+        "answer_color": "#ffffff",
+        "button_bg": "#d4ad6b",
+        "button_text": "#ffffff"
+      }
+    },
+    "hairscripts_review_carousel_HUTDWC": {
+      "type": "hairscripts-review-carousel",
+      "blocks": {
+        "review_xkRFC6": {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
+            "name": "Maria L.",
+            "age": "36",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_fqHV7D": {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
+            "name": "Maria L.",
+            "age": "36",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_fka6Kb": {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
+            "name": "Maria L.",
+            "age": "36",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_9gECQD": {
+          "type": "review",
+          "settings": {
+            "title": "Healthier Growth",
+            "review": "<p>With consistent use, my hair looks healthier and feels much more resilient.</p>",
+            "name": "Danielle R.",
+            "age": "28",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_BxcHbT": {
+          "type": "review",
+          "settings": {
+            "title": "Stronger Hair",
+            "review": "<p>My hair kept breaking before it could grow longer, and nothing I tried seemed to help. Now my strands feel stronger and healthier, and I’m finally seeing real length.</p>",
+            "name": "Nicole T.",
+            "age": "38",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_3KeTMH": {
+          "type": "review",
+          "settings": {
+            "title": "Fuller Ponytail",
+            "review": "<p>My hair looks fuller and my ponytail finally feels thicker again.</p>",
+            "name": "Jessica P.",
+            "age": "44",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_hyLzh6": {
+          "type": "review",
+          "settings": {
+            "title": "Confidence Back",
+            "review": "<p>I felt self-conscious about my thinning hair and avoided certain hairstyles.</p>",
+            "name": "Ashley M.",
+            "age": "32",
+            "label": "Verified Buyer Review"
+          }
+        }
+      },
+      "block_order": [
+        "review_xkRFC6",
+        "review_fqHV7D",
+        "review_fka6Kb",
+        "review_9gECQD",
+        "review_BxcHbT",
+        "review_3KeTMH",
+        "review_hyLzh6"
+      ],
+      "name": "Review carousel",
+      "settings": {
+        "show_stars": true,
+        "heading": "RESULTS WOMEN ARE TALKING ABOUT",
+        "subheading": "Thousands are supporting their hair health with HairScripts.",
+        "button_label": "View All Reviews",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_recommendations_qggXJq",
+    "who_this_is_for_HXUUtf",
+    "hair_assessment_banner_aHjkyY",
+    "hairscripts_change_JNxQ9p",
+    "brand_comparison_split_r8L9fH",
+    "key_ingredients_grid_JqJxJf",
+    "real_results_women_rznViw",
+    "risk_free_guarantee_w3iinq",
+    "faq_category_tabs_g3iPAk",
+    "hairscripts_review_carousel_HUTDWC"
+  ]
+}

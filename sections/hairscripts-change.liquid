@@ -1,0 +1,400 @@
+<section
+  id="hairscripts-change-{{ section.id }}"
+  class="hairscripts-change-section"
+  style="
+    --hsc-section-bg: {{ section.settings.section_bg }};
+    --hsc-top-bar: {{ section.settings.top_bar_color }};
+    --hsc-heading-color: {{ section.settings.heading_color }};
+    --hsc-item-title-color: {{ section.settings.item_title_color }};
+    --hsc-item-text-color: {{ section.settings.item_text_color }};
+    --hsc-subtext-color: {{ section.settings.subtext_color }};
+    --hsc-main-heading-color: {{ section.settings.main_heading_color }};
+    --hsc-icon-color: {{ section.settings.icon_color }};
+  "
+>
+  <div class="hairscripts-change__top-bar"></div>
+
+  <div class="hairscripts-change__wrap">
+    <div class="hairscripts-change__inner">
+      {% if section.settings.top_heading != blank %}
+        <h2 class="hairscripts-change__top-heading">{{ section.settings.top_heading }}</h2>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="hairscripts-change__grid">
+          {% for block in section.blocks %}
+            <div class="hairscripts-change__item" {{ block.shopify_attributes }}>
+              <div class="hairscripts-change__icon-wrap">
+                {% if block.settings.icon != blank %}
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 180 }}"
+                    alt="{{ block.settings.title | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.icon.width }}"
+                    height="{{ block.settings.icon.height }}"
+                    class="hairscripts-change__icon-image"
+                  >
+                {% else %}
+                  <span class="hairscripts-change__icon-fallback">
+                    {{ block.settings.icon_symbol }}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if block.settings.title != blank %}
+                <h3 class="hairscripts-change__item-title">{{ block.settings.title }}</h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <div class="hairscripts-change__item-text">
+                  {{ block.settings.text }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.bottom_text != blank %}
+        <div class="hairscripts-change__bottom-text">
+          {{ section.settings.bottom_text }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.main_heading != blank %}
+        <h3 class="hairscripts-change__main-heading">{{ section.settings.main_heading }}</h3>
+      {% endif %}
+    </div>
+  </div>
+
+  <style>
+    #hairscripts-change-{{ section.id }} {
+      background: var(--hsc-section-bg);
+      position: relative;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__top-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--hsc-top-bar);
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 20px 26px;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__top-heading {
+      margin: 0 0 28px;
+      color: var(--hsc-heading-color);
+      font-size: 20px;
+      line-height: 1.15;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 26px 18px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__item {
+      min-width: 0;
+      text-align: center;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__icon-wrap {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hsc-icon-color);
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__icon-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__icon-fallback {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__item-title {
+      margin: 0 0 6px;
+      color: var(--hsc-item-title-color);
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__item-text {
+      color: var(--hsc-item-text-color);
+      font-size: 9px;
+      line-height: 1.45;
+      max-width: 170px;
+      margin: 0 auto;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__item-text p {
+      margin: 0;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__bottom-text {
+      margin: 0 0 8px;
+      color: var(--hsc-subtext-color);
+      font-size: 14px;
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    #hairscripts-change-{{ section.id }} .hairscripts-change__main-heading {
+      margin: 0;
+      color: var(--hsc-main-heading-color);
+      font-size: 33px;
+      line-height: 1.08;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 989px) {
+      #hairscripts-change-{{ section.id }} .hairscripts-change__wrap {
+        padding: 24px 18px 24px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__main-heading {
+        font-size: 28px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      #hairscripts-change-{{ section.id }} .hairscripts-change__wrap {
+        padding: 22px 14px 22px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__top-heading {
+        font-size: 16px;
+        margin-bottom: 22px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px 14px;
+        margin-bottom: 22px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__icon-wrap {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 8px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__icon-fallback {
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__item-title {
+        font-size: 10px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__item-text {
+        font-size: 9px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__bottom-text {
+        font-size: 12px;
+      }
+
+      #hairscripts-change-{{ section.id }} .hairscripts-change__main-heading {
+        font-size: 22px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      #hairscripts-change-{{ section.id }} .hairscripts-change__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "HairScripts change",
+  "settings": [
+    {
+      "type": "text",
+      "id": "top_heading",
+      "label": "Top heading",
+      "default": "IS THIS WHAT YOU'RE GOING THROUGH?"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Without addressing the root cause, whether hormonal, nutrient, or stress-related shedding continues."
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main heading",
+      "default": "HAIRSCRIPT'S WAS BUILT TO CHANGE THAT."
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#f5efe7"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_color",
+      "label": "Top bar color",
+      "default": "#2d6a68"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Top heading color",
+      "default": "#6a5c50"
+    },
+    {
+      "type": "color",
+      "id": "item_title_color",
+      "label": "Item title color",
+      "default": "#4f453d"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "Item text color",
+      "default": "#6d6259"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Bottom text color",
+      "default": "#6d6259"
+    },
+    {
+      "type": "color",
+      "id": "main_heading_color",
+      "label": "Main heading color",
+      "default": "#6a5c50"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Fallback icon color",
+      "default": "#6a5c50"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Concern item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "icon_symbol",
+          "label": "Fallback icon symbol",
+          "default": "✦"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "More hair collecting in the shower drain than ever before each morning"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Supportive descriptive text goes here.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "HairScripts change",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "✺",
+            "title": "More hair collecting in the shower drain than ever before each morning",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "〰",
+            "title": "Edges and temples visibly thinning after every wash and blow before time",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "〽",
+            "title": "Painful sensitivity when hair is tied every day for years ago",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "◔",
+            "title": "Postpartum shedding or hormones have shifted and recovered",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon_symbol": "⌬",
+            "title": "Tried oils, supplements, and vitamins without relief or answers",
+            "text": "<p>Supportive descriptive text goes here.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

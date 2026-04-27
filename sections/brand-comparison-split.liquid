@@ -1,0 +1,529 @@
+<section
+  id="brand-comparison-split-{{ section.id }}"
+  class="brand-comparison-split"
+  style="
+    --bcs-bg: {{ section.settings.section_bg }};
+    --bcs-card-bg: {{ section.settings.card_bg }};
+    --bcs-card-border: {{ section.settings.card_border }};
+    --bcs-title-color: {{ section.settings.title_color }};
+    --bcs-row-text: {{ section.settings.row_text_color }};
+    --bcs-left-icon-bg: {{ section.settings.left_icon_bg }};
+    --bcs-left-icon-color: {{ section.settings.left_icon_color }};
+    --bcs-right-icon-color: {{ section.settings.right_icon_color }};
+    --bcs-divider: {{ section.settings.divider_color }};
+    --bcs-left-header-bg: {{ section.settings.left_header_bg }};
+    --bcs-left-header-border: {{ section.settings.left_header_border }};
+  "
+>
+  <div class="bcs-wrap">
+    <div class="bcs-layout">
+      <div class="bcs-product bcs-product--left">
+        {% if section.settings.left_image != blank %}
+          <img
+            src="{{ section.settings.left_image | image_url: width: 900 }}"
+            alt="{{ section.settings.left_image.alt | default: section.settings.left_heading | escape }}"
+            loading="lazy"
+            width="{{ section.settings.left_image.width }}"
+            height="{{ section.settings.left_image.height }}"
+            class="bcs-product__image"
+          >
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'bcs-product__image bcs-product__placeholder' }}
+        {% endif %}
+      </div>
+
+      <div class="bcs-card">
+        <div class="bcs-card__head">
+          <div class="bcs-card__title bcs-card__title--left">
+            {{ section.settings.left_heading }}
+          </div>
+          <div class="bcs-card__title bcs-card__title--right">
+            {{ section.settings.right_heading }}
+          </div>
+        </div>
+
+        {% if section.blocks.size > 0 %}
+          <div class="bcs-card__body">
+            {% for block in section.blocks %}
+              <div class="bcs-row" {{ block.shopify_attributes }}>
+                <div class="bcs-cell bcs-cell--left">
+                  <span class="bcs-icon bcs-icon--left" aria-hidden="true">✓</span>
+                  <span class="bcs-cell__text">{{ block.settings.left_text }}</span>
+                </div>
+
+                <div class="bcs-cell bcs-cell--right">
+                  <span class="bcs-icon bcs-icon--right" aria-hidden="true">✕</span>
+                  <span class="bcs-cell__text">{{ block.settings.right_text }}</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="bcs-product bcs-product--right">
+        {% if section.settings.right_image != blank %}
+          <img
+            src="{{ section.settings.right_image | image_url: width: 900 }}"
+            alt="{{ section.settings.right_image.alt | default: section.settings.right_heading | escape }}"
+            loading="lazy"
+            width="{{ section.settings.right_image.width }}"
+            height="{{ section.settings.right_image.height }}"
+            class="bcs-product__image"
+          >
+        {% else %}
+          {{ 'product-2' | placeholder_svg_tag: 'bcs-product__image bcs-product__placeholder' }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #brand-comparison-split-{{ section.id }} {
+      background: var(--bcs-bg);
+      padding: 44px 20px;
+      overflow: hidden;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-layout {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr) 170px;
+      align-items: center;
+      gap: 0;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-product {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-product--left {
+      transform: translateX(18px);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-product--right {
+      transform: translateX(-18px);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-product__image {
+      display: block;
+      width: 100%;
+      max-width: 170px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-product__placeholder {
+      opacity: 0.35;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card {
+      position: relative;
+      z-index: 1;
+      background: var(--bcs-card-bg);
+      border: 1px solid var(--bcs-card-border);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__head {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      position: relative;
+      min-height: 66px;
+      border-bottom: 1px solid var(--bcs-divider);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__head::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: var(--bcs-divider);
+      transform: translateX(-0.5px);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__title {
+      padding: 18px 22px;
+      text-align: center;
+      color: var(--bcs-title-color);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__title--left {
+      background: var(--bcs-left-header-bg);
+      border-right: 1px solid var(--bcs-left-header-border);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+      background: transparent;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__body {
+      position: relative;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-card__body::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: var(--bcs-divider);
+      transform: translateX(-0.5px);
+      pointer-events: none;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      position: relative;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-row + .bcs-row {
+      border-top: 1px solid var(--bcs-divider);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 12px 16px;
+      color: var(--bcs-row-text);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-cell__text {
+      display: block;
+      min-width: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-icon--left {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border-radius: 999px;
+      background: var(--bcs-left-icon-bg);
+      color: var(--bcs-left-icon-color);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 10px;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-icon--right {
+      width: auto;
+      height: auto;
+      min-width: auto;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      color: var(--bcs-right-icon-color);
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 989px) {
+      #brand-comparison-split-{{ section.id }} {
+        padding: 38px 18px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-layout {
+        grid-template-columns: 130px minmax(0, 1fr) 130px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product__image {
+        max-width: 130px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--left {
+        transform: translateX(10px);
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--right {
+        transform: translateX(-10px);
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title {
+        font-size: 22px;
+        padding: 16px 12px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell {
+        font-size: 11px;
+        padding: 11px 12px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      #brand-comparison-split-{{ section.id }} {
+        padding: 30px 14px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 560px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--left,
+      #brand-comparison-split-{{ section.id }} .bcs-product--right {
+        transform: none;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product {
+        order: 1;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card {
+        order: 2;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--right {
+        order: 3;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product__image {
+        max-width: 120px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__head,
+      #brand-comparison-split-{{ section.id }} .bcs-row {
+        grid-template-columns: 1fr;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__head::after,
+      #brand-comparison-split-{{ section.id }} .bcs-card__body::after {
+        display: none;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title {
+        font-size: 20px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--left {
+        border-bottom: 1px solid var(--bcs-divider);
+        border-right: 0;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-row + .bcs-row {
+        border-top: 1px solid var(--bcs-divider);
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell--left {
+        border-bottom: 1px solid var(--bcs-divider);
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Brand comparison split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right product image"
+    },
+    {
+      "type": "text",
+      "id": "left_heading",
+      "label": "Left heading",
+      "default": "HAIRSCRIPTS"
+    },
+    {
+      "type": "text",
+      "id": "right_heading",
+      "label": "Right heading",
+      "default": "OTHER BRANDS"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#3b8b88"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#2f7e7a"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border",
+      "default": "#b9d6d3"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#78aba7"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "row_text_color",
+      "label": "Row text color",
+      "default": "#eef8f7"
+    },
+    {
+      "type": "color",
+      "id": "left_header_bg",
+      "label": "Left header background",
+      "default": "#366f6c"
+    },
+    {
+      "type": "color",
+      "id": "left_header_border",
+      "label": "Left header border",
+      "default": "#8fc2be"
+    },
+    {
+      "type": "color",
+      "id": "left_icon_bg",
+      "label": "Left icon background",
+      "default": "#5d9f9b"
+    },
+    {
+      "type": "color",
+      "id": "left_icon_color",
+      "label": "Left icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "right_icon_color",
+      "label": "Right icon color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_row",
+      "name": "Comparison row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "left_text",
+          "label": "Left text",
+          "default": "Science-informed, root-cause approach"
+        },
+        {
+          "type": "text",
+          "id": "right_text",
+          "label": "Right text",
+          "default": "Surface-level, symptom-focused"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Brand comparison split",
+      "blocks": [
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Science-informed, root-cause approach",
+            "right_text": "Surface-level, symptom-focused"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Multi-ingredient, comprehensive formula",
+            "right_text": "Often built-in one or single-focus"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Transparent ingredient education",
+            "right_text": "Limited explanation of ingredients"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Supports hair cycle & follicle health",
+            "right_text": "Focuses mainly on appearance"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Targets stress, hormones & nutrient gaps",
+            "right_text": "Generic hair growth claims"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Backed by pharmacology expertise",
+            "right_text": "Often trend or influencer-driven"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Education-led brand",
+            "right_text": "Marketing-first approach"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Designed for long-term results",
+            "right_text": "Positioned as quick fix"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,727 @@
+<div
+  class="timeline-support-bg"
+  {% if section.settings.bg_image != blank %}
+    style="
+      background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    "
+  {% endif %}
+>
+  <div class="timeline-support-section" id="section-{{ section.id }}">
+    <div class="timeline-support-outer">
+      <div class="timeline-support-wrapper">
+
+        {% if section.settings.heading != blank or section.settings.subheading != blank %}
+          <div class="timeline-support-header">
+            {% if section.settings.heading != blank %}
+              <h2 class="timeline-support-heading">{{ section.settings.heading }}</h2>
+            {% endif %}
+
+            {% if section.settings.subheading != blank %}
+              <p class="timeline-support-subheading">{{ section.settings.subheading }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="timeline-support-slider">
+            <div class="timeline-support-track-wrap">
+              <div class="timeline-support-grid">
+                {% for block in section.blocks %}
+                  <div class="timeline-support-item" {{ block.shopify_attributes }}>
+                    <div class="timeline-support-month-wrap">
+                      {% if block.settings.month_label != blank %}
+                        <p class="timeline-support-month-label">{{ block.settings.month_label }}</p>
+                      {% endif %}
+
+                      {% if block.settings.month_number != blank %}
+                        <div class="timeline-support-month-number">{{ block.settings.month_number }}</div>
+                      {% endif %}
+                    </div>
+
+                    {% if block.settings.phase_label != blank %}
+                      <div class="timeline-support-phase-pill">{{ block.settings.phase_label }}</div>
+                    {% endif %}
+
+                    <div class="timeline-support-content-box">
+                      {% if block.settings.image != blank %}
+                        <div class="timeline-support-image-wrap">
+                          {{
+                            block.settings.image
+                            | image_url: width: 900
+                            | image_tag:
+                              class: 'timeline-support-image',
+                              loading: 'lazy',
+                              widths: '300, 500, 700, 900',
+                              sizes: '(min-width: 990px) 25vw, 100vw',
+                              alt: block.settings.phase_label
+                          }}
+                        </div>
+                      {% else %}
+                        <div class="timeline-support-image-wrap">
+                          {{ 'image' | placeholder_svg_tag: 'timeline-support-image timeline-support-placeholder' }}
+                        </div>
+                      {% endif %}
+
+                      <div class="timeline-support-card">
+                        {% if block.settings.card_title != blank %}
+                          <h3 class="timeline-support-card-title">{{ block.settings.card_title }}</h3>
+                        {% endif %}
+
+                        {% if block.settings.bullets != blank %}
+                          {% assign bullet_lines = block.settings.bullets | newline_to_br | split: '<br />' %}
+                          <ul class="timeline-support-list">
+                            {% for line in bullet_lines %}
+                              {% assign clean_line = line | strip %}
+                              {% if clean_line != blank %}
+                                <li class="timeline-support-list-item">{{ clean_line }}</li>
+                              {% endif %}
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .timeline-support-bg {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} {
+    background: transparent;
+  }
+
+  #section-{{ section.id }} .timeline-support-outer {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .timeline-support-wrapper {
+    padding: 60px 40px;
+  }
+
+  #section-{{ section.id }} .timeline-support-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 28px;
+  }
+
+  #section-{{ section.id }} .timeline-support-heading {
+    color: #fff;
+    text-align: center;
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.6px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  #section-{{ section.id }} .timeline-support-subheading {
+    color: #fff;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .timeline-support-slider {
+    position: relative;
+  }
+
+  #section-{{ section.id }} .timeline-support-track-wrap {
+    overflow: visible;
+  }
+
+  #section-{{ section.id }} .timeline-support-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 47px;
+    align-items: stretch;
+  }
+
+  #section-{{ section.id }} .timeline-support-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  #section-{{ section.id }} .timeline-support-month-wrap {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  #section-{{ section.id }} .timeline-support-month-label {
+    color: #fff;
+    font-family: "Cormorant Garamond";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.2px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .timeline-support-month-number {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border: 1px solid #D1C3B3;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #5A534D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "DM Sans";
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  #section-{{ section.id }} .timeline-support-phase-pill {
+    position: relative;
+    min-height: 34px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 999px;
+    color: #fff;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    background: transparent;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} .timeline-support-phase-pill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    padding: 2px;
+    background: linear-gradient(270deg, #FFFFFF 0%, rgba(110, 52, 0, 0.15) 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  #section-{{ section.id }} .timeline-support-content-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+
+  #section-{{ section.id }} .timeline-support-image-wrap {
+    overflow: hidden;
+    height: 210px;
+    flex: 0 0 210px;
+  }
+
+  #section-{{ section.id }} .timeline-support-image,
+  #section-{{ section.id }} .timeline-support-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #section-{{ section.id }} .timeline-support-card {
+    background: #FFFFFF;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  #section-{{ section.id }} .timeline-support-card-title {
+    margin: 0 0 8px;
+    color: #2E241E;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  #section-{{ section.id }} .timeline-support-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+  }
+
+  #section-{{ section.id }} .timeline-support-list-item {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 6px;
+    color: #3F3934;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #section-{{ section.id }} .timeline-support-list-item:last-child {
+    margin-bottom: 0;
+  }
+
+  #section-{{ section.id }} .timeline-support-list-item::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #8C2E63;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  @media screen and (max-width: 1024px) {
+    #section-{{ section.id }} .timeline-support-wrapper {
+      padding: 40px 20px;
+    }
+
+    #section-{{ section.id }} .timeline-support-slider {
+      position: relative;
+    }
+
+    #section-{{ section.id }} .timeline-support-track-wrap {
+      overflow: hidden;
+    }
+
+    #section-{{ section.id }} .timeline-support-grid {
+      display: flex;
+      gap: 0;
+      transition: transform 0.4s ease;
+      will-change: transform;
+      align-items: stretch;
+    }
+
+    #section-{{ section.id }} .timeline-support-item {
+      flex: 0 0 38%;
+      max-width: 38%;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    #section-{{ section.id }} .timeline-support-wrapper {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .timeline-support-heading {
+      font-size: 32px;
+      width: 80%;
+      margin: 0 auto 10px;
+    }
+
+    #section-{{ section.id }} .timeline-support-subheading {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .timeline-support-month-number {
+      margin: unset;
+    }
+
+    #section-{{ section.id }} .timeline-support-month-wrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    #section-{{ section.id }} .timeline-support-phase-pill {
+      font-size: 18px;
+    }
+
+    #section-{{ section.id }} .timeline-support-card-title {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    #section-{{ section.id }} .timeline-support-list-item {
+      font-size: 12px;
+      margin-bottom: 4px;
+      padding-left: 12px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .timeline-support-slider {
+      position: relative;
+      padding: 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .timeline-support-heading {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    #section-{{ section.id }} .timeline-support-item {
+      flex: 0 0 58%;
+      max-width: 58%;
+      padding: 0 8px;
+    }
+
+    #section-{{ section.id }} .timeline-support-image-wrap {
+      height: 220px;
+      flex: 0 0 220px;
+    }
+
+    #section-{{ section.id }} .timeline-support-image,
+    #section-{{ section.id }} .timeline-support-placeholder {
+      height: 100%;
+    }
+
+    #section-{{ section.id }} .timeline-support-month-label {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    #section-{{ section.id }} .timeline-support-item {
+      flex: 0 0 84%;
+      max-width: 84%;
+      padding: 0 10px 0 0;
+    }
+
+    #section-{{ section.id }} .timeline-support-image-wrap {
+      height: 180px;
+      flex: 0 0 180px;
+    }
+
+    #section-{{ section.id }} .timeline-support-card {
+      padding: 8px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .timeline-support-heading {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const section = document.getElementById('section-{{ section.id }}');
+    if (!section) return;
+
+    const track = section.querySelector('.timeline-support-grid');
+    if (!track) return;
+
+    let currentIndex = 0;
+    let startX = 0;
+    let endX = 0;
+    let slidesPerView = 4;
+    let totalRealSlides = 0;
+    let isCarousel = false;
+    let loopActive = false;
+    let isAnimating = false;
+    let pendingSnap = null;
+
+    function getRealSlides() {
+      return Array.from(track.querySelectorAll('.timeline-support-item:not(.is-clone)'));
+    }
+
+    function getSlidesPerView() {
+      if (window.innerWidth <= 500) return 1;
+      if (window.innerWidth <= 767) return 2;
+      if (window.innerWidth <= 1024) return 3;
+      return 4;
+    }
+
+    function clearClones() {
+      track.querySelectorAll('.timeline-support-item.is-clone').forEach((slide) => slide.remove());
+    }
+
+    function setTransition(enabled) {
+      track.style.transition = enabled ? 'transform 0.4s ease' : 'none';
+    }
+
+    function getStepSize() {
+      const firstSlide = track.querySelector('.timeline-support-item');
+      if (!firstSlide) return 0;
+      return firstSlide.getBoundingClientRect().width;
+    }
+
+    function setTranslate(offsetIndex, animate = true) {
+      const stepSize = getStepSize();
+      setTransition(animate);
+      track.style.transform = 'translateX(-' + (offsetIndex * stepSize) + 'px)';
+    }
+
+    function buildClones() {
+      clearClones();
+
+      const realSlides = getRealSlides();
+      totalRealSlides = realSlides.length;
+      slidesPerView = getSlidesPerView();
+      isCarousel = window.innerWidth <= 1024;
+      loopActive = isCarousel && totalRealSlides > slidesPerView;
+
+      if (!isCarousel) {
+        currentIndex = 0;
+        setTranslate(0, false);
+        return;
+      }
+
+      if (!loopActive) {
+        currentIndex = 0;
+        setTranslate(0, false);
+        return;
+      }
+
+      const beforeFragment = document.createDocumentFragment();
+      const afterFragment = document.createDocumentFragment();
+
+      realSlides.slice(-slidesPerView).forEach((slide) => {
+        const clone = slide.cloneNode(true);
+        clone.classList.add('is-clone');
+        beforeFragment.appendChild(clone);
+      });
+
+      realSlides.slice(0, slidesPerView).forEach((slide) => {
+        const clone = slide.cloneNode(true);
+        clone.classList.add('is-clone');
+        afterFragment.appendChild(clone);
+      });
+
+      track.prepend(beforeFragment);
+      track.appendChild(afterFragment);
+
+      if (currentIndex >= totalRealSlides) {
+        currentIndex = 0;
+      }
+
+      requestAnimationFrame(() => {
+        setTranslate(currentIndex + slidesPerView, false);
+      });
+    }
+
+    function goToNext() {
+      if (!isCarousel || !loopActive || isAnimating) return;
+
+      isAnimating = true;
+
+      if (currentIndex === totalRealSlides - 1) {
+        currentIndex = 0;
+        pendingSnap = slidesPerView;
+        setTranslate(totalRealSlides + slidesPerView, true);
+      } else {
+        currentIndex++;
+        setTranslate(currentIndex + slidesPerView, true);
+      }
+    }
+
+    function goToPrev() {
+      if (!isCarousel || !loopActive || isAnimating) return;
+
+      isAnimating = true;
+
+      if (currentIndex === 0) {
+        currentIndex = totalRealSlides - 1;
+        pendingSnap = totalRealSlides - 1 + slidesPerView;
+        setTranslate(slidesPerView - 1, true);
+      } else {
+        currentIndex--;
+        setTranslate(currentIndex + slidesPerView, true);
+      }
+    }
+
+    track.addEventListener('transitionend', function(e) {
+      if (e.propertyName !== 'transform') return;
+
+      if (pendingSnap !== null) {
+        setTranslate(pendingSnap, false);
+        pendingSnap = null;
+        track.offsetHeight;
+      }
+
+      isAnimating = false;
+    });
+
+    track.addEventListener('touchstart', function(e) {
+      if (!isCarousel || !loopActive) return;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+      if (!isCarousel || !loopActive || isAnimating) return;
+
+      endX = e.changedTouches[0].clientX;
+
+      if (startX - endX > 50) {
+        goToNext();
+      } else if (endX - startX > 50) {
+        goToPrev();
+      }
+    }, { passive: true });
+
+    function rebuildSlider() {
+      isAnimating = false;
+      pendingSnap = null;
+      track.style.transform = 'translateX(0)';
+      buildClones();
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(rebuildSlider, 150);
+    });
+
+    document.addEventListener('shopify:section:load', rebuildSlider);
+
+    rebuildSlider();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hairscripts timeline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A TIMELINE OF HAIRSCRIPT SUPPORT THAT WORKS"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Small changes each week lead to noticeable improvements in shedding, strength, and overall hair health."
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeline_item",
+      "name": "Timeline item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "month_label",
+          "label": "Month label",
+          "default": "MONTH"
+        },
+        {
+          "type": "text",
+          "id": "month_number",
+          "label": "Month number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "phase_label",
+          "label": "Phase label",
+          "default": "FOUNDATION PHASE"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card title",
+          "default": "Follicle Nourishment Begins"
+        },
+        {
+          "type": "textarea",
+          "id": "bullets",
+          "label": "Bullets",
+          "default": "Nutrients are reaching your hair follicles\nYour scalp environment is being optimized for growth\nNo visible changes yet but that’s completely normal\nThis is where most people quit... don’t be one of them"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hairscripts timeline",
+      "blocks": [
+        {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "01",
+            "phase_label": "FOUNDATION PHASE",
+            "card_title": "Follicle Nourishment Begins",
+            "bullets": "Nutrients are reaching your hair follicles\nYour scalp environment is being optimized for growth\nNo visible changes yet but that’s completely normal\nThis is where most people quit... don’t be one of them"
+          }
+        },
+        {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "02",
+            "phase_label": "TRANSITION PHASE",
+            "card_title": "Shedding Slows",
+            "bullets": "Notice less hair in the shower\nLess buildup on your brush\nFollicles shift back to growth phase\nYour first real sign it’s working\nDaily shedding feels under control\nYou’re no longer afraid to touch your hair"
+          }
+        },
+        {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "03",
+            "phase_label": "RESULTS PHASE",
+            "card_title": "Visible Density Returns",
+            "bullets": "Hair looks fuller and thicker\nEdges start filling back in\n90 days in — results become visible\nBefore & after differences are noticeable\nResults you can actually see"
+          }
+        },
+        {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "06",
+            "phase_label": "LONG-TERM PHASE",
+            "card_title": "Transformation Locked In",
+            "bullets": "Hair feels stronger and healthier\nNoticeably longer, fuller strands\nDensity restored beyond pre-thinning\n6 months in — full transformation achieved\nHair you don’t have to worry about anymore"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,367 @@
+<div class="results-columns-section" id="section-{{ section.id }}">
+  <div class="results-columns-outer">
+          <div class="results-columns-wrapper">
+            {% if section.settings.heading != blank %}
+              <div class="results-columns-header">
+                <h2 class="results-columns-heading">{{ section.settings.heading }}</h2>
+              </div>
+            {% endif %}
+
+            {% if section.blocks.size > 0 %}
+              <div class="results-columns-grid">
+                {% for block in section.blocks %}
+                  <div class="results-columns-card" {{ block.shopify_attributes }}>
+                    {% if block.settings.top_text != blank %}
+                      <p class="results-columns-top-text">{{ block.settings.top_text }}</p>
+                    {% endif %}
+
+                    {% if block.settings.main_text != blank %}
+                      <h3 class="results-columns-main-text">{{ block.settings.main_text }}</h3>
+                    {% endif %}
+
+                    {% if block.settings.bottom_text != blank %}
+                      <p class="results-columns-bottom-text">{{ block.settings.bottom_text }}</p>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+<style>
+
+  #section-{{ section.id }} .results-columns-outer {
+    width: 100%;
+    background-image: url('{{ section.settings.bg | img_url: 'master' }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #section-{{ section.id }} .results-columns-wrapper {
+    padding: 60px 40px;
+    margin: 0 auto;
+  }
+
+  #section-{{ section.id }} .results-columns-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  #section-{{ section.id }} .results-columns-heading {
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .results-columns-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  #section-{{ section.id }} .results-columns-card {
+    position: relative;
+    padding: 50px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} .results-columns-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1.5px;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  #section-{{ section.id }} .results-columns-card:first-child::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.45) 100%);
+  }
+
+  #section-{{ section.id }} .results-columns-card:nth-child(2)::before {
+    background: linear-gradient(50deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.35) 100%);
+  }
+
+  #section-{{ section.id }} .results-columns-card:nth-child(3)::before {
+    background: linear-gradient(180deg, rgba(255, 244, 232, 0.1) 0%, rgba(255, 244, 232, 0.4) 100%);
+  }
+
+  #section-{{ section.id }} .results-columns-card:nth-child(4)::before {
+    background: linear-gradient(50deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.3) 100%);
+  }
+
+  #section-{{ section.id }} .results-columns-card:nth-child(5)::before {
+    background: linear-gradient(180deg, rgba(255, 248, 240, 0.12) 0%, rgba(255, 248, 240, 0.5) 100%);
+  }
+
+  #section-{{ section.id }} .results-columns-top-text,
+  #section-{{ section.id }} .results-columns-bottom-text {
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .results-columns-top-text {
+    margin-bottom: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} .results-columns-main-text {
+    margin: 0 0 12px;
+    font-size: 40px;
+    line-height: 1.1;
+  }
+
+  #section-{{ section.id }} .results-columns-bottom-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  #section-{{ section.id }} h2.results-columns-heading {
+    color: #fff;
+    text-align: center;
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  #section-{{ section.id }} p.results-columns-top-text {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #fff;
+  }
+
+  #section-{{ section.id }} h3.results-columns-main-text {
+    font-family: "DM Sans";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  #section-{{ section.id }} p.results-columns-bottom-text {
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #fff;
+  }
+
+  @media screen and (max-width: 1510px){
+    #section-{{ section.id }} .results-columns-card {
+      padding: 25px;
+    }
+  }
+
+  @media screen and (max-width: 1260px){
+    #section-{{ section.id }} p.results-columns-top-text {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 1220px){
+    #section-{{ section.id }} h3.results-columns-main-text {
+      font-size: 32px;
+    }
+  }
+
+  @media screen and (max-width: 1138px){
+    #section-{{ section.id }} .results-columns-card {
+      padding: 20px;
+    }
+  }
+
+  @media screen and (max-width: 1024px){
+    #section-{{ section.id }} .results-columns-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #section-{{ section.id }} .results-columns-card{
+      width: 48.5%;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .results-columns-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} h2.results-columns-heading {
+      font-size: 26px;
+    }
+    #section-{{ section.id }} .results-columns-wrapper {
+      padding: 40px 15px;
+      margin: 0 auto;
+  }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .results-columns-inner {
+      padding: 40px 16px;
+    }
+
+    #section-{{ section.id }} .results-columns-grid {
+      grid-template-columns: 1fr;
+    }
+
+    #section-{{ section.id }} .results-columns-main-text {
+      font-size: 32px;
+    }
+  }
+
+  @media screen and (max-width: 745px){
+    #section-{{ section.id }} .results-columns-card {
+      width: 48.4%;
+    }
+  }
+
+  @media screen and (max-width: 704px){
+    #section-{{ section.id }} .results-columns-card {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 579px){
+    #section-{{ section.id }} .results-columns-card {
+      width: 47%;
+    }
+  }
+
+  @media screen and (max-width: 450px){
+    #section-{{ section.id }} h2.results-columns-heading {
+      font-size: 20px;
+    }
+
+    #section-{{ section.id }} .results-columns-card {
+      width: 47%;
+    }
+
+    #section-{{ section.id }} .results-columns-header {
+      margin-bottom: 34px;
+    }
+  }
+
+  @media screen and (max-width: 363px) {
+    #section-{{ section.id }} .results-columns-card {
+      width: 47%;
+    }
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "Results columns",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BACKED BY SCIENCE AND RESULTS. DESIGNED FOR REAL CHANGE."
+    },
+    {
+        "type": "image_picker",
+        "id": "bg",
+        "label": "Background"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Result column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "top_text",
+          "label": "Top text",
+          "default": "UP TO"
+        },
+        {
+          "type": "text",
+          "id": "main_text",
+          "label": "Main text",
+          "default": "34%"
+        },
+        {
+          "type": "text",
+          "id": "bottom_text",
+          "label": "Bottom text",
+          "default": "LESS SHEDDING IN 8 WEEKS"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Results columns",
+      "blocks": [
+        {
+          "type": "result",
+          "settings": {
+            "top_text": "UP TO",
+            "main_text": "34%",
+            "bottom_text": "LESS SHEDDING IN 8 WEEKS"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "top_text": "INCREASE",
+            "main_text": "78%",
+            "bottom_text": "IN ACTIVE GROWTH PHASE"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "top_text": "MORE THAN JUST A BIOTIN",
+            "main_text": "9×",
+            "bottom_text": "MULTI-PATHWAY FOLLICLE SUPPORT"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "top_text": "REDUCTION",
+            "main_text": "35%",
+            "bottom_text": "IN STRESS SHEDDING"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "top_text": "FAST AS",
+            "main_text": "8 WEEKS",
+            "bottom_text": "HEALTHIER SCALP IN AS LITTLE"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

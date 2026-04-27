@@ -1,0 +1,1084 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "text_YLPk4p": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h1>SCIENCE Designed for Visibly<br/> Fuller, Healthier Hair</h1>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_cncqe9": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>HairScripts was built to address what most hair vitamins ignore. The root biological causes of shedding, thinning edges, and reduced density that affect women through stress, hormones, and postpartum recovery.</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_H9gpTf": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop The Formula",
+            "link": "shopify://collections/all",
+            "style_class": "button",
+            "label2": "Find My Hair Plan- Free Quiz",
+            "link2": "#",
+            "style_class2": "button-secondary",
+            "open_in_new_tab": false,
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        },
+        "custom_jtQzQW": {
+          "type": "custom",
+          "name": "Custom",
+          "settings": {
+            "image": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
+            "name": "Created by Bevy.",
+            "list": "10+ Years Pharmaceutical Professional",
+            "list2": "Science-Informed Formulation",
+            "list3": "Clinical Data Interpreter"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_YLPk4p",
+        "text_cncqe9",
+        "button_H9gpTf",
+        "custom_jtQzQW"
+      ],
+      "disabled": true,
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "mobile_media_type_1": "image",
+        "image_1": "shopify://shop_images/Frame_1000008726.webp",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": true,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/h1_2.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 24,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-6",
+        "toggle_overlay": false,
+        "overlay_color": "#12121266",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 72
+      }
+    },
+    "new_hero_section_kUCQAP": {
+      "type": "new-hero-section",
+      "blocks": {
+        "proof_MDU78m": {
+          "type": "proof",
+          "settings": {
+            "text": "10+ years pharmaceutical professional"
+          }
+        },
+        "proof_6CNga7": {
+          "type": "proof",
+          "settings": {
+            "text": "Science-informed formulation"
+          }
+        },
+        "proof_4kQmak": {
+          "type": "proof",
+          "settings": {
+            "text": "Clinical data interpreter"
+          }
+        }
+      },
+      "block_order": [
+        "proof_MDU78m",
+        "proof_6CNga7",
+        "proof_4kQmak"
+      ],
+      "name": "Hair science hero",
+      "settings": {
+        "background_image": "shopify://shop_images/Hairscripts_Hair_Density_Support_Hair_Growth_Supplement.webp",
+        "background_image_1024": "shopify://shop_images/Hairscripts_Hair_Density_Support_Hair_Growth_Supplement_1024.webp",
+        "background_image_450": "shopify://shop_images/Hairscripts_Hair_Density_Support_Hair_Growth_Supplement_450.webp",
+        "creator_image": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
+        "heading": "SCIENCE DESIGNED FOR VISIBLY <br> FULLER HEALTHIER HAIR",
+        "description": "If nothing has worked, it’s because most products only target one cause of hair loss. HairScripts™ targets all 9 major biological causes of thinning including stress signaling, androgen activity, inflammation, circulation, nutrient depletion, and follicle miniaturization.",
+        "button_label": "Stop My Hair From Thinning Now",
+        "button_link": "#",
+        "button_label_2": "Find My Hair Plan - Free Quiz",
+        "button_link_2": "#",
+        "creator_text": "Created by Bevy."
+      }
+    },
+    "custom_section_jhUkNn": {
+      "type": "custom-section",
+      "blocks": {
+        "result_aVL3fR": {
+          "type": "result",
+          "settings": {
+            "top_text": "UP TO",
+            "main_text": "34%",
+            "bottom_text": "LESS SHEDDING IN 8 WEEKS"
+          }
+        },
+        "result_haK9En": {
+          "type": "result",
+          "settings": {
+            "top_text": "INCREASE",
+            "main_text": "78%",
+            "bottom_text": "IN ACTIVE GROWTH PHASE"
+          }
+        },
+        "result_YiVdV8": {
+          "type": "result",
+          "settings": {
+            "top_text": "MORE THAN JUST A BIOTIN",
+            "main_text": "9×",
+            "bottom_text": "MULTI-PATHWAY FOLLICLE SUPPORT"
+          }
+        },
+        "result_W7gRQJ": {
+          "type": "result",
+          "settings": {
+            "top_text": "REDUCTION",
+            "main_text": "35%",
+            "bottom_text": "IN STRESS SHEDDING"
+          }
+        },
+        "result_YbXBFh": {
+          "type": "result",
+          "settings": {
+            "top_text": "FAST AS",
+            "main_text": "8 WEEKS",
+            "bottom_text": "HEALTHIER SCALP IN AS LITTLE"
+          }
+        }
+      },
+      "block_order": [
+        "result_aVL3fR",
+        "result_haK9En",
+        "result_YiVdV8",
+        "result_W7gRQJ",
+        "result_YbXBFh"
+      ],
+      "name": "Results columns",
+      "settings": {
+        "heading": "BACKED BY SCIENCE AND RESULTS.<br> DESIGNED FOR REAL CHANGE",
+        "bg": "shopify://shop_images/background.webp"
+      }
+    },
+    "hair_signal_assessment_Tgrd4w": {
+      "type": "hair-signal-assessment",
+      "blocks": {
+        "issue_mV4WXx": {
+          "type": "issue",
+          "settings": {
+            "label": "Hormonal Imbalances"
+          }
+        },
+        "issue_UrLiEp": {
+          "type": "issue",
+          "settings": {
+            "label": "Poor Scalp Health"
+          }
+        },
+        "issue_tpaiyL": {
+          "type": "issue",
+          "settings": {
+            "label": "Stress-Related Shedding"
+          }
+        },
+        "issue_Y7FUGk": {
+          "type": "issue",
+          "settings": {
+            "label": "Weak, Breakage-Prone Strands"
+          }
+        },
+        "issue_TkdQV8": {
+          "type": "issue",
+          "settings": {
+            "label": "Nutrient Deficiencies"
+          }
+        },
+        "issue_jTVhqQ": {
+          "type": "issue",
+          "settings": {
+            "label": "Postpartum or Life Stage Changes"
+          }
+        }
+      },
+      "block_order": [
+        "issue_mV4WXx",
+        "issue_UrLiEp",
+        "issue_tpaiyL",
+        "issue_Y7FUGk",
+        "issue_TkdQV8",
+        "issue_jTVhqQ"
+      ],
+      "disabled": true,
+      "name": "Hair signal assessment",
+      "settings": {
+        "image": "shopify://shop_images/Frame_1000008767.png",
+        "heading": "ITS A SIGNAL YOUR BODY IS SENDING YOU.",
+        "description": "<p>Your hair doesn’t just thin overnight. It’s often the result of multiple underlying factors working against your hair’s natural growth cycle from stress and hormonal shifts, postpartum recovery, and nutritional deficiencies to nutrient gaps and scalp health.</p>",
+        "subheading": "HAVE YOU BEEN EXPERIENCING ANY OF THESE?",
+        "description2": "<p>Your hair doesn’t just thin overnight. It’s often the result of multiple underlying factors working against your hair’s natural growth cycle from stress and hormonal shifts, postpartum recovery, and nutritional deficiencies to nutrient gaps and scalp health.</p>",
+        "button_label": "Start My Hair Assessment",
+        "button_link": ""
+      }
+    },
+    "hair_signal_assessment_wkQfcX": {
+      "type": "hair-signal-assessment",
+      "blocks": {
+        "issue_78XDkU": {
+          "type": "issue",
+          "settings": {
+            "label": "Keeps shedding no matter what you take"
+          }
+        },
+        "issue_wmp6h9": {
+          "type": "issue",
+          "settings": {
+            "label": "Thinning around your edges or part line"
+          }
+        },
+        "issue_9AYRpt": {
+          "type": "issue",
+          "settings": {
+            "label": "Grows, then breaks before you see real length"
+          }
+        },
+        "issue_46aHwC": {
+          "type": "issue",
+          "settings": {
+            "label": "You’ve tried things. Nothing stuck."
+          }
+        }
+      },
+      "block_order": [
+        "issue_78XDkU",
+        "issue_wmp6h9",
+        "issue_9AYRpt",
+        "issue_46aHwC"
+      ],
+      "name": "Hair signal assessment",
+      "settings": {
+        "image": "shopify://shop_images/Hair.webp",
+        "heading": "If Your Hair Keeps Falling Out, Read This.",
+        "description": "<p>Here’s why. Most supplements target one cause of hair loss.<br/>But your hair loss isn’t one thing — it’s nine biological drivers working against you at the same time.</p>",
+        "subheading": "You’re not imagining it. And you’re not failing.",
+        "description2": "<p>HairScripts™ addresses all nine simultaneously.<br/>So you’re covered whether you’ve identified your root cause or not.<br/>It does the heavy lifting for you.</p>",
+        "button_label": "Find What’s Actually Causing It",
+        "button_link": ""
+      }
+    },
+    "hairscripts_advanced_support_m9TkNL": {
+      "type": "hairscripts-advanced-support",
+      "blocks": {
+        "benefit_B8EFLp": {
+          "type": "benefit",
+          "settings": {
+            "side": "left",
+            "icon": "shopify://shop_images/hormonal_defense.svg",
+            "title": "Hormonal Defense",
+            "text": "Blocks DHT from shrinking your follicles cycle by cycle."
+          }
+        },
+        "benefit_VFzbRq": {
+          "type": "benefit",
+          "settings": {
+            "side": "left",
+            "icon": "shopify://shop_images/growth_activation.svg",
+            "title": "Growth Activation",
+            "text": "Keeps more hairs in the active growth phase — longer."
+          }
+        },
+        "benefit_4nxeMg": {
+          "type": "benefit",
+          "settings": {
+            "side": "left",
+            "icon": "shopify://shop_images/Inflammation_Control.svg",
+            "title": "Inflammation Control",
+            "text": "Calms the internal environment your follicles are trying to grow in."
+          }
+        },
+        "benefit_yKCLNt": {
+          "type": "benefit",
+          "settings": {
+            "side": "right",
+            "icon": "shopify://shop_images/Circulation_Boost.svg",
+            "title": "Circulation Boost",
+            "text": "Delivers oxygen and nutrients directly to the base of every follicle."
+          }
+        },
+        "benefit_Vd6wdx": {
+          "type": "benefit",
+          "settings": {
+            "side": "right",
+            "icon": "shopify://shop_images/Stress_Regulation.svg",
+            "title": "Stress Regulation",
+            "text": "Addresses the cortisol signal pushing your follicles into early dormancy."
+          }
+        },
+        "benefit_D3pJD4": {
+          "type": "benefit",
+          "settings": {
+            "side": "right",
+            "icon": "shopify://shop_images/Energy_Support.svg",
+            "title": "Energy Support",
+            "text": "Restores mitochondrial energy to follicle cells so they can actually produce."
+          }
+        },
+        "benefit_EyMiVr": {
+          "type": "benefit",
+          "settings": {
+            "side": "right",
+            "icon": "shopify://shop_images/Nutrient_Absorption.svg",
+            "title": "Nutrient Absorption",
+            "text": "Bioavailable forms your body can actually use — not just absorb and excrete."
+          }
+        },
+        "benefit_GVNjfd": {
+          "type": "benefit",
+          "settings": {
+            "side": "right",
+            "icon": "shopify://shop_images/Strand_Repair.svg",
+            "title": "Strand Repair",
+            "text": "Rebuilds the structural integrity of every strand from the inside out."
+          }
+        },
+        "benefit_z9X4RF": {
+          "type": "benefit",
+          "settings": {
+            "side": "right",
+            "icon": "shopify://shop_images/Scalp_Health.svg",
+            "title": "Scalp Health",
+            "text": "Creates the microenvironment healthy follicle growth requires."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_B8EFLp",
+        "benefit_VFzbRq",
+        "benefit_4nxeMg",
+        "benefit_yKCLNt",
+        "benefit_Vd6wdx",
+        "benefit_D3pJD4",
+        "benefit_EyMiVr",
+        "benefit_GVNjfd",
+        "benefit_z9X4RF"
+      ],
+      "name": "Advanced hair support",
+      "settings": {
+        "background_image": "shopify://shop_images/Frame_1000009479_7.png",
+        "eyebrow": "9 PATHWAY GRID",
+        "heading": "HairScripts™ Advanced Shedding <br>&amp; Thinning Support",
+        "bottom_heading": "CLINICIAN-INFORMED + ROOT-CAUSE FORMULA + SCIENCE-BACKED BLEND",
+        "bottom_text": "Formulated with clinically studied ingredients shown to support hair health and fuller function",
+        "research_label": "View Research",
+        "research_link": "#"
+      }
+    },
+    "hairscripts_founder_quote_GPB8pX": {
+      "type": "hairscripts-founder-quote",
+      "blocks": {
+        "stat_hcpFeV": {
+          "type": "stat",
+          "settings": {
+            "icon": "shopify://shop_images/Pill.svg",
+            "title": "10+ Years Pharma",
+            "text": "Clinical data & drug pharmacology training"
+          }
+        },
+        "stat_883CnK": {
+          "type": "stat",
+          "settings": {
+            "icon": "shopify://shop_images/YouTube_68d9975e-8e28-4e94-89bb-522628454dc5.svg",
+            "title": "45,000+ YouTube Community",
+            "text": "Tens of thousands educated on hair biology"
+          }
+        },
+        "stat_FA7igM": {
+          "type": "stat",
+          "settings": {
+            "icon": "shopify://shop_images/Protect.svg",
+            "title": "90-Day Guarantee",
+            "text": "Full satisfaction or your money back"
+          }
+        }
+      },
+      "block_order": [
+        "stat_hcpFeV",
+        "stat_883CnK",
+        "stat_FA7igM"
+      ],
+      "name": "Founder quote",
+      "settings": {
+        "person_image": "shopify://shop_images/Mask_group.png",
+        "person_name": "Bevy",
+        "person_title": "10+ Years Pharmaceutical Professional",
+        "heading": "You don’t have to have all the answers yet.Your follicles just need to be supported while you find them.",
+        "description": "<p><em>Bevy lost over 60% of her own hair. She lived the panic. The shedding.<br/>The devastation of watching her identity change in real time.<br/>And she had a decade inside pharmaceutical dermatology to understand<br/>exactly why it was happening — and what the industry was getting wrong.</em></p><p><em>     <br/>She didn’t find a solution. She built one.</em></p>"
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "hairscripts_timeline_support_VbMNUy": {
+      "type": "hairscripts-timeline-support",
+      "blocks": {
+        "timeline_item_Ena6AX": {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "01",
+            "phase_label": "FOUNDATION PHASE",
+            "image": "shopify://shop_images/Frame_1000008877.png",
+            "card_title": "Follicle Nourishment Begins",
+            "bullets": "Nutrients are reaching your hair follicles\nYour scalp environment is being optimized for growth\nNo visible changes yet but that’s completely normal\nThis is where most people quit... don’t be one of them"
+          }
+        },
+        "timeline_item_pEwnRV": {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "02",
+            "phase_label": "TRANSITION PHASE",
+            "image": "shopify://shop_images/Frame_1000008877.png",
+            "card_title": "Shedding Slows",
+            "bullets": "Notice less hair in the shower\nLess buildup on your brush\nFollicles shift back to growth phase\nYour first real sign it’s working\nDaily shedding feels under control\nYou’re no longer afraid to touch your hair"
+          }
+        },
+        "timeline_item_nwVjjY": {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "03",
+            "phase_label": "RESULTS PHASE",
+            "image": "shopify://shop_images/Frame_1000008877.png",
+            "card_title": "Visible Density Returns",
+            "bullets": "Hair looks fuller and thicker\nEdges start filling back in\n90 days in — results become visible\nBefore & after differences are noticeable\nResults you can actually see"
+          }
+        },
+        "timeline_item_CU9mgB": {
+          "type": "timeline_item",
+          "settings": {
+            "month_label": "MONTH",
+            "month_number": "06",
+            "phase_label": "LONG-TERM PHASE",
+            "image": "shopify://shop_images/Frame_1000008877.png",
+            "card_title": "Transformation Locked In",
+            "bullets": "Hair feels stronger and healthier\nNoticeably longer, fuller strands\nDensity restored beyond pre-thinning\n6 months in — full transformation achieved\nHair you don’t have to worry about anymore"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_Ena6AX",
+        "timeline_item_pEwnRV",
+        "timeline_item_nwVjjY",
+        "timeline_item_CU9mgB"
+      ],
+      "name": "Hairscripts timeline",
+      "settings": {
+        "heading": "A Timeline of Hairscript Support That Works",
+        "subheading": "Small changes each week lead to noticeable improvements in shedding, strength, and overall hair health.",
+        "bg_image": "shopify://shop_images/hairscript-background.webp"
+      }
+    },
+    "hairscripts_faq_split_XBHBkD": {
+      "type": "hairscripts-faq-split",
+      "blocks": {
+        "faq_item_QCbmdf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this for all hair types and textures?",
+            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+          }
+        },
+        "faq_item_9N7nmg": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How soon will I see results?",
+            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+          }
+        },
+        "faq_item_EgJCKP": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this make me shed more before it gets better?",
+            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+          }
+        },
+        "faq_item_mx9ryW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can men use this too?",
+            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+          }
+        },
+        "faq_item_BTdhYT": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I’ve had thinning for years?",
+            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_QCbmdf",
+        "faq_item_9N7nmg",
+        "faq_item_EgJCKP",
+        "faq_item_mx9ryW",
+        "faq_item_BTdhYT"
+      ],
+      "name": "FAQ split image",
+      "settings": {
+        "left_image": "shopify://shop_images/bevy_2b71f94c-88cc-4c0d-8810-a05f513ca590.webp",
+        "heading": "FAQs",
+        "subheading": "Answers to your most important questions about hair thinning, ingredients, and results.",
+        "open_first_item": true,
+        "footer_text": "Still have questions?",
+        "button_label": "View More FAQs",
+        "button_link": ""
+      }
+    },
+    "hairscripts_video_carousel_Fq6r97": {
+      "type": "hairscripts-video-carousel",
+      "blocks": {
+        "video_card_8NrQtV": {
+          "type": "video_card",
+          "settings": {
+            "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
+            "video_link": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_nYj77j": {
+          "type": "video_card",
+          "settings": {
+            "thumbnail": "shopify://shop_images/Rectangle_513_3.png",
+            "video_link": "",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_pbnWRt": {
+          "type": "video_card",
+          "settings": {
+            "thumbnail": "shopify://shop_images/Rectangle_513_4.png",
+            "video_link": "",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_L7VcRD": {
+          "type": "video_card",
+          "settings": {
+            "thumbnail": "shopify://shop_images/Rectangle_513_5.png",
+            "video_link": "",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_YpUapX": {
+          "type": "video_card",
+          "settings": {
+            "thumbnail": "shopify://shop_images/Rectangle_513_6.png",
+            "video_link": "",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        }
+      },
+      "block_order": [
+        "video_card_8NrQtV",
+        "video_card_nYj77j",
+        "video_card_pbnWRt",
+        "video_card_L7VcRD",
+        "video_card_YpUapX"
+      ],
+      "name": "Video carousel",
+      "settings": {
+        "heading": "NOT SURE WHAT’S CAUSING YOUR HAIR THINNING?",
+        "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding and what to do next."
+      }
+    },
+    "hairscripts_professional_proof_wdbpyi": {
+      "type": "hairscripts-professional-proof",
+      "blocks": {
+        "professional_fGUKix": {
+          "type": "professional",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_513.png",
+            "quote": "MORE THAN A TYPICAL HAIR VITAMIN.",
+            "name": "Dr. Amanda Reyes",
+            "role": "Trichology Practitioner"
+          }
+        },
+        "professional_NknWwp": {
+          "type": "professional",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_514.png",
+            "quote": "A WELL-FORMULATED HAIR SUPPLEMENT.",
+            "name": "Dr. Sarah Collins",
+            "role": "Hair & Scalp Specialist"
+          }
+        },
+        "professional_LrQzH9": {
+          "type": "professional",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_515.png",
+            "quote": "DESIGNED WITH REAL HAIR SCIENCE.",
+            "name": "Dr. Nina Patel",
+            "role": "Clinical Hair Consultant"
+          }
+        },
+        "professional_7EaJEH": {
+          "type": "professional",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_516.png",
+            "quote": "A SCIENCE-INFORMED HAIR FORMULA.",
+            "name": "Dr. Michelle Torres",
+            "role": "Hair Health Practitioner"
+          }
+        },
+        "professional_kLL3UN": {
+          "type": "professional",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_517.png",
+            "quote": "SUPPORTS HEALTHIER HAIR GROWTH.",
+            "name": "Dr. Laura Kim",
+            "role": "Dermatology Specialist"
+          }
+        }
+      },
+      "block_order": [
+        "professional_fGUKix",
+        "professional_NknWwp",
+        "professional_LrQzH9",
+        "professional_7EaJEH",
+        "professional_kLL3UN"
+      ],
+      "disabled": true,
+      "name": "Professional proof",
+      "settings": {
+        "heading": "WHAT HAIR PROFESSIONALS LOOK FOR AND WHY HAIRSCRIPTS DELIVERS",
+        "subheading": "A thoughtful, science-informed approach to supporting follicle health and hair growth."
+      }
+    },
+    "hairscripts_community_banner_7hxyz6": {
+      "type": "hairscripts-community-banner",
+      "blocks": {
+        "point_tJ6ARQ": {
+          "type": "point",
+          "settings": {
+            "text": "Real talk about the biology behind your hair loss"
+          }
+        },
+        "point_G6tRgj": {
+          "type": "point",
+          "settings": {
+            "text": "Education from a pharmaceutical dermatology expert — not a marketing team"
+          }
+        },
+        "point_G84443": {
+          "type": "point",
+          "settings": {
+            "text": "A founder who actually shows up"
+          }
+        }
+      },
+      "block_order": [
+        "point_tJ6ARQ",
+        "point_G6tRgj",
+        "point_G84443"
+      ],
+      "name": "Community banner",
+      "settings": {
+        "background_image": "shopify://shop_images/Frame_1000008728.png",
+        "background_image_1024": "shopify://shop_images/1024.png",
+        "background_image_450": "shopify://shop_images/Frame_1000009396.png",
+        "heading": "Join the HairScripts Community",
+        "subheading": "Science-backed education, real conversations, and a founder who shows up and explains things without the marketing script.",
+        "button_label": "Join Community",
+        "button_link": ""
+      }
+    },
+    "hairscripts_review_carousel_PX4qXD": {
+      "type": "hairscripts-review-carousel",
+      "blocks": {
+        "review_WxmzNK": {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
+            "name": "Maria L.",
+            "age": "36",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_XwPNyi": {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
+            "name": "Maria L.",
+            "age": "36",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_ydYx77": {
+          "type": "review",
+          "settings": {
+            "title": "Less Shedding",
+            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
+            "name": "Maria L.",
+            "age": "36",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_jJ97aW": {
+          "type": "review",
+          "settings": {
+            "title": "Healthier Growth",
+            "review": "<p>With consistent use, my hair looks healthier and feels much more resilient.</p>",
+            "name": "Danielle R.",
+            "age": "28",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_TtQyLP": {
+          "type": "review",
+          "settings": {
+            "title": "Stronger Hair",
+            "review": "<p>My hair kept breaking before it could grow longer, and nothing I tried seemed to help. Now my strands feel stronger and healthier, and I’m finally seeing real length.</p>",
+            "name": "Nicole T.",
+            "age": "38",
+            "label": "Verified Buyer Review"
+          }
+        },
+        "review_Vf9cyW": {
+          "type": "review",
+          "settings": {
+            "title": "Fuller Ponytail",
+            "review": "<p>My hair looks fuller and my ponytail finally feels thicker again.</p>",
+            "name": "Jessica P.",
+            "age": "44",
+            "label": "Verified Buyer Review"
+          }
+        }
+      },
+      "block_order": [
+        "review_WxmzNK",
+        "review_XwPNyi",
+        "review_ydYx77",
+        "review_jJ97aW",
+        "review_TtQyLP",
+        "review_Vf9cyW"
+      ],
+      "name": "Review carousel",
+      "settings": {
+        "show_stars": true,
+        "heading": "RESULTS WOMEN ARE TALKING ABOUT",
+        "subheading": "Thousands are supporting their hair health with HairScripts.",
+        "button_label": "View All Reviews",
+        "button_link": ""
+      }
+    },
+    "hair_assessment_banner_ajTAyL": {
+      "type": "hair-assessment-banner",
+      "name": "Hair assessment banner",
+      "settings": {
+        "background_image": "shopify://shop_images/Frame_1000009479_2.png",
+        "background_image_1024": "shopify://shop_images/Frame_1000009401_2.png",
+        "background_image_450": "shopify://shop_images/Frame_1000009400.png",
+        "badge_text": "FREE • TAKES 2 MINUTES",
+        "heading": "Not sure what's causing your hair thinning? Let's find out.",
+        "subheading": "In 10 questions, get a biological breakdown tailored to your life stage, hormonal pattern, and hair type so you know exactly what's working against your follicles and what to do about it.",
+        "button_label": "Stop My Hair From Thinning Now",
+        "button_link": "#",
+        "button_label2": "Take the Free Hair Assessment",
+        "button_link2": ""
+      }
+    }
+  },
+  "order": [
+    "hero_jVaWmY",
+    "new_hero_section_kUCQAP",
+    "custom_section_jhUkNn",
+    "hair_signal_assessment_Tgrd4w",
+    "hair_signal_assessment_wkQfcX",
+    "hairscripts_advanced_support_m9TkNL",
+    "hairscripts_founder_quote_GPB8pX",
+    "product_list_fa6P9H",
+    "hairscripts_timeline_support_VbMNUy",
+    "hairscripts_faq_split_XBHBkD",
+    "hairscripts_video_carousel_Fq6r97",
+    "hairscripts_professional_proof_wdbpyi",
+    "hairscripts_community_banner_7hxyz6",
+    "hairscripts_review_carousel_PX4qXD",
+    "hair_assessment_banner_ajTAyL"
+  ]
+}

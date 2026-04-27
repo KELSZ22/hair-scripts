@@ -1,0 +1,602 @@
+<div class="faq-split-section" id="section-{{ section.id }}">
+  <div class="faq-split-outer">
+    <div class="faq-split-wrapper">
+      <div class="faq-split-grid">
+
+        <div class="faq-split-media-column">
+          <div class="faq-split-media-wrap">
+            {% if section.settings.left_image != blank %}
+              {{
+                section.settings.left_image
+                | image_url: width: 1400
+                | image_tag:
+                  class: 'faq-split-image',
+                  loading: 'lazy',
+                  widths: '400, 700, 900, 1200, 1400',
+                  sizes: '(min-width: 990px) 40vw, 100vw',
+                  alt: section.settings.heading
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'faq-split-image faq-split-placeholder' }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="faq-split-content-column">
+          <div class="faq-split-content">
+
+            {% if section.settings.heading != blank %}
+              <h2 class="faq-split-heading">{{ section.settings.heading }}</h2>
+            {% endif %}
+
+            {% if section.settings.subheading != blank %}
+              <p class="faq-split-subheading">{{ section.settings.subheading }}</p>
+            {% endif %}
+
+            {% if section.blocks.size > 0 %}
+              <div class="faq-split-accordion">
+                {% for block in section.blocks %}
+                  <details
+                    class="faq-split-item"
+                    {% if section.settings.open_first_item and forloop.first %}open{% endif %}
+                    {{ block.shopify_attributes }}
+                  >
+                    <summary class="faq-split-question">
+                      <span class="faq-split-question-text">{{ block.settings.question }}</span>
+                      <span class="faq-split-icon" aria-hidden="true"></span>
+                    </summary>
+
+                    <div class="faq-split-answer-wrap">
+                      <div class="faq-split-answer">
+                        {{ block.settings.answer }}
+                      </div>
+                    </div>
+                  </details>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.footer_text != blank or section.settings.button_label != blank %}
+              <div class="faq-split-footer">
+                {% if section.settings.footer_text != blank %}
+                  <p class="faq-split-footer-text">{{ section.settings.footer_text }}</p>
+                {% endif %}
+
+                {% if section.settings.button_label != blank %}
+                  <a
+                    {% if section.settings.button_link != blank %}
+                      href="{{ section.settings.button_link }}"
+                    {% else %}
+                      role="link"
+                      aria-disabled="true"
+                    {% endif %}
+                    class="faq-split-button"
+                  >
+                    {{ section.settings.button_label }}
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #section-{{ section.id }} {
+    background: #DBEEEC;
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .faq-split-outer {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .faq-split-wrapper {
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .faq-split-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .faq-split-media-column {
+    width: 45%;
+    max-width: 45%;
+    flex: 0 0 45%;
+    min-width: 0;
+  }
+
+  #section-{{ section.id }} .faq-split-content-column {
+    width: 55%;
+    max-width: 55%;
+    flex: 0 0 55%;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    background: #fff;
+  }
+
+  #section-{{ section.id }} .faq-split-media-wrap {
+    position: relative;
+    height: 100%;
+    min-height: 650px;
+    overflow: hidden;
+  }
+
+  #section-{{ section.id }} .faq-split-image,
+  #section-{{ section.id }} .faq-split-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #section-{{ section.id }} .faq-split-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 56px 40px;
+  }
+
+  #section-{{ section.id }} .faq-split-heading {
+    margin: 0 0 8px;
+    color: #2B221E;
+    font-family: "Cormorant Garamond";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  #section-{{ section.id }} .faq-split-subheading {
+    margin: 0 0 26px;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.45;
+    max-width: 420px;
+  }
+
+  #section-{{ section.id }} .faq-split-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  #section-{{ section.id }} .faq-split-item {
+    border-bottom: 1px solid rgba(43, 34, 30, 0.14);
+  }
+
+  #section-{{ section.id }} .faq-split-item:first-child {
+    border-top: 1px solid rgba(43, 34, 30, 0.14);
+  }
+
+  #section-{{ section.id }} .faq-split-question {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 0;
+    cursor: pointer;
+  }
+
+  #section-{{ section.id }} .faq-split-question::-webkit-details-marker {
+    display: none;
+  }
+
+  #section-{{ section.id }} .faq-split-question-text {
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  #section-{{ section.id }} .faq-split-icon {
+    position: relative;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(43, 34, 30, 0.45);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+
+  #section-{{ section.id }} .faq-split-icon::before,
+  #section-{{ section.id }} .faq-split-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #2B221E;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  #section-{{ section.id }} .faq-split-icon::before {
+    width: 8px;
+    height: 1px;
+  }
+
+  #section-{{ section.id }} .faq-split-icon::after {
+    width: 1px;
+    height: 8px;
+  }
+
+  #section-{{ section.id }} .faq-split-item[open] .faq-split-icon {
+    transform: rotate(180deg);
+  }
+
+  #section-{{ section.id }} .faq-split-item[open] .faq-split-icon::after {
+    opacity: 0;
+  }
+
+  #section-{{ section.id }} .faq-split-answer-wrap {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.35s ease, opacity 0.25s ease;
+  }
+
+  #section-{{ section.id }} .faq-split-answer {
+    padding: 16px;
+    color: #fff;
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    border-radius: 5px;
+    background: #3D7E7A;
+  }
+
+  #section-{{ section.id }} .faq-split-answer p {
+    margin: 0;
+  }
+
+  #section-{{ section.id }} .faq-split-footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  #section-{{ section.id }} .faq-split-footer-text {
+    margin: 0;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  #section-{{ section.id }} .faq-split-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 15px 25px;
+    border-radius: 999px;
+    background: #C4A882;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  @media screen and (max-width: 989px) {
+    #section-{{ section.id }} .faq-split-content-column {
+      background: #DBEEEC;
+  }
+    #section-{{ section.id }} .faq-split-media-column {
+      padding: 20px 15px 40px;
+    }
+
+    #section-{{ section.id }} img.faq-split-image {
+      border-radius: 10px;
+    }
+
+    #section-{{ section.id }} .faq-split-media-wrap {
+      overflow: hidden;
+    }
+
+    #section-{{ section.id }} .faq-split-grid {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: auto;
+      flex-direction: column-reverse;
+    }
+
+    #section-{{ section.id }} .faq-split-media-column,
+    #section-{{ section.id }} .faq-split-content-column {
+      width: 100%;
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+
+    #section-{{ section.id }} .faq-split-media-wrap {
+      min-height: 100%;
+    }
+
+    #section-{{ section.id }} .faq-split-content {
+      max-width: 100%;
+      padding: 40px 24px;
+    }
+
+    #section-{{ section.id }} .faq-split-heading {
+      font-size: 32px;
+      text-align: center;
+    }
+
+    #section-{{ section.id }} .faq-split-subheading {
+      font-size: 14px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    #section-{{ section.id }} .faq-split-footer {
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .faq-split-content {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .faq-split-heading {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .faq-split-content {
+      padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .faq-split-heading {
+      font-size: 26px;
+    }
+
+    #section-{{ section.id }} .faq-split-subheading {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    #section-{{ section.id }} .faq-split-question {
+      padding: 14px 0;
+    }
+
+  }
+
+  @media screen and (max-width: 450px) {
+    #section-{{ section.id }} .faq-split-heading {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('#section-{{ section.id }}');
+    if (!section) return;
+
+    const items = section.querySelectorAll('.faq-split-item');
+
+    function setInitialState(item) {
+      const wrap = item.querySelector('.faq-split-answer-wrap');
+      if (!wrap) return;
+
+      if (item.hasAttribute('open')) {
+        wrap.style.height = 'auto';
+        wrap.style.opacity = '1';
+      } else {
+        wrap.style.height = '0px';
+        wrap.style.opacity = '0';
+      }
+    }
+
+    function openItem(item) {
+      const wrap = item.querySelector('.faq-split-answer-wrap');
+      if (!wrap) return;
+
+      item.setAttribute('open', '');
+
+      wrap.style.height = '0px';
+      wrap.style.opacity = '0';
+
+      requestAnimationFrame(() => {
+        wrap.style.height = wrap.scrollHeight + 'px';
+        wrap.style.opacity = '1';
+      });
+
+      const onOpenEnd = function (e) {
+        if (e.propertyName !== 'height') return;
+        wrap.style.height = 'auto';
+        wrap.removeEventListener('transitionend', onOpenEnd);
+      };
+
+      wrap.addEventListener('transitionend', onOpenEnd);
+    }
+
+    function closeItem(item) {
+      const wrap = item.querySelector('.faq-split-answer-wrap');
+      if (!wrap || !item.hasAttribute('open')) return;
+
+      wrap.style.height = wrap.scrollHeight + 'px';
+      wrap.style.opacity = '1';
+
+      requestAnimationFrame(() => {
+        wrap.style.height = '0px';
+        wrap.style.opacity = '0';
+      });
+
+      const onCloseEnd = function (e) {
+        if (e.propertyName !== 'height') return;
+        item.removeAttribute('open');
+        wrap.removeEventListener('transitionend', onCloseEnd);
+      };
+
+      wrap.addEventListener('transitionend', onCloseEnd);
+    }
+
+    items.forEach((item) => {
+      setInitialState(item);
+
+      const summary = item.querySelector('.faq-split-question');
+      if (!summary) return;
+
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const isOpen = item.hasAttribute('open');
+
+        if (isOpen) {
+          closeItem(item);
+        } else {
+          items.forEach((other) => {
+            if (other !== item) {
+              closeItem(other);
+            }
+          });
+          openItem(item);
+        }
+      });
+    });
+
+    window.addEventListener('resize', function () {
+      items.forEach((item) => {
+        const wrap = item.querySelector('.faq-split-answer-wrap');
+        if (!wrap) return;
+
+        if (item.hasAttribute('open')) {
+          wrap.style.height = 'auto';
+          wrap.style.opacity = '1';
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ split image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQs"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Answers to your most important questions about hair thinning, ingredients, and results."
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_item",
+      "label": "Open first FAQ by default",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "Still have questions?"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View More FAQs"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Is this for all hair types and textures?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ split image",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this for all hair types and textures?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How soon will I see results?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this make me shed more before it gets better?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can men use this too?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I’ve had thinning for years?"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
