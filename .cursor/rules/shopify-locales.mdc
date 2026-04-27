@@ -1,0 +1,12 @@
+---
+description: Storefront and schema translations in locales
+globs: "locales/**/*.json"
+alwaysApply: false
+---
+
+# Locales
+
+- **Storefront strings**: add keys under `locales/en.default.json` first; mirror structure in other locale files only when the user asks for full i18n.
+- **Theme editor / section settings**: labels and info text often live in **`locales/*.schema.json`** (e.g. `en.default.schema.json`); keep keys aligned with `settings_schema.json`, section `schema` ids, and existing `t:*` namespace patterns.
+- Use **consistent key naming** with surrounding entries (snake_case vs dot namespaces—follow the dominant style in that file).
+- JSON must stay valid: trailing commas are not allowed; escape quotes inside strings.

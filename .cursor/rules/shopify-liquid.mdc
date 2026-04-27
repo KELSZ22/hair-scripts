@@ -1,0 +1,15 @@
+---
+description: Liquid conventions for Shopify theme sections and snippets
+globs: "**/*.liquid"
+alwaysApply: false
+---
+
+# Liquid
+
+- Prefer **`{% render 'snippet-name', var: value %}`** over deprecated `{% include %}`. Pass only needed variables; use `only` when the snippet must not inherit outer scope.
+- Escape by default: **`{{ output | escape }}`**. Use `| json` when embedding values in `<script>` or JSON. Only skip escaping when output is trusted HTML (e.g. some `content_for` / RTE cases already sanitized).
+- Use **`routes`**, **`canonical_url`**, and **`request.locale`** as the theme already does for links and SEO.
+- Images: use **`image_url`** with width/crop parameters aligned with existing `sizes` / `srcset` patterns; respect theme lazy-loading and `loading` attributes.
+- **Translations**: new customer-facing strings belong in `locales/en.default.json` (and schema labels in `locales/*.schema.json`); reference with the `t` filter or schema `default` keys consistent with nearby sections.
+- This repo has many section/block driven templates (for example `product-information` with `_product-*` blocks in `templates/product.json`); preserve that composition style instead of inlining large logic into one section/snippet.
+- Avoid heavy logic in Liquid; keep complex behavior in **JS** (`assets/`) using the same split already present in this codebase.

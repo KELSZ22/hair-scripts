@@ -1,0 +1,16 @@
+---
+description: JSON templates, section groups, and theme config
+globs:
+  - "templates/**/*.json"
+  - "sections/*-group.json"
+  - "config/settings_schema.json"
+alwaysApply: false
+---
+
+# Theme JSON
+
+- **Template JSON** (`templates/`): top-level `sections` object and `order` array must stay consistent; each section entry needs `type` matching a file in `sections/` (without `.liquid`).
+- Respect **auto-generated** banners at the top of template files (for example in `templates/product.json`); keep valid JSON after edits.
+- **Section groups** (`header-group.json`, `footer-group.json`): preserve structure (`type`, `sections`, `order`) unless adding/removing a section type the theme already supports.
+- **`config/settings_schema.json`**: this repo uses translation keys heavily (`t:*`) and Horizon-style setting groups; keep new settings aligned with existing (`type`, `id`, `label`, `default`, visibility rules such as `visible_if` where relevant).
+- Do not commit secrets; theme config is **not** for API keys—use app proxies or the merchant’s app configuration instead.

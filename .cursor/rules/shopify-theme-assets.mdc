@@ -1,0 +1,15 @@
+---
+description: Theme JavaScript and CSS in assets
+globs:
+  - "assets/**/*.js"
+  - "assets/**/*.css"
+alwaysApply: false
+---
+
+# Theme assets
+
+- Prefer **small, focused changes** that match existing module style (ES module files with classes and `customElements` where used in neighboring files).
+- **No build step assumed** unless the repo adds one: ship plain JS/CSS compatible with Shopify’s asset pipeline.
+- Register **custom elements** and listeners in the same patterns as existing components (`Component`/`DeclarativeShadowElement` patterns in `assets/component.js`, `connectedCallback`, cleanup where the theme does).
+- For **Cart / product / section APIs**, follow Shopify’s documented AJAX and Liquid object shapes; do not rely on undocumented internal Admin APIs from the storefront.
+- Keep **accessibility**: focus management, keyboard support, and `prefers-reduced-motion` when adding motion - mirror patterns in `assets/` and section markup.
