@@ -246,6 +246,7 @@
   }
 
   #section-{{ section.id }} .hs-science-hero__button {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -267,8 +268,48 @@
   }
 
   #section-{{ section.id }} .hs-science-hero__button--primary {
-    background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
+    overflow: hidden;
+    isolation: isolate;
+    background: #4d2449;
     color: #FFFFFF;
+  }
+
+  #section-{{ section.id }} .hs-science-hero__button--primary::before {
+    content: "";
+    position: absolute;
+    top: -80%;
+    bottom: -80%;
+    left: -1000px;
+    width: 420px;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(114, 82, 112, 0) 0%,
+      rgba(114, 82, 112, 0.18) 20%,
+      rgba(114, 82, 112, 0.65) 38%,
+      rgba(77, 36, 73, 0.95) 50%,
+      rgba(72, 29, 68, 0.65) 62%,
+      rgba(55, 24, 52, 0.18) 80%,
+      rgba(55, 24, 52, 0) 100%
+    );
+    filter: brightness(1.35);
+    transform: skewX(-18deg);
+    animation: shine 3s infinite linear;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -1000px;
+    }
+
+    20% {
+      left: 100%;
+    }
+
+    100% {
+      left: 100%;
+    }
   }
 
   #section-{{ section.id }} .hs-science-hero__button--secondary {
@@ -630,6 +671,13 @@
 
     #section-{{ section.id }} {
       height: 850px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #section-{{ section.id }} .hs-science-hero__button--primary::before {
+      animation: none;
+      display: none;
     }
   }
 </style>

@@ -86,9 +86,9 @@ export class VariantUpdateEvent extends Event {
 
 /**
  * Event class for cart additions
- * @extends {CustomEvent<{ resource?: object; sourceId?: string; data: Record<string, unknown> }>}
+ * @extends {Event}
  */
-export class CartAddEvent extends CustomEvent {
+export class CartAddEvent extends Event {
   /**
    * Creates a new CartAddEvent
    * @param {Object} [resource] - The new cart object
@@ -102,16 +102,14 @@ export class CartAddEvent extends CustomEvent {
    * @param {Record<string, string>} [data.sections] - The sections affected by the cart operation
    */
   constructor(resource, sourceId, data) {
-    super(CartAddEvent.eventName, {
-      bubbles: true,
-      detail: {
-        resource,
-        sourceId,
-        data: {
-          ...data,
-        },
+    super(CartAddEvent.eventName, { bubbles: true });
+    this.detail = {
+      resource,
+      sourceId,
+      data: {
+        ...data,
       },
-    });
+    };
   }
 
   static eventName = ThemeEvents.cartUpdate;
@@ -119,9 +117,9 @@ export class CartAddEvent extends CustomEvent {
 
 /**
  * Event class for cart updates
- * @extends {CustomEvent<{ resource?: object; sourceId?: string; data: Record<string, unknown> }>}
+ * @extends {Event}
  */
-export class CartUpdateEvent extends CustomEvent {
+export class CartUpdateEvent extends Event {
   /**
    * Creates a new CartUpdateEvent
    * @param {Object} resource - The new cart object
@@ -135,24 +133,22 @@ export class CartUpdateEvent extends CustomEvent {
    * @param {Record<string, string>} [data.sections] - The sections affected by the cart operation
    */
   constructor(resource, sourceId, data) {
-    super(ThemeEvents.cartUpdate, {
-      bubbles: true,
-      detail: {
-        resource,
-        sourceId,
-        data: {
-          ...data,
-        },
+    super(ThemeEvents.cartUpdate, { bubbles: true });
+    this.detail = {
+      resource,
+      sourceId,
+      data: {
+        ...data,
       },
-    });
+    };
   }
 }
 
 /**
  * Event class for cart errors
- * @extends {CustomEvent<{ sourceId: string; data: { message: string; errors: object; description: object } }>}
+ * @extends {Event}
  */
-export class CartErrorEvent extends CustomEvent {
+export class CartErrorEvent extends Event {
   /**
    * Creates a new CartErrorEvent
    * @param {string} sourceId - The id of the element the action was triggered from
@@ -161,17 +157,15 @@ export class CartErrorEvent extends CustomEvent {
    * @param {Object} errors - Errors from the server response
    */
   constructor(sourceId, message, description, errors) {
-    super(ThemeEvents.cartError, {
-      bubbles: true,
-      detail: {
-        sourceId,
-        data: {
-          message,
-          errors,
-          description,
-        },
+    super(ThemeEvents.cartError, { bubbles: true });
+    this.detail = {
+      sourceId,
+      data: {
+        message,
+        errors,
+        description,
       },
-    });
+    };
   }
 }
 

@@ -105,8 +105,6 @@ class StickyAddToCartComponent extends Component {
     const buyButtonsBlock = productForm.closest('.buy-buttons-block');
     if (!buyButtonsBlock) return;
 
-    this.#targetAddToCartButton = productForm.querySelector('[ref="addToCartButton"]');
-
     // In themes migrated from 2.0, the footer element doesn't exist
     const footer = document.querySelector('footer') ?? document.querySelector('[class*="footer-group"]');
     if (!footer) return;
@@ -157,6 +155,7 @@ class StickyAddToCartComponent extends Component {
 
     this.#buyButtonsIntersectionObserver.observe(buyButtonsBlock);
     this.#mainBottomObserver.observe(footer);
+    this.#targetAddToCartButton = productForm.querySelector('[ref="addToCartButton"]');
   }
 
   // Public action handlers

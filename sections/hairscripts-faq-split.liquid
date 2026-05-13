@@ -425,52 +425,55 @@
             {% if section.settings.subheading != blank %}
               <p class="faq-split-subheading">{{ section.settings.subheading }}</p>
             {% endif %}
-
-            <div class="faq-split-categories" role="tablist" aria-label="FAQ categories">
-              {% if section.settings.category_1 != blank %}
-                <button type="button" class="faq-split-category-button is-active" data-faq-category="category_1">
-                  {{ section.settings.category_1 }}
-                </button>
-              {% endif %}
-
-              {% if section.settings.category_2 != blank %}
-                <button type="button" class="faq-split-category-button" data-faq-category="category_2">
-                  {{ section.settings.category_2 }}
-                </button>
-              {% endif %}
-
-              {% if section.settings.category_3 != blank %}
-                <button type="button" class="faq-split-category-button" data-faq-category="category_3">
-                  {{ section.settings.category_3 }}
-                </button>
-              {% endif %}
-
-              {% if section.settings.category_4 != blank %}
-                <button type="button" class="faq-split-category-button" data-faq-category="category_4">
-                  {{ section.settings.category_4 }}
-                </button>
-              {% endif %}
-            </div>
-
-            <div class="faq-split-category-dropdown">
-              <select class="faq-split-category-select" aria-label="FAQ categories">
+            
+            {% if section.settings.category_1 != blank %}
+              <div class="faq-split-categories" role="tablist" aria-label="FAQ categories">
                 {% if section.settings.category_1 != blank %}
-                  <option value="category_1" selected>{{ section.settings.category_1 }}</option>
+                  <button type="button" class="faq-split-category-button is-active" data-faq-category="category_1">
+                    {{ section.settings.category_1 }}
+                  </button>
                 {% endif %}
 
                 {% if section.settings.category_2 != blank %}
-                  <option value="category_2">{{ section.settings.category_2 }}</option>
+                  <button type="button" class="faq-split-category-button" data-faq-category="category_2">
+                    {{ section.settings.category_2 }}
+                  </button>
                 {% endif %}
 
                 {% if section.settings.category_3 != blank %}
-                  <option value="category_3">{{ section.settings.category_3 }}</option>
+                  <button type="button" class="faq-split-category-button" data-faq-category="category_3">
+                    {{ section.settings.category_3 }}
+                  </button>
                 {% endif %}
 
                 {% if section.settings.category_4 != blank %}
-                  <option value="category_4">{{ section.settings.category_4 }}</option>
+                  <button type="button" class="faq-split-category-button" data-faq-category="category_4">
+                    {{ section.settings.category_4 }}
+                  </button>
                 {% endif %}
-              </select>
-            </div>
+              </div>
+
+            
+              <div class="faq-split-category-dropdown">
+                <select class="faq-split-category-select" aria-label="FAQ categories">
+                  {% if section.settings.category_1 != blank %}
+                    <option value="category_1" selected>{{ section.settings.category_1 }}</option>
+                  {% endif %}
+
+                  {% if section.settings.category_2 != blank %}
+                    <option value="category_2">{{ section.settings.category_2 }}</option>
+                  {% endif %}
+
+                  {% if section.settings.category_3 != blank %}
+                    <option value="category_3">{{ section.settings.category_3 }}</option>
+                  {% endif %}
+
+                  {% if section.settings.category_4 != blank %}
+                    <option value="category_4">{{ section.settings.category_4 }}</option>
+                  {% endif %}
+                </select>
+              </div>
+            {% endif %}
 
             {% if section.blocks.size > 0 %}
               <div class="faq-split-accordion">

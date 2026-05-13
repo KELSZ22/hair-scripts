@@ -460,7 +460,7 @@
       });
     }
     async function refresh(e) {
-      const c = e && e.detail && (e.detail.cartData || e.detail.cart || e.detail.resource);
+      const c = e && e.detail && (e.detail.cartData || e.detail.cart);
       if (c) {
         applyCart(c);
         return;
@@ -472,7 +472,6 @@
       } catch (_) {}
     }
     document.addEventListener('cart:updated', refresh);
-    document.addEventListener('cart:update', refresh);
     document.addEventListener('cart:change', refresh);
     document.addEventListener('cart:refresh', refresh);
     document.addEventListener('variant:add', refresh);

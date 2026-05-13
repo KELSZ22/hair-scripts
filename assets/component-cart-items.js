@@ -238,36 +238,6 @@ class CartItemsComponent extends Component {
   };
 
   /**
-   * HTML for this instance from Cart API `sections`, keyed by section id (handles minor key mismatches).
-   *
-   * @param {Record<string, string | null | undefined> | undefined} sections
-   * @returns {string | null | undefined}
-   */
-  #bundledSectionHtml(sections) {
-    if (!sections || typeof sections !== 'object') return undefined;
-
-    const id = this.sectionId;
-    const direct = sections[id];
-    if (typeof direct === 'string' && direct.length > 0) return direct;
-
-    const rootMarker = `shopify-section-${id}`;
-
-    for (const key of Object.keys(sections)) {
-      const html = sections[key];
-      if (!html || typeof html !== 'string') continue;
-      if (html.includes(`id="${rootMarker}"`) || html.includes(`id='${rootMarker}'`)) return html;
-    }
-
-    const keys = Object.keys(sections);
-    if (keys.length === 1) {
-      const only = sections[keys[0]];
-      return typeof only === 'string' && only.length > 0 ? only : undefined;
-    }
-
-    return undefined;
-  }
-
-  /**
    * Handles the cart update.
    *
    * @param {DiscountUpdateEvent | CartUpdateEvent | CartAddEvent} event
@@ -279,9 +249,9 @@ class CartItemsComponent extends Component {
     }
     if (event.target === this) return;
 
-    const cartItemsHtml = this.#bundledSectionHtml(event.detail?.data?.sections);
+    const cartItemsHtml = event.detail.data.sections?.[this.sectionId];
     if (cartItemsHtml) {
-      morphSection(this.sectionId, cartItemsHtml, this.isDrawer ? 'hydration' : 'full', { injectStylesheet: true });
+      morphSection(this.sectionId, cartItemsHtml, 'full', { injectStylesheet: true });
 
       // Update button states for all cart quantity selectors after morph
       this.#updateCartQuantitySelectorButtonStates();

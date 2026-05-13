@@ -24,29 +24,33 @@
         {% endfor %}
       </div>
 
-      <div class="hs-bevy-stats__profile">
-        <div class="hs-bevy-stats__profile-image-wrap">
-          <div class="hs-bevy-stats__profile-image-ring">
-            {% if section.settings.profile_image != blank %}
-              <img
-                src="{{ section.settings.profile_image | image_url: width: 800 }}"
-                alt="{{ section.settings.profile_image_alt | escape }}"
-                class="hs-bevy-stats__profile-image"
-                loading="lazy"
-                width="{{ section.settings.profile_image.width }}"
-                height="{{ section.settings.profile_image.height }}"
-              >
-            {% endif %}
+      <div class="hs-bevy-stats__profile-column">
+        <div class="hs-bevy-stats__profile">
+          <div class="hs-bevy-stats__profile-image-wrap">
+            <div class="hs-bevy-stats__profile-image-ring">
+              {% if section.settings.profile_image != blank %}
+                <img
+                  src="{{ section.settings.profile_image | image_url: width: 800 }}"
+                  alt="{{ section.settings.profile_image_alt | escape }}"
+                  class="hs-bevy-stats__profile-image"
+                  loading="lazy"
+                  width="{{ section.settings.profile_image.width }}"
+                  height="{{ section.settings.profile_image.height }}"
+                >
+              {% endif %}
+            </div>
           </div>
         </div>
 
-        {% if section.settings.name != blank %}
-          <h2 class="hs-bevy-stats__name">{{ section.settings.name }}</h2>
-        {% endif %}
+        <div class="hs-bevy-stats__profile-copy">
+          {% if section.settings.name != blank %}
+            <h2 class="hs-bevy-stats__name">{{ section.settings.name }}</h2>
+          {% endif %}
 
-        {% if section.settings.role != blank %}
-          <p class="hs-bevy-stats__role">{{ section.settings.role }}</p>
-        {% endif %}
+          {% if section.settings.role != blank %}
+            <p class="hs-bevy-stats__role">{{ section.settings.role }}</p>
+          {% endif %}
+        </div>
       </div>
 
       <div class="hs-bevy-stats__stats-group hs-bevy-stats__stats-group--right">
@@ -88,8 +92,8 @@
 
   #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    gap: 40px;
+    grid-template-columns: minmax(0, 1fr) 220px minmax(0, 1fr);
+    gap: 24px;
     align-items: start;
   }
 
@@ -153,18 +157,30 @@
     color: {{ section.settings.card_label_color }};
   }
 
-  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile {
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-column {
+    width: 220px;
+    max-width: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     text-align: center;
     padding-top: 4px;
+    justify-self: center;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile {
+    width: 220px;
+    height: 220px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-wrap {
-    width: 220px;
-    height: 220px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     padding: 11px;
     border: 2px solid {{ section.settings.outer_ring_color }};
@@ -196,8 +212,15 @@
     object-position: center;
   }
 
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-copy {
+    width: max-content;
+    max-width: 320px;
+    margin-top: 22px;
+    text-align: center;
+  }
+
   #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__name {
-    margin: 22px 0 0;
+    margin: 0;
     font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
     font-size: 32px;
     font-style: normal;
@@ -234,8 +257,10 @@
       gap: 30px;
     }
 
-    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile {
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-column {
       order: 1;
+      width: 220px;
+      max-width: 220px;
     }
 
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group--left {
@@ -267,18 +292,31 @@
 
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__label {
       margin-top: 10px;
+    }
 
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-column {
+      width: 180px;
+      max-width: 180px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile {
+      width: 180px;
+      height: 180px;
     }
 
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-wrap {
-      width: 180px;
-      height: 180px;
       padding: 9px;
     }
 
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-ring {
       padding: 8px;
       border-width: 3px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-copy {
+      width: max-content;
+      max-width: 300px;
+      margin-top: 18px;
     }
 
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__name {
@@ -289,29 +327,32 @@
       font-size: 14px;
     }
   }
+
   @media screen and (max-width: 450px) {
-     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__number {
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__number {
       font-size: 32px;
     }
   }
-  @media screen and (max-width: 400px) {
-    
 
+  @media screen and (max-width: 400px) {
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__card {
       min-height: 140px;
     }
-
-   
 
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__suffix {
       font-size: 18px;
       transform: translateY(-5px);
     }
 
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-copy {
+      max-width: 260px;
+    }
+
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__name {
       font-size: 20px;
     }
   }
+
   @media screen and (max-width: 380px) {
     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group {
       grid-template-columns: 1fr;
