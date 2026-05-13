@@ -56,10 +56,8 @@
           {% if section.settings.bottom_text != blank or section.settings.research_label != blank %}
             <div class="advanced-support-footer-text">
               {% if section.settings.bottom_text != blank %}
-                <span>{{ section.settings.bottom_text }}</span>
-              {% endif %}
-
-              {% if section.settings.research_label != blank %}
+                <span>{{ section.settings.bottom_text }} -
+                  {% if section.settings.research_label != blank %}
                 <a
                   {% if section.settings.research_link != blank %}
                     href="{{ section.settings.research_link }}"
@@ -72,6 +70,9 @@
                   {{ section.settings.research_label }}
                 </a>
               {% endif %}
+                </span>
+              {% endif %}
+              
             </div>
           {% endif %}
         </div>
@@ -151,10 +152,10 @@
     grid-template-columns: repeat(14, minmax(0, 1fr));
     gap: 26px 14px;
     align-items: start;
-    margin-bottom: 70px;
-    margin-top: 60px;
-  }
-
+    width: 85%;
+    justify-items: center;
+    margin: 60px auto 70px;
+}
   #section-{{ section.id }} .advanced-support-item {
     grid-column: span 3;
     width: 100%;
@@ -229,7 +230,7 @@
     font-family: "DM Sans";
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.35;
     opacity: 0.96;
   }
@@ -273,7 +274,7 @@
   #section-{{ section.id }} .advanced-support-research-link {
     color: #fff9f4;
     font-family: Fustat, sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: 1.35;
@@ -321,6 +322,7 @@
           radial-gradient(circle at 50% 30%, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 42%),
           linear-gradient(180deg, #9b6444 0%, #7d4d33 100%);
         {% endif %};
+        background-position: center bottom;
     }
 
     #section-{{ section.id }} .advanced-support-grid {
@@ -331,9 +333,14 @@
     #section-{{ section.id }} .advanced-support-pill {
       white-space: normal;
     }
+    #section-{{ section.id }} .advanced-support-grid {
+    width: 100%;
   }
 
   @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .mobile-dash {
+      display: none;
+    }
     #section-{{ section.id }} .advanced-support-wrapper {;
     padding: 40px 15px;
   }
@@ -461,7 +468,7 @@
     }
 
     #section-{{ section.id }} .advanced-support-grid {
-      gap: 18px;
+      gap: 30px;
     }
 
 

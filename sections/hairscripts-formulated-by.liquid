@@ -1,0 +1,558 @@
+<section
+  id="hs-formulated-by-{{ section.id }}"
+  class="hs-formulated-by color-{{ section.settings.color_scheme }}"
+>
+  <div class="hs-formulated-by__inner">
+    <div class="hs-formulated-by__top">
+      {% if section.settings.heading != blank %}
+        <h2 class="hs-formulated-by__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      <div class="hs-formulated-by__profile">
+        {% if section.settings.profile_image != blank %}
+          <div class="hs-formulated-by__avatar-wrap">
+            <img
+              src="{{ section.settings.profile_image | image_url: width: 160 }}"
+              alt="{{ section.settings.profile_image_alt | escape }}"
+              class="hs-formulated-by__avatar"
+              loading="lazy"
+              width="{{ section.settings.profile_image.width }}"
+              height="{{ section.settings.profile_image.height }}"
+            >
+          </div>
+        {% endif %}
+
+        <div class="hs-formulated-by__profile-text">
+          {% if section.settings.profile_name != blank %}
+            <p class="hs-formulated-by__name">
+              {{ section.settings.profile_name }}
+            </p>
+          {% endif %}
+
+          {% if section.settings.profile_role != blank %}
+            <p class="hs-formulated-by__role">
+              {{ section.settings.profile_role }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="hs-formulated-by__items">
+      <div class="hs-formulated-by__marquee-track">
+        <div class="hs-formulated-by__marquee-group">
+          {% for block in section.blocks %}
+            <div class="hs-formulated-by__item" {{ block.shopify_attributes }}>
+              <span class="hs-formulated-by__check" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                  <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+                </svg>
+              </span>
+
+              {% if block.settings.text != blank %}
+                <span class="hs-formulated-by__item-text">
+                  {{ block.settings.text }}
+                </span>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="hs-formulated-by__marquee-group hs-formulated-by__marquee-group--duplicate" aria-hidden="true">
+          {% for block in section.blocks %}
+            <div class="hs-formulated-by__item">
+              <span class="hs-formulated-by__check" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                  <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+                </svg>
+              </span>
+
+              {% if block.settings.text != blank %}
+                <span class="hs-formulated-by__item-text">
+                  {{ block.settings.text }}
+                </span>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-formulated-by-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(186deg, #63CEC7 -78.87%, #3D7E7A 166.02%), #C4A882;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__inner {
+    position: relative;
+    padding: 60px 40px;
+    box-sizing: border-box;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 0 0 26px;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__heading {
+    margin: 0;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__avatar-wrap {
+    inline-size: 72px;
+    block-size: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid {{ section.settings.avatar_border_color }};
+    flex: 0 0 auto;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__avatar {
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__profile-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__name {
+    margin: 0;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__role {
+    margin: 0;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+    color: {{ section.settings.text_color }};
+    opacity: 0.82;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__items {
+    overflow: visible;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: {{ section.settings.desktop_item_gap }}px;
+    flex-wrap: wrap;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-group--duplicate {
+    display: none;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 10px;
+    line-height: 1;
+    flex: 0 0 15px;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__check svg {
+    display: block;
+    width: 15px;
+    height: 10px;
+  }
+
+  #hs-formulated-by-{{ section.id }} .hs-formulated-by__item-text {
+    display: inline-block;
+  }
+
+  @keyframes hs-formulated-marquee-{{ section.id }} {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__top {
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-group {
+      gap: {{ section.settings.tablet_item_gap }}px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__inner {
+      padding: 60px 15px;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__heading {
+      font-size: 26px;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__top {
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__profile {
+      justify-content: center;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__name {
+      text-align: left;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__role {
+      font-size: 12px;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__items {
+      overflow: hidden;
+      width: calc(100% + 30px);
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-track {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: max-content;
+      min-width: 200%;
+      flex-wrap: nowrap;
+      animation: hs-formulated-marquee-{{ section.id }} {{ section.settings.marquee_speed }}s linear infinite;
+      will-change: transform;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-group,
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__marquee-group--duplicate {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: {{ section.settings.mobile_item_gap }}px;
+      padding-right: {{ section.settings.mobile_item_gap }}px;
+      flex: 0 0 auto;
+      min-width: max-content;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__item {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      font-size: 14px;
+      align-items: flex-start;
+    }
+
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__check {
+      padding-top: 3px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #hs-formulated-by-{{ section.id }} .hs-formulated-by__heading {
+      font-size: 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HairScripts Formulated By",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FORMULATED BY:"
+    },
+    {
+      "type": "image_picker",
+      "id": "profile_image",
+      "label": "Profile image"
+    },
+    {
+      "type": "text",
+      "id": "profile_image_alt",
+      "label": "Profile image alt text",
+      "default": "Formulator profile image"
+    },
+    {
+      "type": "text",
+      "id": "profile_name",
+      "label": "Profile name",
+      "default": "BEVY"
+    },
+    {
+      "type": "text",
+      "id": "profile_role",
+      "label": "Profile role",
+      "default": "Hair Educator & Content Creator"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#4DA9A3"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "avatar_border_color",
+      "label": "Avatar border color",
+      "default": "#B57942"
+    },
+    {
+      "type": "range",
+      "id": "avatar_size",
+      "label": "Avatar size",
+      "min": 36,
+      "max": 90,
+      "step": 2,
+      "default": 54
+    },
+    {
+      "type": "range",
+      "id": "desktop_name_size",
+      "label": "Desktop name size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "tablet_name_size",
+      "label": "Tablet name size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "mobile_name_size",
+      "label": "Mobile name size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "desktop_role_size",
+      "label": "Desktop role size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "tablet_role_size",
+      "label": "Tablet role size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "mobile_role_size",
+      "label": "Mobile role size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "desktop_item_size",
+      "label": "Desktop item text size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "tablet_item_size",
+      "label": "Tablet item text size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_size",
+      "label": "Mobile item text size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "desktop_item_gap",
+      "label": "Desktop item gap",
+      "min": 8,
+      "max": 80,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "tablet_item_gap",
+      "label": "Tablet item gap",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_gap",
+      "label": "Mobile item gap",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee speed",
+      "min": 8,
+      "max": 60,
+      "step": 1,
+      "default": 22
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "credential",
+      "name": "Credential item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "10+ Years Pharmaceutical Sale"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HairScripts Formulated By",
+      "blocks": [
+        {
+          "type": "credential",
+          "settings": {
+            "text": "10+ Years Pharmaceutical Sale"
+          }
+        },
+        {
+          "type": "credential",
+          "settings": {
+            "text": "Clinical Data Interpretation Training"
+          }
+        },
+        {
+          "type": "credential",
+          "settings": {
+            "text": "Trichology Certification (In Progress)"
+          }
+        },
+        {
+          "type": "credential",
+          "settings": {
+            "text": "Active YouTube Education Community"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -5,7 +5,6 @@
 
 <section id="section-{{ section.id }}" class="hs-science-hero">
   <div class="hs-science-hero__bg"></div>
-  <div class="hs-science-hero__overlay"></div>
 
   <div class="hs-science-hero__container">
     <div class="hs-science-hero__grid">
@@ -63,7 +62,9 @@
                       alt: section.settings.creator_text
                   }}
                 {% else %}
-                  <span class="hs-science-hero__creator-fallback">✓</span>
+                  <span class="hs-science-hero__creator-fallback"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+  <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+</svg></span>
                 {% endif %}
               </div>
               <span class="hs-science-hero__creator-text">{{ section.settings.creator_text }}</span>
@@ -75,7 +76,9 @@
               {% for block in proof_blocks %}
                 {% if block.settings.text != blank %}
                   <div class="hs-science-hero__proof-item" {{ block.shopify_attributes }}>
-                    <span class="hs-science-hero__proof-icon">✓</span>
+                    <span class="hs-science-hero__proof-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+  <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+</svg></span>
                     <span class="hs-science-hero__proof-text">{{ block.settings.text }}</span>
                   </div>
                 {% endif %}
@@ -151,7 +154,7 @@
     height: 100vh;
     color: #FFFFFF;
     background: #8E603F;
-    margin-top: -64px;
+    margin-top: -84px;
   }
 
   #section-{{ section.id }} .hs-science-hero__bg,
@@ -212,7 +215,7 @@
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: normal;
   }
 
@@ -224,7 +227,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 26px;
+    margin-bottom: 46px;
   }
 
   #section-{{ section.id }} .hs-science-hero__button {
@@ -249,7 +252,7 @@
   }
 
   #section-{{ section.id }} .hs-science-hero__button--primary {
-    background: #C4A882;
+    background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
     color: #FFFFFF;
   }
 
@@ -262,7 +265,7 @@
   #section-{{ section.id }} .hs-science-hero__bottom {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
   }
 
   #section-{{ section.id }} .hs-science-hero__creator {
@@ -272,15 +275,15 @@
   }
 
   #section-{{ section.id }} .hs-science-hero__creator-image {
-    width: 24px;
-    height: 24px;
+    width: 39px;
+    height: 39px;
     border-radius: 999px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.14);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 0 0 24px;
+    flex: 0 0 39px;
   }
 
   #section-{{ section.id }} .hs-science-hero__creator-img {
@@ -326,11 +329,11 @@
   }
 
   #section-{{ section.id }} .hs-science-hero__proof-text {
-    color: rgba(255, 255, 255, 0.88);
+    color: rgba(224, 224, 224, 0.86);
     font-family: "DM Sans";
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.4;
   }
 
@@ -533,7 +536,7 @@
 
   @media screen and (max-width: 749px) {
     #section-{{ section.id }} {
-    margin-top: -60px;
+    margin-top: -80px;
   }
     #section-{{ section.id }} .hs-science-hero__overlay {
       background: linear-gradient(180deg, rgba(39, 22, 13, 0.34) 0%, rgba(39, 22, 13, 0.46) 55%, rgba(39, 22, 13, 0.70) 100%);
@@ -565,7 +568,7 @@
 
   @media screen and (max-width: 450px) {
     #section-{{ section.id }} .hs-science-hero__buttons {
-      width: 100%;
+      width: 80%;
 }
     #section-{{ section.id }} .hs-science-hero__heading {
       font-size: 20px;

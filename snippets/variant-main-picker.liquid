@@ -12,12 +12,14 @@
 {% unless product_resource.has_only_default_variant %}
   {% liquid
     assign button_background_brightness = section.settings.color_scheme.settings.foreground | color_brightness
+
     if button_background_brightness < 105
       assign strikethrough_color_mix = '#000'
     else
       assign strikethrough_color_mix = '#fff'
     endif
   %}
+
   <variant-picker
     class="variant-picker spacing-style variant-picker--{{ block_settings.alignment }}"
     style="--color-strikethrough-mix: {{ strikethrough_color_mix }}; {% render 'spacing-style', settings: block_settings %}"
@@ -37,6 +39,17 @@
     <form class="variant-picker__form">
       {%- for product_option in product_resource.options_with_values -%}
         {%- liquid
+          assign option_name_downcase = product_option.name | downcase
+          assign is_quantity_option = false
+
+          if option_name_downcase contains 'quantity'
+            assign is_quantity_option = true
+          elsif option_name_downcase contains 'bottle'
+            assign is_quantity_option = true
+          elsif option_name_downcase contains 'pack'
+            assign is_quantity_option = true
+          endif
+
           assign swatch_count = product_option.values | map: 'swatch' | compact | size
           assign variant_style = block_settings.variant_style
 
@@ -68,26 +81,56 @@
               {{- product_option.selected_value -}}
             </span>
           </div>
+
         {%- elsif variant_style == 'swatch' or block_settings.variant_style == 'buttons' -%}
           {%- assign fieldset_index = forloop.index0 -%}
+
           <fieldset
-            class="variant-option variant-option--buttons{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}"
+            class="variant-option variant-option--buttons{% if is_quantity_option %} variant-option--quantity-cards{% endif %}{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}"
             data-fieldset-index="{{ fieldset_index }}"
             ref="fieldsets[]"
             {{ option_id_attribute }}
           >
             <legend>
-              {{ product_option.name | escape -}}
+              {% if is_quantity_option %}
+                Select quantity
+              {% else %}
+                {{ product_option.name | escape }}
+              {% endif %}
+
               {%- if variant_style == 'swatch' -%}
                 <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
               {%- endif %}
             </legend>
+
             {%- for product_option_value in product_option.values -%}
-              {% if product_option_value.size > longest_value and option_id_attribute %}
-                {% assign longest_value = product_option_value.size %}
-              {% endif %}
+              {% liquid
+                if product_option_value.size > longest_value and option_id_attribute
+                  assign longest_value = product_option_value.size
+                endif
+
+                assign option_value_text = product_option_value.name | default: product_option_value
+                assign option_value_downcase = option_value_text | downcase
+
+                assign quantity_badge = ''
+                assign quantity_badge_class = ''
+                assign quantity_save_text = ''
+
+                if is_quantity_option
+                  if option_value_downcase contains '2'
+                    assign quantity_badge = 'RECOMMENDED'
+                    assign quantity_badge_class = 'is-recommended'
+                    assign quantity_save_text = 'SAVE 10%'
+                  elsif option_value_downcase contains '3'
+                    assign quantity_badge = 'SAVE MORE!'
+                    assign quantity_badge_class = 'is-save-more'
+                    assign quantity_save_text = 'SAVE 20%'
+                  endif
+                endif
+              %}
+
               <label
-                class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+                class="variant-option__button-label{% if is_quantity_option %} variant-option__button-label--quantity-card{% endif %}{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
               >
                 <input
                   type="radio"
@@ -114,12 +157,11 @@
                     data-current-checked="false"
                   {% endif %}
                 >
+
                 {% if variant_style == 'swatch' %}
                   {% liquid
                     assign featured_media = product_option_value.variant.featured_media
 
-                    # If the variant has no featured media, and we have a combined listing product, then fall back to
-                    # using the featured media of the child product that is linked to this option value.
                     if featured_media == blank and product_option_value.product_url
                       assign featured_media = product_option_value.variant.product.featured_media
                     endif
@@ -131,22 +173,67 @@
                     mode: 'unscaled'
                   %}
                 {% else %}
-                  {% if product_option_value.available == true %}
+                  {% if is_quantity_option %}
+                    {% comment %}
+                      Quantity cards intentionally do NOT use `.variant-option__button-label__pill`.
+
+                      Reason:
+                      The theme applies default pill styling/animation to `.variant-option__button-label__pill`.
+                      That default animation causes the quantity cards to shift, clip the badge, and create the extra ghost shape.
+
+                      Use `.variant-option__quantity-card-bg` for quantity cards instead.
+                      Keep `.variant-option__button-label__pill` below for normal variant buttons only.
+                    {% endcomment %}
+                    <span
+                      class="variant-option__quantity-card-bg"
+                      data-key="variant-option-pill"
+                    ></span>
+                  {% else %}
+                    {% comment %}
+                      Default Shopify/theme pill for normal variant buttons.
+                      Do not remove this unless normal variant buttons are also being redesigned.
+                    {% endcomment %}
                     <span
                       class="variant-option__button-label__pill"
                       data-key="variant-option-pill"
                     ></span>
                   {% endif %}
-                  <span
-                    class="variant-option__button-label__text"
-                    data-key="variant-option-text"
-                  >
-                    {{- product_option_value | escape -}}
-                  </span>
+
+                  {% if is_quantity_option %}
+                    <span
+                      class="variant-option__quantity-card-content"
+                      data-key="variant-option-text"
+                    >
+                      {% if quantity_badge != blank %}
+                        <span class="variant-option__quantity-badge {{ quantity_badge_class }}">
+                          {{ quantity_badge }}
+                        </span>
+                      {% endif %}
+
+                      <span class="variant-option__quantity-title">
+                        {{ option_value_text | escape }}
+                      </span>
+
+                      {% if quantity_save_text != blank %}
+                        <span class="variant-option__quantity-save">
+                          {{ quantity_save_text }}
+                        </span>
+                      {% endif %}
+                    </span>
+                  {% else %}
+                    <span
+                      class="variant-option__button-label__text"
+                      data-key="variant-option-text"
+                    >
+                      {{- product_option_value | escape -}}
+                    </span>
+                  {% endif %}
                 {% endif %}
+
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>
             {%- endfor -%}
+
             {% if option_id_attribute %}
               {% style %}
                 [data-option-id="{{ fieldset_id }}"] {
@@ -155,27 +242,43 @@
               {% endstyle %}
             {% endif %}
           </fieldset>
+
+          {% if is_quantity_option %}
+            <div class="variant-option__quantity-note">
+              <span class="variant-option__quantity-note-icon">i</span>
+              <span>We recommend 2-3 months of consistent daily use for best results.</span>
+            </div>
+
+            <div class="variant-option__purchase-row">
+              <span class="variant-option__purchase-title">
+                Select your purchase type
+              </span>
+
+              <span class="variant-option__payment-text">
+                Pay in installments with
+                <span class="variant-option__payment-badge variant-option__payment-badge--klarna">Klarna.</span>
+                <span class="variant-option__payment-badge variant-option__payment-badge--afterpay">afterpay</span>
+              </span>
+            </div>
+          {% endif %}
+
         {%- elsif block_settings.variant_style == 'dropdowns' -%}
-          {%
-            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
-            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
-            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
-          %}
           {% liquid
             assign property_being_updated = false
+
             if settings.variant_swatch_width != settings.variant_swatch_height
               assign property_being_updated = true
-              # (original width / original height) x new height (20px at the moment) = new width
               assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
             endif
           %}
 
           <div class="variant-option variant-option--dropdowns">
             <label for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ product_option.name | escape }}</label>
+
             <div
               class="variant-option__select-wrapper"
               style="
-                {%- if property_being_updated  -%}
+                {%- if property_being_updated -%}
                   --variant-picker-swatch-width: clamp(10px,{{ new_width }}px, 50px);
                 {%- endif -%}
               "
@@ -204,6 +307,7 @@
                   </option>
                 {%- endfor -%}
               </select>
+
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -225,7 +329,6 @@
 {% endunless %}
 
 {% stylesheet %}
-  /* Variant picker container styles - unique to main variant picker */
   .variant-picker {
     width: 100%;
   }
@@ -239,7 +342,6 @@
     padding-inline-start: max(4px, var(--padding-inline-start));
   }
 
-  /* Dropdown variant option styles */
   .variant-option__select-wrapper {
     display: flex;
     position: relative;
@@ -295,7 +397,6 @@
     transform: translateY(-50%);
   }
 
-  /* Variant picker alignment modifiers */
   .variant-picker--center,
   .variant-picker--center .variant-option {
     text-align: center;
@@ -308,5 +409,273 @@
   .variant-picker--right .variant-option {
     text-align: right;
     justify-content: right;
+  }
+
+  .variant-option--quantity-cards {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    overflow: visible !important;
+  }
+
+  .variant-option--quantity-cards legend {
+    grid-column: 1 / -1;
+    margin: 0 0 14px;
+    padding: 0;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: left;
+  }
+
+  .variant-option__button-label--quantity-card {
+    position: relative !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 86px;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    overflow: visible !important;
+    contain: none !important;
+    isolation: isolate;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .variant-option__button-label--quantity-card input {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 6 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    cursor: pointer;
+    transform: none !important;
+  }
+
+  .variant-option__quantity-card-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(33, 27, 24, 0.18);
+    border-radius: 7px;
+    background: #fbf8f2;
+    transform: none !important;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .variant-option__button-label--quantity-card input:checked + .variant-option__quantity-card-bg {
+    border-color: var(--New-Colors-Primary, #237B84);
+    background: rgba(35, 123, 132, 0.18);
+  }
+
+  .variant-option__button-label--quantity-card:hover .variant-option__quantity-card-bg {
+    border-color: var(--New-Colors-Primary, #237B84);
+  }
+
+  .variant-option__quantity-card-content {
+    position: relative !important;
+    z-index: 3 !important;
+    display: flex;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    padding: 16px 10px 12px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    pointer-events: none;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .variant-option__quantity-title {
+    position: relative;
+    z-index: 4;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .variant-option__quantity-save {
+    position: relative;
+    z-index: 4;
+    margin-top: 6px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .variant-option__quantity-badge {
+    position: absolute !important;
+    top: -25px !important;
+    left: 50% !important;
+    z-index: 10 !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 16px;
+    border-radius: 999px;
+    transform: translateX(-50%) !important;
+    white-space: nowrap;
+    pointer-events: none;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .variant-option__quantity-badge.is-recommended {
+    color: #653628 !important;
+    background: #e5cdbc !important;
+  }
+
+  .variant-option__quantity-badge.is-save-more {
+    color: #ffffff !important;
+    background: var(--New-Colors-Primary, #237B84) !important;
+  }
+
+  .variant-option__quantity-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    color: var(--New-Colors-Primary, #237B84);
+    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .variant-option__quantity-note-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .variant-option__purchase-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 14px;
+    width: 100%;
+  }
+
+  .variant-option__purchase-title {
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .variant-option__payment-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .variant-option__payment-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 18px;
+    padding: 0 5px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .variant-option__payment-badge--klarna {
+    color: #111111;
+    background: #ffb3c7;
+  }
+
+  .variant-option__payment-badge--afterpay {
+    color: #111111;
+    background: #b2fce4;
+  }
+
+  @media screen and (max-width: 749px) {
+    .variant-option--quantity-cards {
+      gap: 8px;
+      padding-top: 28px !important;
+    }
+
+    .variant-option__button-label--quantity-card {
+      min-height: 78px;
+    }
+
+    .variant-option__quantity-title {
+      font-size: 15px;
+    }
+
+    .variant-option__quantity-save {
+      font-size: 11px;
+    }
+
+    .variant-option__quantity-badge {
+      top: -28px !important;
+      min-height: 28px;
+      padding: 0 10px;
+      font-size: 10px;
+    }
+
+    .variant-option__quantity-note {
+      align-items: flex-start;
+      font-size: 13px;
+    }
+
+    .variant-option__purchase-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .variant-option__payment-text {
+      white-space: normal;
+    }
   }
 {% endstylesheet %}

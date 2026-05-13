@@ -33,32 +33,61 @@
       </div>
 
       <div class="bcs-card">
-        <div class="bcs-card__head">
+        <div class="bcs-column bcs-column--left">
           <div class="bcs-card__title bcs-card__title--left">
-            {{ section.settings.left_heading }}
+            {% if section.settings.left_heading_image != blank %}
+              <img
+                src="{{ section.settings.left_heading_image | image_url: width: 700 }}"
+                alt="{{ section.settings.left_heading_image.alt | default: section.settings.left_heading | escape }}"
+                loading="lazy"
+                width="{{ section.settings.left_heading_image.width }}"
+                height="{{ section.settings.left_heading_image.height }}"
+                class="bcs-left-heading-image"
+              >
+            {% else %}
+              {{ section.settings.left_heading }}
+            {% endif %}
           </div>
+
+          {% if section.blocks.size > 0 %}
+            <div class="bcs-column__items bcs-column__items--left">
+              {% for block in section.blocks %}
+                <div class="bcs-cell bcs-cell--left" {{ block.shopify_attributes }}>
+                  <span class="bcs-icon bcs-icon--left" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                      <path d="M10.6201 19.7912C10.2163 19.7912 9.8385 19.5913 9.611 19.2565C7.71057 16.4534 5.75082 14.4847 3.62044 13.24C3.0395 12.9003 2.84369 12.1537 3.18332 11.5727C3.52213 10.9918 4.26882 10.7943 4.85057 11.1356C6.90538 12.3365 8.79607 14.0825 10.5958 16.4485C14.0578 11.567 18.1382 7.64266 22.7443 4.76885C23.3171 4.41297 24.067 4.58603 24.4229 5.15803C24.7788 5.72922 24.6057 6.48078 24.0337 6.83666C19.2115 9.84453 15.1571 13.903 11.6366 19.2435C11.4123 19.584 11.0337 19.7895 10.6266 19.792C10.625 19.7912 10.6226 19.7912 10.6201 19.7912Z" fill="white"/>
+                    </svg>
+                  </span>
+
+                  <span class="bcs-cell__text">{{ block.settings.left_text }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="bcs-column bcs-column--right">
           <div class="bcs-card__title bcs-card__title--right">
             {{ section.settings.right_heading }}
           </div>
-        </div>
 
-        {% if section.blocks.size > 0 %}
-          <div class="bcs-card__body">
-            {% for block in section.blocks %}
-              <div class="bcs-row" {{ block.shopify_attributes }}>
-                <div class="bcs-cell bcs-cell--left">
-                  <span class="bcs-icon bcs-icon--left" aria-hidden="true">✓</span>
-                  <span class="bcs-cell__text">{{ block.settings.left_text }}</span>
-                </div>
-
+          {% if section.blocks.size > 0 %}
+            <div class="bcs-column__items bcs-column__items--right">
+              {% for block in section.blocks %}
                 <div class="bcs-cell bcs-cell--right">
-                  <span class="bcs-icon bcs-icon--right" aria-hidden="true">✕</span>
+                  <span class="bcs-icon bcs-icon--right" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+
                   <span class="bcs-cell__text">{{ block.settings.right_text }}</span>
                 </div>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
       </div>
 
       <div class="bcs-product bcs-product--right">
@@ -81,21 +110,22 @@
   <style>
     #brand-comparison-split-{{ section.id }} {
       background: var(--bcs-bg);
-      padding: 44px 20px;
+      padding: 60px 40px;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-wrap {
-      max-width: 1180px;
+      width: 100%;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-layout {
       display: grid;
-      grid-template-columns: 170px minmax(0, 1fr) 170px;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
       gap: 0;
-      max-width: 980px;
       margin: 0 auto;
     }
 
@@ -109,19 +139,15 @@
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-product--left {
-      transform: translateX(18px);
+      transform: translateX(45px);
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-product--right {
-      transform: translateX(-18px);
+      transform: translateX(-45px);
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-product__image {
       display: block;
-      width: 100%;
-      max-width: 170px;
-      height: auto;
-      object-fit: contain;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-product__placeholder {
@@ -131,80 +157,90 @@
     #brand-comparison-split-{{ section.id }} .bcs-card {
       position: relative;
       z-index: 1;
-      background: var(--bcs-card-bg);
-      border: 1px solid var(--bcs-card-border);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    #brand-comparison-split-{{ section.id }} .bcs-card__head {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      align-items: center;
-      position: relative;
-      min-height: 66px;
-      border-bottom: 1px solid var(--bcs-divider);
+      align-items: start;
+      background: transparent;
+      border: 0;
+      border-radius: 6px;
+      overflow: visible;
+      box-shadow: none;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    #brand-comparison-split-{{ section.id }} .bcs-card__head::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: var(--bcs-divider);
-      transform: translateX(-0.5px);
+    #brand-comparison-split-{{ section.id }} .bcs-column {
+      min-width: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-column--left {
+      position: relative;
+      z-index: 2;
+      padding: 25px;
+      background: #2C5F5C;
+      border: 1px solid var(--bcs-card-border);
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-column--right {
+      position: relative;
+      z-index: 1;
+      padding: 25px 25px 25px 5px;
+      box-sizing: border-box;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-card__title {
-      padding: 18px 22px;
       text-align: center;
       color: var(--bcs-title-color);
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 28px;
-      line-height: 1;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      box-sizing: border-box;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-card__title--left {
-      background: var(--bcs-left-header-bg);
-      border-right: 1px solid var(--bcs-left-header-border);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0 0 22px;
+      font-family: "Cormorant Garamond";
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-left-heading-image {
+      display: block;
+      width: 300px;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+      filter: brightness(0) invert(1);
+      -webkit-filter: brightness(0) invert(1);
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
       background: transparent;
-      border-right: 0;
-      border-bottom: 0;
+      border: 0;
+      font-family: "DM Sans";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: uppercase;
+      padding: 0 0 22px;
     }
 
-    #brand-comparison-split-{{ section.id }} .bcs-card__body {
-      position: relative;
-    }
-
-    #brand-comparison-split-{{ section.id }} .bcs-card__body::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: var(--bcs-divider);
-      transform: translateX(-0.5px);
-      pointer-events: none;
-    }
-
-    #brand-comparison-split-{{ section.id }} .bcs-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      position: relative;
-    }
-
-    #brand-comparison-split-{{ section.id }} .bcs-row + .bcs-row {
-      border-top: 1px solid var(--bcs-divider);
+    #brand-comparison-split-{{ section.id }} .bcs-column__items {
+      display: flex;
+      flex-direction: column;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-cell {
@@ -212,15 +248,64 @@
       align-items: center;
       gap: 10px;
       min-width: 0;
-      padding: 12px 16px;
+      min-height: 52px;
+      padding: 10px 16px;
       color: var(--bcs-row-text);
-      font-size: 12px;
-      line-height: 1.45;
+      font-family: "DM Sans";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      box-sizing: border-box;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-cell--left {
+      background: transparent;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-top: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-column__items--left .bcs-cell--left + .bcs-cell--left {
+      border-top: 1px solid var(--bcs-divider);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-column__items--left .bcs-cell--left:last-child {
+      border-bottom: 0;
+      border-radius: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-cell--right {
+      background: transparent;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-top: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-column__items--right .bcs-cell--right + .bcs-cell--right {
+      border-top: 1px solid var(--bcs-divider);
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-column__items--right .bcs-cell--right:last-child {
+      border-bottom: 0;
+      border-radius: 0;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-cell__text {
       display: block;
       min-width: 0;
+      color: var(--bcs-row-text);
+      font-family: "DM Sans";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-icon {
@@ -228,121 +313,442 @@
       align-items: center;
       justify-content: center;
       line-height: 1;
-      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    #brand-comparison-split-{{ section.id }} .bcs-icon svg {
+      display: block;
       flex-shrink: 0;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-icon--left {
-      width: 18px;
-      height: 18px;
-      min-width: 18px;
-      border-radius: 999px;
-      background: var(--bcs-left-icon-bg);
-      color: var(--bcs-left-icon-color);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      font-size: 10px;
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      background: transparent;
+      border: 0;
     }
 
     #brand-comparison-split-{{ section.id }} .bcs-icon--right {
-      width: auto;
-      height: auto;
-      min-width: auto;
-      border-radius: 0;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
       background: transparent;
       border: 0;
       color: var(--bcs-right-icon-color);
-      font-size: 14px;
     }
 
-    @media screen and (max-width: 989px) {
+    @media screen and (max-width: 1366px) {
       #brand-comparison-split-{{ section.id }} {
-        padding: 38px 18px;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-layout {
-        grid-template-columns: 130px minmax(0, 1fr) 130px;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-product__image {
-        max-width: 130px;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-product--left {
-        transform: translateX(10px);
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-product--right {
-        transform: translateX(-10px);
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-card__title {
-        font-size: 22px;
-        padding: 16px 12px;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-cell {
-        font-size: 11px;
-        padding: 11px 12px;
-      }
-    }
-
-    @media screen and (max-width: 767px) {
-      #brand-comparison-split-{{ section.id }} {
-        padding: 30px 14px;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-layout {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        max-width: 560px;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-product--left,
-      #brand-comparison-split-{{ section.id }} .bcs-product--right {
-        transform: none;
-      }
-
-      #brand-comparison-split-{{ section.id }} .bcs-product {
-        order: 1;
+        padding: 60px 28px;
       }
 
       #brand-comparison-split-{{ section.id }} .bcs-card {
-        order: 2;
+        max-width: 840px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--left {
+        transform: translateX(30px);
       }
 
       #brand-comparison-split-{{ section.id }} .bcs-product--right {
-        order: 3;
+        transform: translateX(-30px);
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--left {
+        padding: 22px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--right {
+        padding: 22px 22px 22px 8px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-left-heading-image {
+        width: 260px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell {
+        min-height: 47px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell__text {
+        font-size: 16px;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      #brand-comparison-split-{{ section.id }} {
+        padding: 60px 15px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-layout {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "left-product right-product"
+          "comparison comparison";
+        align-items: end;
+        gap: 14px 18px;
+        margin: 0 auto;
       }
 
       #brand-comparison-split-{{ section.id }} .bcs-product__image {
-        max-width: 120px;
+        width: 150px;
+        max-width: 100%;
+        height: auto;
       }
 
-      #brand-comparison-split-{{ section.id }} .bcs-card__head,
-      #brand-comparison-split-{{ section.id }} .bcs-row {
-        grid-template-columns: 1fr;
+      #brand-comparison-split-{{ section.id }} .bcs-product--left {
+        grid-area: left-product;
+        justify-content: center;
+        transform: translateY(50px);
       }
 
-      #brand-comparison-split-{{ section.id }} .bcs-card__head::after,
-      #brand-comparison-split-{{ section.id }} .bcs-card__body::after {
-        display: none;
+      #brand-comparison-split-{{ section.id }} .bcs-product--right {
+        grid-area: right-product;
+        justify-content: center;
+        transform: translateY(50px);
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card {
+        grid-area: comparison;
+        max-width: 100%;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--left {
+        padding: 18px 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--right {
+        padding: 18px 16px;
       }
 
       #brand-comparison-split-{{ section.id }} .bcs-card__title {
-        font-size: 20px;
+        min-height: 88px;
+        height: 88px;
+        padding-bottom: 16px;
+        align-items: center;
+        justify-content: center;
       }
 
-      #brand-comparison-split-{{ section.id }} .bcs-card__title--left {
-        border-bottom: 1px solid var(--bcs-divider);
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--left,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        min-height: 88px;
+        height: 88px;
+        padding: 0 0 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-left-heading-image {
+        width: 190px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        font-size: 14px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell {
+        min-height: 48px;
+        gap: 8px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell__text {
+        font-size: 14px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--left {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--right {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--left svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--right svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      #brand-comparison-split-{{ section.id }} {
+        padding: 60px 15px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-layout {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "left-product right-product"
+          "comparison comparison";
+        align-items: end;
+        gap: 14px 14px;
+        margin: 0 auto;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product__image {
+        width: 150px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--left {
+        grid-area: left-product;
+        justify-content: center;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--right {
+        grid-area: right-product;
+        justify-content: center;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card {
+        grid-area: comparison;
+        max-width: 100%;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--left {
+        padding: 18px 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--right {
+        padding: 18px 16px;
+        margin-top: 0;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--left,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        min-height: 88px;
+        height: 88px;
+        padding: 0 0 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-left-heading-image {
+        width: 190px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        font-size: 14px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell {
+        min-height: 48px;
+        padding: 10px 16px;
+        gap: 8px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell__text {
+        font-size: 14px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell--left,
+      #brand-comparison-split-{{ section.id }} .bcs-cell--right {
+        border-left: 0;
         border-right: 0;
+        padding-left: 0;
+        padding-right: 0;
       }
 
-      #brand-comparison-split-{{ section.id }} .bcs-row + .bcs-row {
-        border-top: 1px solid var(--bcs-divider);
+      #brand-comparison-split-{{ section.id }} .bcs-column__items--left .bcs-cell--left:last-child,
+      #brand-comparison-split-{{ section.id }} .bcs-column__items--right .bcs-cell--right:last-child {
+        border-radius: 0;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      #brand-comparison-split-{{ section.id }} {
+        padding: 60px 10px;
       }
 
-      #brand-comparison-split-{{ section.id }} .bcs-cell--left {
-        border-bottom: 1px solid var(--bcs-divider);
+      #brand-comparison-split-{{ section.id }} .bcs-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+          "left-product right-product"
+          "comparison comparison";
+        gap: 12px 8px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product__image {
+        width: 120px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--left,
+      #brand-comparison-split-{{ section.id }} .bcs-column--right {
+        padding: 14px 10px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--left,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        min-height: 70px;
+        height: 70px;
+        padding: 0 0 12px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-left-heading-image {
+        width: 120px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell {
+        min-height: 44px;
+        gap: 6px;
+        padding: 8px 10px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--left {
+        width: 17px;
+        height: 17px;
+        min-width: 17px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--right {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--left svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--right svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media screen and (max-width: 380px) {
+      #brand-comparison-split-{{ section.id }} {
+        padding: 60px 15px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "left-product"
+          "left-column"
+          "right-product"
+          "right-column";
+        gap: 16px;
+        margin: 0 auto;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product__image {
+        width: 120px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--left {
+        grid-area: left-product;
+        transform: none;
+        justify-content: center;
+        transform: translateY(45px);
+        z-index: 3;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-product--right {
+        grid-area: right-product;
+        transform: none;
+        justify-content: center;
+        transform: translateY(35px);
+        z-index: 3;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card {
+        display: contents;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--left {
+        grid-area: left-column;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--right {
+        grid-area: right-column;
+        margin-top: 0;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-column--left,
+      #brand-comparison-split-{{ section.id }} .bcs-column--right {
+        padding: 20px 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--left,
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        min-height: auto;
+        height: auto;
+        padding: 0 0 18px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-left-heading-image {
+        width: 160px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-card__title--right {
+        font-size: 16px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell {
+        min-height: auto;
+        padding: 10px 16px;
+        gap: 8px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell--left,
+      #brand-comparison-split-{{ section.id }} .bcs-cell--right {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-cell__text {
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--left {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--right {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--left svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      #brand-comparison-split-{{ section.id }} .bcs-icon--right svg {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
@@ -363,9 +769,14 @@
       "label": "Right product image"
     },
     {
+      "type": "image_picker",
+      "id": "left_heading_image",
+      "label": "Left heading image"
+    },
+    {
       "type": "text",
       "id": "left_heading",
-      "label": "Left heading",
+      "label": "Left heading fallback text",
       "default": "HAIRSCRIPTS"
     },
     {

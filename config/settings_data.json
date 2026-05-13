@@ -57,8 +57,11 @@
     "button_border_radius_secondary": 14,
     "cart_type": "drawer",
     "cart_price_font": "secondary",
+    "auto_open_cart_drawer": true,
     "show_cart_note": false,
-    "show_add_discount_code": true,
+    "show_add_discount_code": false,
+    "show_installments": false,
+    "show_accelerated_checkout_buttons": false,
     "drawer_drop_shadow": true,
     "icon_stroke": "default",
     "input_border_width": 1,
@@ -78,6 +81,29 @@
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "6478312753674380289": {
+        "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3",
+        "disabled": false,
+        "settings": {}
+      },
+      "17151115064775110295": {
+        "type": "shopify://apps/recharge-subscriptions/blocks/recharge-theme/371eed76-0b44-4869-9813-730372ea378e",
+        "disabled": false,
+        "settings": {
+          "color_brand": "#1773B0",
+          "contrast_color": "#FFFFFF",
+          "color_brand_secondary": "#1773B0",
+          "corners": "8px",
+          "app_background": "#f7f7f7",
+          "app_container": 1200,
+          "app_vertical_padding": 32,
+          "images_aspect_ratio": "1",
+          "cards_background": "#FFFFFF",
+          "cards_border_color": "rgba(0,0,0,0)"
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {

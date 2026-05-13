@@ -1,0 +1,75 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "bevy_policy_page_note_6kCpyb": {
+      "type": "bevy-policy-page-note",
+      "name": "Bevy policy custom text",
+      "settings": {
+        "main_content": "<h1>Privacy Policy</h1><p>Hi love. Before you scroll past this, please read it. I built HairScripts by Bevy as a small, founder-led brand and I want everycustomer to have a great experience. The policies below exist to keep things fair, transparent, and consistent for everyone — including me. </p><p>By placing an order on hairscriptsbybevy.com, you agree to the terms in this document. These rules apply to all orders, including subscriptions, one-time purchases, and presale orders.<br/><br/></p><h2>SHIPPING TIMELINES<br/></h2><p>We currently ship within the United States and to select international destinations. Most orders ship within 2–5 business days from the date of order. Once your package is on its way, you will receive a tracking number by email. Shipping times do not include weekends, federal holidays, or processing time at the fulfillment center. Orders placed on weekends or holidays will begin processing the next business day.<br/><br/></p><h2><strong>SHIPPING COSTS</strong></h2><ul><li>United States: FREE on all subscription orders. One-time orders ship at standard<br/>rates calculated at checkout.</li><li>International: Shipping rates are calculated at checkout based on destination and weight. International orders may also be subject to customs duties, taxes, and import fees imposed by the destination country. These charges are the responsibility of the recipient</li></ul><h2><strong>ADDRESS ACCURACY</strong></h2><p>You are responsible for providing a complete and accurate shipping address at checkout. We are not liable for packages that are delayed, lost, or undeliverable due to an incorrect, incomplete, or outdated address provided by you.<br/> <br/>If your package is returned to us as undeliverable due to an address error, you will be responsible for any reshipment fees if you would like the order resent. To update your address before fulfillment, see the 12-hour change window in our Returns & Refunds Policy.<br/><br/></p><h2>TRACKING YOUR ORDER</h2><p>Once your order ships, the tracking number we provide is the official record of your shipment. Please check your tracking regularly so you can plan to receive your package.<br/> <br/>If you live somewhere where packages can be stolen (apartment lobbies, shared common areas, unsecured porches), we strongly recommend arranging for someone to receive the package, having it sent to a more secure address, or using a package locker service.<br/><br/></p><h2>DELIVERY ACCEPTANCE<br/></h2><p>By placing an order, you authorize the carrier to deliver your package to the shipping address you provided. Most carriers do not require a signature for our packages and may leave them at the door, in a mailbox, or in a common area as they see fit.<br/> <br/>If you require a signature on delivery, please contact us at <strong>support@hairscriptsbybevy.com</strong> before your order ships and we will do our best to accommodate the request when carrier services allow it.<br/></p><h2>INTERNATIONAL & APO/MILITARY ADDRESSES<br/></h2><p>International shipping is handled through our partner FlavorCloud or other carrier services as appropriate. Customers ordering internationally agree to comply with all import regulations in their destination country.<br/> <br/>International packages may be subject to customs review, additional documentation requests, and delays beyond our control. We are not responsible for packages held, returned, or destroyed by customs authorities in the destination country. If a package is delayed in customs, the customer agrees to cooperate with the carrier and provide any additional documentation requested.<br/> <br/>APO/Military addresses (DPO/FPO) may have additional carrier limitations. Please<br/><br/>contact us before ordering if you have a specialty shipping situation, as standard<br/><br/>carrier rules and timelines may not apply.<br/></p><h2>LOST, STOLEN, OR UNDELIVERED PACKAGES<br/></h2><p>For policies regarding lost or stolen packages with proof of delivery, please see Section 2 of our Returns & Refunds Policy.<br/></p>",
+        "effective_text": "(Updated Last: May 12, 2026)",
+        "card_image": "shopify://shop_images/CandaceHoweStudiosNYCPortraitPhotographer-251-220copy_1_2.svg",
+        "card_button_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bevy_policy_page_note_6kCpyb"
+  ]
+}

@@ -1,0 +1,75 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "bevy_policy_page_note_kwM79U": {
+      "type": "bevy-policy-page-note",
+      "name": "Bevy policy page note",
+      "settings": {
+        "main_content": "<h1>A Note From Bevy</h1><p>Hi love. Before you scroll past this, please read it. I built HairScripts by Bevy as a small, founder-led brand and I want everycustomer to have a great experience. The policies below exist to keep things fair, transparent, and consistent for everyone — including me. </p><p>By placing an order on hairscriptsbybevy.com, you agree to the terms in this document. These rules apply to all orders, including<br/>subscriptions, one-time purchases, and presale orders.</p><h2><strong>Order Processing & The 12-Hour Window</strong></h2><p>Once you place your order, you have a 12-hour window to make any of the following changes:<br/> <br/></p><ul><li>Cancel a one-time order entirely<br/></li><li>Update or correct your shipping address<br/></li><li>Change your bottle quantity or product selection<br/></li><li>Modify any other order details</li></ul><p><strong>IMPORTANT —</strong></p><p>If you miss the 12-hour window and need a different address, you'll unfortunately need to wait for the next monthly delivery (for<br/>subscribers) or place a new order (for one-time purchases). We are not responsible for packages delivered to an outdated or incorrect address that you provided at checkout.</p><p><strong>HOW TO REQUEST CHANGES</strong></p><p>Email support@hairscriptsbybevy.com within 12 hours of placing your order with your order number and the change you need.Requests sent after the 12-hour window will not be processed.</p><h2><strong>Lost or Stolen Packages</strong></h2><p>This is the section I really need you to read carefully.</p><p><strong>OUR POLICY —</strong></p><p>If your tracking number shows your package as delivered and the carrier has provided proof of delivery (timestamped photo, GPS coordinates, signature, or call attempt), HairScripts by Bevy is not responsible for any package that is missing, lost, or stolen after delivery.</p><p><strong>WHAT TO DO IF YOUR PACKAGE IS MARKED DELIVERED BUT YOU CAN'T FIND IT</strong></p><ul><li>Check your front door, porch, mailbox, building lobby, mailroom, and any common area where packages are typically left<br/></li><li>Check with your neighbors, doorman, building staff, or anyone else who may have collected the package<br/></li><li>Check your missed calls and voicemails on the day of delivery in case the courier attempted to reach you<br/></li><li>Wait 24–48 hours, as some carriers mark packages as delivered before the actual drop-off</li></ul><p><strong>IF YOU STILL CANNOT LOCATE YOUR PACKAGE</strong></p><p>You will need to <strong>file a claim directly with the shipping carrier</strong> (FedEx, UPS, USPS, UniUni, etc.) using your tracking number. The carrier is responsible for investigating delivery disputes and reimbursing you for confirmed losses on their end.<br/> <br/>We are happy to provide you with the proof of delivery information we received from the carrier to assist you with your claim. Email <strong>support@hairscriptsbybevy.com</strong> with your order number to request this documentation.</p><p><strong>Why this policy exists: </strong>When a carrier confirms delivery with proof, the package has legally left our hands and is in your possession. We pay for the product and the shipping; the carrier is paid to deliver it safely. If something happens after that point, the<br/>responsibility falls on the party that controls what happens at the delivery address, which is the carrier and the recipient — not us.</p><h2><strong>Damaged Packages or Defective Products</strong></h2><p>If your bottles arrive physically damaged (broken, leaking, crushed, or otherwise unusable), we'll take care of you. Here's how:</p><p><strong>REPORT DAMAGE WITHIN 7 DAYS OF DELIVERY</strong></p><p>Email <strong>support@hairscriptsbybevy.com</strong> within 7 days of receiving your package with:</p><ul><li>Your order number<br/></li><li>Clear photos of the damaged product (the bottles themselves)<br/></li><li>Clear photos of the shipping packaging (the box or mailer)<br/></li><li>A short description of what happened</li></ul><p><strong>WHAT HAPPENS NEXT</strong></p><p>Once we verify the damage, we will reship the affected bottles to you at no additional cost and file the claim with our shipping<br/>carrier on our end. You do not need to file the carrier claim yourself for damage cases — we handle that part.</p><p><strong>PLEASE NOTE —</strong></p><p>Damage claims must be reported within 7 days of the delivery date. Reports submitted after 7 days will not be eligible for replacement, as we cannot file a successful claim with the carrier outside of their reporting window.</p><p><strong>WHAT COUNTS AS DAMAGE</strong></p><p>Damage means the product itself is unusable due to physical harm during shipping. This does not include normal cosmetic wear (small scuffs on the box, a slightly dented seal, etc.) or personal preference issues with how the product looks, smells, or feels.</p><h2><strong>Refund Policy</strong></h2><p><strong>ALL SALES ARE FINAL —</strong></p><p>Because HairScripts is a consumable supplement product, all sales are final once your order has been processed and shipped. We do not offer refunds on opened, used, or unused product after fulfillment.</p><p><strong>THE ONLY EXCEPTIONS</strong></p><ul><li><strong>Cancellations within 12 hours:</strong> If you cancel a one-time order within 12 hours of purchase and before fulfillment has begun, you will receive a full refund to your original payment method.<br/></li><li><strong>Damaged or defective product</strong>: Damaged or defective product: See Section 3. Damaged products are replaced, not refunded.</li><li><strong>Subscription renewals processed in error:</strong> If a renewal charge processes due to a verified system error on our end, we will refund or credit you within 5 business days.</li></ul><p><strong>WHY WE DON'T OFFER REFUNDS FOR CHANGE OF MIND</strong></p><p>I run a science-backed supplement brand, not a fashion store. Hair growth takes time — most women don't see meaningful results until the 90-day mark. Refunds based on \"I didn't see results in 30 days\" undermine the entire science of what HairScripts does, and they aren't fair to me as the founder. If you're not sure whether HairScripts is right for you, I encourage you to read through my YouTube videos, customer testimonials, and ingredient breakdown before purchasing.</p><h2><strong>Subscription Charges & Chargebacks</strong></h2><p>When you sign up for a subscription, you agree to recurring charges at the frequency you selected (monthly, quarterly, or semiannually). It is your responsibility to manage your subscription, including pausing or cancelling before your next renewal date if you do not want to be charged.</p><p><strong>CHARGEBACKS</strong></p><p>If you initiate a chargeback with your bank or credit card company instead of contacting us directly, please know:<br/> <br/></p><ul><li>We will provide your card company with a full record of your subscription agreement, including the date you signed up, the terms you accepted, and proof of all deliveries<br/></li><li>Fraudulent chargebacks (where the customer received the product and disputed the charge anyway) will be contested with full documentation<br/></li><li>Customers who file fraudulent chargebacks may be banned from future purchases at HairScripts by Bevy<br/> </li></ul><p>If you have a billing concern, please reach out to <strong>support@hairscriptsbybevy.com</strong> first. I personally read every email and will work with you to resolve the issue. Chargebacks should be a last resort, not a first one.</p><h2><strong>Policy Updates</strong></h2><p>HairScripts by Bevy reserves the right to update this Returns & Refunds Policy at any time. Updates will be posted on hairscriptsbybevy.com with the effective date noted at the top of the document. The version of the policy in effect on the date you place your order is the version that applies to that order.</p>",
+        "effective_text": "(EFFECTIVE: MAY 2026)",
+        "card_image": "shopify://shop_images/CandaceHoweStudiosNYCPortraitPhotographer-251-220copy_1_2.svg",
+        "card_button_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bevy_policy_page_note_kwM79U"
+  ]
+}

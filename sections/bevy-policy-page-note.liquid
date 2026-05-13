@@ -1,0 +1,521 @@
+<section
+  id="bevy-policy-custom-text-{{ section.id }}"
+  class="bevy-policy-custom-text"
+>
+  <div class="bevy-policy-custom-text__inner">
+    <div class="bevy-policy-custom-text__layout">
+      <div class="bevy-policy-custom-text__content-wrap">
+        <div class="bevy-policy-custom-text__content rte">
+          {% if section.settings.main_content != blank %}
+            {{ section.settings.main_content }}
+          {% else %}
+            <h1>A NOTE FROM BEVY</h1>
+            <p>Add your policy text inside the section setting.</p>
+          {% endif %}
+        </div>
+
+        <div class="bevy-policy-custom-text__questions-box">
+          <h3 class="bevy-policy-custom-text__questions-heading">
+            QUESTIONS?
+          </h3>
+
+          <a
+            href="mailto:support@hairscriptsbybevy.com"
+            class="bevy-policy-custom-text__questions-email"
+          >
+            support@hairscriptsbybevy.com
+          </a>
+
+          <p class="bevy-policy-custom-text__questions-text">
+            I personally read and respond to every email.
+          </p>
+        </div>
+      </div>
+
+      <aside class="bevy-policy-custom-text__help-card">
+        {% if section.settings.card_image != blank %}
+          <img
+            src="{{ section.settings.card_image | image_url: width: 800 }}"
+            alt="{{ section.settings.card_image.alt | default: 'Need a little guidance?' | escape }}"
+            width="{{ section.settings.card_image.width }}"
+            height="{{ section.settings.card_image.height }}"
+            loading="lazy"
+            class="bevy-policy-custom-text__help-image"
+          >
+        {% endif %}
+
+        <div class="bevy-policy-custom-text__help-overlay"></div>
+
+        <div class="bevy-policy-custom-text__help-content">
+          <h3 class="bevy-policy-custom-text__help-heading">
+            NEED A LITTLE GUIDANCE?
+          </h3>
+
+          <p class="bevy-policy-custom-text__help-text">
+            We’re here to help you make the best decision for your hair.
+          </p>
+
+          <a
+            {% if section.settings.card_button_link != blank %}
+              href="{{ section.settings.card_button_link }}"
+            {% else %}
+              role="link"
+              aria-disabled="true"
+            {% endif %}
+            class="bevy-policy-custom-text__help-button"
+          >
+            Contact Us
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  #bevy-policy-custom-text-{{ section.id }} {
+    width: 100%;
+    padding: 60px 50px;
+    background: #F7F2EC;
+    box-sizing: border-box;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} *,
+  #bevy-policy-custom-text-{{ section.id }} *::before,
+  #bevy-policy-custom-text-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__inner {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 350px;
+    gap: 40px;
+    align-items: start;
+    width: 100%;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content-wrap {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content {
+    width: 100%;
+    max-width: 720px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content > *:first-child {
+    margin-top: 0;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content > *:last-child {
+    margin-bottom: 0;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1 {
+    margin: 0 0 14px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type::after {
+    content: "{{ section.settings.effective_text | escape }}";
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h2 {
+    margin: 18px 0 10px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(33, 27, 24, 0.45);
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h3 {
+    margin: 14px 0 8px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content p {
+    margin: 0 0 10px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content ul,
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content ol {
+    margin: 8px 0 12px 18px;
+    padding: 0;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content li {
+    margin-bottom: 3px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content strong {
+    font-weight: 700;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content a {
+    color: #237B84;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-box {
+    width: 100%;
+    max-width: 720px;
+    margin-top: 28px;
+    padding: 24px 20px;
+    background: linear-gradient(90deg, #5CB8B2 0%, #3F9A98 100%);
+    text-align: center;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-heading {
+    width: 298px;
+    max-width: 100%;
+    margin: 0 auto 18px;
+    color: var(--Old-colors-Scheme-1-Text-Light, #FFFFFF);
+    text-align: center;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-email {
+    display: inline-block;
+    margin: 0 0 8px;
+    color: var(--Old-colors-Scheme-1-Text-Light, #FFFFFF);
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-text {
+    margin: 0;
+    color: var(--Old-colors-Scheme-1-Text-Light, #FFFFFF);
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-card {
+    position: sticky;
+    top: 120px;
+    width: 100%;
+    min-height: 230px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #211B18;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(33, 27, 24, 0.08) 0%,
+        rgba(33, 27, 24, 0.55) 52%,
+        rgba(33, 27, 24, 0.9) 100%
+      );
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-content {
+    position: relative;
+    z-index: 2;
+    min-height: 230px;
+    padding: 90px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-heading {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-text {
+    margin: 0 0 14px;
+    max-width: 230px;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-button:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  @media screen and (max-width: 1024px) {
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-box {
+      max-width: 100%;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-card {
+      position: relative;
+      top: auto;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #bevy-policy-custom-text-{{ section.id }} {
+      padding: 60px 16px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__layout {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content-wrap {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-box {
+      width: 100%;
+      max-width: 100%;
+      margin-top: 24px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-card {
+      width: 100%;
+      max-width: 100%;
+      min-height: 260px;
+      margin: 0;
+      position: relative;
+      top: auto;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-content {
+      min-height: 260px;
+      padding: 100px 24px 24px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1 {
+      font-size: 26px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type {
+      gap: 10px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type::after {
+      font-size: 9px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h2 {
+      font-size: 16px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content p,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content ul,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content ol,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content li {
+      font-size: 12px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h3 {
+      font-size: 12px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-heading {
+      font-size: 26px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-email,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-text {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1 {
+      font-size: 24px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type::after {
+      font-size: 8px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-box {
+      padding: 22px 15px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-heading {
+      font-size: 24px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-email,
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-text {
+      font-size: 14px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-content {
+      padding: 90px 18px 22px;
+    }
+
+    #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__help-heading {
+      font-size: 21px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bevy policy custom text",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "main_content",
+      "label": "Main content"
+    },
+    {
+      "type": "text",
+      "id": "effective_text",
+      "label": "Effective text",
+      "default": "(EFFECTIVE: MAY 2026)"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "Guidance card image"
+    },
+    {
+      "type": "url",
+      "id": "card_button_link",
+      "label": "Contact button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bevy policy custom text"
+    }
+  ]
+}
+{% endschema %}

@@ -35,7 +35,7 @@
                             class: 'hs-video-carousel-thumb',
                             loading: 'lazy',
                             widths: '300, 500, 700, 900',
-                            sizes: '(min-width: 1200px) 20vw, (min-width: 750px) 33vw, 82vw',
+                            sizes: '(min-width: 1200px) 20vw, (min-width: 750px) 33vw, 72vw',
                             alt: block.settings.title
                         }}
                       {% else %}
@@ -43,7 +43,9 @@
                       {% endif %}
 
                       <span class="hs-video-carousel-play" aria-hidden="true">
-                        <span class="hs-video-carousel-play-triangle"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69" fill="none">
+                          <path d="M34.5 5.17578C18.6473 5.17578 5.75 18.0731 5.75 33.9258C5.75 49.7784 18.6473 62.6758 34.5 62.6758C50.3527 62.6758 63.25 49.7784 63.25 33.9258C63.25 18.0731 50.3527 5.17578 34.5 5.17578ZM34.5 9.48828C48.022 9.48828 58.9375 20.4038 58.9375 33.9258C58.9375 47.4478 48.022 58.3633 34.5 58.3633C20.978 58.3633 10.0625 47.4478 10.0625 33.9258C10.0625 20.4038 20.978 9.48828 34.5 9.48828ZM28.2615 22.4258C27.8852 22.42 27.5058 22.5139 27.1665 22.7065C26.488 23.086 26.0715 23.8029 26.0715 24.582V43.2695C26.0715 44.0487 26.488 44.7655 27.1665 45.145C27.4943 45.3319 27.8627 45.4258 28.2278 45.4258C28.6159 45.4258 29.0031 45.3239 29.3452 45.1169L44.7646 35.7732C45.4115 35.3822 45.8035 34.6819 45.8035 33.9258C45.8035 33.1697 45.4115 32.4722 44.7646 32.0784L29.3452 22.7346C29.0132 22.5334 28.6377 22.4315 28.2615 22.4258Z" fill="white"/>
+                        </svg>
                       </span>
                     </div>
 
@@ -138,7 +140,7 @@
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: normal;
   }
 
@@ -176,7 +178,7 @@
     overflow: hidden;
     border-radius: 8px;
     background: #3D7E7A;
-    padding: 5px;
+    padding: 12px;
   }
 
   #section-{{ section.id }} .hs-video-carousel-thumb {
@@ -194,10 +196,9 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 44px;
-    height: 44px;
+    width: 57px;
+    height: 57px;
     transform: translate(-50%, -50%);
-    border: 2px solid rgba(255, 255, 255, 0.95);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(2px);
@@ -207,13 +208,10 @@
     pointer-events: none;
   }
 
-  #section-{{ section.id }} .hs-video-carousel-play-triangle {
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    border-left: 11px solid #FFFFFF;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
+  #section-{{ section.id }} .hs-video-carousel-play svg {
+    width: 57px;
+    height: 57px;
+    display: block;
   }
 
   #section-{{ section.id }} .hs-video-carousel-content {
@@ -332,30 +330,35 @@
   }
 
   @media screen and (max-width: 768px) {
-    #section-{{ section.id }} .hs-video-carousel-title{
+    #section-{{ section.id }} .hs-video-carousel-wrapper {
+      padding: 40px 0;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-header {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-heading {
+      font-size: 26px;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-title {
       font-size: 14px;
     }
-    #section-{{ section.id }} .hs-video-carousel-wrapper {
-      padding: 40px 15px;
+
+    #section-{{ section.id }} .hs-video-carousel-viewport {
+      width: 100%;
+      overflow: hidden;
     }
 
-    #section-{{ section.id }} .hs-video-carousel-heading {
-      font-size: 26px;
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    #section-{{ section.id }} .hs-video-carousel-wrapper {
-      padding: 40px 15px;
-    }
-
-    #section-{{ section.id }} .hs-video-carousel-heading {
-      font-size: 26px;
+    #section-{{ section.id }} .hs-video-carousel-track {
+      gap: 14px;
     }
 
     #section-{{ section.id }} .hs-video-carousel-slide {
-      flex: 0 0 calc((100% - 28px) / 2.2);
-      max-width: calc((100% - 28px) / 2.2);
+      flex: 0 0 72%;
+      max-width: 72%;
     }
 
     #section-{{ section.id }} .review-carousel-controls {
@@ -365,8 +368,8 @@
 
   @media screen and (max-width: 500px) {
     #section-{{ section.id }} .hs-video-carousel-slide {
-      flex: 0 0 calc((100% - 14px) / 1.18);
-      max-width: calc((100% - 14px) / 1.18);
+      flex: 0 0 72%;
+      max-width: 72%;
     }
 
     #section-{{ section.id }} .review-carousel-controls {
@@ -416,9 +419,12 @@
         return ((value % total) + total) % total;
       }
 
+      function isMobilePeekMode() {
+        return window.innerWidth <= 768;
+      }
+
       function getVisibleCount() {
-        if (window.innerWidth <= 500) return 2;
-        if (window.innerWidth <= 749) return 3;
+        if (window.innerWidth <= 768) return 3;
         if (window.innerWidth <= 1024) return 4;
         return 5;
       }
@@ -452,10 +458,23 @@
 
       function updateSlider(animate) {
         const step = getStep();
-        if (!step) return;
+        const firstSlide = track.querySelector('.hs-video-carousel-slide');
+
+        if (!step || !firstSlide) return;
+
+        let offset = currentPosition * step;
+
+        if (isMobilePeekMode()) {
+          const viewportWidth = viewport.getBoundingClientRect().width;
+          const slideWidth = firstSlide.getBoundingClientRect().width;
+          const centerOffset = (viewportWidth - slideWidth) / 2;
+
+          offset = offset - centerOffset;
+        }
 
         track.style.transition = animate ? 'transform 0.35s ease' : 'none';
-        track.style.transform = 'translate3d(' + (currentPosition * -step) + 'px, 0, 0)';
+        track.style.transform = 'translate3d(' + (offset * -1) + 'px, 0, 0)';
+
         setActiveDot();
       }
 
@@ -504,6 +523,7 @@
 
       function goToPrev() {
         if (isAnimating) return;
+
         isAnimating = true;
         currentPosition -= 1;
         updateSlider(true);
@@ -511,6 +531,7 @@
 
       function goToNext() {
         if (isAnimating) return;
+
         isAnimating = true;
         currentPosition += 1;
         updateSlider(true);

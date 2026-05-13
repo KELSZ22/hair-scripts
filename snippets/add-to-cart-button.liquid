@@ -12,8 +12,10 @@
 
 {%- liquid
   assign default_add_to_cart_text = 'actions.add_to_cart' | t
-  assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100
-  if product.selected_or_first_available_variant.featured_media.preview_image == blank
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_variant_media = current_variant.featured_media.preview_image | image_url: width: 100
+
+  if current_variant.featured_media.preview_image == blank
     assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
   endif
 -%}
@@ -22,6 +24,7 @@
   ref="addToCartButtonContainer"
   data-product-variant-media="{{ product_variant_media }}"
   data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
+  class="custom-add-to-cart-wrapper"
 >
   <button
     {% if id != blank %}
@@ -39,30 +42,80 @@
       disabled
     {% endunless %}
   >
-    <span
-      class="add-to-cart-text"
-    >
-      {% if can_add_to_cart %}
-        <span
-          aria-hidden="true"
-          class="svg-wrapper add-to-cart-icon"
-        >
-          {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-        </span>
-      {% endif %}
-      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
-        <span>
-          <span>
-            {{- add_to_cart_text | default: default_add_to_cart_text -}}
+    <span class="add-to-cart-text">
+      {% comment %}
+        {% if can_add_to_cart %}
+          <span
+            aria-hidden="true"
+            class="svg-wrapper add-to-cart-icon"
+          >
+            {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
           </span>
+        {% endif %}
+      {% endcomment %}
+
+      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
+        <span class="add-to-cart-text__label">
+          {{- add_to_cart_text | default: default_add_to_cart_text -}}
         </span>
+
+        {% if current_variant != blank %}
+          <span class="add-to-cart-text__price">
+            {{ current_variant.price | money }}
+          </span>
+        {% endif %}
       </span>
     </span>
-    {% comment %} checkmark burst markup {% endcomment %}
+
     <span class="add-to-cart__added">
       <span class="svg-wrapper add-to-cart__added-icon">
         {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
       </span>
     </span>
   </button>
+
+  <div class="custom-add-to-cart-shipping-text">
+    Ships in the <span class="custom-add-to-cart-shipping-text__flag" aria-hidden="true">🇺🇸</span> United States in estimated 6-7 days
+  </div>
 </add-to-cart-component>
+
+{% stylesheet %}
+  .custom-add-to-cart-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .add-to-cart-text__content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .add-to-cart-text__price {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .custom-add-to-cart-shipping-text {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center !important;
+
+    color: var(--Old-colors-Scheme-1-Shadow, #9F9F9F) !important;
+
+    /* Old Typography/Paragraph/Regular */
+    font-family: Fustat, sans-serif !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
+  }
+
+  .custom-add-to-cart-shipping-text__flag {
+    display: inline-block;
+    margin: 0 2px;
+  }
+{% endstylesheet %}

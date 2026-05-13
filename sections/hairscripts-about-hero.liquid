@@ -1,0 +1,131 @@
+{{ 'about-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="about-hero" id="about-hero-{{ section.id }}">
+  <div class="about-hero__inner">
+    <div class="about-hero__content">
+      <h1 class="about-hero__heading">{{ section.settings.heading }}</h1>
+      <div class="about-hero__body">
+        <p class="about-hero__lead">{{ section.settings.lead_text }}</p>
+        <p class="about-hero__description">{{ section.settings.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #about-hero-{{ section.id }} {
+    background: linear-gradient(192.78deg, rgb(99, 206, 199) 0.76%, rgb(61, 126, 122) 46.63%);
+    width: 100%;
+    overflow: hidden;
+    padding: 58px 0;
+  }
+
+  #about-hero-{{ section.id }} .about-hero__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #about-hero-{{ section.id }} .about-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    max-width: 868px;
+    width: 100%;
+  }
+
+  #about-hero-{{ section.id }} .about-hero__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 43px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0;
+  }
+
+  #about-hero-{{ section.id }} .about-hero__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #about-hero-{{ section.id }} .about-hero__lead,
+  #about-hero-{{ section.id }} .about-hero__description {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 990px) {
+    #about-hero-{{ section.id }} {
+      padding: 48px 0;
+    }
+
+    #about-hero-{{ section.id }} .about-hero__heading {
+      font-size: 32px;
+    }
+
+    #about-hero-{{ section.id }} .about-hero__lead,
+    #about-hero-{{ section.id }} .about-hero__description {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #about-hero-{{ section.id }} {
+      padding: 40px 0;
+    }
+
+    #about-hero-{{ section.id }} .about-hero__inner {
+      padding: 0 20px;
+    }
+
+    #about-hero-{{ section.id }} .about-hero__heading {
+      font-size: 28px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About - Our Story Hero",
+  "tag": "section",
+  "class": "about-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "text",
+      "id": "lead_text",
+      "label": "Lead Text",
+      "default": "Built by someone who's been through it — and trained to fix it."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "HairScripts™ wasn't created in a boardroom. It was built by a pharmaceutical specialist who lived the problem, studied the biology, and refused to accept that women deserved anything less than a real solution."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About - Our Story Hero"
+    }
+  ]
+}
+{% endschema %}

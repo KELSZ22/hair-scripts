@@ -1,0 +1,493 @@
+{% liquid
+  assign section_id = 'bevy-learn-' | append: section.id
+  assign block_count = section.blocks.size
+%}
+
+<section
+  id="{{ section_id }}"
+  class="bevy-learn{% if section.settings.scroll_state == 'stop' %} bevy-learn--stop{% endif %}"
+  style="
+    --bevy-bg: {{ section.settings.bg_color }};
+    --bevy-heading-color: {{ section.settings.heading_color }};
+    --bevy-text-color: {{ section.settings.text_color }};
+    --bevy-accent-color: {{ section.settings.border_color }};
+    --bevy-card-radius: {{ section.settings.card_radius }}px;
+    --bevy-gap: {{ section.settings.card_gap }}px;
+    --bevy-marquee-duration: {{ section.settings.marquee_speed }}s;
+  "
+>
+  <div class="bevy-learn__header">
+    {% if section.settings.heading != blank %}
+      <h2 class="bevy-learn__heading">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.text != blank %}
+      <div class="bevy-learn__text">
+        {{ section.settings.text }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="bevy-learn__marquee">
+    <div class="bevy-learn__track">
+      {% for set_repeat in (1..2) %}
+        {% assign is_first_set = forloop.first %}
+
+        <div class="bevy-learn__set"{% unless is_first_set %} aria-hidden="true"{% endunless %}>
+          {% for cycle in (1..2) %}
+            {% assign cycle_index = forloop.index0 %}
+
+            {% for block in section.blocks %}
+              {% assign card_number = cycle_index | times: block_count | plus: forloop.index %}
+              {% assign card_even = card_number | modulo: 2 %}
+
+              <div
+                class="bevy-learn__card{% if card_even == 0 %} bevy-learn__card--rotate-180{% else %} bevy-learn__card--rotate-0{% endif %}"
+                {% if is_first_set and cycle_index == 0 %}
+                  {{ block.shopify_attributes }}
+                {% endif %}
+              >
+                <div class="bevy-learn__media">
+                  {% if block.settings.embed_code != blank %}
+                    <div class="bevy-learn__embed">
+                      {{ block.settings.embed_code }}
+                    </div>
+
+                  {% elsif block.settings.video_file != blank %}
+                    {{
+                      block.settings.video_file
+                      | video_tag:
+                        image_size: '700x',
+                        autoplay: false,
+                        loop: true,
+                        muted: true,
+                        controls: true,
+                        class: 'bevy-learn__video'
+                    }}
+
+                  {% elsif block.settings.video_url != blank %}
+                    <video
+                      class="bevy-learn__video"
+                      controls
+                      playsinline
+                      preload="metadata"
+                      {% if block.settings.poster != blank %}
+                        poster="{{ block.settings.poster | image_url: width: 700 }}"
+                      {% endif %}
+                    >
+                      <source src="{{ block.settings.video_url }}" type="video/mp4">
+                    </video>
+
+                  {% elsif block.settings.poster != blank %}
+                    <img
+                      src="{{ block.settings.poster | image_url: width: 700 }}"
+                      alt="{{ block.settings.poster.alt | default: block.settings.title | escape }}"
+                      loading="lazy"
+                      class="bevy-learn__image"
+                    >
+
+                  {% else %}
+                    <div class="bevy-learn__placeholder">
+                      {{ 'image' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #{{ section_id }} {
+    background: var(--bevy-bg);
+    padding: 60px 0;
+    overflow: hidden;
+  }
+
+  #{{ section_id }} .bevy-learn__header {
+    margin: 0 auto 78px;
+    padding: 0 40px;
+    text-align: center;
+  }
+
+  #{{ section_id }} .bevy-learn__heading {
+    margin: 0 0 18px;
+    color: var(--bevy-heading-color);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 43px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  #{{ section_id }} .bevy-learn__text {
+    color: var(--bevy-text-color);
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    line-height: 1.28;
+    font-weight: 400;
+    margin: 0 auto;
+  }
+
+  #{{ section_id }} .bevy-learn__text p {
+    margin: 0;
+  }
+
+  #{{ section_id }} .bevy-learn__marquee {
+    inline-size: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+  }
+
+  #{{ section_id }} .bevy-learn__track {
+    display: flex;
+    width: max-content;
+    animation: bevyLearnMarquee-{{ section.id }} var(--bevy-marquee-duration) linear infinite;
+    will-change: transform;
+  }
+
+  #{{ section_id }} .bevy-learn__track:hover {
+    animation-play-state: paused;
+  }
+
+  #{{ section_id }}.bevy-learn--stop .bevy-learn__marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #{{ section_id }}.bevy-learn--stop .bevy-learn__marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  #{{ section_id }}.bevy-learn--stop .bevy-learn__track {
+    animation: none;
+    transform: none;
+  }
+
+  #{{ section_id }}.bevy-learn--stop .bevy-learn__card {
+    scroll-snap-align: start;
+  }
+
+  #{{ section_id }} .bevy-learn__set {
+    display: flex;
+    gap: 14px;
+    flex: 0 0 auto;
+    padding-inline-end: var(--bevy-gap);
+  }
+
+  #{{ section_id }} .bevy-learn__card {
+    position: relative;
+    flex: 0 0 calc((100vw - (var(--bevy-gap) * 4)) / 5);
+    box-sizing: border-box;
+    border-radius: var(--bevy-card-radius);
+    overflow: hidden;
+    min-height: 340px;
+  }
+
+  #{{ section_id }} .bevy-learn__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      0deg,
+      var(--bevy-accent-color) 0%,
+      rgba(35, 123, 132, 0.8) 18%,
+      rgba(35, 123, 132, 0.35) 48%,
+      rgba(35, 123, 132, 0) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  #{{ section_id }} .bevy-learn__card--rotate-0::before {
+    transform: rotate(0deg);
+  }
+
+  #{{ section_id }} .bevy-learn__card--rotate-180::before {
+    transform: rotate(180deg);
+  }
+
+  #{{ section_id }} .bevy-learn__media {
+    position: relative;
+    block-size: 100%;
+    min-height: 340px;
+    border-radius: calc(var(--bevy-card-radius) - 3px);
+    overflow: hidden;
+    margin: 12px;
+  }
+
+  #{{ section_id }} .bevy-learn__image,
+  #{{ section_id }} .bevy-learn__video,
+  #{{ section_id }} .bevy-learn__embed,
+  #{{ section_id }} .bevy-learn__embed iframe,
+  #{{ section_id }} .bevy-learn__embed video {
+    inline-size: 100%;
+    min-height: 340px;
+    display: block;
+    object-fit: cover;
+    border: 0;
+    border-radius: calc(var(--bevy-card-radius) - 4px);
+  }
+
+  #{{ section_id }} .bevy-learn__embed {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #{{ section_id }} .bevy-learn__placeholder {
+    inline-size: 100%;
+    block-size: 100%;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eeeeee;
+    border-radius: calc(var(--bevy-card-radius) - 4px);
+  }
+
+  #{{ section_id }} .bevy-learn__placeholder svg {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes bevyLearnMarquee-{{ section.id }} {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    #{{ section_id }} .bevy-learn__header {
+      margin-bottom: 54px;
+    }
+
+    #{{ section_id }} .bevy-learn__card {
+      flex-basis: calc((100vw - (var(--bevy-gap) * 3)) / 4);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #{{ section_id }} {
+      padding: 60px 0;
+    }
+
+    #{{ section_id }} .bevy-learn__header {
+      padding: 0 15px;
+      margin-bottom: 36px;
+    }
+
+    #{{ section_id }} .bevy-learn__heading {
+      font-size: 32px;
+      letter-spacing: 1.4px;
+    }
+
+    #{{ section_id }} .bevy-learn__text {
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    #{{ section_id }} .bevy-learn__card {
+      flex-basis: 68vw;
+      min-height: 360px;
+    }
+
+    #{{ section_id }} .bevy-learn__media,
+    #{{ section_id }} .bevy-learn__image,
+    #{{ section_id }} .bevy-learn__video,
+    #{{ section_id }} .bevy-learn__embed,
+    #{{ section_id }} .bevy-learn__embed iframe,
+    #{{ section_id }} .bevy-learn__embed video,
+    #{{ section_id }} .bevy-learn__placeholder {
+      min-height: 360px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #{{ section_id }} .bevy-learn__heading {
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    #{{ section_id }} .bevy-learn__card {
+      flex-basis: 82vw;
+      min-height: 330px;
+    }
+
+    #{{ section_id }} .bevy-learn__media,
+    #{{ section_id }} .bevy-learn__image,
+    #{{ section_id }} .bevy-learn__video,
+    #{{ section_id }} .bevy-learn__embed,
+    #{{ section_id }} .bevy-learn__embed iframe,
+    #{{ section_id }} .bevy-learn__embed video,
+    #{{ section_id }} .bevy-learn__placeholder {
+      min-height: 330px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bevy Learn Marquee",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "LEARN DIRECTLY FROM BEVY"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Get real, no-fluff guidance from Bev—breaking down the science behind hair thinning and what actually works.</p>"
+    },
+    {
+      "type": "select",
+      "id": "scroll_state",
+      "label": "Auto scroll",
+      "default": "start",
+      "options": [
+        {
+          "value": "start",
+          "label": "Start"
+        },
+        {
+          "value": "stop",
+          "label": "Stop"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Scroll speed",
+      "info": "Lower number = faster. Higher number = slower.",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card rounded corners",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 7
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#28221e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Accent border color",
+      "default": "#237B84"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media_card",
+      "name": "Video / Image card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Admin title",
+          "default": "Video card"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Image / video poster"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Shopify hosted video"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "MP4 video URL"
+        },
+        {
+          "type": "html",
+          "id": "embed_code",
+          "label": "Embed code",
+          "info": "Use this for TikTok, Instagram, YouTube Shorts, or custom iframe embeds."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bevy Learn Marquee",
+      "blocks": [
+        {
+          "type": "media_card"
+        },
+        {
+          "type": "media_card"
+        },
+        {
+          "type": "media_card"
+        },
+        {
+          "type": "media_card"
+        },
+        {
+          "type": "media_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

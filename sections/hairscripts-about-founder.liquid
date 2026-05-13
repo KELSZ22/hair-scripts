@@ -1,0 +1,294 @@
+<section class="about-founder" id="about-founder-{{ section.id }}">
+  <div class="about-founder__inner">
+
+    <div class="about-founder__left">
+      <div class="about-founder__credentials">
+        <h2 class="about-founder__name">{{ section.settings.founder_name }}</h2>
+        <div class="about-founder__titles">
+          {%- if section.settings.title_1 != blank -%}
+            <p>{{ section.settings.title_1 }}</p>
+          {%- endif -%}
+          {%- if section.settings.title_2 != blank -%}
+            <p>{{ section.settings.title_2 }}</p>
+          {%- endif -%}
+          {%- if section.settings.title_3 != blank -%}
+            <p>{{ section.settings.title_3 }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="about-founder__bio">
+        {{ section.settings.bio_text }}
+      </div>
+    </div>
+
+    <div class="about-founder__right">
+      <div class="about-founder__photo-card">
+        {%- if section.settings.founder_image != blank -%}
+          {{
+            section.settings.founder_image
+            | image_url: width: 800
+            | image_tag:
+              class: 'about-founder__photo',
+              alt: section.settings.founder_image.alt | default: section.settings.founder_name,
+              loading: 'lazy'
+          }}
+        {%- else -%}
+          <div class="about-founder__photo-placeholder"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="about-founder__badges">
+        {%- if section.settings.badge_1 != blank -%}
+          <div class="about-founder__badge">
+            <span class="about-founder__badge-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="about-founder__badge-text">{{ section.settings.badge_1 }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.badge_2 != blank -%}
+          <div class="about-founder__badge">
+            <span class="about-founder__badge-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="about-founder__badge-text">{{ section.settings.badge_2 }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.badge_3 != blank -%}
+          <div class="about-founder__badge">
+            <span class="about-founder__badge-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="about-founder__badge-text">{{ section.settings.badge_3 }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  #about-founder-{{ section.id }} {
+    background-color: #FFF9F4;
+    width: 100%;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__left {
+    flex: 0 0 auto;
+    width: 54%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #211B18;
+    margin: 0;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__titles {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__titles p {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #6B6B6B;
+    margin: 0;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__bio {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #211B18;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__bio p {
+    margin: 0 0 16px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__right {
+    flex: 0 0 auto;
+    width: 41%;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__photo-card {
+    background-color: #3D7E7A;
+    border-radius: 19.634px;
+    padding: 23.561px;
+    overflow: hidden;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__photo {
+    width: 100%;
+    height: auto;
+    border-radius: 9.817px;
+    display: block;
+    object-fit: cover;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__photo-placeholder {
+    width: 100%;
+    aspect-ratio: 0.81;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 9.817px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__badges {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__badge-icon {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__badge-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    color: #211B18;
+  }
+
+  @media screen and (max-width: 990px) {
+    #about-founder-{{ section.id }} .about-founder__inner {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__left,
+    #about-founder-{{ section.id }} .about-founder__right {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #about-founder-{{ section.id }} .about-founder__inner {
+      padding: 40px 20px;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__name {
+      font-size: 24px;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__bio,
+    #about-founder-{{ section.id }} .about-founder__titles p {
+      font-size: 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About - Founder Bio",
+  "tag": "section",
+  "class": "about-founder-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder Name",
+      "default": "BEVY"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title Line 1",
+      "default": "Founder, HairScripts™"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title Line 2",
+      "default": "Pharmaceutical Dermatology Expert"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title Line 3",
+      "default": "Certified Hair Loss Practitioner"
+    },
+    {
+      "type": "richtext",
+      "id": "bio_text",
+      "label": "Bio Text",
+      "default": "<p>Bevy knows what it feels like to lose your hair during one of the hardest seasons of your life. In 2019, she was diagnosed with Androgenic Alopecia and lost nearly 60% of her hair — all while navigating significant health and personal challenges that left little room to slow down.</p><p>With over a decade inside pharmaceutical dermatology, she already knew how to read clinical data, evaluate formulations, and identify the gap between what a product claims and what the biology actually requires.</p><p>Bevy formulated HairScripts™ herself — drawing directly on her pharmaceutical dermatology expertise to build a clinically-dosed, multi-pathway formula from the ground up. Every ingredient chosen for its documented mechanism of action. No fillers. No underdosed actives hiding behind a proprietary blend.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Photo"
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Credential Badge 1",
+      "default": "10+ Years Pharmaceutical Experience"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Credential Badge 2",
+      "default": "Certified Hair Loss Practitioner"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Credential Badge 3",
+      "default": "YouTube Educator · Thousands in the Community"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About - Founder Bio"
+    }
+  ]
+}
+{% endschema %}

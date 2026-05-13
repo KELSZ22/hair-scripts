@@ -1,0 +1,436 @@
+<section
+  id="hs-hair-cycle-{{ section.id }}"
+  class="hs-hair-cycle color-{{ section.settings.color_scheme }}"
+>
+  <div class="hs-hair-cycle__inner">
+    <div class="hs-hair-cycle__left">
+      <div class="hs-hair-cycle__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="hs-hair-cycle__eyebrow">
+            {{ section.settings.eyebrow }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="hs-hair-cycle__heading">
+            {{ section.settings.heading | newline_to_br }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="hs-hair-cycle__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.main_image != blank %}
+        <div class="hs-hair-cycle__image-wrap">
+          <img
+            src="{{ section.settings.main_image | image_url: width: 1200 }}"
+            alt="{{ section.settings.main_image_alt | escape }}"
+            class="hs-hair-cycle__image"
+            loading="lazy"
+            width="{{ section.settings.main_image.width }}"
+            height="{{ section.settings.main_image.height }}"
+          >
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="hs-hair-cycle__cards">
+      {% for block in section.blocks %}
+        <div class="hs-hair-cycle__card" {{ block.shopify_attributes }}>
+          {% if block.settings.kicker != blank %}
+            <p class="hs-hair-cycle__card-kicker">
+              {{ block.settings.kicker }}
+            </p>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h3 class="hs-hair-cycle__card-title">
+              {{ block.settings.title }}
+            </h3>
+          {% endif %}
+
+          {% if block.settings.description != blank %}
+            <div class="hs-hair-cycle__card-text">
+              {{ block.settings.description }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-hair-cycle-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    align-items: stretch;
+    gap: 60px;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    min-height: 720px;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__left {
+    position: relative;
+    min-height: 600px;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__eyebrow {
+    margin: 0 0 14px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__heading {
+    margin: 0;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__text {
+    margin-top: 18px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__text p {
+    margin: 0;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__image-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: -160px;
+    transform: translateX(-50%);
+    width: 829px;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__cards {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card {
+    padding: 20px 26px;
+    border: 1px solid {{ section.settings.card_border_color }};
+    border-radius: 4px;
+    background: {{ section.settings.card_background_color }};
+    box-sizing: border-box;
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-kicker {
+    margin: 0 0 6px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: {{ section.settings.muted_text_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-title {
+    margin: 0 0 6px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: {{ section.settings.card_title_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-text {
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-text p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 60px 15px;
+      min-height: auto;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__left {
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__heading {
+      font-size: 26px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__eyebrow {
+      font-size: 14px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__text {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__image-wrap {
+      width: 594px;
+      bottom: -60px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__cards {
+      gap: 12px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card {
+      padding: 18px 16px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-kicker {
+      font-size: 12px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-title {
+      font-size: 16px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__card-text {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__left {
+      min-height: 390px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__heading {
+      font-size: 20px;
+    }
+
+    #hs-hair-cycle-{{ section.id }} .hs-hair-cycle__image-wrap {
+      width: 358px;
+      bottom: -58px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HairScripts Hair Cycle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "HAIR BIOLOGY 101"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "YOUR HAIR LIVES IN A\nFOUR-PHASE CYCLE."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every strand is at a different stage of its growth cycle. Hormones, stress, and nutrition disrupt this cycle — that’s the real reason hair thins.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main image"
+    },
+    {
+      "type": "text",
+      "id": "main_image_alt",
+      "label": "Main image alt text",
+      "default": "Woman holding a hair brush"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F7F3EC"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Top/bottom border color",
+      "default": "#4DA9A3"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Muted text color",
+      "default": "#9A9A9A"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#4DA9A3"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background color",
+      "default": "#F7F3EC"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cycle_card",
+      "name": "Cycle card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Small top text",
+          "default": "85% of all hairs"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Anagen — Active Growth"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HairScripts Hair Cycle",
+      "blocks": [
+        {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "85% of all hairs",
+            "title": "Anagen — Active Growth",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        },
+        {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "3% of all hairs",
+            "title": "Catagen — Transition",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        },
+        {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "12% of all hairs",
+            "title": "Telogen — Resting",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        },
+        {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "Normal: 50–100 strands/day",
+            "title": "Exogen — Shedding",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

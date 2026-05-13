@@ -46,6 +46,7 @@
 {% style %}
   aside.announcement-bar.spacing-style.section.section--page-width {
     background-color: {{ block.settings.bg-color }};
+    z-index: 99;
   }
 {% endstyle %}
 {% stylesheet %}
@@ -141,6 +142,14 @@
   .text-block--align-right,
   .text-block--align-right > * {
     margin-inline-start: auto;
+  }
+
+  @media (max-width: 400px) {
+    p.announcement-bar__text{
+          flex-direction: column;
+          align-items: center;
+    gap: 0;
+    }
   }
 {% endstylesheet %}
 

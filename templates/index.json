@@ -143,32 +143,38 @@
         "proof_MDU78m": {
           "type": "proof",
           "settings": {
-            "text": "10+ years pharmaceutical professional"
+            "text": "10+ Years Pharmaceutical Dermatology Expert"
           }
         },
         "proof_6CNga7": {
           "type": "proof",
           "settings": {
-            "text": "Science-informed formulation"
+            "text": "Certified Hair Loss Practitioner"
           }
         },
         "proof_4kQmak": {
           "type": "proof",
           "settings": {
-            "text": "Clinical data interpreter"
+            "text": "Personally overcame Androgenic Alopecia — diagnosed 2019, lost ~60% of her hair"
+          }
+        },
+        "proof_Q7fMaP": {
+          "type": "proof",
+          "settings": {
+            "text": "Trusted by 44,000+ women in the HairScripts community"
           }
         }
       },
       "block_order": [
         "proof_MDU78m",
         "proof_6CNga7",
-        "proof_4kQmak"
+        "proof_4kQmak",
+        "proof_Q7fMaP"
       ],
-      "name": "Hair science hero",
+      "name": "Hair Home Hero",
       "settings": {
-        "background_image": "shopify://shop_images/Hairscripts_Hair_Density_Support_Hair_Growth_Supplement.webp",
-        "background_image_1024": "shopify://shop_images/Hairscripts_Hair_Density_Support_Hair_Growth_Supplement_1024.webp",
-        "background_image_450": "shopify://shop_images/Hairscripts_Hair_Density_Support_Hair_Growth_Supplement_450.webp",
+        "background_image": "shopify://shop_images/Frame_1000009480_fbfeddd9-ad7d-4f12-a260-d0bf95f61ff4.webp",
+        "background_image_1024": "shopify://shop_images/Frame_1000009463_1.png",
         "creator_image": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
         "heading": "SCIENCE DESIGNED FOR VISIBLY <br> FULLER HEALTHIER HAIR",
         "description": "If nothing has worked, it’s because most products only target one cause of hair loss. HairScripts™ targets all 9 major biological causes of thinning including stress signaling, androgen activity, inflammation, circulation, nutrient depletion, and follicle miniaturization.",
@@ -185,9 +191,9 @@
         "result_aVL3fR": {
           "type": "result",
           "settings": {
-            "top_text": "UP TO",
+            "top_text": "REDUCED",
             "main_text": "34%",
-            "bottom_text": "LESS SHEDDING IN 8 WEEKS"
+            "bottom_text": "SHEDDING IN AS LITTLE AS 8 WEEKS"
           }
         },
         "result_haK9En": {
@@ -201,9 +207,9 @@
         "result_YiVdV8": {
           "type": "result",
           "settings": {
-            "top_text": "MORE THAN JUST A BIOTIN",
+            "top_text": "BIOLOGICAL",
             "main_text": "9×",
-            "bottom_text": "MULTI-PATHWAY FOLLICLE SUPPORT"
+            "bottom_text": "PATHWAYS ADDRESSED"
           }
         },
         "result_W7gRQJ": {
@@ -219,7 +225,7 @@
           "settings": {
             "top_text": "FAST AS",
             "main_text": "8 WEEKS",
-            "bottom_text": "HEALTHIER SCALP IN AS LITTLE"
+            "bottom_text": "VISIBLE SCALP IMPROVEMENT"
           }
         }
       },
@@ -333,7 +339,7 @@
       "name": "Hair signal assessment",
       "settings": {
         "image": "shopify://shop_images/Hair.webp",
-        "heading": "If Your Hair Keeps Falling Out, Read This.",
+        "heading": "If Your Hair Keeps Falling Out, <br>Read This.",
         "description": "<p>Here’s why. Most supplements target one cause of hair loss.<br/>But your hair loss isn’t one thing — it’s nine biological drivers working against you at the same time.</p>",
         "subheading": "You’re not imagining it. And you’re not failing.",
         "description2": "<p>HairScripts™ addresses all nine simultaneously.<br/>So you’re covered whether you’ve identified your root cause or not.<br/>It does the heavy lifting for you.</p>",
@@ -439,7 +445,8 @@
       ],
       "name": "Advanced hair support",
       "settings": {
-        "background_image": "shopify://shop_images/Frame_1000009479_7.png",
+        "background_image": "shopify://shop_images/Frame_1000009480.webp",
+        "background_image_1024": "shopify://shop_images/Frame_1000009401.webp",
         "eyebrow": "9 PATHWAY GRID",
         "heading": "HairScripts™ Advanced Shedding <br>&amp; Thinning Support",
         "bottom_heading": "CLINICIAN-INFORMED + ROOT-CAUSE FORMULA + SCIENCE-BACKED BLEND",
@@ -470,9 +477,9 @@
         "stat_FA7igM": {
           "type": "stat",
           "settings": {
-            "icon": "shopify://shop_images/Protect.svg",
-            "title": "90-Day Guarantee",
-            "text": "Full satisfaction or your money back"
+            "icon": "shopify://shop_images/Frame.svg",
+            "title": "Personally Overcame Androgenic Alopecia",
+            "text": "Diagnosed in 2019 — lost ~60% of her hair"
           }
         }
       },
@@ -483,11 +490,11 @@
       ],
       "name": "Founder quote",
       "settings": {
-        "person_image": "shopify://shop_images/Mask_group.png",
+        "person_image": "shopify://shop_images/Frame_1000008716_2.webp",
         "person_name": "Bevy",
         "person_title": "10+ Years Pharmaceutical Professional",
         "heading": "You don’t have to have all the answers yet.Your follicles just need to be supported while you find them.",
-        "description": "<p><em>Bevy lost over 60% of her own hair. She lived the panic. The shedding.<br/>The devastation of watching her identity change in real time.<br/>And she had a decade inside pharmaceutical dermatology to understand<br/>exactly why it was happening — and what the industry was getting wrong.</em></p><p><em>     <br/>She didn’t find a solution. She built one.</em></p>"
+        "description": "<p><em>Bevy lost over 60% of her own hair. She lived the panic. The shedding. The devastation of watching her identity change in real time. And she had a decade inside pharmaceutical dermatology to understand exactly why it was happening — and what the industry was getting wrong.</em></p><p><em>     <br/>She didn’t find a solution. She built one.</em></p>"
       }
     },
     "product_list_fa6P9H": {
@@ -693,8 +700,8 @@
           "settings": {
             "month_label": "MONTH",
             "month_number": "01",
-            "phase_label": "FOUNDATION PHASE",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "phase_label": "Foundation Phase",
+            "image": "shopify://shop_images/Frame_1000008877_1.webp",
             "card_title": "Follicle Nourishment Begins",
             "bullets": "Nutrients are reaching your hair follicles\nYour scalp environment is being optimized for growth\nNo visible changes yet but that’s completely normal\nThis is where most people quit... don’t be one of them"
           }
@@ -704,8 +711,8 @@
           "settings": {
             "month_label": "MONTH",
             "month_number": "02",
-            "phase_label": "TRANSITION PHASE",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "phase_label": "Transition Phase",
+            "image": "shopify://shop_images/Frame_1000008878_2.webp",
             "card_title": "Shedding Slows",
             "bullets": "Notice less hair in the shower\nLess buildup on your brush\nFollicles shift back to growth phase\nYour first real sign it’s working\nDaily shedding feels under control\nYou’re no longer afraid to touch your hair"
           }
@@ -715,10 +722,10 @@
           "settings": {
             "month_label": "MONTH",
             "month_number": "03",
-            "phase_label": "RESULTS PHASE",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "phase_label": "Result Phase",
+            "image": "shopify://shop_images/Frame_1000008877_1_1.webp",
             "card_title": "Visible Density Returns",
-            "bullets": "Hair looks fuller and thicker\nEdges start filling back in\n90 days in — results become visible\nBefore & after differences are noticeable\nResults you can actually see"
+            "bullets": "Hair looks fuller and thicker\nEdges start filling back in\n90 days in — results become visible\nBefore & after differences are noticeable\nResults you can actually see (or your money back)"
           }
         },
         "timeline_item_CU9mgB": {
@@ -726,8 +733,8 @@
           "settings": {
             "month_label": "MONTH",
             "month_number": "06",
-            "phase_label": "LONG-TERM PHASE",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "phase_label": "Long-Term Phase",
+            "image": "shopify://shop_images/Frame_1000008878_1_1.webp",
             "card_title": "Transformation Locked In",
             "bullets": "Hair feels stronger and healthier\nNoticeably longer, fuller strands\nDensity restored beyond pre-thinning\n6 months in — full transformation achieved\nHair you don’t have to worry about anymore"
           }
@@ -752,6 +759,7 @@
         "faq_item_QCbmdf": {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "Is this for all hair types and textures?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -759,6 +767,7 @@
         "faq_item_9N7nmg": {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "How soon will I see results?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -766,6 +775,7 @@
         "faq_item_EgJCKP": {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "Will this make me shed more before it gets better?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -773,6 +783,7 @@
         "faq_item_mx9ryW": {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "Can men use this too?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -780,6 +791,7 @@
         "faq_item_BTdhYT": {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "What if I’ve had thinning for years?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -795,9 +807,14 @@
       "name": "FAQ split image",
       "settings": {
         "left_image": "shopify://shop_images/bevy_2b71f94c-88cc-4c0d-8810-a05f513ca590.webp",
+        "desktop_order": "image_first",
+        "mobile_order": "faq_first",
         "heading": "FAQs",
         "subheading": "Answers to your most important questions about hair thinning, ingredients, and results.",
-        "open_first_item": true,
+        "category_1": "",
+        "category_2": "",
+        "category_3": "",
+        "category_4": "",
         "footer_text": "Still have questions?",
         "button_label": "View More FAQs",
         "button_link": ""
@@ -1042,7 +1059,7 @@
       "settings": {
         "show_stars": true,
         "heading": "RESULTS WOMEN ARE TALKING ABOUT",
-        "subheading": "Thousands are supporting their hair health with HairScripts.",
+        "subheading": "Women navigating postpartum shedding, hormonal thinning, and stress-related loss  sharing what actually happened. Thousands in the community. Here’s what they’re saying.",
         "button_label": "View All Reviews",
         "button_link": ""
       }

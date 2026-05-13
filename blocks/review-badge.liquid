@@ -1,0 +1,106 @@
+{% liquid
+  assign review_text = block.settings.review_text | default: '5.0 from 20,000+ Reviews'
+  assign star_count = block.settings.star_count | default: 5
+%}
+
+<div class="hs-review-badge" {{ block.shopify_attributes }}>
+  <div class="hs-review-badge__stars" aria-hidden="true">
+    {% for i in (1..star_count) %}
+      <span class="hs-review-badge__star">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M9.60404 1.91176C9.64056 1.83798 9.69697 1.77587 9.76692 1.73245C9.83686 1.68903 9.91755 1.66602 9.99987 1.66602C10.0822 1.66602 10.1629 1.68903 10.2328 1.73245C10.3028 1.77587 10.3592 1.83798 10.3957 1.91176L12.3207 5.81093C12.4475 6.06757 12.6347 6.2896 12.8662 6.45797C13.0977 6.62634 13.3666 6.73602 13.6499 6.77759L17.9549 7.40759C18.0364 7.41941 18.1131 7.45382 18.1761 7.50693C18.2391 7.56003 18.2861 7.62972 18.3116 7.7081C18.337 7.78648 18.3401 7.87043 18.3204 7.95046C18.3006 8.03048 18.2589 8.10339 18.1999 8.16093L15.0865 11.1926C14.8812 11.3927 14.7276 11.6397 14.6389 11.9123C14.5502 12.1849 14.5291 12.475 14.5774 12.7576L15.3124 17.0409C15.3268 17.1225 15.318 17.2064 15.287 17.2832C15.2559 17.3599 15.204 17.4264 15.137 17.4751C15.07 17.5237 14.9907 17.5526 14.9081 17.5583C14.8255 17.5641 14.743 17.5465 14.6699 17.5076L10.8215 15.4843C10.568 15.3511 10.2859 15.2816 9.99946 15.2816C9.71306 15.2816 9.43094 15.3511 9.17737 15.4843L5.32987 17.5076C5.25681 17.5463 5.17437 17.5637 5.09191 17.5578C5.00946 17.5519 4.9303 17.5231 4.86345 17.4744C4.7966 17.4258 4.74473 17.3594 4.71375 17.2828C4.68277 17.2061 4.67392 17.1223 4.68821 17.0409L5.42237 12.7584C5.47087 12.4757 5.44986 12.1854 5.36115 11.9126C5.27245 11.6398 5.11871 11.3927 4.91321 11.1926L1.79987 8.16176C1.74037 8.10429 1.6982 8.03126 1.67817 7.95099C1.65815 7.87072 1.66107 7.78644 1.6866 7.70775C1.71214 7.62906 1.75926 7.55913 1.8226 7.50591C1.88594 7.4527 1.96296 7.41834 2.04487 7.40676L6.34904 6.77759C6.63259 6.73634 6.90186 6.62681 7.13369 6.45842C7.36552 6.29002 7.55296 6.06782 7.67987 5.81093L9.60404 1.91176Z" fill="#EDB826"/>
+        </svg>
+      </span>
+    {% endfor %}
+  </div>
+
+  <div class="hs-review-badge__text">
+    {{ review_text }}
+  </div>
+</div>
+
+{% stylesheet %}
+  .hs-review-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hs-review-badge__stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 0;
+  }
+
+  .hs-review-badge__star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  .hs-review-badge__star svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .hs-review-badge__text {
+    color: #000;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hs-review-badge {
+      gap: 10px;
+    }
+
+    .hs-review-badge__stars {
+      gap: 3px;
+    }
+
+    .hs-review-badge__star svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hs-review-badge__text {
+      font-size: 14px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Review badge",
+  "settings": [
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "5.0 from 20,000+ Reviews"
+    },
+    {
+      "type": "range",
+      "id": "star_count",
+      "label": "Number of stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review badge"
+    }
+  ]
+}
+{% endschema %}

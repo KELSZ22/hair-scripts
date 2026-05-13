@@ -113,104 +113,7 @@
           endif
         %}
 
-        {% capture cart_discount_accordion_children %}
-          <details
-            class="details"
-            {% if disclosure_expanded %}
-              open
-            {% endif %}
-          >
-            <summary class="cart-discount__summary">
-              <span class="cart-discount__label cart-primary-typography">{{ 'content.discount' | t }}</span>
-
-              <span class="cart-totals__icon">
-                {{- 'icon-plus.svg' | inline_asset_content -}}
-              </span>
-            </summary>
-
-            <div class="details-content">
-              <div id="cart-discount-disclosure">
-                <cart-discount-component
-                  {% if section_id != blank %}
-                    data-section-id="{{ section_id }}"
-                  {% endif %}
-                >
-                  <div class="cart-discount__content">
-                    <form
-                      on:submit="/applyDiscount"
-                      onsubmit="return false;"
-                      class="cart-discount__form"
-                    >
-                      <label
-                        for="cart-discount"
-                        class="visually-hidden"
-                      >
-                        {{- 'accessibility.discount' | t -}}
-                      </label>
-                      <input
-                        id="cart-discount"
-                        class="cart-discount__input"
-                        type="text"
-                        name="discount"
-                        size="8"
-                        placeholder="{{ 'content.discount_code' | t }}"
-                        required
-                      >
-                      <button
-                        type="submit"
-                        class="button cart-discount__button"
-                      >
-                        {{ 'actions.apply' | t }}
-                      </button>
-                    </form>
-                  </div>
-                  <div
-                    class="cart-discount__error hidden"
-                    role="alert"
-                    ref="cartDiscountError"
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-error.svg' | inline_asset_content -}}
-                    </span>
-                    <small
-                      class="cart-discount__error-text cart-primary-typography hidden"
-                      ref="cartDiscountErrorDiscountCode"
-                    >
-                      {{ 'content.discount_code_error' | t: code: 'test' }}
-                    </small>
-                    <small
-                      class="cart-discount__error-text cart-primary-typography hidden"
-                      ref="cartDiscountErrorShipping"
-                    >
-                      {{ 'content.shipping_discount_error' | t }}
-                    </small>
-                  </div>
-                  <ul class="cart-discount__codes">
-                    {% for discount_code in discount_codes %}
-                      <li
-                        class="cart-discount__pill"
-                        data-discount-code="{{ discount_code }}"
-                        aria-label="{{ 'accessibility.discount_applied' | t: code: discount_code }}"
-                      >
-                        <p class="cart-discount__pill-code">
-                          {{ discount_code }}
-                        </p>
-                        <button
-                          type="button"
-                          on:click="/removeDiscount"
-                          class="cart-discount__pill-remove svg-wrapper svg-wrapper--smaller button-unstyled"
-                          aria-label="{{ 'actions.remove_discount' | t: code: discount_code }}"
-                        >
-                          {{- 'icon-filters-close.svg' | inline_asset_content -}}
-                        </button>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </cart-discount-component>
-              </div>
-            </div>
-          </details>
-        {% endcapture %}
+        
         {% render 'accordion-custom-component',
           children: cart_discount_accordion_children,
           class: 'cart-discount'
@@ -227,63 +130,10 @@
     endif
   -%}
 
-  <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
-    <span
-      class="cart-totals__item cart-totals__total"
-      role="status"
-    >
-      <span class="cart-totals__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
-      <text-component
-        ref="cartTotal"
-        value="{{ total_price | strip_html }}"
-        class="cart-totals__total-value cart-secondary-typography"
-        {% comment %} Used by payment_terms web component {% endcomment %}
-        data-testid="cart-total-value"
-        data-cart-subtotal
-      >
-        {{ total_price }}
-      </text-component>
-    </span>
-    {% if settings.show_installments %}
-      <span class="cart-totals__item cart-totals__installments">
-        {% form 'cart', cart %}
-          {{ form | payment_terms }}
-        {% endform %}
-      </span>
-    {% endif %}
-    <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
-      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
-    </div>
-  </div>
+ 
 </div>
 
-<div class="cart__ctas">
-  <button
-    type="submit"
-    id="checkout"
-    class="cart__checkout-button button"
-    name="checkout"
-    {% if cart == empty %}
-      disabled
-    {% endif %}
-    form="cart-form"
-  >
-    <span class="button-text">
-      {{ 'content.checkout' | t }}
-    </span>
-  </button>
 
-  {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
-    <div
-      class="
-        additional-checkout-buttons
-        {% if accelerated_checkout_buttons_layout == 'vertical' %}additional-checkout-buttons--vertical{% endif %}
-      "
-    >
-      {{ content_for_additional_checkout_buttons }}
-    </div>
-  {% endif %}
-</div>
 
 {% stylesheet %}
   .cart-actions {

@@ -138,7 +138,7 @@
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 300;
     line-height: normal;
     margin: 0;
   }
@@ -166,6 +166,11 @@
   }
 
   #section-{{ section.id }} .timeline-support-month-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     text-align: center;
     margin-bottom: 14px;
   }
@@ -185,8 +190,7 @@
   #section-{{ section.id }} .timeline-support-month-number {
     width: 50px;
     height: 50px;
-    margin: 0 auto;
-    border: 1px solid #D1C3B3;
+    margin: 0;
     border-radius: 50%;
     background: #FFFFFF;
     color: #5A534D;
@@ -211,7 +215,6 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 1.2;
-    text-transform: uppercase;
     margin-bottom: 10px;
     background: transparent;
     z-index: 1;
@@ -283,7 +286,7 @@
 
   #section-{{ section.id }} .timeline-support-list-item {
     position: relative;
-    padding-left: 14px;
+    padding-left: 22px;
     margin-bottom: 6px;
     color: #3F3934;
     font-family: "DM Sans";
@@ -297,14 +300,20 @@
   }
 
   #section-{{ section.id }} .timeline-support-list-item::before {
-    content: "✓";
+    content: "";
     position: absolute;
     left: 0;
-    top: 0;
-    color: #8C2E63;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.35;
+    top: 3px;
+    width: 15px;
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='10' viewBox='0 0 15 10' fill='none'%3E%3Cpath d='M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z' fill='%2363144F'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  #section-{{ section.id }} span.dmsans {
+    font-family: "DM Sans";
   }
 
   @media screen and (max-width: 1024px) {
@@ -335,10 +344,6 @@
       box-sizing: border-box;
     }
 
-    #section-{{ section.id }} .timeline-support-wrapper {
-      padding: 40px 15px;
-    }
-
     #section-{{ section.id }} .timeline-support-heading {
       font-size: 32px;
       width: 80%;
@@ -349,22 +354,6 @@
       font-size: 14px;
     }
 
-    #section-{{ section.id }} .timeline-support-month-number {
-      margin: unset;
-    }
-
-    #section-{{ section.id }} .timeline-support-month-wrap {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-    }
-
-    #section-{{ section.id }} .timeline-support-phase-pill {
-      font-size: 18px;
-    }
-
     #section-{{ section.id }} .timeline-support-card-title {
       font-size: 14px;
       margin-bottom: 6px;
@@ -373,7 +362,13 @@
     #section-{{ section.id }} .timeline-support-list-item {
       font-size: 12px;
       margin-bottom: 4px;
-      padding-left: 12px;
+      padding-left: 20px;
+    }
+
+    #section-{{ section.id }} .timeline-support-list-item::before {
+      top: 2px;
+      width: 15px;
+      height: 10px;
     }
   }
 
@@ -385,16 +380,36 @@
   }
 
   @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .timeline-support-wrapper {
+      padding: 40px 0;
+    }
+
+    #section-{{ section.id }} .timeline-support-header {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
     #section-{{ section.id }} .timeline-support-heading {
       font-size: 26px;
     }
-  }
 
-  @media screen and (max-width: 767px) {
+    #section-{{ section.id }} .timeline-support-track-wrap {
+      width: 100%;
+      overflow: hidden;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #section-{{ section.id }} .timeline-support-grid {
+      width: 100%;
+      gap: 0;
+    }
+
     #section-{{ section.id }} .timeline-support-item {
       flex: 0 0 58%;
       max-width: 58%;
       padding: 0 8px;
+      box-sizing: border-box;
     }
 
     #section-{{ section.id }} .timeline-support-image-wrap {
@@ -413,10 +428,16 @@
   }
 
   @media screen and (max-width: 500px) {
+    #section-{{ section.id }} .timeline-support-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
     #section-{{ section.id }} .timeline-support-item {
       flex: 0 0 84%;
       max-width: 84%;
-      padding: 0 10px 0 0;
+      padding: 0 8px;
+      box-sizing: border-box;
     }
 
     #section-{{ section.id }} .timeline-support-image-wrap {
@@ -460,7 +481,7 @@
 
     function getSlidesPerView() {
       if (window.innerWidth <= 500) return 1;
-      if (window.innerWidth <= 767) return 2;
+      if (window.innerWidth <= 768) return 2;
       if (window.innerWidth <= 1024) return 3;
       return 4;
     }
@@ -616,7 +637,7 @@
   "name": "Hairscripts timeline",
   "settings": [
     {
-      "type": "text",
+      "type": "html",
       "id": "heading",
       "label": "Heading",
       "default": "A TIMELINE OF HAIRSCRIPT SUPPORT THAT WORKS"

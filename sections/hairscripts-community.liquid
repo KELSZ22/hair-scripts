@@ -1,0 +1,519 @@
+<section
+  id="hs-community-{{ section.id }}"
+  class="hs-community color-{{ section.settings.color_scheme }}"
+>
+  <div class="hs-community__inner">
+    <div class="hs-community__layout">
+      <div class="hs-community__media-col">
+        <div class="hs-community__media-wrap{% if section.settings.mobile_main_image != blank %} hs-community__media-wrap--has-mobile{% endif %}">
+          {% if section.settings.main_image != blank %}
+            <img
+              src="{{ section.settings.main_image | image_url: width: 1800 }}"
+              alt="{{ section.settings.main_image_alt | escape }}"
+              class="hs-community__media-image hs-community__media-image--desktop"
+              loading="lazy"
+              width="{{ section.settings.main_image.width }}"
+              height="{{ section.settings.main_image.height }}"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'hs-community__media-image hs-community__media-image--desktop hs-community__media-image--placeholder' }}
+          {% endif %}
+
+          {% if section.settings.mobile_main_image != blank %}
+            <img
+              src="{{ section.settings.mobile_main_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.mobile_main_image_alt | default: section.settings.main_image_alt | escape }}"
+              class="hs-community__media-image hs-community__media-image--mobile"
+              loading="lazy"
+              width="{{ section.settings.mobile_main_image.width }}"
+              height="{{ section.settings.mobile_main_image.height }}"
+            >
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="hs-community__content">
+        <div class="hs-community__topline">
+          <div class="hs-community__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <span class="hs-community__star">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17" fill="none">
+                  <path d="M8.75029 13.361L14.1582 16.625L12.7229 10.4738L17.5006 6.33492L11.2092 5.80133L8.75029 0L6.29137 5.80133L0 6.33492L4.77771 10.4738L3.34242 16.625L8.75029 13.361Z" fill="{{ section.settings.star_color }}"/>
+                </svg>
+              </span>
+            {% endfor %}
+          </div>
+
+          {% if section.settings.topline_text != blank %}
+            <div class="hs-community__topline-text">
+              {{ section.settings.topline_text }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.heading != blank %}
+          <h2 class="hs-community__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="hs-community__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        <div class="hs-community__features">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' %}
+              <div class="hs-community__feature" {{ block.shopify_attributes }}>
+                <span class="hs-community__feature-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                    <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="{{ section.settings.check_color }}"/>
+                  </svg>
+                </span>
+
+                {% if block.settings.text != blank %}
+                  <span class="hs-community__feature-text">
+                    {{ block.settings.text }}
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if section.settings.button_label != blank %}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="hs-community__button"
+          >
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-community-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    overflow: hidden;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__inner {
+    padding: 60px 40px;
+    box-sizing: border-box;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
+    align-items: center;
+    gap: 64px;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__media-col {
+    min-width: 0;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__media-wrap {
+    width: 100%;
+    line-height: 0;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__media-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__media-image--mobile {
+    display: none;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__media-image--placeholder {
+    display: block;
+    width: 100%;
+    min-height: 480px;
+    background: #d9d9d9;
+    border-radius: 20px;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__content {
+    min-width: 0;
+    text-align: center;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__topline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__stars {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__star {
+    display: inline-flex;
+    line-height: normal;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__topline-text {
+    color: {{ section.settings.text_color }};
+    text-align: center;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__heading {
+    margin: 18px 0 0;
+    color: {{ section.settings.heading_color }};
+    text-align: center;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__text {
+    margin-top: 14px;
+    color: {{ section.settings.text_color }};
+    text-align: center;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__text p {
+    margin: 0;
+    line-height: normal;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__features {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__feature-icon {
+    display: inline-flex;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__feature-text {
+    color: {{ section.settings.text_color }};
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    min-width: 200px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, {{ section.settings.button_gradient_left }} 0%, {{ section.settings.button_gradient_right }} 100%);
+    color: {{ section.settings.button_text_color }};
+    text-align: center;
+    text-decoration: none;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    transition: opacity 0.2s ease;
+  }
+
+  #hs-community-{{ section.id }} .hs-community__button:hover {
+    opacity: 0.92;
+  }
+
+  @media screen and (max-width: 1366px) {
+    #hs-community-{{ section.id }} .hs-community__layout {
+      gap: 44px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    #hs-community-{{ section.id }} .hs-community__layout {
+      gap: 34px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__text {
+      font-size: 16px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__features {
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-community-{{ section.id }} .hs-community__inner {
+      padding: 60px 15px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__layout {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__content {
+      order: 1;
+      width: 100%;
+      text-align: center;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__media-col {
+      order: 2;
+      width: 100%;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__media-wrap {
+      width: 100%;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__media-wrap--has-mobile .hs-community__media-image--desktop {
+      display: none;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__media-wrap--has-mobile .hs-community__media-image--mobile {
+      display: block;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__media-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__topline {
+      gap: 14px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__heading {
+      font-size: 26px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__text {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__features {
+      margin-top: 24px;
+      gap: 14px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__button {
+      margin-top: 28px;
+      min-width: 190px;
+      padding: 14px 24px;
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #hs-community-{{ section.id }} .hs-community__heading {
+      font-size: 20px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__topline {
+      gap: 10px;
+    }
+
+    #hs-community-{{ section.id }} .hs-community__topline-text,
+    #hs-community-{{ section.id }} .hs-community__feature-text {
+      font-size: 14px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HairScripts Community",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Left full image"
+    },
+    {
+      "type": "text",
+      "id": "main_image_alt",
+      "label": "Left image alt text",
+      "default": "HairScripts community comments"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_main_image",
+      "label": "Left full image mobile"
+    },
+    {
+      "type": "text",
+      "id": "mobile_main_image_alt",
+      "label": "Left mobile image alt text",
+      "default": "HairScripts community comments mobile"
+    },
+    {
+      "type": "text",
+      "id": "topline_text",
+      "label": "Topline text",
+      "default": "40K+ AND COUNTING"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "JOIN HAIRSCRIPTS COMMUNITY"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>See what others are experiencing, ask questions, and learn directly from Bev. This is where your hair journey becomes clearer and more supported.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Join Community"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F3F3F3"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#63144F"
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Check color",
+      "default": "#63144F"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#2F2926"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#2F2926"
+    },
+    {
+      "type": "color",
+      "id": "button_gradient_left",
+      "label": "Button gradient left",
+      "default": "#875F89"
+    },
+    {
+      "type": "color",
+      "id": "button_gradient_right",
+      "label": "Button gradient right",
+      "default": "#4B143F"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "10+ Years Pharmaceutical Sales"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HairScripts Community",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "10+ Years Pharmaceutical Sales"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Science-Informed Formulation"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Clinical Data Interpreter"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

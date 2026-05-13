@@ -1,101 +1,10 @@
-<div class="faq-split-section" id="section-{{ section.id }}">
-  <div class="faq-split-outer">
-    <div class="faq-split-wrapper">
-      <div class="faq-split-grid">
-
-        <div class="faq-split-media-column">
-          <div class="faq-split-media-wrap">
-            {% if section.settings.left_image != blank %}
-              {{
-                section.settings.left_image
-                | image_url: width: 1400
-                | image_tag:
-                  class: 'faq-split-image',
-                  loading: 'lazy',
-                  widths: '400, 700, 900, 1200, 1400',
-                  sizes: '(min-width: 990px) 40vw, 100vw',
-                  alt: section.settings.heading
-              }}
-            {% else %}
-              {{ 'image' | placeholder_svg_tag: 'faq-split-image faq-split-placeholder' }}
-            {% endif %}
-          </div>
-        </div>
-
-        <div class="faq-split-content-column">
-          <div class="faq-split-content">
-
-            {% if section.settings.heading != blank %}
-              <h2 class="faq-split-heading">{{ section.settings.heading }}</h2>
-            {% endif %}
-
-            {% if section.settings.subheading != blank %}
-              <p class="faq-split-subheading">{{ section.settings.subheading }}</p>
-            {% endif %}
-
-            {% if section.blocks.size > 0 %}
-              <div class="faq-split-accordion">
-                {% for block in section.blocks %}
-                  <details
-                    class="faq-split-item"
-                    {% if section.settings.open_first_item and forloop.first %}open{% endif %}
-                    {{ block.shopify_attributes }}
-                  >
-                    <summary class="faq-split-question">
-                      <span class="faq-split-question-text">{{ block.settings.question }}</span>
-                      <span class="faq-split-icon" aria-hidden="true"></span>
-                    </summary>
-
-                    <div class="faq-split-answer-wrap">
-                      <div class="faq-split-answer">
-                        {{ block.settings.answer }}
-                      </div>
-                    </div>
-                  </details>
-                {% endfor %}
-              </div>
-            {% endif %}
-
-            {% if section.settings.footer_text != blank or section.settings.button_label != blank %}
-              <div class="faq-split-footer">
-                {% if section.settings.footer_text != blank %}
-                  <p class="faq-split-footer-text">{{ section.settings.footer_text }}</p>
-                {% endif %}
-
-                {% if section.settings.button_label != blank %}
-                  <a
-                    {% if section.settings.button_link != blank %}
-                      href="{{ section.settings.button_link }}"
-                    {% else %}
-                      role="link"
-                      aria-disabled="true"
-                    {% endif %}
-                    class="faq-split-button"
-                  >
-                    {{ section.settings.button_label }}
-                  </a>
-                {% endif %}
-              </div>
-            {% endif %}
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <style>
   #section-{{ section.id }} {
-    background: #DBEEEC;
     width: 100%;
+    background: #FAF7F2;
   }
 
-  #section-{{ section.id }} .faq-split-outer {
-    width: 100%;
-  }
-
+  #section-{{ section.id }} .faq-split-outer,
   #section-{{ section.id }} .faq-split-wrapper {
     width: 100%;
   }
@@ -106,8 +15,17 @@
     width: 100%;
   }
 
+  #section-{{ section.id }}.faq-desktop-image_first .faq-split-grid {
+    flex-direction: row;
+  }
+
+  #section-{{ section.id }}.faq-desktop-faq_first .faq-split-grid {
+    flex-direction: row-reverse;
+  }
+
   #section-{{ section.id }} .faq-split-media-column {
     width: 45%;
+    background: #DBEEEC;
     max-width: 45%;
     flex: 0 0 45%;
     min-width: 0;
@@ -120,7 +38,7 @@
     display: flex;
     align-items: center;
     min-width: 0;
-    background: #fff;
+
   }
 
   #section-{{ section.id }} .faq-split-media-wrap {
@@ -155,7 +73,7 @@
   }
 
   #section-{{ section.id }} .faq-split-subheading {
-    margin: 0 0 26px;
+    margin: 0 0 18px;
     color: #2B221E;
     font-family: "DM Sans";
     font-size: 18px;
@@ -163,6 +81,35 @@
     font-weight: 400;
     line-height: 1.45;
     max-width: 420px;
+  }
+
+  #section-{{ section.id }} .faq-split-categories {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 36px;
+  }
+
+  #section-{{ section.id }} .faq-split-category-button {
+    appearance: none;
+    border: 1px solid rgba(43, 34, 30, 0.18);
+    background: #fff;
+    color: #2B221E;
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-family: "DM Sans";
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #section-{{ section.id }} .faq-split-category-button.is-active {
+    background: #3D7E7A;
+    border-color: #3D7E7A;
+    color: #fff;
   }
 
   #section-{{ section.id }} .faq-split-accordion {
@@ -178,6 +125,10 @@
 
   #section-{{ section.id }} .faq-split-item:first-child {
     border-top: 1px solid rgba(43, 34, 30, 0.14);
+  }
+
+  #section-{{ section.id }} .faq-split-item.is-hidden {
+    display: none;
   }
 
   #section-{{ section.id }} .faq-split-question {
@@ -291,23 +242,18 @@
     min-height: 36px;
     padding: 15px 25px;
     border-radius: 999px;
-    background: #C4A882;
+    background: linear-gradient(90deg, #725270 0%, #725270 42.83%, #371834 100%),
+      linear-gradient(90deg, #8D6B2C 0%, #C9AB64 24.52%, #D4C875 50%, #C9AB64 75%, #8D6B2C 100%);
     color: #FFFFFF;
     text-decoration: none;
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
   }
 
-  @media screen and (max-width: 989px) {
-    #section-{{ section.id }} .faq-split-content-column {
-      background: #DBEEEC;
-  }
-    #section-{{ section.id }} .faq-split-media-column {
-      padding: 20px 15px 40px;
-    }
+  @media screen and (max-width: 749px) {
 
     #section-{{ section.id }} img.faq-split-image {
       border-radius: 10px;
@@ -317,11 +263,16 @@
       overflow: hidden;
     }
 
-    #section-{{ section.id }} .faq-split-grid {
-      display: flex;
-      flex-wrap: wrap;
-      min-height: auto;
+    #section-{{ section.id }}.faq-mobile-image_first .faq-split-grid {
+      flex-direction: column;
+    }
+
+    #section-{{ section.id }}.faq-mobile-faq_first .faq-split-grid {
       flex-direction: column-reverse;
+              gap: 20px;
+    }
+    #section-{{ section.id }} .faq-split-media-column {
+    border-radius: 11px;
     }
 
     #section-{{ section.id }} .faq-split-media-column,
@@ -347,8 +298,13 @@
 
     #section-{{ section.id }} .faq-split-subheading {
       font-size: 14px;
-      margin: 0 auto 30px;
+      margin: 0 auto 22px;
       text-align: center;
+    }
+
+    #section-{{ section.id }} .faq-split-categories {
+      justify-content: center;
+      margin-bottom: 28px;
     }
 
     #section-{{ section.id }} .faq-split-footer {
@@ -357,18 +313,11 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
-    #section-{{ section.id }} .faq-split-content {
-      padding: 40px 15px;
-    }
-
-    #section-{{ section.id }} .faq-split-heading {
-      font-size: 26px;
-    }
-  }
-
   @media screen and (max-width: 749px) {
     #section-{{ section.id }} .faq-split-content {
+      padding: 0px;
+    }
+    #section-{{ section.id }} .faq-split-grid {
       padding: 40px 15px;
     }
 
@@ -381,10 +330,14 @@
       margin-bottom: 20px;
     }
 
+    #section-{{ section.id }} .faq-split-category-button {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
     #section-{{ section.id }} .faq-split-question {
       padding: 14px 0;
     }
-
   }
 
   @media screen and (max-width: 450px) {
@@ -394,24 +347,140 @@
   }
 </style>
 
+<div
+  class="faq-split-section faq-desktop-{{ section.settings.desktop_order }} faq-mobile-{{ section.settings.mobile_order }}"
+  id="section-{{ section.id }}"
+>
+  <div class="faq-split-outer">
+    <div class="faq-split-wrapper">
+      <div class="faq-split-grid">
+
+        <div class="faq-split-media-column">
+          <div class="faq-split-media-wrap">
+            {% if section.settings.left_image != blank %}
+              {{
+                section.settings.left_image
+                | image_url: width: 1400
+                | image_tag:
+                  class: 'faq-split-image',
+                  loading: 'lazy',
+                  widths: '400, 700, 900, 1200, 1400',
+                  sizes: '(min-width: 990px) 40vw, 100vw',
+                  alt: section.settings.heading
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'faq-split-image faq-split-placeholder' }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="faq-split-content-column">
+          <div class="faq-split-content">
+
+            {% if section.settings.heading != blank %}
+              <h2 class="faq-split-heading">{{ section.settings.heading }}</h2>
+            {% endif %}
+
+            {% if section.settings.subheading != blank %}
+              <p class="faq-split-subheading">{{ section.settings.subheading }}</p>
+            {% endif %}
+
+            <div class="faq-split-categories" role="tablist" aria-label="FAQ categories">
+              {% if section.settings.category_1 != blank %}
+                <button type="button" class="faq-split-category-button is-active" data-faq-category="category_1">
+                  {{ section.settings.category_1 }}
+                </button>
+              {% endif %}
+
+              {% if section.settings.category_2 != blank %}
+                <button type="button" class="faq-split-category-button" data-faq-category="category_2">
+                  {{ section.settings.category_2 }}
+                </button>
+              {% endif %}
+
+              {% if section.settings.category_3 != blank %}
+                <button type="button" class="faq-split-category-button" data-faq-category="category_3">
+                  {{ section.settings.category_3 }}
+                </button>
+              {% endif %}
+
+              {% if section.settings.category_4 != blank %}
+                <button type="button" class="faq-split-category-button" data-faq-category="category_4">
+                  {{ section.settings.category_4 }}
+                </button>
+              {% endif %}
+            </div>
+
+            {% if section.blocks.size > 0 %}
+              <div class="faq-split-accordion">
+                {% for block in section.blocks %}
+                  <details
+                    class="faq-split-item"
+                    data-faq-item-category="{{ block.settings.category }}"
+                    {{ block.shopify_attributes }}
+                  >
+                    <summary class="faq-split-question">
+                      <span class="faq-split-question-text">{{ block.settings.question }}</span>
+                      <span class="faq-split-icon" aria-hidden="true"></span>
+                    </summary>
+
+                    <div class="faq-split-answer-wrap">
+                      <div class="faq-split-answer">
+                        {{ block.settings.answer }}
+                      </div>
+                    </div>
+                  </details>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.footer_text != blank or section.settings.button_label != blank %}
+              <div class="faq-split-footer">
+                {% if section.settings.footer_text != blank %}
+                  <p class="faq-split-footer-text">{{ section.settings.footer_text }}</p>
+                {% endif %}
+
+                {% if section.settings.button_label != blank %}
+                  <a
+                    {% if section.settings.button_link != blank %}
+                      href="{{ section.settings.button_link }}"
+                    {% else %}
+                      role="link"
+                      aria-disabled="true"
+                    {% endif %}
+                    class="faq-split-button"
+                  >
+                    {{ section.settings.button_label }}
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const section = document.querySelector('#section-{{ section.id }}');
     if (!section) return;
 
     const items = section.querySelectorAll('.faq-split-item');
+    const categoryButtons = section.querySelectorAll('.faq-split-category-button');
 
     function setInitialState(item) {
       const wrap = item.querySelector('.faq-split-answer-wrap');
+
+      item.removeAttribute('open');
+
       if (!wrap) return;
 
-      if (item.hasAttribute('open')) {
-        wrap.style.height = 'auto';
-        wrap.style.opacity = '1';
-      } else {
-        wrap.style.height = '0px';
-        wrap.style.opacity = '0';
-      }
+      wrap.style.height = '0px';
+      wrap.style.opacity = '0';
     }
 
     function openItem(item) {
@@ -419,7 +488,6 @@
       if (!wrap) return;
 
       item.setAttribute('open', '');
-
       wrap.style.height = '0px';
       wrap.style.opacity = '0';
 
@@ -458,6 +526,33 @@
       wrap.addEventListener('transitionend', onCloseEnd);
     }
 
+    function closeAllItems() {
+      items.forEach((item) => {
+        const wrap = item.querySelector('.faq-split-answer-wrap');
+
+        item.removeAttribute('open');
+
+        if (wrap) {
+          wrap.style.height = '0px';
+          wrap.style.opacity = '0';
+        }
+      });
+    }
+
+    function showCategory(category) {
+      closeAllItems();
+
+      items.forEach((item) => {
+        const itemCategory = item.getAttribute('data-faq-item-category');
+
+        if (itemCategory === category) {
+          item.classList.remove('is-hidden');
+        } else {
+          item.classList.add('is-hidden');
+        }
+      });
+    }
+
     items.forEach((item) => {
       setInitialState(item);
 
@@ -477,10 +572,32 @@
               closeItem(other);
             }
           });
+
           openItem(item);
         }
       });
     });
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const selectedCategory = button.getAttribute('data-faq-category');
+
+        categoryButtons.forEach((otherButton) => {
+          otherButton.classList.remove('is-active');
+        });
+
+        button.classList.add('is-active');
+        showCategory(selectedCategory);
+      });
+    });
+
+    const activeCategoryButton = section.querySelector('.faq-split-category-button.is-active');
+
+    if (activeCategoryButton) {
+      showCategory(activeCategoryButton.getAttribute('data-faq-category'));
+    } else {
+      closeAllItems();
+    }
 
     window.addEventListener('resize', function () {
       items.forEach((item) => {
@@ -503,13 +620,45 @@
     {
       "type": "image_picker",
       "id": "left_image",
-      "label": "Left image"
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "desktop_order",
+      "label": "Desktop order",
+      "default": "image_first",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "faq_first",
+          "label": "FAQ first"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Mobile order",
+      "default": "faq_first",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "faq_first",
+          "label": "FAQ first"
+        }
+      ]
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "FAQs"
+      "default": "FREQUENTLY ASKED QUESTIONS"
     },
     {
       "type": "textarea",
@@ -518,10 +667,28 @@
       "default": "Answers to your most important questions about hair thinning, ingredients, and results."
     },
     {
-      "type": "checkbox",
-      "id": "open_first_item",
-      "label": "Open first FAQ by default",
-      "default": true
+      "type": "text",
+      "id": "category_1",
+      "label": "Category 1 label",
+      "default": "Category A"
+    },
+    {
+      "type": "text",
+      "id": "category_2",
+      "label": "Category 2 label",
+      "default": "Category B"
+    },
+    {
+      "type": "text",
+      "id": "category_3",
+      "label": "Category 3 label",
+      "default": "Category C"
+    },
+    {
+      "type": "text",
+      "id": "category_4",
+      "label": "Category 4 label",
+      "default": "Category D"
     },
     {
       "type": "text",
@@ -533,7 +700,7 @@
       "type": "text",
       "id": "button_label",
       "label": "Button label",
-      "default": "View More FAQs"
+      "default": "Contact Us"
     },
     {
       "type": "url",
@@ -546,6 +713,30 @@
       "type": "faq_item",
       "name": "FAQ item",
       "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "default": "category_1",
+          "options": [
+            {
+              "value": "category_1",
+              "label": "Category 1"
+            },
+            {
+              "value": "category_2",
+              "label": "Category 2"
+            },
+            {
+              "value": "category_3",
+              "label": "Category 3"
+            },
+            {
+              "value": "category_4",
+              "label": "Category 4"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "question",
@@ -568,30 +759,35 @@
         {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "Is this for all hair types and textures?"
           }
         },
         {
           "type": "faq_item",
           "settings": {
+            "category": "category_1",
             "question": "How soon will I see results?"
           }
         },
         {
           "type": "faq_item",
           "settings": {
+            "category": "category_2",
             "question": "Will this make me shed more before it gets better?"
           }
         },
         {
           "type": "faq_item",
           "settings": {
+            "category": "category_3",
             "question": "Can men use this too?"
           }
         },
         {
           "type": "faq_item",
           "settings": {
+            "category": "category_4",
             "question": "What if I’ve had thinning for years?"
           }
         }

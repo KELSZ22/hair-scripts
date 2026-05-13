@@ -1,0 +1,75 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "bevy_policy_page_note_NHaNKN": {
+      "type": "bevy-policy-page-note",
+      "name": "Bevy policy custom text",
+      "settings": {
+        "main_content": "<h1>Terms & Conditions</h1><p>Welcome to HairScripts by Bevy. By accessing or using our website at hairscriptsbybevy.com (the \"Site\"), purchasing our products, or engaging with our services in any way, you agree to be bound by these Terms & Conditions (\"Terms\"). Please read them carefully before making a purchase.  </p><p>If you do not agree with these Terms, do not use our Site or purchase our products.</p><h2>ELIGIBILITY & AGE REQUIREMENT</h2><p>You must be at least 18 years old to purchase from HairScripts by Bevy. By placing an order, you represent and warrant that you are 18 years of age or older and have the legal capacity to enter into this agreement.  </p><p>Our products are formulated for adult use only and are not intended for individuals under 18.</p><h2>USE OF WEBSITE</h2><p>You agree to use this website only for lawful purposes and in a manner consistent with all applicable laws and regulations. You agree not to:</p><ul><li>Engage in any activity that may harm the website, its users, or its operations </li><li>Attempt to gain unauthorized access to any part of the Site or its systems </li><li>Use automated tools (bots, scrapers, crawlers) without our written permission </li><li>Impersonate any person or entity </li><li>Submit false or misleading information </li><li>Use our products or content for commercial resale without our written authorization</li></ul><h2>DSHEA & FDA DISCLAIMER</h2><p>HairScripts by Bevy products are classified as dietary supplements under the U.S. Dietary Supplement Health and Education Act (DSHEA) of 1994.   </p><p>THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.   </p><p>Our products are intended to support general wellness and are not pharmaceutical drugs. Any references to specific health benefits are based on traditional use, published research on individual ingredients, or general nutritional support — not on claims of treating, curing, or preventing any medical condition.</p><h2>MEDICAL DISCLAIMER</h2><p>The information provided on our website, in our content, and through our customer service is for educational and informational purposes only. It is not intended as a substitute for professional medical advice, diagnosis, or treatment.  Always consult a licensed healthcare provider before:</p><ul><li>Starting any new dietary supplement </li><li>Combining HairScripts with prescription medications, other supplements, or medical treatments </li><li>Using HairScripts if you are pregnant, nursing, planning to become pregnant, or under medical care </li><li>Using HairScripts if you have any pre-existing medical conditions, allergies, or sensitivities</li></ul><p> Do not disregard or delay seeking professional medical advice because of something you have read on our website. If you experience any adverse reaction to our products, discontinue use immediately and contact your healthcare provider.   Reliance on any information provided by HairScripts by Bevy is solely at your own risk.</p><h2>RESULTS DISCLAIMER</h2><p>Individual results from using HairScripts products may vary. The testimonials, reviews, and before-and-after photos featured on our website and marketing materials reflect the personal experiences of specific customers and are not guarantees of results for every user.  Factors that may affect your results include but are not limited to:</p><ul><li>Age, genetics, and hormonal status </li><li>Overall health and nutrition </li><li>Stress levels and sleep quality </li><li>Underlying medical conditions </li><li>Consistency of use </li><li>Concurrent hair care practices and treatments</li></ul><p> Hair growth is a slow biological process. Most customers report noticeable changes between 90 and 180 days of consistent use. HairScripts by Bevy does not guarantee specific results, timelines, or outcomes.</p><h2>PRODUCT INFORMATION</h2><p>We strive to ensure all product descriptions, ingredient lists, images, pricing, and other content on our website are accurate. However, we do not guarantee that all content is error-free, complete, or current at all times.  </p><p>We reserve the right to correct any errors, inaccuracies, or omissions and to update product information at any time without prior notice. If a product is listed at an incorrect price due to a typographical or system error, we reserve the right to cancel any order for that product, even if your order has been confirmed and charged.</p><h2>ORDERS & PAYMENTS</h2><ul><li><span style=\"text-decoration:underline\">All prices are listed in U.S. dollars (USD) unless otherwise stated </span></li><li>Payment must be completed at checkout </li><li>We accept major credit cards, debit cards, and other payment methods displayed at checkout </li><li>We reserve the right to cancel or refuse any order for any reason, including but not limited to suspected fraud, payment issues, or violations of these Terms </li><li>Orders are not confirmed until payment has been successfully processed</li></ul><h2>INTELLECTUAL PROPERTY</h2><p>All content on this website — including but not limited to text, images, graphics, logos, product names, formulations, branding elements, marketing copy, video, audio, and software — is the property of HairScripts by Bevy and is protected by United States and international copyright, trademark, and other intellectual property laws.   You may not copy, reproduce, distribute, modify, publicly display, create derivative works from, or otherwise exploit any content on our website without our prior written permission.   \"HAIRSCRIPTS,\" \"HAIRSCRIPTS BY BEVY,\" and our logos are trademarks of HairScripts by Bevy. Unauthorized use is prohibited.</p><h2>USER CONTENT & TESTIMONIALS</h2><p>If you submit reviews, testimonials, photos, videos, or other content to HairScripts by Bevy (collectively, \"User Content\"), you grant us a perpetual, worldwide, royalty-free, non-exclusive, transferable license to use, reproduce, modify, publish, distribute, and display that User Content in any media for marketing, advertising, and other business purposes.  You represent and warrant that: <br/></p><ul><li>You own or have the necessary rights to the User Content you submit </li><li>Your User Content does not infringe on any third party's rights </li><li>Your User Content is truthful and based on your actual experience with our products </li><li>You will not be compensated for your User Content unless explicitly agreed to in writing</li></ul><h2>AFFILIATE & REFERRAL PROGRAMS</h2><p>HairScripts by Bevy may operate affiliate, ambassador, or referral programs. Participation in these programs is subject to separate program-specific terms which will be provided at the time of enrollment. We reserve the right to modify, suspend, or terminate any program at any time without notice.   </p><p>Earnings from affiliate or referral activity may be reportable as income for tax purposes; affiliates are responsible for their own tax obligations.</p><h2>LIMITATION OF LIABILITY</h2><p>TO THE FULLEST EXTENT PERMITTED BY LAW, HairScripts by Bevy, its founders, owners, employees, contractors, and affiliates shall not be liable for:<br/></p><ul><li>Any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use our website or products </li><li>Any loss of profits, data, or business opportunity </li><li>Any personal injury, illness, or adverse reaction allegedly resulting from the use or misuse of our products beyond the original purchase price of the product </li><li>Any damages arising from third-party services, including but not limited to shipping carriers, payment processors, or fulfillment partners </li></ul><p>Our total cumulative liability to you for any and all claims arising out of or related to your purchase or use of our products shall not exceed the amount you paid for the specific product giving rise to the claim.<br/><br/>Some jurisdictions do not allow the exclusion or limitation of certain damages, so some of the above limitations may not apply to you.</p><h2>INDEMNIFICATION</h2><p>You agree to defend, indemnify, and hold harmless HairScripts by Bevy, its founders, owners, employees, contractors, and affiliates from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or related to: <br/></p><ul><li>Your violation of these Terms </li><li>Your violation of any third-party rights </li><li>Your misuse of our products </li><li>Your User Content </li><li>Any false or misleading information you provide to us </li></ul><p>Our total cumulative liability to you for any and all claims arising out of or related to your purchase or use of our products shall not exceed the amount you paid for the specific product giving rise to the claim.<br/><br/>Some jurisdictions do not allow the exclusion or limitation of certain damages, so some of the above limitations may not apply to you.</p><h2>DISPUTE RESOLUTION & ARBITRATION</h2><p>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS.   </p><p>In the event of any dispute between you and HairScripts by Bevy, you agree to first contact us directly at support@hairscriptsbybevy.com to attempt to resolve the matter informally. We will respond within 30 days.  </p><p>If we cannot resolve the dispute informally, you agree that:  Your violation of these Terms <br/></p><ul><li>Any dispute, claim, or controversy arising out of or relating to these Terms, our products, or our services shall be resolved through binding individual arbitration administered by the American Arbitration Association (AAA) under its Consumer Arbitration Rules </li><li>Arbitration shall take place in New York, New York, unless otherwise mutually agreed </li><li>You waive your right to participate in any class action, class arbitration, or representative action against HairScripts by Bevy </li><li>Each party is responsible for its own legal fees, except where the arbitrator determines that one party should bear the costs </li></ul><p>This arbitration clause does not prevent either party from seeking injunctive or equitable relief in court for matters relating to intellectual property, trade secrets, or breach of confidentiality.</p><h2>GOVERNING LAW</h2><p>These Terms shall be governed by and construed in accordance with the laws of the State of New York, without regard to its conflict of laws principles. Any legal action or proceeding that cannot be resolved through arbitration shall be brought exclusively in the state or federal courts located in New York County, New York, and you consent to the jurisdiction of those courts.</p><h2>CHANGES TO TERMS</h2><p>We reserve the right to update or modify these Terms at any time without prior notice. Updates will be posted on hairscriptsbybevy.com with the \"Last Updated\" date revised at the top.   Your continued use of the website or purchase of our products after changes have been posted constitutes your acceptance of the updated Terms. We recommend reviewing these Terms periodically.</p><h2>SEVERABILITY</h2><p>If any provision of these Terms is found to be invalid, unlawful, or unenforceable, that provision shall be severed from these Terms, and the remaining provisions shall continue in full force and effect.</p><h2>ENTIRE AGREEMENT</h2><p>These Terms, along with our Privacy Policy, Returns & Refunds Policy, Shipping & Delivery Policy, and Subscription Management Policy, constitute the entire agreement between you and HairScripts by Bevy regarding your use of our website and products, and supersede any prior agreements or understandings.</p><h2>CONTACT US</h2><p>For questions about these Terms & Conditions, please contact us at:</p><p>HairScripts by Bevy<br/>Email: support@hairscriptsbybevy.com  <br/>Website: hairscriptsbybevy.com</p>",
+        "effective_text": "(Updated Last: May 12, 2026)",
+        "card_image": "shopify://shop_images/CandaceHoweStudiosNYCPortraitPhotographer-251-220copy_1_2.svg",
+        "card_button_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bevy_policy_page_note_NHaNKN"
+  ]
+}

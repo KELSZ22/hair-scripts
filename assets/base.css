@@ -676,8 +676,8 @@ p:empty {
 }
 
 .svg-wrapper > svg {
-  width: var(--icon-size-sm);
-  height: var(--icon-size-sm);
+  width: 22px;
+  height: 22px;
 }
 
 .relative {
@@ -1553,9 +1553,7 @@ media-gallery {
 }
 
 @media screen and (max-width: 749px) {
-  .product-media-container.constrain-height {
-    max-height: none;
-  }
+
 }
 
 @media screen and (min-width: 750px) {
@@ -4207,4 +4205,54 @@ product-recommendations:has([data-has-recommendations='false']) {
     opacity: var(--atc-opacity, 1);
     translate: 0px var(--atc-destination, 0px);
   }
+}
+button#BuyButtons-ProductSubmitButton-Aa29pQlFONlRwQnlzZ__add-to-cart {
+  background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
+}
+span.add-to-cart-text__content {
+    color: var(--Old-colors-Primary-Button-Text, #FFF);
+    font-family: Fustat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.product-information__grid.product-information--media-left h1{
+  color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+  font-family: "Cormorant Garamond";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+rte-formatter.rte p {
+  overflow: hidden;
+color: var(--new-colors-gray-subhead, #6B6B6B);
+text-overflow: ellipsis;
+
+/* NewTypography/Paragraph/Medium */
+font-family: "DM Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+rte-formatter.spacing-style.text-block.text-block--ANjBhM2RpS3RTdm9QM__text_Q6BCJN.rte.rte p {
+    color: #211B18;
+}
+
+.group-block-content.layout-panel-flex.layout-panel-flex--column.mobile-column rte-formatter:nth-child(1) {
+    display: flex;
+    padding: 5px 15px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 9999px;
+    background: var(--Old-colors-Scheme-1-Hover-Links, #D7E9E6);
+    color: #2A2A2A;
+}
+
+#hs-sticky-atc-template--18975046598761__main-7666369724521 .hs-sticky-atc__button {
+  background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%) !important;
 }

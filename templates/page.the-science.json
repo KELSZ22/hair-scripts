@@ -1,0 +1,485 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "hairscripts_science_hero_qGPWVW": {
+      "type": "hairscripts-science-hero",
+      "blocks": {
+        "stat_DgCQYq": {
+          "type": "stat",
+          "settings": {
+            "number": "10+",
+            "label": "YEARS PHARMA BACKGROUND"
+          }
+        },
+        "stat_yyTxgH": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "ROOT CAUSES ADDRESSED"
+          }
+        },
+        "stat_rLKEpV": {
+          "type": "stat",
+          "settings": {
+            "number": "90",
+            "label": "DAYS TO VISIBLE RESULT"
+          }
+        }
+      },
+      "block_order": [
+        "stat_DgCQYq",
+        "stat_yyTxgH",
+        "stat_rLKEpV"
+      ],
+      "name": "HairScripts Science Hero",
+      "settings": {
+        "bg_image": "shopify://shop_images/orange-wall-with-window-shadow-background-presentation-product-advertising-3d-rendering_1.webp",
+        "hero_image": "shopify://shop_images/smiley-young-woman-styling-hair-medium-shot_1_1.webp",
+        "hero_image_alt": "Woman combing natural hair",
+        "eyebrow": "Science & Education",
+        "heading": "YOUR HAIR DOESN’T THIN<br> WITHOUT A REASON.",
+        "text": "<p>Most products treat the symptom. HairScripts addresses the biology. Here’s what’s actually happening — and why it matters.</p>",
+        "desktop_height": 520,
+        "image_width": 700,
+        "image_right_position": -100,
+        "image_bottom_position": -60,
+        "left_overlay_opacity": 0,
+        "heading_color": "#ffffff",
+        "body_color": "#ffffff",
+        "eyebrow_color": "#ffffff",
+        "text_color": "#ffffff",
+        "color_scheme": ""
+      }
+    },
+    "hairscripts_formulated_by_YbkLAj": {
+      "type": "hairscripts-formulated-by",
+      "blocks": {
+        "credential_4Bjfix": {
+          "type": "credential",
+          "settings": {
+            "text": "10+ Years Pharmaceutical Sale"
+          }
+        },
+        "credential_xx3rEw": {
+          "type": "credential",
+          "settings": {
+            "text": "Clinical Data Interpretation Training"
+          }
+        },
+        "credential_rrd3hY": {
+          "type": "credential",
+          "settings": {
+            "text": "Trichology Certification (In Progress)"
+          }
+        },
+        "credential_fNQ8nf": {
+          "type": "credential",
+          "settings": {
+            "text": "Active YouTube Education Community"
+          }
+        }
+      },
+      "block_order": [
+        "credential_4Bjfix",
+        "credential_xx3rEw",
+        "credential_rrd3hY",
+        "credential_fNQ8nf"
+      ],
+      "name": "HairScripts Formulated By",
+      "settings": {
+        "heading": "FORMULATED BY:",
+        "profile_image": "shopify://shop_images/Mask_group.png",
+        "profile_image_alt": "Formulator profile image",
+        "profile_name": "BEVY",
+        "profile_role": "Hair Educator & Content Creator",
+        "background_color": "#4da9a3",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "avatar_border_color": "#b57942",
+        "avatar_size": 54,
+        "desktop_name_size": 13,
+        "tablet_name_size": 13,
+        "mobile_name_size": 13,
+        "desktop_role_size": 11,
+        "tablet_role_size": 11,
+        "mobile_role_size": 11,
+        "desktop_item_size": 13,
+        "tablet_item_size": 12,
+        "mobile_item_size": 13,
+        "desktop_item_gap": 24,
+        "tablet_item_gap": 18,
+        "mobile_item_gap": 12,
+        "marquee_speed": 22,
+        "color_scheme": ""
+      }
+    },
+    "hairscripts_hair_cycle_XRjCbX": {
+      "type": "hairscripts-hair-cycle",
+      "blocks": {
+        "cycle_card_CYte8h": {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "85% of all hairs",
+            "title": "Anagen — Active Growth",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        },
+        "cycle_card_YL4M4M": {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "3% of all hairs",
+            "title": "Catagen — Transition",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        },
+        "cycle_card_7KDTxi": {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "12% of all hairs",
+            "title": "Telogen — Resting",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        },
+        "cycle_card_LtwABk": {
+          "type": "cycle_card",
+          "settings": {
+            "kicker": "Normal: 50–100 strands/day",
+            "title": "Exogen — Shedding",
+            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cycle_card_CYte8h",
+        "cycle_card_YL4M4M",
+        "cycle_card_7KDTxi",
+        "cycle_card_LtwABk"
+      ],
+      "name": "HairScripts Hair Cycle",
+      "settings": {
+        "eyebrow": "HAIR BIOLOGY 101",
+        "heading": "YOUR HAIR LIVES IN A\nFOUR-PHASE CYCLE.",
+        "text": "<p>Every strand is at a different stage of its growth cycle. Hormones, stress, and nutrition disrupt this cycle — that’s the real reason hair thins.</p>",
+        "main_image": "shopify://shop_images/portrait-young-beautiful-woman-with-hairbrush_2.webp",
+        "main_image_alt": "Woman holding a hair brush",
+        "background_color": "#f7f3ec",
+        "border_color": "#4da9a3",
+        "heading_color": "#111111",
+        "eyebrow_color": "#111111",
+        "text_color": "#555555",
+        "muted_text_color": "#9a9a9a",
+        "card_title_color": "#111111",
+        "card_border_color": "#4da9a3",
+        "card_background_color": "#f7f3ec",
+        "color_scheme": ""
+      }
+    },
+    "hairscripts_root_causes_kk7yKx": {
+      "type": "hairscripts-root-causes",
+      "blocks": {
+        "cause_aEz4Gd": {
+          "type": "cause",
+          "settings": {
+            "number": "01",
+            "title": "Hormonal Disruption",
+            "description": "<p>DHT miniaturizes follicles and shortens the growth phase. Estrogen drops during perimenopause and postpartum periods remove the hormonal support that keeps hair actively growing.</p>",
+            "result": "Thinning edges, temples, and crown"
+          }
+        },
+        "cause_jx34P4": {
+          "type": "cause",
+          "settings": {
+            "number": "02",
+            "title": "Nutritional Deficiency",
+            "description": "<p>Hair follicles are among the most metabolically active cells in the body. Even subclinical deficiencies in iron, zinc, and B vitamins are enough to disrupt the growth cycle.</p>",
+            "result": "Density loss, slower growth, breakage"
+          }
+        },
+        "cause_KcJ8ym": {
+          "type": "cause",
+          "settings": {
+            "number": "03",
+            "title": "Chronic Stress",
+            "description": "<p>Elevated cortisol forces follicles from the growth phase into rest prematurely. The result appears as sudden shedding 2–4 months after the stressor — called telogen effluvium.</p>",
+            "result": "More hair in the shower, brush, and sink"
+          }
+        },
+        "cause_TYWy9R": {
+          "type": "cause",
+          "settings": {
+            "number": "04",
+            "title": "Oxidative Stress & Scalp Health",
+            "description": "<p>Free radical damage at the dermal papilla impairs the cells that direct hair growth. Poor scalp circulation reduces the nutrient delivery follicles need to complete a full growth cycle.</p>",
+            "result": "Follicle miniaturization, reduced growth speed"
+          }
+        }
+      },
+      "block_order": [
+        "cause_aEz4Gd",
+        "cause_jx34P4",
+        "cause_KcJ8ym",
+        "cause_TYWy9R"
+      ],
+      "name": "HairScripts Root Causes",
+      "settings": {
+        "eyebrow": "WHY HAIR THINS",
+        "heading": "FOUR ROOT CAUSES.\nONE FORMULA THAT ADDRESSES THEM ALL.",
+        "text": "<p>Hair thinning is rarely one thing. It's a convergence of biological stressors disrupting the follicle's </p><p>ability to complete a healthy growth cycle.</p>",
+        "background_color_left": "#3f8f89",
+        "background_color_right": "#55c6be",
+        "heading_color": "#ffffff",
+        "eyebrow_color": "#ffffff",
+        "text_color": "#ffffff",
+        "card_title_color": "#ffffff",
+        "card_border_color": "#00000059",
+        "number_background_color": "#f8f3ec",
+        "number_border_color": "#d8c6b4",
+        "number_color": "#222222",
+        "color_scheme": ""
+      }
+    },
+    "key_ingredients_grid_drWHkt": {
+      "type": "key-ingredients-grid",
+      "blocks": {
+        "ingredient_d8Em4R": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Vector.svg",
+            "icon_symbol": "✦",
+            "title": "Ashwagandha Root Extract",
+            "text": "<p>Helps reduce stress-related hair loss by supporting cortisol balance.</p>"
+          }
+        },
+        "ingredient_jDEQ7D": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_1.svg",
+            "icon_symbol": "✦",
+            "title": "Saw Palmetto Extract",
+            "text": "<p>Helps reduce DHT by supporting healthy hormone balance.</p>"
+          }
+        },
+        "ingredient_Wi6pzN": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.40.21_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Hydrolyzed Marine Collagen",
+            "text": "<p>Supports skin elasticity, follicles, and hair structure.</p>"
+          }
+        },
+        "ingredient_eAYjVX": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.43.07_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Hyaluronic Acid",
+            "text": "<p>Helps hydrate the scalp and support elasticity.</p>"
+          }
+        },
+        "ingredient_7QiwfJ": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.40.28_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Methylsulfonylmethane",
+            "text": "<p>Supports natural keratin production for stronger hair.</p>"
+          }
+        },
+        "ingredient_ThAwA7": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.43.35_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Coenzyme Q10 (CoQ10)",
+            "text": "<p>Supports cellular energy and healthier scalp function.</p>"
+          }
+        },
+        "ingredient_fRdpd3": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.42.53_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Zinc Bisglycinate Chelate",
+            "text": "<p>Supports growth, oil balance, and immune resilience.</p>"
+          }
+        },
+        "ingredient_UjMjwU": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.43.14_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Grape Seed Extract",
+            "text": "<p>Helps protect follicles through antioxidant support.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_d8Em4R",
+        "ingredient_jDEQ7D",
+        "ingredient_Wi6pzN",
+        "ingredient_eAYjVX",
+        "ingredient_7QiwfJ",
+        "ingredient_ThAwA7",
+        "ingredient_fRdpd3",
+        "ingredient_UjMjwU"
+      ],
+      "name": "Key ingredients grid",
+      "settings": {
+        "eyebrow": "KEY INGREDIENTS",
+        "heading": "Key Ingredients",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+        "section_bg": "#2f6665",
+        "heading_color": "#f5efe4",
+        "text_color": "#d9e7e2",
+        "item_title_color": "#f5efe4",
+        "item_text_color": "#d9e7e2",
+        "icon_bg": "#f5efe4",
+        "icon_color": "#2f6665",
+        "divider_color": "#4e817f"
+      }
+    },
+    "hairscripts_growth_timeline_zAd8Mn": {
+      "type": "hairscripts-growth-timeline",
+      "blocks": {
+        "timeline_item_QEBQpE": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "Weeks 1–4",
+            "title": "Follicle Nourishment Begins",
+            "description": "<p>The formula begins addressing nutritional gaps. No visible changes yet — this phase is foundational.</p>",
+            "tag_1": "Nutrient uptake active",
+            "tag_2": "Cortisol modulation begins",
+            "tag_3": ""
+          }
+        },
+        "timeline_item_Um8VWk": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "Month 2",
+            "title": "Shedding Begins to Slow",
+            "description": "<p>Less hair in the shower and on the brush. Scalp health improvements become noticeable.</p>",
+            "tag_1": "Less shower shedding",
+            "tag_2": "Improved scalp condition",
+            "tag_3": ""
+          }
+        },
+        "timeline_item_TM8iCm": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "Month 3",
+            "title": "Visible Density Improvement",
+            "description": "<p>Less hair in the shower and on the brush. Scalp health improvements become noticeable.</p>",
+            "tag_1": "Fuller appearance",
+            "tag_2": "Edge recovery",
+            "tag_3": "Stronger strands"
+          }
+        },
+        "timeline_item_hGFFLW": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "Month 4–6",
+            "title": "Compounding Results",
+            "description": "<p>Each cycle nourished by the formula builds on the last. This is where before/after results become clearly visible.</p>",
+            "tag_1": "Compounding density",
+            "tag_2": "Ponytail volume",
+            "tag_3": "Long-term follicle health"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_QEBQpE",
+        "timeline_item_Um8VWk",
+        "timeline_item_TM8iCm",
+        "timeline_item_hGFFLW"
+      ],
+      "name": "HairScripts Timeline",
+      "settings": {
+        "image": "shopify://shop_images/Rectangle_536.webp",
+        "image_alt": "Hair growth before and after timeline",
+        "note_quote": "\"90 days is where you begin to see meaningful change. That's not a limitation — it's how hair works.\"",
+        "note_avatar": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
+        "note_avatar_alt": "Bevy",
+        "note_label": "A note from Bevy",
+        "heading": "HAIR GROWTH IS A BIOLOGY TIMELINE,\nNOT A PROMISE.",
+        "text": "<p>Most brands promise results in 30 days. The hair growth cycle tells a different story.</p>",
+        "background_color": "#f8f3ec",
+        "heading_color": "#222222",
+        "text_color": "#666666",
+        "title_color": "#222222",
+        "muted_text_color": "#7d7d7d",
+        "period_background_color": "#b9dadb",
+        "period_text_color": "#222222",
+        "tag_background_color": "#f8f3ec",
+        "tag_border_color": "#afcbcd",
+        "tag_text_color": "#333333",
+        "color_scheme": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hairscripts_science_hero_qGPWVW",
+    "hairscripts_formulated_by_YbkLAj",
+    "hairscripts_hair_cycle_XRjCbX",
+    "hairscripts_root_causes_kk7yKx",
+    "key_ingredients_grid_drWHkt",
+    "hairscripts_growth_timeline_zAd8Mn"
+  ]
+}

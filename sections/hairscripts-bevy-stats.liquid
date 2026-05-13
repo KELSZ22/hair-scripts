@@ -1,0 +1,482 @@
+<section
+  id="hs-bevy-stats-{{ section.id }}"
+  class="hs-bevy-stats color-{{ section.settings.color_scheme }}"
+>
+  <div class="hs-bevy-stats__inner">
+    <div class="hs-bevy-stats__layout">
+      <div class="hs-bevy-stats__stats-group hs-bevy-stats__stats-group--left">
+        {% for block in section.blocks limit: 2 %}
+          <div class="hs-bevy-stats__card" {{ block.shopify_attributes }}>
+            <div class="hs-bevy-stats__number-wrap">
+              {% if block.settings.number != blank %}
+                <span class="hs-bevy-stats__number">{{ block.settings.number }}</span>
+              {% endif %}
+
+              {% if block.settings.suffix != blank %}
+                <span class="hs-bevy-stats__suffix">{{ block.settings.suffix }}</span>
+              {% endif %}
+            </div>
+
+            {% if block.settings.label != blank %}
+              <p class="hs-bevy-stats__label">{{ block.settings.label }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="hs-bevy-stats__profile">
+        <div class="hs-bevy-stats__profile-image-wrap">
+          <div class="hs-bevy-stats__profile-image-ring">
+            {% if section.settings.profile_image != blank %}
+              <img
+                src="{{ section.settings.profile_image | image_url: width: 800 }}"
+                alt="{{ section.settings.profile_image_alt | escape }}"
+                class="hs-bevy-stats__profile-image"
+                loading="lazy"
+                width="{{ section.settings.profile_image.width }}"
+                height="{{ section.settings.profile_image.height }}"
+              >
+            {% endif %}
+          </div>
+        </div>
+
+        {% if section.settings.name != blank %}
+          <h2 class="hs-bevy-stats__name">{{ section.settings.name }}</h2>
+        {% endif %}
+
+        {% if section.settings.role != blank %}
+          <p class="hs-bevy-stats__role">{{ section.settings.role }}</p>
+        {% endif %}
+      </div>
+
+      <div class="hs-bevy-stats__stats-group hs-bevy-stats__stats-group--right">
+        {% for block in section.blocks offset: 2 %}
+          <div class="hs-bevy-stats__card" {{ block.shopify_attributes }}>
+            <div class="hs-bevy-stats__number-wrap">
+              {% if block.settings.number != blank %}
+                <span class="hs-bevy-stats__number">{{ block.settings.number }}</span>
+              {% endif %}
+
+              {% if block.settings.suffix != blank %}
+                <span class="hs-bevy-stats__suffix">{{ block.settings.suffix }}</span>
+              {% endif %}
+            </div>
+
+            {% if block.settings.label != blank %}
+              <p class="hs-bevy-stats__label">{{ block.settings.label }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-bevy-stats-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(192deg, #63CEC7 -32.41%, #3D7E7A 70%), url(<path-to-image>) lightgray -97.728px -218.717px / 109.205% 109.205% no-repeat;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__inner {
+    position: relative;
+    padding: 60px 40px;
+    box-sizing: border-box;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__card {
+    min-height: 205px;
+    padding: 24px 20px;
+    border: 2px solid {{ section.settings.card_border_color }};
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__number-wrap {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__number {
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: {{ section.settings.card_number_color }};
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__suffix {
+    display: inline-block;
+    margin-left: 3px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: {{ section.settings.card_number_color }};
+    transform: translateY(-9px);
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__label {
+    margin: 12px 0 0;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    color: {{ section.settings.card_label_color }};
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: 4px;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-wrap {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    padding: 11px;
+    border: 2px solid {{ section.settings.outer_ring_color }};
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 10px;
+    border: 4px solid {{ section.settings.inner_ring_color }};
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__name {
+    margin: 22px 0 0;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    color: {{ section.settings.name_color }};
+  }
+
+  #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__role {
+    margin: 8px 0 0;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: {{ section.settings.role_color }};
+  }
+
+  @media screen and (max-width: 1366px) {
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__number {
+      font-size: 44px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__suffix {
+      font-size: 22px;
+      transform: translateY(-7px);
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__layout {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile {
+      order: 1;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group--left {
+      order: 2;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group--right {
+      order: 3;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__inner {
+      padding: 60px 15px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__layout {
+      gap: 26px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group {
+      gap: 14px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__card {
+      min-height: 160px;
+      padding: 20px 14px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__label {
+      margin-top: 10px;
+
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-wrap {
+      width: 180px;
+      height: 180px;
+      padding: 9px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__profile-image-ring {
+      padding: 8px;
+      border-width: 3px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__name {
+      font-size: 26px;
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__role {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 450px) {
+     #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__number {
+      font-size: 32px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__card {
+      min-height: 140px;
+    }
+
+   
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__suffix {
+      font-size: 18px;
+      transform: translateY(-5px);
+    }
+
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__name {
+      font-size: 20px;
+    }
+  }
+  @media screen and (max-width: 380px) {
+    #hs-bevy-stats-{{ section.id }} .hs-bevy-stats__stats-group {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HairScripts Bevy Stats",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "profile_image",
+      "label": "Profile image"
+    },
+    {
+      "type": "text",
+      "id": "profile_image_alt",
+      "label": "Profile image alt",
+      "default": "Bevy"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "BEVY"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role",
+      "default": "Hair Educator & Content Creator"
+    },
+    {
+      "type": "color",
+      "id": "background_color_left",
+      "label": "Background color left",
+      "default": "#4B9793"
+    },
+    {
+      "type": "color",
+      "id": "background_color_right",
+      "label": "Background color right",
+      "default": "#62BDB8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_number_color",
+      "label": "Card number color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_label_color",
+      "label": "Card label color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "outer_ring_color",
+      "label": "Outer ring color",
+      "default": "#C86F4D"
+    },
+    {
+      "type": "color",
+      "id": "inner_ring_color",
+      "label": "Inner ring color",
+      "default": "#E89E7C"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "Role color",
+      "default": "#D8E9E7"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "44K"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix",
+          "default": "+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "YOUTUBE SUBSCRIBERS"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HairScripts Bevy Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "44K",
+            "suffix": "+",
+            "label": "YOUTUBE SUBSCRIBERS"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "5M",
+            "suffix": "+",
+            "label": "VIEWS ACROSS VIDEOS"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "750",
+            "suffix": "+",
+            "label": "CONTENT CREATED"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "40K",
+            "suffix": "+",
+            "label": "COMMUNITY MEMBERS"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

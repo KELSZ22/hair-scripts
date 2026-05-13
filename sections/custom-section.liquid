@@ -264,7 +264,11 @@
       margin-bottom: 34px;
     }
   }
-
+  @media screen and (max-width: 400px) {
+    #section-{{ section.id }}  .results-columns-card:last-child {
+      width: 50%;
+  }
+}
   @media screen and (max-width: 363px) {
     #section-{{ section.id }} .results-columns-card {
       width: 47%;

@@ -77,6 +77,7 @@
 %}
 
 <div class="section-background color-{{ settings.color_scheme }}"></div>
+
 <div
   class="product-information section section--{{ content_width }} spacing-style color-{{ settings.color_scheme }} relative"
   style="{% render 'spacing-style', settings: settings %} --gap: {{ settings.gap }}px;"
@@ -86,11 +87,13 @@
     {% assign product_href = '#ProductInformation-' | append: section_id %}
     {% render 'skip-to-content-link', href: product_href, text: 'accessibility.skip_to_product_info' %}
   {% endif %}
+
   <div
     class="{{ product_grid_class }}"
     data-product-grid-content
   >
     {% assign render_order_array = render_order | split: ',' %}
+
     {% capture media %}
       <div
         class="product-information__media"
@@ -307,6 +310,103 @@
   @media screen and (min-width: 1600px) {
     .product-information__grid--limit-details .product-details > .group-block {
       --details-max-width: 32rem;
+    }
+  }
+
+  /*
+    FORCE PRODUCT MEDIA AND DETAILS TO 50 / 50
+    This overrides the default 2fr / 1fr and sidebar-width behavior.
+  */
+  @media screen and (min-width: 750px) {
+    .product-information__grid:not(.product-information--media-none) {
+      display: grid !important;
+      grid-template-columns: minmax(0, 50%) minmax(0, 50%) !important;
+      align-items: start;
+    }
+
+    .product-information__grid.product-information--media-left .product-information__media {
+      grid-column: 1 / 2 !important;
+      order: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: calc(var(--gap, 0) / 2) !important;
+    }
+
+    .product-information__grid.product-information--media-left .product-details {
+      grid-column: 2 / 3 !important;
+      order: 1 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding-left: calc(var(--gap, 0) / 2) !important;
+      padding-right: 0 !important;
+    }
+
+    .product-information__grid.product-information--media-right .product-details {
+      grid-column: 1 / 2 !important;
+      order: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: calc(var(--gap, 0) / 2) !important;
+    }
+
+    .product-information__grid.product-information--media-right .product-information__media {
+      grid-column: 2 / 3 !important;
+      order: 1 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding-left: calc(var(--gap, 0) / 2) !important;
+      padding-right: 0 !important;
+    }
+
+    .section--full-width .product-information__grid.product-information--media-left .product-information__media,
+    .section--full-width .product-information__grid.product-information--media-left .product-details,
+    .section--full-width .product-information__grid.product-information--media-right .product-information__media,
+    .section--full-width .product-information__grid.product-information--media-right .product-details {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+  }
+
+  /*
+    STICKY PRODUCT MEDIA ON DESKTOP
+    Keeps the product media/gallery sticky while the product details scroll.
+  */
+  @media screen and (min-width: 750px) {
+    .product-information__grid:not(.product-information--media-none) .product-information__media {
+      position: sticky !important;
+      top: calc(var(--header-group-height, 0px) + 20px) !important;
+      align-self: start !important;
+      height: fit-content !important;
+      z-index: 2;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-information__grid:not(.product-information--media-none) {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+    }
+
+    .product-information__media,
+    .product-details {
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .product-information__media {
+      position: static !important;
+      top: auto !important;
     }
   }
 

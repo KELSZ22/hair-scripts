@@ -1,0 +1,82 @@
+<div
+  class="video-carousel-block__card"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.youtube_link != blank %}
+    <a
+      href="{{ block.settings.youtube_link }}"
+      class="video-carousel-block__link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="{{ block.settings.card_text | default: 'Open YouTube video' | escape }}"
+    >
+      {% if block.settings.thumbnail != blank %}
+        {{
+          block.settings.thumbnail
+          | image_url: width: 600
+          | image_tag:
+            loading: 'lazy',
+            class: 'video-carousel-block__image',
+            alt: block.settings.card_text
+        }}
+      {% else %}
+        <div class="video-carousel-block__placeholder"></div>
+      {% endif %}
+
+      {% if block.settings.card_text != blank %}
+        <span class="video-carousel-block__card-title">
+          {{ block.settings.card_text | escape }}
+        </span>
+      {% endif %}
+    </a>
+  {% else %}
+    <div class="video-carousel-block__link">
+      {% if block.settings.thumbnail != blank %}
+        {{
+          block.settings.thumbnail
+          | image_url: width: 600
+          | image_tag:
+            loading: 'lazy',
+            class: 'video-carousel-block__image',
+            alt: block.settings.card_text
+        }}
+      {% else %}
+        <div class="video-carousel-block__placeholder"></div>
+      {% endif %}
+
+      {% if block.settings.card_text != blank %}
+        <span class="video-carousel-block__card-title">
+          {{ block.settings.card_text | escape }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Video item",
+  "settings": [
+    {
+      "type": "url",
+      "id": "youtube_link",
+      "label": "YouTube link"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Thumbnail image"
+    },
+    {
+      "type": "text",
+      "id": "card_text",
+      "label": "Card text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video item"
+    }
+  ]
+}
+{% endschema %}

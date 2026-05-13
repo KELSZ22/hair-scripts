@@ -1,0 +1,54 @@
+{% if block.settings.quiz_text != blank %}
+  <a
+    href="{{ block.settings.quiz_link }}"
+    class="take-our-quiz-link"
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.quiz_text | escape }}
+  </a>
+{% endif %}
+
+{% stylesheet %}
+  .take-our-quiz-link {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden !important;
+    color: var(--New-Colors-Primary, #3D7E7A) !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+
+    /* NewTypography/Paragraph/Bold */
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
+
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Take our quiz",
+  "settings": [
+    {
+      "type": "text",
+      "id": "quiz_text",
+      "label": "Text",
+      "default": "Is Hairscripts Right For Me? Take Our Quiz."
+    },
+    {
+      "type": "url",
+      "id": "quiz_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Take our quiz"
+    }
+  ]
+}
+{% endschema %}

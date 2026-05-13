@@ -4,12 +4,13 @@
   style="
     --rrw-section-bg: {{ section.settings.section_bg }};
     --rrw-card-bg: {{ section.settings.card_bg }};
-    --rrw-heading-color: {{ section.settings.heading_color }};
-    --rrw-text-color: {{ section.settings.text_color }};
-    --rrw-muted-color: {{ section.settings.muted_color }};
+    --rrw-heading-color: #211B18;
+    --rrw-text-color: #211B18;
+    --rrw-muted-color: #211B18;
     --rrw-border-color: {{ section.settings.border_color }};
-    --rrw-stat-number-color: {{ section.settings.stat_number_color }};
-    --rrw-stat-label-color: {{ section.settings.stat_label_color }};
+    --rrw-stat-eyebrow-color: #211B18;
+    --rrw-stat-number-color: #211B18;
+    --rrw-stat-label-color: #211B18;
   "
 >
   <div class="real-results-women__wrap">
@@ -59,6 +60,10 @@
       </div>
 
       <div class="real-results-women__content">
+        {% if section.settings.eyebrow != blank %}
+          <div class="real-results-women__eyebrow">{{ section.settings.eyebrow }}</div>
+        {% endif %}
+
         {% if section.settings.heading != blank %}
           <h2 class="real-results-women__title">{{ section.settings.heading }}</h2>
         {% endif %}
@@ -72,7 +77,14 @@
         {% if section.blocks.size > 0 %}
           <div class="real-results-women__stats">
             {% for block in section.blocks %}
-              <div class="real-results-women__stat" {{ block.shopify_attributes }}>
+              <div
+                class="real-results-women__stat{% if forloop.last %} real-results-women__stat--last{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {% if block.settings.eyebrow != blank %}
+                  <div class="real-results-women__stat-eyebrow">{{ block.settings.eyebrow }}</div>
+                {% endif %}
+
                 {% if block.settings.number != blank %}
                   <div class="real-results-women__stat-number">{{ block.settings.number }}</div>
                 {% endif %}
@@ -91,38 +103,54 @@
   <style>
     #real-results-women-{{ section.id }} {
       background: var(--rrw-section-bg);
-      padding: 40px 20px;
+      padding: 60px 40px;
+      box-sizing: border-box;
+      color: #211B18;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__wrap {
-      max-width: 1200px;
+      width: 100%;
+      max-width: 1440px;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__card {
-      background: var(--rrw-card-bg);
-      border: 1px solid var(--rrw-border-color);
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 290px minmax(0, 1fr);
-      gap: 18px;
-      align-items: start;
+      border: 0;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      box-sizing: border-box;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__media {
+      flex: 0 1 calc(40% - 15px);
+      max-width: calc(40% - 15px);
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+      align-items: start;
+      box-sizing: border-box;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__content {
+      flex: 0 1 calc(60% - 15px);
+      max-width: calc(60% - 15px);
+      min-width: 0;
+      padding: 6px 0 4px;
+      box-sizing: border-box;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__image-col {
       min-width: 0;
+      width: 100%;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__image-wrap {
       position: relative;
       overflow: hidden;
       background: #f3eee8;
+      width: 100%;
       aspect-ratio: 0.72 / 1;
     }
 
@@ -136,74 +164,163 @@
 
     #real-results-women-{{ section.id }} .real-results-women__caption {
       margin-top: 8px;
-      text-align: center;
-      color: var(--rrw-muted-color);
-      font-size: 11px;
-      line-height: 1.2;
-      letter-spacing: 0.08em;
+      text-align: left;
+      color: #211B18;
+      font-family: "Cormorant Garamond";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0;
       text-transform: uppercase;
     }
 
-    #real-results-women-{{ section.id }} .real-results-women__content {
-      min-width: 0;
-      padding: 6px 4px 4px 0;
+    #real-results-women-{{ section.id }} .real-results-women__eyebrow {
+      margin: 0 0 10px;
+      color: #211B18;
+      font-family: "DM Sans";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__title {
-      margin: 0 0 12px;
-      color: var(--rrw-heading-color);
+      margin: 0 0 18px;
+      color: #211B18;
+      font-family: "Cormorant Garamond";
       font-size: 32px;
-      line-height: 1.05;
+      font-style: normal;
       font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__description {
       margin: 0 0 18px;
-      color: var(--rrw-text-color);
-      font-size: 13px;
-      line-height: 1.6;
-      max-width: 620px;
+      color: #211B18;
+      font-family: "DM Sans";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.45;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__description p {
       margin: 0;
+      color: #211B18;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__stats {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(5, 150px);
+      gap: 8px;
+      justify-content: start;
+      align-items: start;
+      width: 100%;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__stat {
-      min-height: 95px;
-      border: 1px solid var(--rrw-border-color);
-      background: transparent;
+      position: relative;
+      width: 150px;
+      height: 150px;
+      min-height: 0;
+      border: 0;
+      background: transparent !important;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 14px 10px;
+      padding: 12px 8px;
       text-align: center;
+      box-sizing: border-box;
+      color: #211B18;
+      overflow: hidden;
     }
 
-    #real-results-women-{{ section.id }} .real-results-women__stat-number {
-      color: var(--rrw-stat-number-color);
-      font-size: 30px;
-      line-height: 1;
+    #real-results-women-{{ section.id }} .real-results-women__stat::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      padding: 2px;
+      pointer-events: none;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat:nth-child(1)::before {
+      background: linear-gradient(90deg, #FFFFFF 0%, #237B84 100%);
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat:nth-child(2)::before {
+      background: linear-gradient(135deg, #FFFFFF 0%, #237B84 100%);
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat:nth-child(3)::before {
+      background: linear-gradient(180deg, #FFFFFF 0%, #237B84 100%);
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat:nth-child(4)::before {
+      background: linear-gradient(225deg, #FFFFFF 0%, #237B84 100%);
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat:nth-child(5)::before {
+      background: linear-gradient(270deg, #FFFFFF 0%, #237B84 100%);
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow,
+    #real-results-women-{{ section.id }} .real-results-women__stat-label {
+      text-align: center;
+      font-family: "DM Sans";
+      font-size: 8.938px;
+      font-style: normal;
       font-weight: 400;
-      margin-bottom: 8px;
+      line-height: normal;
+      color: #211B18;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow {
+      margin: 0 0 8px;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__stat-label {
-      color: var(--rrw-stat-label-color);
-      font-size: 10px;
-      line-height: 1.35;
-      letter-spacing: 0.06em;
+      margin: 0;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat:not(.real-results-women__stat--last) .real-results-women__stat-number {
+      text-align: center;
+      font-family: "DM Sans";
+      font-size: 35.75px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -1.787px;
       text-transform: uppercase;
-      max-width: 120px;
+      color: #211B18;
+      margin: 0 0 8px;
+    }
+
+    #real-results-women-{{ section.id }} .real-results-women__stat--last .real-results-women__stat-number {
+      font-family: "Cormorant Garamond";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-transform: uppercase;
+      color: #211B18;
+      margin: 0 0 8px;
     }
 
     #real-results-women-{{ section.id }} .real-results-women__placeholder {
@@ -211,64 +328,200 @@
       background: rgba(0, 0, 0, 0.04);
     }
 
-    @media screen and (max-width: 989px) {
-      #real-results-women-{{ section.id }} .real-results-women__card {
-        grid-template-columns: 1fr;
+    @media screen and (max-width: 1366px) {
+      #real-results-women-{{ section.id }} .real-results-women__stats {
+        grid-template-columns: repeat(5, 135px);
       }
 
-      #real-results-women-{{ section.id }} .real-results-women__content {
-        padding-right: 0;
+      #real-results-women-{{ section.id }} .real-results-women__stat {
+        width: 135px;
+        height: 135px;
       }
 
-      #real-results-women-{{ section.id }} .real-results-women__title {
+      #real-results-women-{{ section.id }} .real-results-women__stat:not(.real-results-women__stat--last) .real-results-women__stat-number {
         font-size: 28px;
+        letter-spacing: -1.2px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow,
+      #real-results-women-{{ section.id }} .real-results-women__stat-label {
+        font-size: 8.938px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat--last .real-results-women__stat-number {
+        font-size: 18px;
       }
     }
 
-    @media screen and (max-width: 767px) {
-      #real-results-women-{{ section.id }} {
-        padding: 28px 14px;
+    @media screen and (max-width: 1200px) {
+      #real-results-women-{{ section.id }} .real-results-women__card {
+        gap: 24px;
       }
 
+      #real-results-women-{{ section.id }} .real-results-women__media {
+        flex: 0 1 calc(38% - 12px);
+        max-width: calc(38% - 12px);
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__content {
+        flex: 0 1 calc(62% - 12px);
+        max-width: calc(62% - 12px);
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stats {
+        grid-template-columns: repeat(5, 120px);
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat {
+        width: 120px;
+        height: 120px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat:not(.real-results-women__stat--last) .real-results-women__stat-number {
+        font-size: 24px;
+        letter-spacing: -0.9px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat--last .real-results-women__stat-number {
+        font-size: 16px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow,
+      #real-results-women-{{ section.id }} .real-results-women__stat-label {
+        font-size: 8.938px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow {
+        margin-bottom: 5px;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
       #real-results-women-{{ section.id }} .real-results-women__card {
-        padding: 14px;
-        gap: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        gap: 26px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__media,
+      #real-results-women-{{ section.id }} .real-results-women__content {
+        flex: none;
+        max-width: none;
+        width: 100%;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__media {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__image-col,
+      #real-results-women-{{ section.id }} .real-results-women__image-wrap {
+        width: 100%;
+      }
+
+
+      #real-results-women-{{ section.id }} .real-results-women__content {
+        padding: 0;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__caption {
+        font-size: 16px;
+        margin-top: 6px;
       }
 
       #real-results-women-{{ section.id }} .real-results-women__title {
-        font-size: 22px;
+        font-size: 26px;
+        margin-bottom: 10px;
       }
 
       #real-results-women-{{ section.id }} .real-results-women__description {
-        font-size: 12px;
-        margin-bottom: 14px;
+        font-size: 14px;
+        line-height: 1.35;
+        margin-bottom: 18px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stats {
+        grid-template-columns: repeat(5, 120px);
+        gap: 8px;
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat {
+        width: 120px;
+        height: 120px;
+        padding: 10px 8px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow,
+      #real-results-women-{{ section.id }} .real-results-women__stat-label {
+        font-size: 8.938px;
+        line-height: normal;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow {
+        margin-bottom: 5px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat:not(.real-results-women__stat--last) .real-results-women__stat-number {
+        font-size: 34px;
+        letter-spacing: -0.8px;
+        margin-bottom: 5px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat--last .real-results-women__stat-number {
+        font-size: 20px;
+        letter-spacing: 0;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      #real-results-women-{{ section.id }} {
+        padding: 60px 15px;
       }
 
       #real-results-women-{{ section.id }} .real-results-women__stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
       }
 
       #real-results-women-{{ section.id }} .real-results-women__stat {
-        min-height: 82px;
-        padding: 12px 8px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
       }
 
-      #real-results-women-{{ section.id }} .real-results-women__stat-number {
-        font-size: 24px;
-      }
-
-      #real-results-women-{{ section.id }} .real-results-women__stat-label {
-        font-size: 9px;
+      #real-results-women-{{ section.id }} .real-results-women__stat--last {
+        grid-column: 1 / -1;
+        height: 95px;
+        aspect-ratio: auto;
       }
     }
 
     @media screen and (max-width: 480px) {
       #real-results-women-{{ section.id }} .real-results-women__media {
-        gap: 8px;
+        gap: 4px;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      #real-results-women-{{ section.id }} .real-results-women__title {
+        font-size: 20px;
       }
 
-      #real-results-women-{{ section.id }} .real-results-women__caption {
-        font-size: 10px;
+      #real-results-women-{{ section.id }} .real-results-women__stat-eyebrow,
+      #real-results-women-{{ section.id }} .real-results-women__stat-label {
+        font-size: 8.938px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat:not(.real-results-women__stat--last) .real-results-women__stat-number {
+        font-size: 34px;
+      }
+
+      #real-results-women-{{ section.id }} .real-results-women__stat--last .real-results-women__stat-number {
+        font-size: 20px;
       }
     }
   </style>
@@ -302,6 +555,12 @@
     },
     {
       "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "REAL RESULTS"
+    },
+    {
+      "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Real Results, From Real Women"
@@ -328,19 +587,19 @@
       "type": "color",
       "id": "heading_color",
       "label": "Heading color",
-      "default": "#5e5147"
+      "default": "#211B18"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Description color",
-      "default": "#8b7f74"
+      "default": "#211B18"
     },
     {
       "type": "color",
       "id": "muted_color",
       "label": "Small label color",
-      "default": "#8b7f74"
+      "default": "#211B18"
     },
     {
       "type": "color",
@@ -350,15 +609,21 @@
     },
     {
       "type": "color",
+      "id": "stat_eyebrow_color",
+      "label": "Stat eyebrow color",
+      "default": "#211B18"
+    },
+    {
+      "type": "color",
       "id": "stat_number_color",
       "label": "Stat number color",
-      "default": "#5e5147"
+      "default": "#211B18"
     },
     {
       "type": "color",
       "id": "stat_label_color",
       "label": "Stat label color",
-      "default": "#8b7f74"
+      "default": "#211B18"
     }
   ],
   "blocks": [
@@ -368,20 +633,26 @@
       "settings": [
         {
           "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "UP TO"
+        },
+        {
+          "type": "text",
           "id": "number",
-          "label": "Number",
+          "label": "Heading / number",
           "default": "34%"
         },
         {
           "type": "text",
           "id": "label",
-          "label": "Label",
-          "default": "Users saw improvement"
+          "label": "Text",
+          "default": "Less shedding in 8 weeks"
         }
       ]
     }
   ],
-  "max_blocks": 4,
+  "max_blocks": 5,
   "presets": [
     {
       "name": "Real results women",
@@ -389,29 +660,41 @@
         {
           "type": "stat",
           "settings": {
+            "eyebrow": "UP TO",
             "number": "34%",
-            "label": "Users saw less shedding"
+            "label": "Less shedding in 8 weeks"
           }
         },
         {
           "type": "stat",
           "settings": {
+            "eyebrow": "INCREASE",
             "number": "78%",
-            "label": "Users noticed stronger strands"
+            "label": "In active growth phase"
           }
         },
         {
           "type": "stat",
           "settings": {
+            "eyebrow": "REDUCTION",
             "number": "35%",
-            "label": "Users saw improved scalp health"
+            "label": "In stress shedding"
           }
         },
         {
           "type": "stat",
           "settings": {
+            "eyebrow": "MORE THAN JUST A",
             "number": "9X",
-            "label": "Visible satisfaction"
+            "label": "Multi-pathway follicle support"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "eyebrow": "FAST AS",
+            "number": "8 WEEKS",
+            "label": "Healthier scalp in as little"
           }
         }
       ]

@@ -2,7 +2,6 @@
   <div class="hair-assessment-banner-bg__outer">
     <div class="hair-assessment-banner-bg__wrapper">
       <div class="hair-assessment-banner-bg__inner">
-
         <div class="hair-assessment-banner-bg__content">
           {% if section.settings.badge_text != blank %}
             <div class="hair-assessment-banner-bg__badge">
@@ -21,55 +20,63 @@
               {{ section.settings.subheading }}
             </p>
           {% endif %}
-          <div class="two-buttons-container">
-          {% if section.settings.button_label != blank %}
-            <div class="hair-assessment-banner-bg__button-wrap">
-              <a
-                {% if section.settings.button_link != blank %}
-                  href="{{ section.settings.button_link }}"
-                {% else %}
-                  role="link"
-                  aria-disabled="true"
-                {% endif %}
-                class="hair-assessment-banner-bg__button"
-              >
-                {{ section.settings.button_label }}
-                <span class="hair-assessment-banner-bg__button-arrow">→</span>
-              </a>
-            </div>
-          {% endif %}
-          {% if section.settings.button_label != blank %}
-            <div class="two hair-assessment-banner-bg__button-wrap">
-              <a
-                {% if section.settings.button_link != blank %}
-                  href="{{ section.settings.button_link2 }}"
-                {% else %}
-                  role="link"
-                  aria-disabled="true"
-                {% endif %}
-                class="two hair-assessment-banner-bg__button"
-              >
-                {{ section.settings.button_label2 }}
-                <span class="hair-assessment-banner-bg__button-arrow">→</span>
-              </a>
-            </div>
-          {% endif %}
-        </div>
-        </div>
 
+          {% if section.settings.button_label != blank or section.settings.button_label2 != blank %}
+            <div class="two-buttons-container">
+              {% if section.settings.button_label != blank %}
+                <div class="hair-assessment-banner-bg__button-wrap">
+                  <a
+                    {% if section.settings.button_link != blank %}
+                      href="{{ section.settings.button_link }}"
+                    {% else %}
+                      role="link"
+                      aria-disabled="true"
+                    {% endif %}
+                    class="hair-assessment-banner-bg__button"
+                  >
+                    {{ section.settings.button_label }}
+                  </a>
+                </div>
+              {% endif %}
+
+              {% if section.settings.button_label2 != blank %}
+                <div class="two hair-assessment-banner-bg__button-wrap">
+                  <a
+                    {% if section.settings.button_link2 != blank %}
+                      href="{{ section.settings.button_link2 }}"
+                    {% else %}
+                      role="link"
+                      aria-disabled="true"
+                    {% endif %}
+                    class="two hair-assessment-banner-bg__button"
+                  >
+                    {{ section.settings.button_label2 }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <style>
+  #section-{{ section.id }} {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #section-{{ section.id }} *,
+  #section-{{ section.id }} *::before,
+  #section-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
   #section-{{ section.id }} .two-buttons-container {
     display: flex;
     gap: 12px;
-  }
-
-  #section-{{ section.id }} {
-    width: 100%;
   }
 
   #section-{{ section.id }} .hair-assessment-banner-bg__outer {
@@ -77,24 +84,31 @@
   }
 
   #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
-    width: 100%;
-  }
-
-  #section-{{ section.id }} .hair-assessment-banner-bg__inner {
     position: relative;
     width: 100%;
     min-height: 518px;
+    padding: 60px 40px;
     display: flex;
     align-items: center;
-    padding: 60px 40px;
     background-color: #DCECED;
     {% if section.settings.background_image != blank %}
       background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');
     {% endif %}
     background-size: cover;
-    background-position: right bottom;
+    background-position: center center;
     background-repeat: no-repeat;
     overflow: hidden;
+  }
+
+  #section-{{ section.id }} .hair-assessment-banner-bg__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0;
   }
 
   #section-{{ section.id }} .hair-assessment-banner-bg__content {
@@ -109,7 +123,6 @@
     align-items: center;
     justify-content: center;
     min-height: 26px;
-    padding: 6px 14px;
     margin-bottom: 18px;
     border-radius: 999px;
     background: transparent;
@@ -120,7 +133,7 @@
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
-    padding: 10px;
+    padding: 10px 20px;
     position: relative;
   }
 
@@ -156,7 +169,7 @@
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: normal;
   }
 
@@ -177,7 +190,7 @@
     min-height: 38px;
     padding: 15px 21px;
     border-radius: 999px;
-    background: #C4A882;
+    background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
     color: #FFFFFF;
     text-decoration: none;
     font-family: "DM Sans";
@@ -186,6 +199,11 @@
     font-weight: 500;
     line-height: 1;
     transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  a.header.hs-science-hero__button.hs-science-hero__button--secondary:hover {
+    color: #000;
+    background: #fff;
   }
 
   #section-{{ section.id }} .hair-assessment-banner-bg__button:hover {
@@ -198,15 +216,16 @@
   }
 
   @media screen and (max-width: 1024px) {
-    #section-{{ section.id }} .hair-assessment-banner-bg__inner {
+    #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
+      justify-content: center;
       {% if section.settings.background_image_1024 != blank %}
         background-image: url('{{ section.settings.background_image_1024 | image_url: width: 1800 }}');
       {% endif %}
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__inner {
-      min-height: 700px;
       flex-direction: column;
+      justify-content: center;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__content {
@@ -245,8 +264,12 @@
   }
 
   @media screen and (max-width: 768px) {
-    #section-{{ section.id }} .hair-assessment-banner-bg__inner {
+    #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
       padding: 40px 15px;
+    }
+
+    #section-{{ section.id }} .two-buttons-container {
+      flex-direction: column;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__heading {
@@ -255,10 +278,15 @@
   }
 
   @media screen and (max-width: 749px) {
-    #section-{{ section.id }} .hair-assessment-banner-bg__inner {
-      align-items: flex-end;
+    #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
       padding: 40px 15px;
       background-position: center bottom;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__inner {
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__content {
@@ -267,7 +295,7 @@
   }
 
   @media screen and (max-width: 450px) {
-    #section-{{ section.id }} .hair-assessment-banner-bg__inner {
+    #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
       {% if section.settings.background_image_450 != blank %}
         background-image: url('{{ section.settings.background_image_450 | image_url: width: 900 }}');
       {% endif %}
@@ -330,13 +358,13 @@
     {
       "type": "text",
       "id": "button_label2",
-      "label": "Button label",
+      "label": "Second button label",
       "default": "Take the Free Hair Assessment"
     },
     {
       "type": "url",
       "id": "button_link2",
-      "label": "Button link"
+      "label": "Second button link"
     }
   ],
   "presets": [

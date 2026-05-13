@@ -1,0 +1,141 @@
+<div
+  class="two-image-text-block"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.image_1 != blank or block.settings.text_1 != blank %}
+    <div class="two-image-text-block__item">
+      {% if block.settings.image_1 != blank %}
+        {{
+          block.settings.image_1
+          | image_url: width: 64
+          | image_tag:
+            loading: 'lazy',
+            class: 'two-image-text-block__image',
+            alt: block.settings.text_1,
+            widths: '32, 64'
+        }}
+      {% endif %}
+
+      {% if block.settings.text_1 != blank %}
+        <div class="two-image-text-block__text">
+          {{ block.settings.text_1 | escape }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.image_2 != blank or block.settings.text_2 != blank %}
+    <div class="two-image-text-block__item">
+      {% if block.settings.image_2 != blank %}
+        {{
+          block.settings.image_2
+          | image_url: width: 64
+          | image_tag:
+            loading: 'lazy',
+            class: 'two-image-text-block__image',
+            alt: block.settings.text_2,
+            widths: '32, 64'
+        }}
+      {% endif %}
+
+      {% if block.settings.text_2 != blank %}
+        <div class="two-image-text-block__text">
+          {{ block.settings.text_2 | escape }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .two-image-text-block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .two-image-text-block__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: auto;
+    min-width: 0;
+    flex: 0 0 auto;
+  }
+
+  .two-image-text-block__image {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .two-image-text-block__text {
+    overflow: hidden;
+    color: var(--New-Colors-Black, #2A2A2A) !important;
+    text-overflow: ellipsis;
+
+    /* NewTypography/HEADING/H6 Medium */
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 18px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .two-image-text-block {
+      gap: 12px;
+    }
+
+    .two-image-text-block__item {
+      gap: 8px;
+      width: auto;
+      flex: 0 0 auto;
+    }
+
+    .two-image-text-block__text {
+      font-size: 14px !important;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Two image text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Left image"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Left text",
+      "default": "Left text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Right image"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Right text",
+      "default": "Right text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two image text"
+    }
+  ]
+}
+{% endschema %}

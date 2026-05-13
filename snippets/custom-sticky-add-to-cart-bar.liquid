@@ -1,0 +1,709 @@
+{% liquid
+  assign sticky_product = product
+  assign sticky_current_variant = current_variant | default: sticky_product.selected_or_first_available_variant
+  assign sticky_initial_quantity = initial_quantity
+
+  if sticky_initial_quantity == blank
+    assign sticky_initial_quantity = sticky_current_variant.quantity_rule.min | default: 1
+  endif
+
+  assign sticky_color_scheme = color_scheme | default: settings.popover_color_scheme
+  assign sticky_id = 'hs-sticky-atc-' | append: section.id | append: '-' | append: sticky_product.id
+  assign image_to_show = sticky_current_variant.featured_image | default: sticky_product.featured_image
+%}
+
+{% if sticky_product != blank and sticky_current_variant != blank %}
+  <sticky-add-to-cart
+    id="{{ sticky_id }}"
+    class="sticky-add-to-cart hs-sticky-atc"
+    data-below-fold="false"
+    data-variant-available="{{ sticky_current_variant.available }}"
+    data-product-id="{{ sticky_product.id }}"
+    data-current-variant-id="{{ sticky_current_variant.id }}"
+    data-initial-quantity="{{ sticky_initial_quantity }}"
+    data-default-variant-title="{{ 'products.product.default_title' | t }}"
+  >
+    <div
+      class="sticky-add-to-cart__bar hs-sticky-atc__bar color-{{ sticky_color_scheme }}"
+      data-stuck="true"
+      ref="stickyBar"
+      role="region"
+      aria-label="{{ 'products.product.sticky_add_to_cart' | t }}"
+    >
+      <div class="hs-sticky-atc__left">
+        {% if image_to_show %}
+          <div class="sticky-add-to-cart__image hs-sticky-atc__image">
+            {% assign image_alt = image_to_show.alt | default: sticky_product.title | escape %}
+            {{
+              image_to_show
+              | image_url: width: 180
+              | image_tag:
+                loading: 'lazy',
+                alt: image_alt,
+                class: 'sticky-add-to-cart__image-img hs-sticky-atc__image-img',
+                data-testid: 'sticky-product-image',
+                srcset: null,
+                sizes: null,
+                ref: 'productImage'
+            }}
+          </div>
+        {% endif %}
+
+        <div class="sticky-add-to-cart__info hs-sticky-atc__info">
+          <p
+            class="sticky-add-to-cart__title hs-sticky-atc__title"
+            data-testid="sticky-product-title"
+          >
+            {{ sticky_product.title | escape }}
+          </p>
+
+          <div class="hs-sticky-atc__selectors">
+            {% if sticky_product.has_only_default_variant %}
+              <select class="hs-sticky-atc__select" aria-label="Product option">
+                <option selected>1 Bottle</option>
+              </select>
+            {% else %}
+              <select
+                class="hs-sticky-atc__select"
+                aria-label="Product option"
+                data-sticky-variant-select
+              >
+                {% for variant in sticky_product.variants %}
+                  <option
+                    value="{{ variant.id }}"
+                    data-price="{{ variant.price | money | escape }}"
+                    data-available="{{ variant.available }}"
+                    data-min="{{ variant.quantity_rule.min | default: 1 }}"
+                    data-max="{{ variant.quantity_rule.max }}"
+                    data-step="{{ variant.quantity_rule.increment | default: 1 }}"
+                    {% if variant.featured_image %}
+                      data-image="{{ variant.featured_image | image_url: width: 180 }}"
+                    {% endif %}
+                    {% if variant.id == sticky_current_variant.id %}
+                      selected
+                    {% endif %}
+                    {% unless variant.available %}
+                      disabled
+                    {% endunless %}
+                  >
+                    {{ variant.title }}
+                  </option>
+                {% endfor %}
+              </select>
+            {% endif %}
+
+            <select
+              class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
+              aria-label="Purchase option"
+              data-sticky-selling-plan-select
+            >
+              <option value="">One-time Purchase</option>
+
+              {% for selling_plan_group in sticky_product.selling_plan_groups %}
+                {% for selling_plan in selling_plan_group.selling_plans %}
+                  <option value="{{ selling_plan.id }}">
+                    {{ selling_plan.name }}
+                  </option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+
+          <div
+            class="sticky-add-to-cart__price hs-sticky-atc__price"
+            data-testid="sticky-price-display"
+            data-sticky-price
+          >
+            {{ sticky_current_variant.price | money }}
+          </div>
+        </div>
+      </div>
+
+      <div class="hs-sticky-atc__right">
+        <div class="hs-sticky-atc__qty" aria-label="Quantity selector">
+          <button
+            type="button"
+            class="hs-sticky-atc__qty-btn"
+            aria-label="Decrease quantity"
+            data-sticky-qty-minus
+          >
+            −
+          </button>
+
+          <span class="hs-sticky-atc__qty-number" aria-live="polite">
+            <span data-sticky-qty-number>{{ sticky_initial_quantity }}</span>
+          </span>
+
+          <button
+            type="button"
+            class="hs-sticky-atc__qty-btn"
+            aria-label="Increase quantity"
+            data-sticky-qty-plus
+          >
+            +
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="sticky-add-to-cart__button add-to-cart-button button hs-sticky-atc__button"
+          ref="addToCartButton"
+          on:click="/handleAddToCartClick"
+          {% unless sticky_current_variant.available %}
+            disabled
+          {% endunless %}
+        >
+          <span class="add-to-cart-text">
+            <span class="add-to-cart-text__content">
+              <span data-sticky-button-label>
+                {%- if sticky_current_variant.available -%}
+                  {{- 'products.product.add_to_cart' | t -}}
+                {%- elsif sticky_current_variant == blank -%}
+                  {{- 'products.product.unavailable' | t -}}
+                {%- else -%}
+                  {{- 'products.product.sold_out' | t -}}
+                {%- endif -%}
+              </span>
+
+              <span
+                class="hs-sticky-atc__theme-qty-ref"
+                ref="quantityDisplay"
+                aria-hidden="true"
+                style="display: none;"
+              >
+                <span ref="quantityNumber" data-sticky-theme-qty-number>{{ sticky_initial_quantity }}</span>
+              </span>
+            </span>
+          </span>
+
+          <span class="add-to-cart__added">
+            <span class="svg-wrapper add-to-cart__added-icon">
+              {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </sticky-add-to-cart>
+
+  <style>
+    #{{ sticky_id }} {
+      --hs-atc-purple: #56304f;
+      --hs-atc-purple-dark: #3b1738;
+      --hs-atc-text: #1f1a1c;
+      --hs-atc-border: #d8d8d8;
+      --hs-atc-shadow: 0 -10px 35px rgba(0, 0, 0, 0.14);
+      --hs-atc-body-font: "DM Sans", sans-serif;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      z-index: calc(var(--layer-sticky, 1000) - 1);
+      width: 100vw;
+      min-height: 118px;
+      padding: 22px 60px;
+      background: #ffffff;
+      color: var(--hs-atc-text);
+      box-shadow: var(--hs-atc-shadow);
+      border-radius: 0;
+      font-family: var(--hs-atc-body-font);
+
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(110%) !important;
+
+      display: flex !important;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    #{{ sticky_id }}[data-below-fold='true'] .hs-sticky-atc__bar {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0) !important;
+      display: flex !important;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__bar::before {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      #{{ sticky_id }} .hs-sticky-atc__bar {
+        transition-property: transform, opacity, visibility;
+        transition-duration: 0.3s;
+        transition-timing-function: var(--ease-out-quad, ease);
+      }
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__image {
+      width: 92px;
+      height: 72px;
+      aspect-ratio: auto;
+      flex-shrink: 0;
+      border-radius: 0;
+      overflow: hidden;
+      background: #f3f0ec;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__image-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__info {
+      min-width: 0;
+      flex: 1;
+      font-family: var(--hs-atc-body-font);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__title {
+      margin: 0 0 8px;
+      color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__selectors {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      font-family: var(--hs-atc-body-font);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__select {
+      width: 165px;
+      max-width: 100%;
+      height: 31px;
+      padding: 0 34px 0 8px;
+      border: 1px solid var(--hs-atc-border);
+      border-radius: 2px;
+      background-color: #ffffff;
+      color: #222222;
+      font-family: var(--hs-atc-body-font);
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 400;
+      box-shadow: none;
+      outline: none;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__select--purchase {
+      width: 205px;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__price {
+      color: #222222;
+      font-family: var(--hs-atc-body-font);
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      font-family: var(--hs-atc-body-font);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__qty {
+      height: 56px;
+      min-width: 122px;
+      padding: 0 14px;
+      border: 1px solid #d5d5d5;
+      border-radius: 999px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      color: #111111;
+      font-family: var(--hs-atc-body-font);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__qty-btn {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #111111;
+      font-family: var(--hs-atc-body-font);
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 400;
+      width: 18px;
+      height: 30px;
+      padding: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__qty-number {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 30px;
+      text-align: center;
+      color: #111111 !important;
+      font-family: var(--hs-atc-body-font);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__theme-qty-ref {
+      display: none !important;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__button {
+      min-width: 178px;
+      height: 56px;
+      border-radius: 999px;
+      border: 0;
+      background: linear-gradient(90deg, var(--hs-atc-purple), var(--hs-atc-purple-dark));
+      color: #ffffff;
+      font-family: var(--hs-atc-body-font);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1;
+      padding: 0 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: none;
+      position: relative;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__button::before,
+    #{{ sticky_id }} .hs-sticky-atc__button::after {
+      display: none;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__button .add-to-cart-icon {
+      display: none;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__button[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__button *,
+    #{{ sticky_id }} .hs-sticky-atc__select *,
+    #{{ sticky_id }} .hs-sticky-atc__qty * {
+      font-family: var(--hs-atc-body-font);
+    }
+
+    @media screen and (max-width: 989px) {
+      #{{ sticky_id }} .hs-sticky-atc__bar {
+        padding: 18px 24px;
+        gap: 18px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__right {
+        gap: 8px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__button {
+        min-width: 150px;
+        font-size: 16px;
+        padding-inline: 22px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      #{{ sticky_id }} .hs-sticky-atc__bar {
+        bottom: 0;
+        width: 100vw;
+        min-height: auto;
+        padding: 12px;
+        border-top: 1px solid #eeeeee;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__left {
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__image {
+        width: 98px;
+        height: 94px;
+        flex-shrink: 0;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__title {
+        margin: 0 0 8px;
+        color: var(--New-Colors-Black, #2A2A2A);
+        font-family: var(--hs-atc-body-font);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: none;
+        letter-spacing: 0;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__selectors {
+        gap: 10px;
+        margin-bottom: 8px;
+        flex-wrap: nowrap;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__select {
+        width: 100px;
+        height: 32px;
+        padding: 0 24px 0 8px;
+        font-size: 14px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__select--purchase {
+        width: 150px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__price {
+        font-size: 14px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__right {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__qty {
+        height: 48px;
+        min-width: 112px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__qty-number {
+        min-width: 16px;
+        height: 28px;
+        font-size: 14px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__button {
+        height: 48px;
+        min-width: 0;
+        flex: 1;
+        font-size: 15px;
+      }
+    }
+
+    @media screen and (max-width: 420px) {
+      #{{ sticky_id }} .hs-sticky-atc__bar {
+        padding: 10px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__left {
+        gap: 8px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__image {
+        width: 96px;
+        height: 94px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__selectors {
+        gap: 8px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__select {
+        width: 96px;
+        font-size: 14px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__select--purchase {
+        width: 145px;
+      }
+    }
+  </style>
+
+  <script>
+    (() => {
+      const root = document.getElementById({{ sticky_id | json }});
+
+      if (!root || root.dataset.hsStickyReady === 'true') return;
+
+      root.dataset.hsStickyReady = 'true';
+
+      const stickyBar = root.querySelector('.hs-sticky-atc__bar');
+      const variantSelect = root.querySelector('[data-sticky-variant-select]');
+      const qtyMinus = root.querySelector('[data-sticky-qty-minus]');
+      const qtyPlus = root.querySelector('[data-sticky-qty-plus]');
+      const qtyNumber = root.querySelector('[data-sticky-qty-number]');
+      const themeQtyNumber = root.querySelector('[data-sticky-theme-qty-number]');
+      const price = root.querySelector('[data-sticky-price]');
+      const productImage = root.querySelector('[data-testid="sticky-product-image"]');
+      const addButton = root.querySelector('[ref="addToCartButton"]');
+      const buttonLabel = root.querySelector('[data-sticky-button-label]');
+
+      const addToCartText = {{ 'products.product.add_to_cart' | t | json }};
+      const soldOutText = {{ 'products.product.sold_out' | t | json }};
+
+      let quantity = parseInt(root.dataset.initialQuantity || '1', 10) || 1;
+      let isTicking = false;
+
+      const updateStickyVisibility = () => {
+        const foldPosition = window.innerHeight || document.documentElement.clientHeight || 0;
+        const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        const isBelowFold = currentScroll > foldPosition;
+
+        root.setAttribute('data-below-fold', isBelowFold ? 'true' : 'false');
+
+        if (stickyBar) {
+          stickyBar.setAttribute('data-stuck', 'true');
+        }
+      };
+
+      const requestStickyVisibilityUpdate = () => {
+        if (isTicking) return;
+
+        isTicking = true;
+
+        window.requestAnimationFrame(() => {
+          updateStickyVisibility();
+          isTicking = false;
+        });
+      };
+
+      updateStickyVisibility();
+
+      window.addEventListener('scroll', requestStickyVisibilityUpdate, { passive: true });
+      window.addEventListener('resize', requestStickyVisibilityUpdate);
+      window.addEventListener('pageshow', updateStickyVisibility);
+
+      const getSelectedOption = () => {
+        if (!variantSelect) return null;
+        return variantSelect.options[variantSelect.selectedIndex] || null;
+      };
+
+      const getQuantityRules = () => {
+        const selectedOption = getSelectedOption();
+
+        const min = parseInt(selectedOption?.dataset.min || '1', 10) || 1;
+        const max = parseInt(selectedOption?.dataset.max || '', 10);
+        const step = parseInt(selectedOption?.dataset.step || '1', 10) || 1;
+
+        return {
+          min,
+          max: Number.isNaN(max) ? null : max,
+          step
+        };
+      };
+
+      const setQuantity = (nextQuantity) => {
+        const rules = getQuantityRules();
+
+        let newQuantity = Math.max(rules.min, nextQuantity);
+
+        if (rules.max && rules.max > 0) {
+          newQuantity = Math.min(rules.max, newQuantity);
+        }
+
+        quantity = newQuantity;
+
+        if (qtyNumber) {
+          qtyNumber.textContent = quantity;
+        }
+
+        if (themeQtyNumber) {
+          themeQtyNumber.textContent = quantity;
+        }
+
+        root.dataset.initialQuantity = String(quantity);
+      };
+
+      if (qtyMinus) {
+        qtyMinus.addEventListener('click', () => {
+          const rules = getQuantityRules();
+          setQuantity(quantity - rules.step);
+        });
+      }
+
+      if (qtyPlus) {
+        qtyPlus.addEventListener('click', () => {
+          const rules = getQuantityRules();
+          setQuantity(quantity + rules.step);
+        });
+      }
+
+      if (variantSelect) {
+        variantSelect.addEventListener('change', () => {
+          const selectedOption = getSelectedOption();
+
+          if (!selectedOption) return;
+
+          const isAvailable = selectedOption.dataset.available === 'true';
+
+          root.setAttribute('data-current-variant-id', selectedOption.value);
+          root.setAttribute('data-variant-available', String(isAvailable));
+
+          if (price && selectedOption.dataset.price) {
+            price.textContent = selectedOption.dataset.price;
+          }
+
+          if (productImage && selectedOption.dataset.image) {
+            productImage.src = selectedOption.dataset.image;
+            productImage.removeAttribute('srcset');
+          }
+
+          if (addButton) {
+            addButton.disabled = !isAvailable;
+          }
+
+          if (buttonLabel) {
+            buttonLabel.textContent = isAvailable ? addToCartText : soldOutText;
+          }
+
+          const rules = getQuantityRules();
+          setQuantity(rules.min);
+          updateStickyVisibility();
+        });
+      }
+
+      setQuantity(quantity);
+    })();
+  </script>
+{% endif %}

@@ -1,0 +1,529 @@
+<div
+  class="video-carousel-block"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.heading != blank or block.settings.subheading != blank %}
+    <div class="video-carousel-block__header">
+      {% if block.settings.heading != blank %}
+        <h3 class="video-carousel-block__heading">
+          {{ block.settings.heading | escape }}
+        </h3>
+      {% endif %}
+
+      {% if block.settings.subheading != blank %}
+        <p class="video-carousel-block__subheading">
+          {{ block.settings.subheading | escape }}
+        </p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="video-carousel-block__viewport">
+    <div class="video-carousel-block__track">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const carousels = document.querySelectorAll('.video-carousel-block');
+
+    carousels.forEach((carousel) => {
+      if (carousel.dataset.videoCarouselReady === 'true') return;
+      carousel.dataset.videoCarouselReady = 'true';
+
+      const track = carousel.querySelector('.video-carousel-block__track');
+
+      if (!track) return;
+
+      let originalCards = [];
+      let loopWidth = 0;
+      let isPaused = false;
+      let isDragging = false;
+      let hasDragged = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let lastTime = performance.now();
+      let resumeTimer = null;
+
+      const speed = 32;
+
+      const updateCarouselWidth = () => {
+        const rect = carousel.getBoundingClientRect();
+        const availableWidth = window.innerWidth - rect.left;
+
+        carousel.style.setProperty('--video-carousel-width', `${availableWidth}px`);
+      };
+
+      const revealCarousel = () => {
+        carousel.classList.add('is-visible');
+      };
+
+      const pauseCarousel = () => {
+        isPaused = true;
+
+        if (resumeTimer) {
+          window.clearTimeout(resumeTimer);
+          resumeTimer = null;
+        }
+      };
+
+      const resumeCarousel = () => {
+        if (resumeTimer) {
+          window.clearTimeout(resumeTimer);
+        }
+
+        resumeTimer = window.setTimeout(() => {
+          isPaused = false;
+        }, 900);
+      };
+
+      const removeOldClones = () => {
+        const clones = track.querySelectorAll('[data-video-carousel-clone="true"]');
+
+        clones.forEach((clone) => {
+          clone.remove();
+        });
+      };
+
+      const cloneCards = () => {
+        removeOldClones();
+
+        originalCards = Array.from(track.querySelectorAll('.video-carousel-block__card:not([data-video-carousel-clone="true"])'));
+
+        if (!originalCards.length) return;
+
+        loopWidth = track.scrollWidth;
+
+        let safetyCount = 0;
+
+        while (track.scrollWidth < track.clientWidth * 3 && safetyCount < 12) {
+          originalCards.forEach((card) => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('data-video-carousel-clone', 'true');
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+          });
+
+          safetyCount += 1;
+        }
+
+        if (loopWidth <= 0) {
+          loopWidth = track.scrollWidth / 2;
+        }
+      };
+
+      const normalizeScroll = () => {
+        if (!loopWidth) return;
+
+        if (track.scrollLeft >= loopWidth) {
+          track.scrollLeft = track.scrollLeft - loopWidth;
+        }
+
+        if (track.scrollLeft < 0) {
+          track.scrollLeft = track.scrollLeft + loopWidth;
+        }
+      };
+
+      const refreshCarousel = () => {
+        updateCarouselWidth();
+        cloneCards();
+        normalizeScroll();
+      };
+
+      const animate = (currentTime) => {
+        const delta = currentTime - lastTime;
+        lastTime = currentTime;
+
+        if (!isPaused && !isDragging && loopWidth > 0 && track.scrollWidth > track.clientWidth) {
+          track.scrollLeft += speed * (delta / 1000);
+          normalizeScroll();
+        }
+
+        requestAnimationFrame(animate);
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                revealCarousel();
+                observer.unobserve(carousel);
+              }
+            });
+          },
+          {
+            threshold: 0.18
+          }
+        );
+
+        observer.observe(carousel);
+      } else {
+        revealCarousel();
+      }
+
+      refreshCarousel();
+
+      window.addEventListener('resize', refreshCarousel);
+
+      track.addEventListener('mouseenter', pauseCarousel);
+      track.addEventListener('mouseleave', resumeCarousel);
+
+      track.addEventListener('mousedown', (event) => {
+        isDragging = true;
+        hasDragged = false;
+        pauseCarousel();
+
+        track.classList.add('is-dragging');
+
+        startX = event.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+      });
+
+      track.addEventListener('mousemove', (event) => {
+        if (!isDragging) return;
+
+        event.preventDefault();
+
+        const x = event.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.2;
+
+        if (Math.abs(walk) > 5) {
+          hasDragged = true;
+        }
+
+        track.scrollLeft = scrollLeft - walk;
+        normalizeScroll();
+      });
+
+      track.addEventListener('mouseup', () => {
+        isDragging = false;
+        track.classList.remove('is-dragging');
+        resumeCarousel();
+      });
+
+      track.addEventListener('mouseleave', () => {
+        isDragging = false;
+        track.classList.remove('is-dragging');
+      });
+
+      track.addEventListener('touchstart', () => {
+        pauseCarousel();
+      });
+
+      track.addEventListener('touchmove', () => {
+        normalizeScroll();
+      });
+
+      track.addEventListener('touchend', () => {
+        resumeCarousel();
+      });
+
+      track.addEventListener(
+        'click',
+        (event) => {
+          if (!hasDragged) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          hasDragged = false;
+        },
+        true
+      );
+
+      requestAnimationFrame(animate);
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .video-carousel-block {
+    width: var(--video-carousel-width, 100%);
+    max-width: none;
+    overflow: hidden;
+  }
+
+  .video-carousel-block__header {
+    width: 100%;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s ease;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__header {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .video-carousel-block__heading {
+    margin: 0;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .video-carousel-block__subheading {
+    margin: 4px 0 0;
+    color: var(--new-colors-gray-subhead, #6B6B6B);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .video-carousel-block__viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .video-carousel-block__track {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    cursor: grab;
+  }
+
+  .video-carousel-block__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .video-carousel-block__track.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+  }
+
+  .video-carousel-block__track.is-dragging .video-carousel-block__link {
+    pointer-events: none;
+  }
+
+  .video-carousel-block__card {
+    flex: 0 0 155px;
+    width: 155px;
+    scroll-snap-align: start;
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card:nth-child(1) {
+    transition-delay: 0.06s;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card:nth-child(3) {
+    transition-delay: 0.18s;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card:nth-child(4) {
+    transition-delay: 0.24s;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card:nth-child(5) {
+    transition-delay: 0.3s;
+  }
+
+  .video-carousel-block.is-visible .video-carousel-block__card:nth-child(6) {
+    transition-delay: 0.36s;
+  }
+
+  .video-carousel-block__link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 222px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #e7e7e7;
+    text-decoration: none;
+    transform: translateZ(0);
+    transition:
+      transform 0.28s ease,
+      box-shadow 0.28s ease;
+  }
+
+  .video-carousel-block__link::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    width: 39px;
+    height: 39px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='39' height='39' viewBox='0 0 39 39' fill='none'%3E%3Cpath d='M19.0339 2.85547C10.2877 2.85547 3.17188 9.97125 3.17188 18.7175C3.17188 27.4638 10.2877 34.5796 19.0339 34.5796C27.7802 34.5796 34.896 27.4638 34.896 18.7175C34.896 9.97125 27.7802 2.85547 19.0339 2.85547ZM19.0339 5.23478C26.4944 5.23478 32.5167 11.2571 32.5167 18.7175C32.5167 26.1779 26.4944 32.2003 19.0339 32.2003C11.5735 32.2003 5.55119 26.1779 5.55119 18.7175C5.55119 11.2571 11.5735 5.23478 19.0339 5.23478ZM15.592 12.3727C15.3844 12.3695 15.175 12.4213 14.9879 12.5276C14.6135 12.737 14.3838 13.1325 14.3838 13.5624V23.8727C14.3838 24.3026 14.6135 24.6981 14.9879 24.9075C15.1687 25.0106 15.372 25.0624 15.5734 25.0624C15.7875 25.0624 16.0012 25.0062 16.1899 24.892L24.6972 19.7368C25.0541 19.5211 25.2703 19.1347 25.2703 18.7175C25.2703 18.3004 25.0541 17.9156 24.6972 17.6983L16.1899 12.5431C16.0067 12.4321 15.7996 12.3759 15.592 12.3727Z' fill='white'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+  }
+
+  .video-carousel-block__link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(33, 27, 24, 0.14);
+  }
+
+  .video-carousel-block__link:hover::after {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  .video-carousel-block__image,
+  .video-carousel-block__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+
+  .video-carousel-block__link:hover .video-carousel-block__image {
+    transform: scale(1.06);
+  }
+
+  .video-carousel-block__placeholder {
+    background: #e7e7e7;
+  }
+
+  .video-carousel-block__card-title {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  }
+
+  @media screen and (max-width: 749px) {
+    .video-carousel-block {
+      width: 100%;
+    }
+
+    .video-carousel-block__header {
+      margin-bottom: 16px;
+    }
+
+    .video-carousel-block__heading {
+      font-size: 17px;
+    }
+
+    .video-carousel-block__subheading {
+      font-size: 13px;
+    }
+
+    .video-carousel-block__track {
+      gap: 10px;
+    }
+
+    .video-carousel-block__card {
+      flex-basis: 142px;
+      width: 142px;
+    }
+
+    .video-carousel-block__link {
+      height: 205px;
+    }
+
+    .video-carousel-block__link::after {
+      width: 39px;
+      height: 39px;
+    }
+
+    .video-carousel-block__link:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .video-carousel-block__link:hover::after {
+      transform: translate(-50%, -50%);
+    }
+
+    .video-carousel-block__link:hover .video-carousel-block__image {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .video-carousel-block__header,
+    .video-carousel-block__card,
+    .video-carousel-block__link,
+    .video-carousel-block__image,
+    .video-carousel-block__placeholder {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .video-carousel-block__link::after {
+      transform: translate(-50%, -50%) !important;
+    }
+
+    .video-carousel-block__track {
+      scroll-behavior: auto;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Video carousel",
+  "blocks": [
+    {
+      "type": "video-carousel-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not Sure What’s Causing Your Hair Thinning?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video carousel"
+    }
+  ]
+}
+{% endschema %}

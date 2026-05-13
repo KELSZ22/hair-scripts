@@ -1,0 +1,728 @@
+<section
+  id="faq-main-{{ section.id }}"
+  class="faq-main-section"
+  style="
+    --faq-main-bg: {{ section.settings.section_bg }};
+    --faq-main-content-bg: {{ section.settings.content_bg }};
+    --faq-main-heading: {{ section.settings.heading_color }};
+    --faq-main-subtext: {{ section.settings.subtext_color }};
+    --faq-main-tab-bg: {{ section.settings.tab_bg }};
+    --faq-main-tab-text: {{ section.settings.tab_text }};
+    --faq-main-tab-active-bg: {{ section.settings.tab_active_bg }};
+    --faq-main-tab-active-text: {{ section.settings.tab_active_text }};
+    --faq-main-item-border: {{ section.settings.item_border }};
+    --faq-main-item-bg: {{ section.settings.item_bg }};
+    --faq-main-item-active-bg: {{ section.settings.item_active_bg }};
+    --faq-main-question: {{ section.settings.question_color }};
+    --faq-main-question-active: {{ section.settings.question_active_color }};
+    --faq-main-answer: {{ section.settings.answer_color }};
+    --faq-main-button-bg: {{ section.settings.button_bg }};
+    --faq-main-button-text: {{ section.settings.button_text }};
+  "
+>
+  <div class="faq-main__grid">
+    <div class="faq-main__content-column">
+      <div class="faq-main__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="faq-main__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+          <div class="faq-main__subheading">{{ section.settings.subheading }}</div>
+        {% endif %}
+
+        <div class="faq-main__tabs" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+          <button type="button" class="faq-main__tab is-active" role="tab" aria-selected="true" data-tab="category-1">
+            {{ section.settings.category_1_label }}
+          </button>
+          <button type="button" class="faq-main__tab" role="tab" aria-selected="false" data-tab="category-2">
+            {{ section.settings.category_2_label }}
+          </button>
+          <button type="button" class="faq-main__tab" role="tab" aria-selected="false" data-tab="category-3">
+            {{ section.settings.category_3_label }}
+          </button>
+          <button type="button" class="faq-main__tab" role="tab" aria-selected="false" data-tab="category-4">
+            {{ section.settings.category_4_label }}
+          </button>
+        </div>
+
+        <div class="faq-main__items" data-faq-items>
+          {% for block in section.blocks %}
+            <div
+              class="faq-main__item{% if forloop.first and block.settings.category == 'category-1' %} is-active{% endif %}"
+              data-category="{{ block.settings.category }}"
+              {{ block.shopify_attributes }}
+            >
+              <button
+                type="button"
+                class="faq-main__question"
+                aria-expanded="{% if forloop.first and block.settings.category == 'category-1' %}true{% else %}false{% endif %}"
+              >
+                <span class="faq-main__question-text">{{ block.settings.question }}</span>
+                <span class="faq-main__icon" aria-hidden="true"></span>
+              </button>
+
+              <div class="faq-main__answer-wrapper" {% unless forloop.first and block.settings.category == 'category-1' %}hidden{% endunless %}>
+                <div class="faq-main__answer">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if section.settings.footer_text != blank or section.settings.button_label != blank %}
+          <div class="faq-main__footer">
+            {% if section.settings.footer_text != blank %}
+              <div class="faq-main__footer-text">{{ section.settings.footer_text }}</div>
+            {% endif %}
+
+            {% if section.settings.button_label != blank %}
+              <a
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                {% else %}
+                  role="link"
+                  aria-disabled="true"
+                {% endif %}
+                class="faq-main__button"
+              >
+                {{ section.settings.button_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="faq-main__media-column">
+      <div class="faq-main__media-wrap">
+        {% if section.settings.right_image != blank %}
+          {{
+            section.settings.right_image
+            | image_url: width: 1800
+            | image_tag:
+              class: 'faq-main__image',
+              loading: 'lazy',
+              widths: '500, 700, 900, 1200, 1600, 1800',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: section.settings.heading
+          }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'faq-main__image faq-main__placeholder' }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #faq-main-{{ section.id }} {
+      background: var(--faq-main-bg);
+      width: 100%;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__grid {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      min-height: 700px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__content-column {
+      width: 52%;
+      flex: 0 0 52%;
+      background: var(--faq-main-content-bg);
+      display: flex;
+      align-items: center;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__media-column {
+      width: 48%;
+      flex: 0 0 48%;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__media-wrap {
+      height: 100%;
+      min-height: 700px;
+      overflow: hidden;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__image,
+    #faq-main-{{ section.id }} .faq-main__placeholder {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__content {
+      width: 100%;
+      max-width: 820px;
+      padding: 52px 28px 46px 24px;
+      margin: 0 auto;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__heading {
+      margin: 0 0 10px;
+      color: var(--faq-main-heading);
+      font-size: 42px;
+      line-height: 1.05;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__subheading {
+      max-width: 540px;
+      margin: 0 0 18px;
+      color: var(--faq-main-subtext);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__subheading p {
+      margin: 0;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__tabs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__tab {
+      appearance: none;
+      border: 1px solid var(--faq-main-item-border);
+      background: var(--faq-main-tab-bg);
+      color: var(--faq-main-tab-text);
+      min-height: 30px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      font-size: 11px;
+      line-height: 1;
+      cursor: pointer;
+      transition: 0.25s ease;
+      white-space: nowrap;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__tab:hover,
+    #faq-main-{{ section.id }} .faq-main__tab.is-active {
+      background: var(--faq-main-tab-active-bg);
+      color: var(--faq-main-tab-active-text);
+      border-color: var(--faq-main-tab-active-bg);
+    }
+
+    #faq-main-{{ section.id }} .faq-main__items {
+      border-top: 1px solid var(--faq-main-item-border);
+    }
+
+    #faq-main-{{ section.id }} .faq-main__item {
+      background: var(--faq-main-item-bg);
+      border-bottom: 1px solid var(--faq-main-item-border);
+      display: none;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__item.is-visible {
+      display: block;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__item.is-active {
+      background: var(--faq-main-item-active-bg);
+    }
+
+    #faq-main-{{ section.id }} .faq-main__question {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      text-align: left;
+      padding: 15px 0;
+      cursor: pointer;
+      color: var(--faq-main-question);
+    }
+
+    #faq-main-{{ section.id }} .faq-main__question-text {
+      color: inherit;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__item.is-active .faq-main__question {
+      color: var(--faq-main-question-active);
+      padding: 14px 14px 10px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__icon {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__icon::before,
+    #faq-main-{{ section.id }} .faq-main__icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: currentColor;
+      transform: translate(-50%, -50%);
+      transition: 0.2s ease;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__icon::before {
+      width: 8px;
+      height: 1px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__icon::after {
+      width: 1px;
+      height: 8px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__item.is-active .faq-main__icon::after {
+      opacity: 0;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__answer-wrapper {
+      padding: 0 14px 14px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__answer {
+      color: var(--faq-main-answer);
+      font-size: 13px;
+      line-height: 1.5;
+      background: var(--faq-main-item-active-bg);
+      border-radius: 5px;
+      padding: 14px;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__answer p {
+      margin: 0;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__footer {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__footer-text {
+      color: var(--faq-main-subtext);
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px 26px;
+      border-radius: 999px;
+      background: var(--faq-main-button-bg);
+      color: var(--faq-main-button-text);
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    #faq-main-{{ section.id }} .faq-main__button:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    @media screen and (max-width: 989px) {
+      #faq-main-{{ section.id }} .faq-main__grid {
+        flex-direction: column-reverse;
+        min-height: auto;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__content-column,
+      #faq-main-{{ section.id }} .faq-main__media-column {
+        width: 100%;
+        flex: 0 0 100%;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__content {
+        padding: 38px 20px 34px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__heading {
+        font-size: 32px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__subheading {
+        font-size: 14px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__media-wrap {
+        min-height: 420px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__footer-text {
+        font-size: 22px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__button {
+        font-size: 18px;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      #faq-main-{{ section.id }} .faq-main__heading {
+        font-size: 26px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__tab {
+        font-size: 10px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__question-text {
+        font-size: 13px;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      #faq-main-{{ section.id }} .faq-main__footer-text {
+        font-size: 20px;
+      }
+    }
+  </style>
+
+  <script>
+    (function() {
+      var section = document.getElementById('faq-main-{{ section.id }}');
+      if (!section) return;
+
+      var tabs = section.querySelectorAll('.faq-main__tab');
+      var items = section.querySelectorAll('.faq-main__item');
+
+      function closeAllVisibleItems() {
+        items.forEach(function(item) {
+          if (!item.classList.contains('is-visible')) return;
+          item.classList.remove('is-active');
+
+          var button = item.querySelector('.faq-main__question');
+          var answer = item.querySelector('.faq-main__answer-wrapper');
+          if (button) button.setAttribute('aria-expanded', 'false');
+          if (answer) answer.hidden = true;
+        });
+      }
+
+      function openFirstVisibleItem() {
+        var firstVisible = section.querySelector('.faq-main__item.is-visible');
+        if (!firstVisible) return;
+
+        firstVisible.classList.add('is-active');
+
+        var button = firstVisible.querySelector('.faq-main__question');
+        var answer = firstVisible.querySelector('.faq-main__answer-wrapper');
+        if (button) button.setAttribute('aria-expanded', 'true');
+        if (answer) answer.hidden = false;
+      }
+
+      function filterItems(category) {
+        items.forEach(function(item) {
+          var match = item.getAttribute('data-category') === category;
+
+          item.classList.remove('is-active');
+          item.classList.toggle('is-visible', match);
+
+          var button = item.querySelector('.faq-main__question');
+          var answer = item.querySelector('.faq-main__answer-wrapper');
+          if (button) button.setAttribute('aria-expanded', 'false');
+          if (answer) answer.hidden = true;
+        });
+
+        openFirstVisibleItem();
+      }
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var category = tab.getAttribute('data-tab');
+
+          tabs.forEach(function(item) {
+            item.classList.remove('is-active');
+            item.setAttribute('aria-selected', 'false');
+          });
+
+          tab.classList.add('is-active');
+          tab.setAttribute('aria-selected', 'true');
+          filterItems(category);
+        });
+      });
+
+      items.forEach(function(item) {
+        var button = item.querySelector('.faq-main__question');
+        var answer = item.querySelector('.faq-main__answer-wrapper');
+        if (!button || !answer) return;
+
+        button.addEventListener('click', function() {
+          var isOpen = item.classList.contains('is-active');
+          closeAllVisibleItems();
+
+          if (!isOpen) {
+            item.classList.add('is-active');
+            button.setAttribute('aria-expanded', 'true');
+            answer.hidden = false;
+          }
+        });
+      });
+
+      filterItems('category-1');
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ main",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Answers to your most important questions about hair thinning, ingredients, and results.</p>"
+    },
+    {
+      "type": "text",
+      "id": "category_1_label",
+      "label": "Category 1 label",
+      "default": "Category A"
+    },
+    {
+      "type": "text",
+      "id": "category_2_label",
+      "label": "Category 2 label",
+      "default": "Category B"
+    },
+    {
+      "type": "text",
+      "id": "category_3_label",
+      "label": "Category 3 label",
+      "default": "Category C"
+    },
+    {
+      "type": "text",
+      "id": "category_4_label",
+      "label": "Category 4 label",
+      "default": "Category D"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "Still have questions?"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Contact us"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#dbecec"
+    },
+    {
+      "type": "color",
+      "id": "content_bg",
+      "label": "Content background",
+      "default": "#f1f0ec"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#2b221e"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#6a5b51"
+    },
+    {
+      "type": "color",
+      "id": "tab_bg",
+      "label": "Tab background",
+      "default": "#f7f6f3"
+    },
+    {
+      "type": "color",
+      "id": "tab_text",
+      "label": "Tab text color",
+      "default": "#6a5b51"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active tab background",
+      "default": "#3d7f7d"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Active tab text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "item_border",
+      "label": "FAQ border color",
+      "default": "#b9c7c3"
+    },
+    {
+      "type": "color",
+      "id": "item_bg",
+      "label": "FAQ item background",
+      "default": "rgba(255,255,255,0)"
+    },
+    {
+      "type": "color",
+      "id": "item_active_bg",
+      "label": "Active FAQ background",
+      "default": "#3d7e7a"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question color",
+      "default": "#2b221e"
+    },
+    {
+      "type": "color",
+      "id": "question_active_color",
+      "label": "Active question color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#c4a882"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#2b221e"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "default": "category-1",
+          "options": [
+            { "value": "category-1", "label": "Category 1" },
+            { "value": "category-2", "label": "Category 2" },
+            { "value": "category-3", "label": "Category 3" },
+            { "value": "category-4", "label": "Category 4" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Is this for all hair types and textures?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes - HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "FAQ main",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-1",
+            "question": "Is this for all hair types and textures?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-1",
+            "question": "How soon will I see results?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-1",
+            "question": "Will this make me shed more before it gets better?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-2",
+            "question": "Can men use this too?"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "category": "category-3",
+            "question": "What if I have had thinning for years?"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

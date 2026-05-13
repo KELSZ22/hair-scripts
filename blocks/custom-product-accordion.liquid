@@ -1,0 +1,191 @@
+<div
+  class="custom-product-accordion"
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+<script>
+  (() => {
+    const accordions = document.querySelectorAll('.custom-product-accordion');
+
+    accordions.forEach((accordion) => {
+      if (accordion.dataset.customAccordionReady === 'true') return;
+      accordion.dataset.customAccordionReady = 'true';
+
+      const items = accordion.querySelectorAll('.custom-product-accordion__item');
+
+      const closeItem = (item) => {
+        const contentWrap = item.querySelector('.custom-product-accordion__content-wrap');
+
+        if (!contentWrap || !item.open) return;
+
+        contentWrap.style.maxHeight = `${contentWrap.scrollHeight}px`;
+
+        requestAnimationFrame(() => {
+          contentWrap.style.maxHeight = '0px';
+        });
+
+        setTimeout(() => {
+          item.open = false;
+        }, 280);
+      };
+
+      const openItem = (item) => {
+        const contentWrap = item.querySelector('.custom-product-accordion__content-wrap');
+
+        if (!contentWrap) return;
+
+        items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            closeItem(otherItem);
+          }
+        });
+
+        item.open = true;
+        contentWrap.style.maxHeight = '0px';
+
+        requestAnimationFrame(() => {
+          contentWrap.style.maxHeight = `${contentWrap.scrollHeight}px`;
+        });
+
+        setTimeout(() => {
+          if (item.open) {
+            contentWrap.style.maxHeight = 'none';
+          }
+        }, 280);
+      };
+
+      items.forEach((item) => {
+        const summary = item.querySelector('.custom-product-accordion__summary');
+        const contentWrap = item.querySelector('.custom-product-accordion__content-wrap');
+
+        if (!summary || !contentWrap) return;
+
+        if (item.open) {
+          contentWrap.style.maxHeight = 'none';
+        } else {
+          contentWrap.style.maxHeight = '0px';
+        }
+
+        summary.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          if (item.open) {
+            closeItem(item);
+          } else {
+            openItem(item);
+          }
+        });
+      });
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .custom-product-accordion {
+    width: 100%;
+  }
+
+  .custom-product-accordion__item {
+    border-bottom: 1px solid rgba(33, 27, 24, 0.16);
+  }
+
+  .custom-product-accordion__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 18px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .custom-product-accordion__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .custom-product-accordion__title {
+    flex: 1;
+    overflow: hidden;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    text-align: left;
+    text-overflow: ellipsis;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .custom-product-accordion__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+  }
+
+  .custom-product-accordion__icon svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+  }
+
+  .custom-product-accordion__icon-minus {
+    display: none;
+  }
+
+  .custom-product-accordion__item[open] .custom-product-accordion__icon-plus {
+    display: none;
+  }
+
+  .custom-product-accordion__item[open] .custom-product-accordion__icon-minus {
+    display: inline-flex;
+  }
+
+  .custom-product-accordion__content-wrap {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.28s ease;
+  }
+
+  .custom-product-accordion__content {
+    padding: 0 0 18px;
+    color: var(--new-colors-gray-subhead, #6B6B6B);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .custom-product-accordion__content p {
+    margin: 0;
+  }
+
+  .custom-product-accordion__content p + p {
+    margin-top: 10px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom accordion",
+  "blocks": [
+    {
+      "type": "custom-product-accordion-row"
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "Custom accordion"
+    }
+  ]
+}
+{% endschema %}

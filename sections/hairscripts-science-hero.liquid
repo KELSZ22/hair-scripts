@@ -1,0 +1,604 @@
+{% liquid
+  assign bg_image = section.settings.bg_image
+  assign hero_image = section.settings.hero_image
+%}
+
+<section
+  id="hs-science-hero-{{ section.id }}"
+  class="hs-science-hero color-{{ section.settings.color_scheme }}"
+>
+  {% if bg_image != blank %}
+    <div
+      class="hs-science-hero__bg"
+      style="background-image: url('{{ bg_image | image_url: width: 2400 }}');"
+    ></div>
+  {% else %}
+    <div class="hs-science-hero__bg"></div>
+  {% endif %}
+
+  <div class="hs-science-hero__overlay"></div>
+
+  <div class="hs-science-hero__inner">
+    <div class="hs-science-hero__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="hs-science-hero__eyebrow">
+          {{ section.settings.eyebrow }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="hs-science-hero__heading">
+          {{ section.settings.heading }}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="hs-science-hero__text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      <div class="hs-science-hero__stats">
+        {% for block in section.blocks %}
+          <div class="hs-science-hero__stat" {{ block.shopify_attributes }}>
+            {% if block.settings.number != blank %}
+              <div class="hs-science-hero__stat-number">
+                {{ block.settings.number }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.label != blank %}
+              <div class="hs-science-hero__stat-label">
+                {{ block.settings.label }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="hs-science-hero__image-wrap">
+      {% if hero_image != blank %}
+        <img
+          src="{{ hero_image | image_url: width: 1400 }}"
+          alt="{{ section.settings.hero_image_alt | escape }}"
+          class="hs-science-hero__image"
+          loading="eager"
+          width="{{ hero_image.width }}"
+          height="{{ hero_image.height }}"
+        >
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-science-hero-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: none;
+    min-height: {{ section.settings.desktop_height }}px;
+    background: #2c1d13;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08), transparent 32%),
+      linear-gradient(90deg, #20140d 0%, #5a351d 50%, #7b4b25 100%);
+    background-size: cover;
+    background-position: center;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(15, 10, 7, {{ section.settings.left_overlay_opacity | divided_by: 100.0 }}) 0%,
+        rgba(15, 10, 7, 0.52) 36%,
+        rgba(15, 10, 7, 0.08) 68%,
+        rgba(15, 10, 7, 0) 100%
+      );
+    pointer-events: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: none;
+    min-height: {{ section.settings.desktop_height }}px;
+    margin: 0;
+    padding: 60px 40px;
+    display: grid;
+    grid-template-columns: minmax(320px, 0.88fr) minmax(420px, 1.12fr);
+    align-items: center;
+    gap: 30px;
+    box-sizing: border-box;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__content {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    padding-top: 18px;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__eyebrow {
+    width: 100%;
+    margin: 0 0 16px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: {{ section.settings.eyebrow_color }};
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__heading {
+    width: 100%;
+    margin: 0;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 43px;
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__text {
+    width: 100%;
+    margin-top: 20px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.45;
+    font-style: normal;
+    font-weight: 400;
+    color: {{ section.settings.body_color }};
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__text p {
+    margin: 0;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat {
+    position: relative;
+    width: 150px;
+    min-height: 72px;
+    padding: 16px 18px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(4px);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat:first-child {
+    border: 1px solid transparent;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat:first-child::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      0deg,
+      #FFFFFF 0%,
+      rgba(110, 52, 0, 0.15) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat:nth-child(2) {
+    border: 1px solid transparent;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat:nth-child(2)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      90deg,
+      #FFFFFF 0%,
+      rgba(110, 52, 0, 0.15) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat:last-child {
+    border: 1px solid transparent;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat:last-child::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      #FFFFFF 0%,
+      rgba(110, 52, 0, 0.15) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat-number {
+    position: relative;
+    z-index: 2;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+    margin-bottom: 6px;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__stat-label {
+    position: relative;
+    z-index: 2;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: none;
+    letter-spacing: 0;
+    color: {{ section.settings.body_color }};
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__image-wrap {
+    position: relative;
+    align-self: end;
+    min-height: {{ section.settings.desktop_height | minus: 40 }}px;
+  }
+
+  #hs-science-hero-{{ section.id }} .hs-science-hero__image {
+    position: absolute;
+    right: {{ section.settings.image_right_position }}px;
+    bottom: {{ section.settings.image_bottom_position }}px;
+    width: min({{ section.settings.image_width }}px, 62vw);
+    max-width: none;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 1024px) {
+    #hs-science-hero-{{ section.id }} {
+      min-height: auto;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__overlay {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(15, 10, 7, 0.84) 0%,
+          rgba(15, 10, 7, 0.58) 48%,
+          rgba(15, 10, 7, 0.2) 100%
+        );
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__inner {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      padding: 60px 40px 0;
+      gap: 20px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__content {
+      width: 100%;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__heading {
+      width: 100%;
+      font-size: 33px;
+      text-align: center;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__text {
+      width: 100%;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__eyebrow {
+      width: 100%;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__image-wrap {
+      min-height: 430px;
+      margin-top: -20px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__image {
+      right: 50%;
+      transform: translateX(50%);
+      bottom: 0;
+      width: min(470px, 105vw);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-science-hero-{{ section.id }} .hs-science-hero__inner {
+      padding: 60px 15px 0;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__heading {
+      width: 100%;
+      font-size: 23px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__text {
+      width: 100%;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__eyebrow {
+      width: 100%;
+      font-size: 14px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 26px;
+      width: 100%;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__stat {
+      width: auto;
+      min-height: 68px;
+      padding: 13px 10px 12px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__stat-number {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__stat-label {
+      font-size: 12px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__image-wrap {
+      min-height: 360px;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__image {
+      width: min(390px, 120vw);
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    #hs-science-hero-{{ section.id }} .hs-science-hero__stats {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    #hs-science-hero-{{ section.id }} .hs-science-hero__image-wrap {
+      min-height: 330px;
+      margin-top: -10px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HairScripts Science Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image / texture"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Right hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Woman combing natural hair"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text",
+      "default": "Science & Education"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "YOUR HAIR DOESN’T THIN WITHOUT A REASON."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Most products treat the symptom. HairScripts addresses the biology. Here’s what’s actually happening — and why it matters.</p>"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop section height",
+      "min": 420,
+      "max": 850,
+      "step": 10,
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Hero image width",
+      "min": 420,
+      "max": 1100,
+      "step": 10,
+      "default": 780
+    },
+    {
+      "type": "range",
+      "id": "image_right_position",
+      "label": "Hero image right position",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_bottom_position",
+      "label": "Hero image bottom position",
+      "min": -120,
+      "max": 120,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_overlay_opacity",
+      "label": "Left overlay darkness",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 72
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body/stat text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Main text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat box",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "10+"
+        },
+        {
+          "type": "textarea",
+          "id": "label",
+          "label": "YEARS PHARMA BACKGROUND"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HairScripts Science Hero",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "10+",
+            "label": "YEARS PHARMA BACKGROUND"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "ROOT CAUSES ADDRESSED"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "90",
+            "label": "DAYS TO VISIBLE RESULT"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

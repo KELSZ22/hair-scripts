@@ -426,8 +426,11 @@ a.header.hs-science-hero__button.hs-science-hero__button--secondary{
     transition: opacity 0.2s ease, transform 0.2s ease;
         border: 1px solid rgba(255, 255, 255, 0.45);
     color: #FFFFFF;
+        margin-right: 20px;
 
 }
+
+
 overflow-list.overflow-menu.color-scheme-matches-parent span.menu-list__link-title {
     text-transform: uppercase;
 }
@@ -446,17 +449,52 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
 #header-component.product-page span.currency-code,
 #header-component.product-page span.svg-wrapper.icon-caret,
 #header-component.product-page span.svg-wrapper,
-#header-component.product-page svg.account-button__icon {
+#header-component.product-page svg.account-button__icon,
+#header-component:not(.home-page):not(.product-page) span.currency-code,
+#header-component:not(.home-page):not(.product-page) span.svg-wrapper.icon-caret,
+#header-component:not(.home-page):not(.product-page) span.svg-wrapper,
+#header-component:not(.home-page):not(.product-page) svg.account-button__icon {
   color: #000;
 }
 
-#header-component.product-page {
+#header-component.product-page a.header.hs-science-hero__button.hs-science-hero__button--secondary,
+#header-component:not(.home-page):not(.product-page) a.header.hs-science-hero__button.hs-science-hero__button--secondary {
+    border-color: #c4a882;
+    color: #000;
+}
+
+#header-component.product-page span.svg-wrapper svg path,
+#header-component:not(.home-page):not(.product-page) span.svg-wrapper svg path {
+    fill: #000;
+}
+
+#header-component.product-page shopify-account span svg path,
+#header-component:not(.home-page):not(.product-page) shopify-account span svg path {
+  fill: #000;
+}
+
+#header-component.product-page span.something svg path,
+#header-component:not(.home-page):not(.product-page) span.something svg path {
+  fill: #000;
+}
+
+#header-component.product-page summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path,
+#header-component:not(.home-page):not(.product-page) summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path {
+  stroke: #000;
+}
+
+#header-component.product-page,
+#header-component:not(.home-page):not(.product-page) {
   background: white;
 }
-#header-component.product-page span.menu-list__link-title{
+
+#header-component.product-page span.menu-list__link-title,
+#header-component:not(.home-page):not(.product-page) span.menu-list__link-title {
   color: #000;
 }
-#header-component.product-page img.header-logo__image {
+
+#header-component.product-page img.header-logo__image,
+#header-component:not(.home-page):not(.product-page) img.header-logo__image {
     filter: brightness(0);
 }
   .header__row.header__row--top.color-scheme-1.section.section--full-width-margin.section--page-width{
@@ -950,8 +988,8 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
   }
 
   .header-actions__action:not(.account-button) svg {
-    width: var(--icon-size-md);
-    height: var(--icon-size-md);
+    width: 22px;
+    height: 22px;
   }
 
   .header:has(#Details-menu-drawer-container[open]) {

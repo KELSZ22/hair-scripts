@@ -1,0 +1,463 @@
+<section class="contact-form" id="contact-form-{{ section.id }}">
+
+  <div class="contact-form__image-wrap">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 1400
+        | image_tag:
+          class: 'contact-form__image',
+          alt: section.settings.image.alt | default: '',
+          loading: 'lazy'
+      }}
+    {%- else -%}
+      <div class="contact-form__image-placeholder"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="contact-form__panel">
+
+    <div class="contact-form__header">
+      <h2 class="contact-form__heading">{{ section.settings.heading }}</h2>
+      <p class="contact-form__subheading">{{ section.settings.subheading }}</p>
+    </div>
+
+    {%- form 'contact', id: 'ContactForm-{{ section.id }}' -%}
+
+      {%- if form.posted_successfully? -%}
+        <div class="contact-form__success" role="status">
+          <p>{{ section.settings.success_message }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="contact-form__errors" role="alert">
+          <ul>
+            {%- for field in form.errors -%}
+              <li>{{ form.errors.messages[field] }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="contact-form__fields">
+
+        <div class="contact-form__row">
+          <div class="contact-form__field contact-form__field--half">
+            <label for="ContactForm-name-{{ section.id }}" class="contact-form__label visually-hidden">
+              {{ section.settings.label_name }}
+            </label>
+            <input
+              type="text"
+              id="ContactForm-name-{{ section.id }}"
+              name="contact[name]"
+              class="contact-form__input"
+              placeholder="{{ section.settings.label_name }}"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+          <div class="contact-form__field contact-form__field--half">
+            <label for="ContactForm-email-{{ section.id }}" class="contact-form__label visually-hidden">
+              {{ section.settings.label_email }}
+            </label>
+            <input
+              type="email"
+              id="ContactForm-email-{{ section.id }}"
+              name="contact[email]"
+              class="contact-form__input"
+              placeholder="{{ section.settings.label_email }}"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="contact-form__field contact-form__field--full">
+          <label for="ContactForm-body-{{ section.id }}" class="contact-form__label visually-hidden">
+            {{ section.settings.label_message }}
+          </label>
+          <textarea
+            id="ContactForm-body-{{ section.id }}"
+            name="contact[body]"
+            class="contact-form__textarea"
+            placeholder="{{ section.settings.label_message }}"
+            rows="6"
+            required
+          >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+
+        <div class="contact-form__actions">
+          <button type="submit" class="contact-form__submit">
+            {{ section.settings.button_label }}
+          </button>
+        </div>
+
+      </div>
+
+    {%- endform -%}
+
+    {%- if section.settings.contact_email != blank -%}
+      <div class="contact-form__contact-line">
+        <span class="contact-form__contact-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </span>
+        <a href="mailto:{{ section.settings.contact_email }}" class="contact-form__contact-email">
+          {{ section.settings.contact_email }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+</section>
+
+<style>
+  #contact-form-{{ section.id }} {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 750px;
+    background-color: #FFF9F4;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__image-wrap {
+    flex: 0 0 48.75%;
+    width: 48.75%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 750px;
+    background-color: #D9D9D9;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__panel {
+    flex: 1;
+    background-color: #FFF9F4;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    justify-content: center;
+    padding: 40px 41px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: #211B18;
+    margin: 0 0 14px;
+    max-width: 533px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__subheading {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #6B6B6B;
+    margin: 0;
+    max-width: 533px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    max-width: 567px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__row {
+    display: flex;
+    gap: 17px;
+    flex-wrap: wrap;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__field--half {
+    flex: 1 1 calc(50% - 8.5px);
+    min-width: 200px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__field--full {
+    width: 100%;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #CDCDCD;
+    border-radius: 5px;
+    padding: 10px 19px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #211B18;
+    background-color: transparent;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__input::placeholder {
+    color: #211B18;
+    opacity: 1;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__input:focus {
+    border-color: #3D7E7A;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__textarea {
+    width: 100%;
+    height: 184px;
+    border: 1px solid #CDCDCD;
+    border-radius: 5px;
+    padding: 20px 19px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #211B18;
+    background-color: transparent;
+    box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__textarea::placeholder {
+    color: #211B18;
+    opacity: 1;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__textarea:focus {
+    border-color: #3D7E7A;
+  }
+
+  /* ── Submit button ── */
+  #contact-form-{{ section.id }} .contact-form__submit {
+    height: 50px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 68px;
+    background: linear-gradient(90deg, rgb(114, 82, 112) 0%, rgb(114, 82, 112) 42.831%, rgb(55, 24, 52) 100%);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #FAF7F2;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__submit:hover {
+    opacity: 0.88;
+  }
+
+  /* ── Success / Errors ── */
+  #contact-form-{{ section.id }} .contact-form__success {
+    padding: 14px 19px;
+    background-color: #DBEEEC;
+    border-radius: 5px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__success p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #211B18;
+    margin: 0;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__errors {
+    padding: 14px 19px;
+    background-color: #fdecea;
+    border-radius: 5px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__errors ul {
+    margin: 0;
+    padding: 0 0 0 16px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__errors li {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #b91c1c;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__contact-line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__contact-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__contact-email {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #211B18;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  #contact-form-{{ section.id }} .contact-form__contact-email:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Accessibility ── */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Responsive ── */
+  @media screen and (max-width: 990px) {
+    #contact-form-{{ section.id }} {
+      flex-direction: column;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__image-wrap {
+      width: 100%;
+      height: 400px;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__panel {
+      padding: 50px 40px;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__fields {
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #contact-form-{{ section.id }} .contact-form__image-wrap {
+      height: 300px;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__panel {
+      padding: 40px 20px;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__heading {
+      font-size: 26px;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__subheading {
+      font-size: 16px;
+    }
+
+    #contact-form-{{ section.id }} .contact-form__field--half {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "tag": "section",
+  "class": "contact-form-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Left Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Have Questions? We're Here to Help"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Whether you're just getting started or looking for the right solution, our team is here to guide you every step of the way."
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Full Name Label",
+      "default": "Full Name"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "Email Label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "label_message",
+      "label": "Message Label",
+      "default": "How can we help you?"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for reaching out! We'll be in touch shortly."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Display Contact Email",
+      "default": "info@hairscriptsbybevy.com",
+      "info": "This is shown as a clickable link below the form. Messages always go to your Shopify admin notification email."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form"
+    }
+  ]
+}
+{% endschema %}
+

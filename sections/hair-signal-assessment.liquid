@@ -54,7 +54,9 @@
                   class="hair-signal-button hs-science-hero__button--primary"
                 >
                   <span class="hair-signal-button-text">{{ section.settings.button_label }}</span>
-                  <span class="hair-signal-button-arrow">→</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0.5 5.9H9.6L5.2 1.5L6.6 0.1L13.5 7L6.6 13.9L5.2 12.5L9.6 8.1H0.5V5.9Z" fill="white"/>
+</svg>
                 </a>
               </div>
             {% endif %}
@@ -88,7 +90,7 @@
 
 <style>
   #section-{{ section.id }} {
-    background: #fff;
+    background: #FFF9F4;
   }
 
   #section-{{ section.id }} .hair-signal-outer {
@@ -109,7 +111,7 @@
   #section-{{ section.id }} .hair-signal-content-column {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: transparent;
   }
 
   #section-{{ section.id }} .hair-signal-content {
@@ -137,9 +139,10 @@
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 300;
     line-height: normal;
-    margin-bottom: 40px;
+    margin-bottom: 19px;
+    color: #6B6B6B;
   }
 
   #section-{{ section.id }} .hair-signal-description.two {
@@ -218,13 +221,13 @@
     min-height: 52px;
     padding: 15px 25px;
     border-radius: 999px;
-    background: #C4A882;
+    background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
     color: #FFFFFF;
     text-decoration: none;
     font-size: 18px;
     line-height: normal;
     transition: all 0.2s ease;
-    font-weight:: 500;
+    font-weight: 500;
     font-family: "DM Sans";
   }
 
@@ -337,9 +340,6 @@
       width: 100%;
     }
 
-    #section-{{ section.id }} .hair-signal-image-wrap {
-      min-height: 320px;
-    }
   }
 
   @media screen and (max-width: 749px) {
@@ -353,8 +353,7 @@
   @media screen and (max-width: 450px) {
     #section-{{ section.id }} .hair-signal-heading {
       font-size: 20px;
-      width: 80%;
-      margin: 0 auto;
+      width: 100%;
     }
   }
 
@@ -375,7 +374,7 @@
       "label": "Right image"
     },
     {
-      "type": "text",
+      "type": "html",
       "id": "heading",
       "label": "Heading",
       "default": "ITS A SIGNAL YOUR BODY IS SENDING YOU."

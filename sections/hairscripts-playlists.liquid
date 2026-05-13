@@ -1,0 +1,887 @@
+<section
+  id="hs-playlists-{{ section.id }}"
+  class="hs-playlists color-{{ section.settings.color_scheme }}"
+  data-hspl-section="{{ section.id }}"
+>
+  <div class="hs-playlists__inner">
+    <div class="hs-playlists__header">
+      <div class="hs-playlists__stars" aria-hidden="true">
+        {% for i in (1..5) %}
+          <span class="hs-playlists__star">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17" fill="none">
+              <path d="M8.75029 13.361L14.1582 16.625L12.7229 10.4738L17.5006 6.33492L11.2092 5.80133L8.75029 0L6.29137 5.80133L0 6.33492L4.77771 10.4738L3.34242 16.625L8.75029 13.361Z" fill="{{ section.settings.star_color }}"/>
+            </svg>
+          </span>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.heading != blank %}
+        <h2 class="hs-playlists__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="hs-playlists__text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a
+          href="{{ section.settings.button_link | default: '#' }}"
+          class="hs-playlists__main-button"
+        >
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="hspl-mobile-viewport">
+      <div class="hspl-mobile-track hs-playlists__grid">
+        {% for block in section.blocks %}
+          <div class="hs-playlists__card" {{ block.shopify_attributes }}>
+            <a
+              class="hs-playlists__image-link"
+              href="{{ block.settings.link | default: '#' }}"
+              {% if block.settings.link == blank %}aria-label="{{ block.settings.title | escape }}"{% endif %}
+            >
+              {% if block.settings.layer_image_2 != blank %}
+                <img
+                  src="{{ block.settings.layer_image_2 | image_url: width: 1200 }}"
+                  alt="{{ block.settings.layer_image_2_alt | escape }}"
+                  class="hs-playlists__image-layer hs-playlists__image-layer--back"
+                  loading="lazy"
+                  width="{{ block.settings.layer_image_2.width }}"
+                  height="{{ block.settings.layer_image_2.height }}"
+                >
+              {% endif %}
+
+              {% if block.settings.layer_image_1 != blank %}
+                <img
+                  src="{{ block.settings.layer_image_1 | image_url: width: 1200 }}"
+                  alt="{{ block.settings.layer_image_1_alt | escape }}"
+                  class="hs-playlists__image-layer hs-playlists__image-layer--middle"
+                  loading="lazy"
+                  width="{{ block.settings.layer_image_1.width }}"
+                  height="{{ block.settings.layer_image_1.height }}"
+                >
+              {% endif %}
+
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.image_alt | escape }}"
+                  class="hs-playlists__image"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'hs-playlists__image hs-playlists__image--placeholder' }}
+              {% endif %}
+            </a>
+
+            {% if block.settings.title != blank %}
+              <h3 class="hs-playlists__card-title">
+                <a href="{{ block.settings.link | default: '#' }}">
+                  {{ block.settings.title }}
+                </a>
+              </h3>
+            {% endif %}
+
+            {% if block.settings.button_label != blank %}
+              <a
+                href="{{ block.settings.link | default: '#' }}"
+                class="hs-playlists__card-button"
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-playlists-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      {{ section.settings.background_color_left }} 0%,
+      {{ section.settings.background_color_right }} 100%
+    );
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__inner {
+    padding: 60px 40px;
+    box-sizing: border-box;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: normal;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__heading {
+    margin: 0;
+    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__text {
+    margin-top: 14px;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: {{ section.settings.text_color }};
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__text p {
+    margin: 0;
+    line-height: normal;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__main-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    min-width: 205px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    background: {{ section.settings.main_button_background }};
+    color: {{ section.settings.main_button_text_color }};
+    text-decoration: none;
+    text-align: center;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    transition: opacity 0.2s ease;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__main-button:hover {
+    opacity: 0.9;
+  }
+
+  #hs-playlists-{{ section.id }} .hspl-mobile-viewport {
+    width: 100%;
+    margin-top: 50px;
+    overflow: visible;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 38px;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-top: 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    isolation: isolate;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image,
+  #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+    display: block;
+    height: 216px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+    position: absolute;
+    pointer-events: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image-layer--middle {
+    top: 9px;
+    left: 8px;
+    right: 8px;
+    width: calc(100% - 16px);
+    z-index: 2;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image-layer--back {
+    top: 0;
+    left: 16px;
+    right: 16px;
+    width: calc(100% - 32px);
+    z-index: 1;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__image--placeholder {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__card-title {
+    margin: 12px 0 0;
+    color: var(--New-Colors-BG-light, #FAF7F2);
+    text-align: center;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__card-title a {
+    color: inherit;
+    text-decoration-line: inherit;
+    text-decoration-style: inherit;
+    text-decoration-skip-ink: inherit;
+    text-decoration-thickness: inherit;
+    text-underline-offset: inherit;
+    text-underline-position: inherit;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__card-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+    min-width: 200px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    background: {{ section.settings.card_button_background }};
+    color: {{ section.settings.card_button_text_color }};
+    text-decoration: none;
+    text-align: center;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    transition: opacity 0.2s ease;
+  }
+
+  #hs-playlists-{{ section.id }} .hs-playlists__card-button:hover {
+    opacity: 0.92;
+  }
+
+  @media screen and (max-width: 1366px) {
+    #hs-playlists-{{ section.id }} .hs-playlists__grid {
+      gap: 24px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__image,
+    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+      height: 190px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    #hs-playlists-{{ section.id }} .hs-playlists__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 36px 22px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__image,
+    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+      height: 220px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-playlists-{{ section.id }} .hs-playlists__inner {
+      padding: 60px 0 60px 15px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__header {
+      padding-right: 15px;
+      box-sizing: border-box;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__stars {
+      margin-bottom: 16px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__heading {
+      font-size: 26px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__text {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__main-button {
+      margin-top: 24px;
+      min-width: 190px;
+      padding: 14px 24px;
+      font-size: 16px;
+    }
+
+    #hs-playlists-{{ section.id }} .hspl-mobile-viewport {
+      overflow: hidden;
+      width: 100%;
+      margin-top: 44px;
+      padding: 0 0 8px;
+      box-sizing: border-box;
+      touch-action: pan-y;
+    }
+
+    #hs-playlists-{{ section.id }} .hspl-mobile-track {
+      display: flex;
+      grid-template-columns: none;
+      gap: 22px;
+      will-change: transform;
+      transition: transform 0.35s ease;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__card {
+      flex: 0 0 calc((100% - 22px) / 2.18);
+      max-width: calc((100% - 22px) / 2.18);
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__image,
+    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+      height: 220px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__card-button {
+      min-width: 190px;
+      padding: 13px 22px;
+      font-size: 14px;
+      margin-top: 18px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    #hs-playlists-{{ section.id }} .hs-playlists__heading {
+      font-size: 20px;
+    }
+
+    #hs-playlists-{{ section.id }} .hspl-mobile-track {
+      gap: 14px;
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__card {
+      flex: 0 0 calc((100% - 14px) / 1.18);
+      max-width: calc((100% - 14px) / 1.18);
+    }
+
+    #hs-playlists-{{ section.id }} .hs-playlists__image,
+    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+      height: 180px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const hsplSectionId = 'hs-playlists-{{ section.id }}';
+
+    function hsplInitMobileCarousel() {
+      const hsplSection = document.getElementById(hsplSectionId);
+      if (!hsplSection) return;
+
+      const hsplViewport = hsplSection.querySelector('.hspl-mobile-viewport');
+      const hsplTrack = hsplSection.querySelector('.hspl-mobile-track');
+
+      if (!hsplViewport || !hsplTrack) return;
+      if (hsplSection.dataset.hsplReady === 'true') return;
+
+      hsplSection.dataset.hsplReady = 'true';
+
+      const hsplOriginalSlides = Array.from(hsplTrack.children).map(function (slide) {
+        return slide.cloneNode(true);
+      });
+
+      const hsplTotalSlides = hsplOriginalSlides.length;
+      if (!hsplTotalSlides) return;
+
+      let hsplCloneCount = 0;
+      let hsplCurrentPosition = 0;
+      let hsplIsMobile = false;
+      let hsplIsAnimating = false;
+      let hsplResizeTimer = null;
+      let hsplStartX = 0;
+      let hsplStartY = 0;
+      let hsplEndX = 0;
+      let hsplMoved = false;
+      let hsplBlockClick = false;
+
+      function hsplMod(value, total) {
+        return ((value % total) + total) % total;
+      }
+
+      function hsplShouldUseCarousel() {
+        return window.innerWidth <= 768;
+      }
+
+      function hsplGetVisibleCount() {
+        return window.innerWidth <= 450 ? 2 : 3;
+      }
+
+      function hsplGetStep() {
+        const hsplFirstSlide = hsplTrack.querySelector('.hs-playlists__card');
+        if (!hsplFirstSlide) return 0;
+
+        const hsplStyles = window.getComputedStyle(hsplTrack);
+        const hsplGap = parseFloat(hsplStyles.columnGap || hsplStyles.gap) || 0;
+
+        return hsplFirstSlide.getBoundingClientRect().width + hsplGap;
+      }
+
+      function hsplAppendClone(index) {
+        const hsplSlide = hsplOriginalSlides[hsplMod(index, hsplTotalSlides)].cloneNode(true);
+        hsplSlide.setAttribute('data-hspl-clone', 'true');
+        hsplTrack.appendChild(hsplSlide);
+      }
+
+      function hsplUpdate(animate) {
+        if (!hsplIsMobile) return;
+
+        const hsplStep = hsplGetStep();
+        if (!hsplStep) return;
+
+        hsplTrack.style.transition = animate ? 'transform 0.35s ease' : 'none';
+        hsplTrack.style.transform = 'translate3d(' + (hsplCurrentPosition * -hsplStep) + 'px, 0, 0)';
+      }
+
+      function hsplBuild(activeIndex) {
+        hsplCloneCount = Math.max(hsplGetVisibleCount() + 2, 4);
+        hsplTrack.innerHTML = '';
+
+        for (let i = hsplTotalSlides - hsplCloneCount; i < hsplTotalSlides; i++) {
+          hsplAppendClone(i);
+        }
+
+        for (let i = 0; i < hsplTotalSlides; i++) {
+          hsplTrack.appendChild(hsplOriginalSlides[i].cloneNode(true));
+        }
+
+        for (let i = 0; i < hsplCloneCount; i++) {
+          hsplAppendClone(i);
+        }
+
+        hsplCurrentPosition = hsplCloneCount + activeIndex;
+
+        requestAnimationFrame(function () {
+          hsplUpdate(false);
+        });
+      }
+
+      function hsplRestoreDesktop() {
+        hsplTrack.innerHTML = '';
+
+        hsplOriginalSlides.forEach(function (slide) {
+          hsplTrack.appendChild(slide.cloneNode(true));
+        });
+
+        hsplTrack.style.transition = '';
+        hsplTrack.style.transform = '';
+        hsplCurrentPosition = 0;
+        hsplIsAnimating = false;
+      }
+
+      function hsplNormalize() {
+        let hsplJumped = false;
+
+        if (hsplCurrentPosition < hsplCloneCount) {
+          hsplCurrentPosition += hsplTotalSlides;
+          hsplJumped = true;
+        } else if (hsplCurrentPosition >= hsplCloneCount + hsplTotalSlides) {
+          hsplCurrentPosition -= hsplTotalSlides;
+          hsplJumped = true;
+        }
+
+        if (hsplJumped) {
+          hsplUpdate(false);
+        }
+
+        hsplIsAnimating = false;
+      }
+
+      function hsplNext() {
+        if (!hsplIsMobile || hsplIsAnimating) return;
+
+        hsplIsAnimating = true;
+        hsplCurrentPosition += 1;
+        hsplUpdate(true);
+      }
+
+      function hsplPrev() {
+        if (!hsplIsMobile || hsplIsAnimating) return;
+
+        hsplIsAnimating = true;
+        hsplCurrentPosition -= 1;
+        hsplUpdate(true);
+      }
+
+      function hsplEnableMobile() {
+        if (hsplIsMobile) return;
+
+        hsplIsMobile = true;
+        hsplBuild(0);
+      }
+
+      function hsplDisableMobile() {
+        if (!hsplIsMobile) return;
+
+        hsplIsMobile = false;
+        hsplRestoreDesktop();
+      }
+
+      function hsplSyncMode() {
+        if (hsplShouldUseCarousel()) {
+          hsplEnableMobile();
+        } else {
+          hsplDisableMobile();
+        }
+      }
+
+      hsplTrack.addEventListener('transitionend', function () {
+        hsplNormalize();
+      });
+
+      hsplViewport.addEventListener(
+        'touchstart',
+        function (event) {
+          if (!hsplIsMobile || hsplIsAnimating) return;
+
+          hsplStartX = event.touches[0].clientX;
+          hsplStartY = event.touches[0].clientY;
+          hsplEndX = hsplStartX;
+          hsplMoved = false;
+          hsplBlockClick = false;
+        },
+        { passive: true }
+      );
+
+      hsplViewport.addEventListener(
+        'touchmove',
+        function (event) {
+          if (!hsplIsMobile || hsplIsAnimating) return;
+
+          const hsplMoveX = Math.abs(event.touches[0].clientX - hsplStartX);
+          const hsplMoveY = Math.abs(event.touches[0].clientY - hsplStartY);
+
+          if (hsplMoveX > 8 && hsplMoveX > hsplMoveY) {
+            hsplMoved = true;
+            hsplBlockClick = true;
+          }
+        },
+        { passive: true }
+      );
+
+      hsplViewport.addEventListener(
+        'touchend',
+        function (event) {
+          if (!hsplIsMobile || hsplIsAnimating) return;
+
+          hsplEndX = event.changedTouches[0].clientX;
+
+          if (!hsplMoved) return;
+
+          if (hsplStartX - hsplEndX > 45) {
+            hsplNext();
+          } else if (hsplEndX - hsplStartX > 45) {
+            hsplPrev();
+          }
+        },
+        { passive: true }
+      );
+
+      hsplViewport.addEventListener(
+        'click',
+        function (event) {
+          if (!hsplBlockClick) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          hsplBlockClick = false;
+        },
+        true
+      );
+
+      window.addEventListener('resize', function () {
+        clearTimeout(hsplResizeTimer);
+
+        hsplResizeTimer = setTimeout(function () {
+          const hsplActiveIndex = hsplIsMobile
+            ? hsplMod(hsplCurrentPosition - hsplCloneCount, hsplTotalSlides)
+            : 0;
+
+          if (hsplShouldUseCarousel()) {
+            hsplIsMobile = true;
+            hsplIsAnimating = false;
+            hsplBuild(hsplActiveIndex);
+          } else {
+            hsplDisableMobile();
+          }
+        }, 150);
+      });
+
+      hsplSyncMode();
+    }
+
+    document.addEventListener('DOMContentLoaded', hsplInitMobileCarousel);
+
+    document.addEventListener('shopify:section:load', function (event) {
+      if (!event.target.querySelector('#' + hsplSectionId)) return;
+
+      const hsplLoadedSection = document.getElementById(hsplSectionId);
+      if (hsplLoadedSection) {
+        hsplLoadedSection.dataset.hsplReady = 'false';
+      }
+
+      hsplInitMobileCarousel();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HairScripts Playlists",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "EXPLORE BEV’S PLAYLISTS"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Watch curated content designed to help you understand your hair—and finally see real results.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Top button label",
+      "default": "Watch All Playlist"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Top button link"
+    },
+    {
+      "type": "color",
+      "id": "background_color_left",
+      "label": "Background color left",
+      "default": "#4E9B97"
+    },
+    {
+      "type": "color",
+      "id": "background_color_right",
+      "label": "Background color right",
+      "default": "#62BBB8"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#63144F"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "main_button_background",
+      "label": "Top button background",
+      "default": "#5B2455"
+    },
+    {
+      "type": "color",
+      "id": "main_button_text_color",
+      "label": "Top button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_button_background",
+      "label": "Card button background",
+      "default": "#F4EFE9"
+    },
+    {
+      "type": "color",
+      "id": "card_button_text_color",
+      "label": "Card button text color",
+      "default": "#C79A63"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "playlist",
+      "name": "Playlist card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Main image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Main image alt text",
+          "default": "Playlist thumbnail"
+        },
+        {
+          "type": "image_picker",
+          "id": "layer_image_1",
+          "label": "Layer image 1"
+        },
+        {
+          "type": "text",
+          "id": "layer_image_1_alt",
+          "label": "Layer image 1 alt text",
+          "default": "Playlist layer image"
+        },
+        {
+          "type": "image_picker",
+          "id": "layer_image_2",
+          "label": "Layer image 2"
+        },
+        {
+          "type": "text",
+          "id": "layer_image_2_alt",
+          "label": "Layer image 2 alt text",
+          "default": "Playlist back layer image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Skin Care Routines"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Watch Playlist"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HairScripts Playlists",
+      "blocks": [
+        {
+          "type": "playlist",
+          "settings": {
+            "title": "Skin Care Routines",
+            "button_label": "Watch Playlist"
+          }
+        },
+        {
+          "type": "playlist",
+          "settings": {
+            "title": "Product Recommendations",
+            "button_label": "Watch Playlist"
+          }
+        },
+        {
+          "type": "playlist",
+          "settings": {
+            "title": "Hair Growth/Hair Loss Solutions",
+            "button_label": "Watch Playlist"
+          }
+        },
+        {
+          "type": "playlist",
+          "settings": {
+            "title": "Super Natural Podcast",
+            "button_label": "Watch Playlist"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

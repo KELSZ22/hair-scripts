@@ -60,7 +60,18 @@
       on:click="/toggle"
     >
       <span class="svg-wrapper header-drawer-icon header-drawer-icon--open">
-        {{- 'icon-menu.svg' | inline_asset_content -}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+  <g clip-path="url(#clip0_1023_5271)">
+    <path d="M-0.0100098 4.17969H17.1581" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-0.0100098 10.4453H17.1581" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-0.0100098 16.7109H17.1581" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_1023_5271">
+      <rect width="53.95" height="21" fill="#000"/>
+    </clipPath>
+  </defs>
+</svg>
       </span>
       <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
         {{- 'icon-close.svg' | inline_asset_content -}}
@@ -1410,4 +1421,25 @@
   .drawer-localization .language-selector .svg-wrapper.icon-caret svg {
     transform: none;
   }
+  @media screen and (max-width: 749px) {
+  .header__columns .search-action,
+  #header-component[data-menu-style='drawer'] .header__columns .search-action {
+    grid-area: rightA !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header__columns header-actions,
+  #header-component[data-menu-style='drawer'] .header__columns header-actions {
+    grid-area: rightB !important;
+  }
+
+  .header__columns header-actions .account-button,
+  .header__columns header-actions shopify-account,
+  #header-component[data-menu-style='drawer'] .header__columns header-actions .account-button,
+  #header-component[data-menu-style='drawer'] .header__columns header-actions shopify-account {
+    display: none !important;
+  }
+}
 {% endstylesheet %}
