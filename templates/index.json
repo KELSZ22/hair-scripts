@@ -143,7 +143,7 @@
         "proof_MDU78m": {
           "type": "proof",
           "settings": {
-            "text": "10+ Years Pharmaceutical Dermatology Expert"
+            "text": "10+ Years Pharmaceutical Industry Expert"
           }
         },
         "proof_6CNga7": {
@@ -173,7 +173,7 @@
       ],
       "name": "Hair Home Hero",
       "settings": {
-        "background_image": "shopify://shop_images/Frame_1000009480_fbfeddd9-ad7d-4f12-a260-d0bf95f61ff4.webp",
+        "background_image": "shopify://shop_images/HairScripts_Desktop_Banner.webp",
         "background_image_1024": "shopify://shop_images/Frame_1000009463_1.png",
         "creator_image": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
         "heading": "SCIENCE DESIGNED FOR VISIBLY <br> FULLER HEALTHIER HAIR",
@@ -490,10 +490,10 @@
       ],
       "name": "Founder quote",
       "settings": {
-        "person_image": "shopify://shop_images/Frame_1000008716_2.webp",
+        "person_image": "shopify://shop_images/Bevy_Picture.png",
         "person_name": "Bevy",
-        "person_title": "10+ Years Pharmaceutical Professional",
-        "heading": "You don’t have to have all the answers yet.Your follicles just need to be supported while you find them.",
+        "person_title": "10+ Years Pharmaceutical Industry Expert",
+        "heading": "You don’t have to have all the answers yet. Your follicles just need to be supported while you find them.",
         "description": "<p><em>Bevy lost over 60% of her own hair. She lived the panic. The shedding. The devastation of watching her identity change in real time. And she had a decade inside pharmaceutical dermatology to understand exactly why it was happening — and what the industry was getting wrong.</em></p><p><em>     <br/>She didn’t find a solution. She built one.</em></p>"
       }
     },
@@ -828,8 +828,8 @@
           "settings": {
             "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
             "video_link": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "title": "Unlock Thicker Hair With Nutrafol",
+            "subtitle": ""
           }
         },
         "video_card_nYj77j": {
@@ -838,7 +838,7 @@
             "thumbnail": "shopify://shop_images/Rectangle_513_3.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "subtitle": ""
           }
         },
         "video_card_pbnWRt": {
@@ -847,7 +847,7 @@
             "thumbnail": "shopify://shop_images/Rectangle_513_4.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "subtitle": ""
           }
         },
         "video_card_L7VcRD": {
@@ -856,7 +856,7 @@
             "thumbnail": "shopify://shop_images/Rectangle_513_5.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "subtitle": ""
           }
         },
         "video_card_YpUapX": {
@@ -865,7 +865,7 @@
             "thumbnail": "shopify://shop_images/Rectangle_513_6.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "subtitle": ""
           }
         }
       },
@@ -957,7 +957,7 @@
         "point_G6tRgj": {
           "type": "point",
           "settings": {
-            "text": "Education from a pharmaceutical dermatology expert — not a marketing team"
+            "text": "Education from a pharmaceutical industry expert — not a marketing team"
           }
         },
         "point_G84443": {

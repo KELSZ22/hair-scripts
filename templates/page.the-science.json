@@ -70,7 +70,7 @@
         "stat_yyTxgH": {
           "type": "stat",
           "settings": {
-            "number": "4",
+            "number": "9",
             "label": "ROOT CAUSES ADDRESSED"
           }
         },
@@ -94,7 +94,7 @@
         "hero_image_alt": "Woman combing natural hair",
         "eyebrow": "Science & Education",
         "heading": "YOUR HAIR DOESN’T THIN<br> WITHOUT A REASON.",
-        "text": "<p>Most products treat the symptom. HairScripts addresses the biology. Here’s what’s actually happening — and why it matters.</p>",
+        "text": "<p>Most products treat the symptom. HairScripts addresses what’s actually causing it. Here’s what’s happening at the follicle — and why it matters.</p>",
         "desktop_height": 520,
         "image_width": 700,
         "image_right_position": -100,
@@ -113,7 +113,7 @@
         "credential_4Bjfix": {
           "type": "credential",
           "settings": {
-            "text": "10+ Years Pharmaceutical Sale"
+            "text": "Pharmaceutical Industry Expert — 10+ Years"
           }
         },
         "credential_xx3rEw": {
@@ -144,10 +144,10 @@
       "name": "HairScripts Formulated By",
       "settings": {
         "heading": "FORMULATED BY:",
-        "profile_image": "shopify://shop_images/Mask_group.png",
+        "profile_image": "shopify://shop_images/Bevy_Picture.png",
         "profile_image_alt": "Formulator profile image",
         "profile_name": "BEVY",
-        "profile_role": "Hair Educator & Content Creator",
+        "profile_role": "Pharmaceutical Industry Expert",
         "background_color": "#4da9a3",
         "heading_color": "#ffffff",
         "text_color": "#ffffff",
@@ -176,46 +176,37 @@
           "type": "cycle_card",
           "settings": {
             "kicker": "85% of all hairs",
-            "title": "Anagen — Active Growth",
-            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+            "title": "Phase 1 — Anagen",
+            "description": "<p>Your follicle is on. Actively building your strand. This is where your hair actually grows. Healthy anagen lasts 2–7 years. Every year your follicle stays in this phase is another year of length, density, and thickness accumulating. DHT, elevated cortisol, and nutrient depletion all send the same signal: shut it down early. The timer gets cut short. The strand produced is finer and shorter than the last. Cycle after cycle, that compounds — until the thinning becomes undeniable.</p>"
           }
         },
         "cycle_card_YL4M4M": {
           "type": "cycle_card",
           "settings": {
             "kicker": "3% of all hairs",
-            "title": "Catagen — Transition",
-            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+            "title": " Phase 2 — Catagen",
+            "description": "<p>Your follicle pauses. Prepares to reset. A brief 2–3 week window where the follicle detaches from its blood supply and prepares for the next cycle. This phase is supposed to be short. But a follicle under internal stress — from androgens, inflammation, or poor circulation — enters catagen too early. It didn’t finish the job. It just stopped.<br/></p>"
           }
         },
         "cycle_card_7KDTxi": {
           "type": "cycle_card",
           "settings": {
             "kicker": "12% of all hairs",
-            "title": "Telogen — Resting",
-            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
-          }
-        },
-        "cycle_card_LtwABk": {
-          "type": "cycle_card",
-          "settings": {
-            "kicker": "Normal: 50–100 strands/day",
-            "title": "Exogen — Shedding",
-            "description": "<p>Lasts 2–7 years. Nutritional deficiencies and hormonal disruption shorten this phase — a primary driver of thinning.</p>"
+            "title": "Phase 3 — Telogen",
+            "description": "<p>Your follicle goes dark. No growth. No strand production. Normally, about 10–15% of your follicles are resting at any time — that’s healthy. But when hormonal disruption, chronic stress, or iron deficiency push more follicles into telogen simultaneously, you lose density fast. And when those follicles finally wake back up, they re-enter anagen producing weaker, thinner strands than before. That’s miniaturization. That’s the real driver behind hormonal hair loss.<br/></p>"
           }
         }
       },
       "block_order": [
         "cycle_card_CYte8h",
         "cycle_card_YL4M4M",
-        "cycle_card_7KDTxi",
-        "cycle_card_LtwABk"
+        "cycle_card_7KDTxi"
       ],
       "name": "HairScripts Hair Cycle",
       "settings": {
-        "eyebrow": "HAIR BIOLOGY 101",
-        "heading": "YOUR HAIR LIVES IN A\nFOUR-PHASE CYCLE.",
-        "text": "<p>Every strand is at a different stage of its growth cycle. Hormones, stress, and nutrition disrupt this cycle — that’s the real reason hair thins.</p>",
+        "eyebrow": "HOW HAIR ACTUALLY GROWS",
+        "heading": "First, Understand the Cycle They’re Disrupting. Your Hair Grows in Three Phases. FOUR-PHASE CYCLE.",
+        "text": "<p><em>Hormones, stress, and nutrient gaps are collapsing all three.</em></p>",
         "main_image": "shopify://shop_images/portrait-young-beautiful-woman-with-hairbrush_2.webp",
         "main_image_alt": "Woman holding a hair brush",
         "background_color": "#f7f3ec",
@@ -279,7 +270,7 @@
       "name": "HairScripts Root Causes",
       "settings": {
         "eyebrow": "WHY HAIR THINS",
-        "heading": "FOUR ROOT CAUSES.\nONE FORMULA THAT ADDRESSES THEM ALL.",
+        "heading": "NINE ROOT CAUSES.\nONE FORMULA THAT ADDRESSES THEM ALL.",
         "text": "<p>Hair thinning is rarely one thing. It's a convergence of biological stressors disrupting the follicle's </p><p>ability to complete a healthy growth cycle.</p>",
         "background_color_left": "#3f8f89",
         "background_color_right": "#55c6be",
@@ -436,7 +427,7 @@
           "settings": {
             "period": "Month 4–6",
             "title": "Compounding Results",
-            "description": "<p>Each cycle nourished by the formula builds on the last. This is where before/after results become clearly visible.</p>",
+            "description": "<p>Each cycle builds on the one before. This is where before/after photos start making sense because the formula finally had enough time to do what it was designed to do.<br/></p>",
             "tag_1": "Compounding density",
             "tag_2": "Ponytail volume",
             "tag_3": "Long-term follicle health"
@@ -453,12 +444,12 @@
       "settings": {
         "image": "shopify://shop_images/Rectangle_536.webp",
         "image_alt": "Hair growth before and after timeline",
-        "note_quote": "\"90 days is where you begin to see meaningful change. That's not a limitation — it's how hair works.\"",
+        "note_quote": "\"It takes at least 90 days to biohack your body from a cellular level. The person you want to see in the mirror is being built from the inside out. Give the science time to do its job.\"",
         "note_avatar": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
         "note_avatar_alt": "Bevy",
         "note_label": "A note from Bevy",
-        "heading": "HAIR GROWTH IS A BIOLOGY TIMELINE,\nNOT A PROMISE.",
-        "text": "<p>Most brands promise results in 30 days. The hair growth cycle tells a different story.</p>",
+        "heading": "HAIR GROWS IN MONTHS, NOT DAYS",
+        "text": "<p>Here’s what’s actually happening inside your follicles month by month — when you give your follicles enough time to do their job.</p>",
         "background_color": "#f8f3ec",
         "heading_color": "#222222",
         "text_color": "#666666",

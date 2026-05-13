@@ -42,7 +42,7 @@
         "faq_item_iNbfbe": {
           "type": "faq_item",
           "settings": {
-            "category": "category_2",
+            "category": "category_1",
             "question": "Will this make me shed more before it gets better?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -50,7 +50,7 @@
         "faq_item_B3Vw9i": {
           "type": "faq_item",
           "settings": {
-            "category": "category_3",
+            "category": "category_1",
             "question": "Can men use this too?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -58,7 +58,7 @@
         "faq_item_Hchjtn": {
           "type": "faq_item",
           "settings": {
-            "category": "category_4",
+            "category": "category_1",
             "question": "What if I’ve had thinning for years?",
             "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
@@ -82,7 +82,6 @@
         "category_2": "Category B",
         "category_3": "Category C",
         "category_4": "Category D",
-        "open_first_item": true,
         "footer_text": "Still have questions?",
         "button_label": "Contact Us",
         "button_link": ""

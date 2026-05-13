@@ -6,7 +6,7 @@
     --faq-heading: #211B18;
     --faq-subtext: #211B18;
     --faq-tab-bg: {{ section.settings.tab_bg }};
-    --faq-tab-text: #211B18;
+    --faq-tab-text: {{ section.settings.tab_text }};
     --faq-tab-active-bg: {{ section.settings.tab_active_bg }};
     --faq-tab-active-text: {{ section.settings.tab_active_text }};
     --faq-item-border: {{ section.settings.item_border }};
@@ -17,8 +17,7 @@
     --faq-answer: {{ section.settings.answer_color }};
     --faq-button-bg: {{ section.settings.button_bg }};
     --faq-button-text: {{ section.settings.button_text }};
-  "
->
+  ">
   <div class="faq-category-tabs__wrap">
     <div class="faq-category-tabs__header">
       {% if section.settings.heading != blank %}
@@ -31,14 +30,16 @@
         </div>
       {% endif %}
 
-      <div class="faq-category-tabs__tabs" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+      <div
+        class="faq-category-tabs__tabs"
+        role="tablist"
+        aria-label="{{ section.settings.heading | escape }}">
         <button
           type="button"
           class="faq-category-tabs__tab is-active"
           role="tab"
           aria-selected="true"
-          data-tab="category-1"
-        >
+          data-tab="category-1">
           {{ section.settings.category_1_label }}
         </button>
 
@@ -47,8 +48,7 @@
           class="faq-category-tabs__tab"
           role="tab"
           aria-selected="false"
-          data-tab="category-2"
-        >
+          data-tab="category-2">
           {{ section.settings.category_2_label }}
         </button>
 
@@ -57,8 +57,7 @@
           class="faq-category-tabs__tab"
           role="tab"
           aria-selected="false"
-          data-tab="category-3"
-        >
+          data-tab="category-3">
           {{ section.settings.category_3_label }}
         </button>
 
@@ -67,8 +66,7 @@
           class="faq-category-tabs__tab"
           role="tab"
           aria-selected="false"
-          data-tab="category-4"
-        >
+          data-tab="category-4">
           {{ section.settings.category_4_label }}
         </button>
       </div>
@@ -78,42 +76,40 @@
           type="button"
           class="faq-category-tabs__mobile-dropdown-button"
           aria-expanded="false"
-          data-mobile-dropdown-button
-        >
+          data-mobile-dropdown-button>
           <span data-mobile-dropdown-label>{{ section.settings.category_1_label }}</span>
           <span class="faq-category-tabs__mobile-dropdown-arrow" aria-hidden="true"></span>
         </button>
 
-        <div class="faq-category-tabs__mobile-dropdown-menu" data-mobile-dropdown-menu hidden>
+        <div
+          class="faq-category-tabs__mobile-dropdown-menu"
+          data-mobile-dropdown-menu
+          hidden>
           <button
             type="button"
             class="faq-category-tabs__mobile-dropdown-option is-active"
-            data-tab="category-1"
-          >
+            data-tab="category-1">
             {{ section.settings.category_1_label }}
           </button>
 
           <button
             type="button"
             class="faq-category-tabs__mobile-dropdown-option"
-            data-tab="category-2"
-          >
+            data-tab="category-2">
             {{ section.settings.category_2_label }}
           </button>
 
           <button
             type="button"
             class="faq-category-tabs__mobile-dropdown-option"
-            data-tab="category-3"
-          >
+            data-tab="category-3">
             {{ section.settings.category_3_label }}
           </button>
 
           <button
             type="button"
             class="faq-category-tabs__mobile-dropdown-option"
-            data-tab="category-4"
-          >
+            data-tab="category-4">
             {{ section.settings.category_4_label }}
           </button>
         </div>
@@ -125,22 +121,32 @@
         <div
           class="faq-category-tabs__item"
           data-category="{{ block.settings.category }}"
-          {{ block.shopify_attributes }}
-        >
+          {{ block.shopify_attributes }}>
           <button
             type="button"
             class="faq-category-tabs__question"
-            aria-expanded="false"
-          >
+            aria-expanded="false">
             <span class="faq-category-tabs__question-text">{{ block.settings.question }}</span>
 
             <span class="faq-category-tabs__icon" aria-hidden="true">
-              <svg class="faq-category-tabs__icon-svg faq-category-tabs__icon-svg--plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10.0002 1.68359C5.41393 1.68359 1.68311 5.41443 1.68311 10.0007C1.68311 14.5869 5.41393 18.3177 10.0002 18.3177C14.5864 18.3177 18.3172 14.5869 18.3172 10.0007C18.3172 5.41443 14.5864 1.68359 10.0002 1.68359ZM10.0002 2.93359C13.9108 2.93359 17.0672 6.08998 17.0672 10.0007C17.0672 13.9113 13.9108 17.0677 10.0002 17.0677C6.08948 17.0677 2.93311 13.9113 2.93311 10.0007C2.93311 6.08998 6.08948 2.93359 10.0002 2.93359ZM10.0034 5.17155C9.92134 5.17283 9.84032 5.19027 9.76498 5.22286C9.68964 5.25545 9.62146 5.30257 9.56433 5.36151C9.5072 5.42045 9.46224 5.49007 9.43202 5.56639C9.40179 5.64271 9.3869 5.72424 9.38818 5.80632V9.33984H5.84652C5.7637 9.33867 5.68147 9.35397 5.60462 9.38486C5.52776 9.41574 5.45781 9.46159 5.39883 9.51974C5.33985 9.5779 5.29301 9.64719 5.26104 9.7236C5.22908 9.80001 5.21262 9.88202 5.21262 9.96484C5.21262 10.0477 5.22908 10.1297 5.26104 10.2061C5.29301 10.2825 5.33985 10.3518 5.39883 10.4099C5.45781 10.4681 5.52776 10.5139 5.60462 10.5448C5.68147 10.5757 5.7637 10.591 5.84652 10.5898H9.38818V14.1592C9.38701 14.242 9.40231 14.3242 9.4332 14.4011C9.46408 14.4779 9.50993 14.5479 9.56808 14.6069C9.62624 14.6658 9.69553 14.7127 9.77194 14.7447C9.84835 14.7766 9.93036 14.7931 10.0132 14.7931C10.096 14.7931 10.178 14.7766 10.2544 14.7447C10.3308 14.7127 10.4001 14.6658 10.4583 14.6069C10.5164 14.5479 10.5623 14.4779 10.5932 14.4011C10.6241 14.3242 10.6394 14.242 10.6382 14.1592V10.5898H14.1619C14.2448 10.591 14.327 10.5757 14.4038 10.5448C14.4807 10.5139 14.5507 10.4681 14.6096 10.4099C14.6686 10.3518 14.7155 10.2825 14.7474 10.2061C14.7794 10.1297 14.7958 10.0477 14.7958 9.96484C14.7958 9.88202 14.7794 9.80001 14.7474 9.7236C14.7155 9.64719 14.6686 9.5779 14.6096 9.51974C14.5507 9.46159 14.4807 9.41574 14.4038 9.38486C14.327 9.35397 14.2448 9.33867 14.1619 9.33984H10.6382V5.80632C10.6395 5.7226 10.624 5.63946 10.5925 5.56186C10.5611 5.48425 10.5144 5.41376 10.4552 5.35455C10.396 5.29534 10.3255 5.24864 10.2479 5.2172C10.1703 5.18576 10.0871 5.17024 10.0034 5.17155Z" fill="#211B18"/>
+              <svg
+                class="faq-category-tabs__icon-svg faq-category-tabs__icon-svg--plus"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none">
+                <path d="M10.0002 1.68359C5.41393 1.68359 1.68311 5.41443 1.68311 10.0007C1.68311 14.5869 5.41393 18.3177 10.0002 18.3177C14.5864 18.3177 18.3172 14.5869 18.3172 10.0007C18.3172 5.41443 14.5864 1.68359 10.0002 1.68359ZM10.0002 2.93359C13.9108 2.93359 17.0672 6.08998 17.0672 10.0007C17.0672 13.9113 13.9108 17.0677 10.0002 17.0677C6.08948 17.0677 2.93311 13.9113 2.93311 10.0007C2.93311 6.08998 6.08948 2.93359 10.0002 2.93359ZM10.0034 5.17155C9.92134 5.17283 9.84032 5.19027 9.76498 5.22286C9.68964 5.25545 9.62146 5.30257 9.56433 5.36151C9.5072 5.42045 9.46224 5.49007 9.43202 5.56639C9.40179 5.64271 9.3869 5.72424 9.38818 5.80632V9.33984H5.84652C5.7637 9.33867 5.68147 9.35397 5.60462 9.38486C5.52776 9.41574 5.45781 9.46159 5.39883 9.51974C5.33985 9.5779 5.29301 9.64719 5.26104 9.7236C5.22908 9.80001 5.21262 9.88202 5.21262 9.96484C5.21262 10.0477 5.22908 10.1297 5.26104 10.2061C5.29301 10.2825 5.33985 10.3518 5.39883 10.4099C5.45781 10.4681 5.52776 10.5139 5.60462 10.5448C5.68147 10.5757 5.7637 10.591 5.84652 10.5898H9.38818V14.1592C9.38701 14.242 9.40231 14.3242 9.4332 14.4011C9.46408 14.4779 9.50993 14.5479 9.56808 14.6069C9.62624 14.6658 9.69553 14.7127 9.77194 14.7447C9.84835 14.7766 9.93036 14.7931 10.0132 14.7931C10.096 14.7931 10.178 14.7766 10.2544 14.7447C10.3308 14.7127 10.4001 14.6658 10.4583 14.6069C10.5164 14.5479 10.5623 14.4779 10.5932 14.4011C10.6241 14.3242 10.6394 14.242 10.6382 14.1592V10.5898H14.1619C14.2448 10.591 14.327 10.5757 14.4038 10.5448C14.4807 10.5139 14.5507 10.4681 14.6096 10.4099C14.6686 10.3518 14.7155 10.2825 14.7474 10.2061C14.7794 10.1297 14.7958 10.0477 14.7958 9.96484C14.7958 9.88202 14.7794 9.80001 14.7474 9.7236C14.7155 9.64719 14.6686 9.5779 14.6096 9.51974C14.5507 9.46159 14.4807 9.41574 14.4038 9.38486C14.327 9.35397 14.2448 9.33867 14.1619 9.33984H10.6382V5.80632C10.6395 5.7226 10.624 5.63946 10.5925 5.56186C10.5611 5.48425 10.5144 5.41376 10.4552 5.35455C10.396 5.29534 10.3255 5.24864 10.2479 5.2172C10.1703 5.18576 10.0871 5.17024 10.0034 5.17155Z" fill="#211B18" />
               </svg>
 
-              <svg class="faq-category-tabs__icon-svg faq-category-tabs__icon-svg--minus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M9.99984 1.66797C5.40486 1.66797 1.6665 5.40633 1.6665 10.0013C1.6665 14.5963 5.40486 18.3346 9.99984 18.3346C14.5948 18.3346 18.3332 14.5963 18.3332 10.0013C18.3332 5.40633 14.5948 1.66797 9.99984 1.66797ZM9.99984 2.91797C13.9193 2.91797 17.0832 6.08188 17.0832 10.0013C17.0832 13.9207 13.9193 17.0846 9.99984 17.0846C6.08041 17.0846 2.9165 13.9207 2.9165 10.0013C2.9165 6.08188 6.08041 2.91797 9.99984 2.91797ZM6.45817 9.3763C6.37535 9.37513 6.29312 9.39043 6.21627 9.42132C6.13941 9.4522 6.06946 9.49805 6.01048 9.5562C5.9515 9.61436 5.90467 9.68365 5.8727 9.76006C5.84073 9.83647 5.82427 9.91847 5.82427 10.0013C5.82427 10.0841 5.84073 10.1661 5.8727 10.2425C5.90467 10.319 5.9515 10.3882 6.01048 10.4464C6.06946 10.5046 6.13941 10.5504 6.21627 10.5813C6.29312 10.6122 6.37535 10.6275 6.45817 10.6263H13.5415C13.6243 10.6275 13.7066 10.6122 13.7834 10.5813C13.8603 10.5504 13.9302 10.5046 13.9892 10.4464C14.0482 10.3882 14.095 10.319 14.127 10.2425C14.1589 10.1661 14.1754 10.0841 14.1754 10.0013C14.1754 9.91847 14.1589 9.83647 14.127 9.76006C14.095 9.68365 14.0482 9.61436 13.9892 9.5562C13.9302 9.49805 13.8603 9.4522 13.7834 9.42132C13.7066 9.39043 13.6243 9.37513 13.5415 9.3763H6.45817Z" fill="#211B18"/>
+              <svg
+                class="faq-category-tabs__icon-svg faq-category-tabs__icon-svg--minus"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none">
+                <path d="M9.99984 1.66797C5.40486 1.66797 1.6665 5.40633 1.6665 10.0013C1.6665 14.5963 5.40486 18.3346 9.99984 18.3346C14.5948 18.3346 18.3332 14.5963 18.3332 10.0013C18.3332 5.40633 14.5948 1.66797 9.99984 1.66797ZM9.99984 2.91797C13.9193 2.91797 17.0832 6.08188 17.0832 10.0013C17.0832 13.9207 13.9193 17.0846 9.99984 17.0846C6.08041 17.0846 2.9165 13.9207 2.9165 10.0013C2.9165 6.08188 6.08041 2.91797 9.99984 2.91797ZM6.45817 9.3763C6.37535 9.37513 6.29312 9.39043 6.21627 9.42132C6.13941 9.4522 6.06946 9.49805 6.01048 9.5562C5.9515 9.61436 5.90467 9.68365 5.8727 9.76006C5.84073 9.83647 5.82427 9.91847 5.82427 10.0013C5.82427 10.0841 5.84073 10.1661 5.8727 10.2425C5.90467 10.319 5.9515 10.3882 6.01048 10.4464C6.06946 10.5046 6.13941 10.5504 6.21627 10.5813C6.29312 10.6122 6.37535 10.6275 6.45817 10.6263H13.5415C13.6243 10.6275 13.7066 10.6122 13.7834 10.5813C13.8603 10.5504 13.9302 10.5046 13.9892 10.4464C14.0482 10.3882 14.095 10.319 14.127 10.2425C14.1589 10.1661 14.1754 10.0841 14.1754 10.0013C14.1754 9.91847 14.1589 9.83647 14.127 9.76006C14.095 9.68365 14.0482 9.61436 13.9892 9.5562C13.9302 9.49805 13.8603 9.4522 13.7834 9.42132C13.7066 9.39043 13.6243 9.37513 13.5415 9.3763H6.45817Z" fill="#211B18" />
               </svg>
             </span>
           </button>
@@ -160,10 +166,7 @@
       {% endif %}
 
       {% if section.settings.button_label != blank %}
-        <a
-          href="{{ section.settings.button_link | default: '#' }}"
-          class="faq-category-tabs__button"
-        >
+        <a href="{{ section.settings.button_link | default: '#' }}" class="faq-category-tabs__button">
           {{ section.settings.button_label }}
         </a>
       {% endif %}
@@ -178,18 +181,21 @@
       color: #211B18;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__wrap {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__wrap {
       margin: 0 auto;
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__header {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__header {
       margin: 0 auto 34px;
       text-align: center;
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__heading {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__heading {
       margin: 0 0 12px;
       color: #211B18;
       font-family: "Cormorant Garamond";
@@ -202,7 +208,8 @@
       text-align: center;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__subheading {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__subheading {
       margin: 0 auto 18px;
       color: #211B18;
       font-family: "DM Sans";
@@ -213,12 +220,14 @@
       text-align: center;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__subheading p {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__subheading p {
       margin: 0;
       color: #211B18;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__tabs {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__tabs {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -226,11 +235,12 @@
       flex-wrap: wrap;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__tab {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__tab {
       appearance: none;
-      border: 1px solid rgba(33, 27, 24, 0.16);
-      background: var(--faq-tab-bg);
-      color: #211B18;
+      border: 1px solid rgba(33, 27, 24, 0.35);
+      background: transparent;
+      color: var(--faq-tab-text);
       min-height: 28px;
       padding: 8px 18px;
       border-radius: 999px;
@@ -245,14 +255,22 @@
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__tab:hover,
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__tab.is-active {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__tab:hover:not(.is-active) {
+      background: transparent;
+      border-color: rgba(33, 27, 24, 0.55);
+      color: var(--faq-tab-text);
+    }
+
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__tab.is-active {
       background: var(--faq-tab-active-bg);
       border-color: var(--faq-tab-active-bg);
       color: var(--faq-tab-active-text);
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown {
       display: none;
       position: relative;
       width: 100%;
@@ -262,7 +280,8 @@
       z-index: 5;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-button {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-button {
       appearance: none;
       width: 100%;
       min-height: 38px;
@@ -284,7 +303,8 @@
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-arrow {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-arrow {
       position: absolute;
       right: 16px;
       top: 50%;
@@ -297,11 +317,13 @@
       transition: transform 0.2s ease;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown.is-open .faq-category-tabs__mobile-dropdown-arrow {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown.is-open .faq-category-tabs__mobile-dropdown-arrow {
       transform: translateY(-35%) rotate(225deg);
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-menu {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-menu {
       position: absolute;
       left: 0;
       right: 0;
@@ -316,7 +338,8 @@
       z-index: 20;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-option {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-option {
       appearance: none;
       width: 100%;
       border: 0;
@@ -334,38 +357,50 @@
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-option:last-child {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-option:last-child {
       border-bottom: 0;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-option:hover,
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown-option.is-active {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-option:hover:not(.is-active) {
+      background: rgba(33, 27, 24, 0.06);
+      color: var(--faq-tab-text);
+    }
+
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__mobile-dropdown-option.is-active {
       background: var(--faq-tab-active-bg);
       color: var(--faq-tab-active-text);
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__items {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__items {
       margin: 0 auto;
       border-top: 0;
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__item {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__item {
       background: transparent;
       border-bottom: 1px solid var(--faq-item-border);
       display: none;
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__item.is-visible {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__item.is-visible {
       display: block;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__item.is-active {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__item.is-active {
       background: transparent;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__question {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__question {
       width: 100%;
       border: 0;
       background: transparent;
@@ -380,7 +415,8 @@
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__question-text {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__question-text {
       color: #211B18;
       font-family: "DM Sans";
       font-size: 18px;
@@ -390,7 +426,8 @@
       transition: color 0.2s ease;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__icon {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__icon {
       width: 20px;
       height: 20px;
       flex: 0 0 20px;
@@ -400,31 +437,37 @@
       color: #211B18;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__icon-svg {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__icon-svg {
       display: block;
       width: 20px;
       height: 20px;
       flex: 0 0 20px;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__icon-svg--minus {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__icon-svg--minus {
       display: none;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__item.is-active .faq-category-tabs__icon-svg--plus {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__item.is-active .faq-category-tabs__icon-svg--plus {
       display: none;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__item.is-active .faq-category-tabs__icon-svg--minus {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__item.is-active .faq-category-tabs__icon-svg--minus {
       display: block;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__answer-wrapper {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__answer-wrapper {
       padding: 0 0 12px;
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__answer {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__answer {
       background: var(--faq-item-active-bg);
       color: var(--faq-answer);
       font-family: "DM Sans";
@@ -437,12 +480,14 @@
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__answer p {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__answer p {
       margin: 0;
       color: var(--faq-answer);
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__footer {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__footer {
       margin-top: 28px;
       display: flex;
       align-items: center;
@@ -452,7 +497,8 @@
       text-align: center;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__footer-text {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__footer-text {
       color: #211B18;
       font-family: "DM Sans";
       font-size: 18px;
@@ -461,7 +507,8 @@
       line-height: 1.45;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__button {
+    #faq-category-tabs-{{ section.id }}
+    .faq-category-tabs__button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -476,11 +523,12 @@
       font-style: normal;
       font-weight: 500;
       line-height: 1;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.2s ease
+      , transform 0.2s ease;
       box-sizing: border-box;
     }
 
-    #faq-category-tabs-{{ section.id }} .faq-category-tabs__button:hover {
+    #faq-category-tabs-{{ section.id }}.faq-category-tabs__button:hover {
       opacity: 0.92;
       transform: translateY(-1px);
     }
@@ -490,28 +538,34 @@
         padding: 60px 15px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__header {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__header {
         margin-bottom: 30px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__heading {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__heading {
         font-size: 26px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__subheading {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__subheading {
         font-size: 14px;
         margin-bottom: 18px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__question-text {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__question-text {
         font-size: 14px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__answer {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__answer {
         font-size: 14px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__footer-text {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__footer-text {
         font-size: 14px;
       }
     }
@@ -521,7 +575,8 @@
         display: none;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__mobile-dropdown {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__mobile-dropdown {
         display: block;
       }
     }
@@ -531,11 +586,13 @@
         padding: 13px 0;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__answer {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__answer {
         padding: 16px 14px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__footer {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__footer {
         gap: 10px;
       }
     }
@@ -545,19 +602,23 @@
         font-size: 20px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__subheading {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__subheading {
         font-size: 14px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__question-text {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__question-text {
         font-size: 14px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__answer {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__answer {
         font-size: 14px;
       }
 
-      #faq-category-tabs-{{ section.id }} .faq-category-tabs__footer-text {
+      #faq-category-tabs-{{ section.id }}
+      .faq-category-tabs__footer-text {
         font-size: 14px;
       }
     }
@@ -567,7 +628,7 @@
     (function() {
       var section = document.getElementById('faq-category-tabs-{{ section.id }}');
       if (!section) return;
-
+    
       var tabs = section.querySelectorAll('.faq-category-tabs__tab');
       var items = section.querySelectorAll('.faq-category-tabs__item');
       var mobileDropdown = section.querySelector('[data-mobile-dropdown]');
@@ -575,82 +636,82 @@
       var mobileDropdownLabel = section.querySelector('[data-mobile-dropdown-label]');
       var mobileDropdownMenu = section.querySelector('[data-mobile-dropdown-menu]');
       var mobileDropdownOptions = section.querySelectorAll('.faq-category-tabs__mobile-dropdown-option');
-
+    
       function closeMobileDropdown() {
         if (!mobileDropdown || !mobileDropdownButton || !mobileDropdownMenu) return;
-
+    
         mobileDropdown.classList.remove('is-open');
         mobileDropdownButton.setAttribute('aria-expanded', 'false');
         mobileDropdownMenu.hidden = true;
       }
-
+    
       function openMobileDropdown() {
         if (!mobileDropdown || !mobileDropdownButton || !mobileDropdownMenu) return;
-
+    
         mobileDropdown.classList.add('is-open');
         mobileDropdownButton.setAttribute('aria-expanded', 'true');
         mobileDropdownMenu.hidden = false;
       }
-
+    
       function closeAllVisibleItems() {
         items.forEach(function(item) {
           if (!item.classList.contains('is-visible')) return;
-
+    
           item.classList.remove('is-active');
-
+    
           var button = item.querySelector('.faq-category-tabs__question');
           var answer = item.querySelector('.faq-category-tabs__answer-wrapper');
-
+    
           if (button) button.setAttribute('aria-expanded', 'false');
           if (answer) answer.hidden = true;
         });
       }
-
+    
       function setActiveTab(category) {
         tabs.forEach(function(tab) {
           var isMatch = tab.getAttribute('data-tab') === category;
           tab.classList.toggle('is-active', isMatch);
           tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
         });
-
+    
         mobileDropdownOptions.forEach(function(option) {
           var isMatch = option.getAttribute('data-tab') === category;
           option.classList.toggle('is-active', isMatch);
-
+    
           if (isMatch && mobileDropdownLabel) {
             mobileDropdownLabel.textContent = option.textContent.trim();
           }
         });
       }
-
+    
       function filterItems(category) {
         items.forEach(function(item) {
           var match = item.getAttribute('data-category') === category;
-
+    
           item.classList.remove('is-active');
           item.classList.toggle('is-visible', match);
-
+    
           var button = item.querySelector('.faq-category-tabs__question');
           var answer = item.querySelector('.faq-category-tabs__answer-wrapper');
-
+    
           if (button) button.setAttribute('aria-expanded', 'false');
           if (answer) answer.hidden = true;
         });
-
+    
         setActiveTab(category);
       }
-
+    
       tabs.forEach(function(tab) {
         tab.addEventListener('click', function() {
           var category = tab.getAttribute('data-tab');
           filterItems(category);
         });
       });
-
+    
       if (mobileDropdownButton) {
         mobileDropdownButton.addEventListener('click', function() {
           var isOpen = mobileDropdown && mobileDropdown.classList.contains('is-open');
-
+    
           if (isOpen) {
             closeMobileDropdown();
           } else {
@@ -658,40 +719,40 @@
           }
         });
       }
-
+    
       mobileDropdownOptions.forEach(function(option) {
         option.addEventListener('click', function() {
           var category = option.getAttribute('data-tab');
-
+    
           filterItems(category);
           closeMobileDropdown();
         });
       });
-
+    
       document.addEventListener('click', function(event) {
         if (!mobileDropdown) return;
         if (mobileDropdown.contains(event.target)) return;
-
+    
         closeMobileDropdown();
       });
-
+    
       document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
           closeMobileDropdown();
         }
       });
-
+    
       items.forEach(function(item) {
         var button = item.querySelector('.faq-category-tabs__question');
         var answer = item.querySelector('.faq-category-tabs__answer-wrapper');
-
+    
         if (!button || !answer) return;
-
+    
         button.addEventListener('click', function() {
           var isOpen = item.classList.contains('is-active');
-
+    
           closeAllVisibleItems();
-
+    
           if (!isOpen) {
             item.classList.add('is-active');
             button.setAttribute('aria-expanded', 'true');
@@ -699,239 +760,225 @@
           }
         });
       });
-
+    
       filterItems('category-1');
     })();
   </script>
 </section>
 
 {% schema %}
-{
-  "name": "FAQ category tabs",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Frequently Asked Questions"
-    },
-    {
-      "type": "richtext",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "<p>Answers to your most important questions about hair thinning, ingredients, and results.</p>"
-    },
-    {
-      "type": "text",
-      "id": "category_1_label",
-      "label": "Category 1 label",
-      "default": "Category A"
-    },
-    {
-      "type": "text",
-      "id": "category_2_label",
-      "label": "Category 2 label",
-      "default": "Category B"
-    },
-    {
-      "type": "text",
-      "id": "category_3_label",
-      "label": "Category 3 label",
-      "default": "Category C"
-    },
-    {
-      "type": "text",
-      "id": "category_4_label",
-      "label": "Category 4 label",
-      "default": "Category D"
-    },
-    {
-      "type": "text",
-      "id": "footer_text",
-      "label": "Footer text",
-      "default": "Still have questions?"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Contact"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "color",
-      "id": "section_bg",
-      "label": "Section background",
-      "default": "#DCEFEB"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#211B18"
-    },
-    {
-      "type": "color",
-      "id": "subtext_color",
-      "label": "Subtext color",
-      "default": "#211B18"
-    },
-    {
-      "type": "color",
-      "id": "tab_bg",
-      "label": "Tab background",
-      "default": "#EEF8F6"
-    },
-    {
-      "type": "color",
-      "id": "tab_text",
-      "label": "Tab text color",
-      "default": "#211B18"
-    },
-    {
-      "type": "color",
-      "id": "tab_active_bg",
-      "label": "Active tab background",
-      "default": "#3D7F7D"
-    },
-    {
-      "type": "color",
-      "id": "tab_active_text",
-      "label": "Active tab text color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "item_border",
-      "label": "FAQ border color",
-      "default": "#A9BBB7"
-    },
-    {
-      "type": "color",
-      "id": "item_bg",
-      "label": "FAQ item background",
-      "default": "#DCEFEB"
-    },
-    {
-      "type": "color",
-      "id": "item_active_bg",
-      "label": "Active FAQ answer background",
-      "default": "#3D7F7D"
-    },
-    {
-      "type": "color",
-      "id": "question_color",
-      "label": "Question color",
-      "default": "#211B18"
-    },
-    {
-      "type": "color",
-      "id": "question_active_color",
-      "label": "Active question color",
-      "default": "#211B18"
-    },
-    {
-      "type": "color",
-      "id": "answer_color",
-      "label": "Answer color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "button_bg",
-      "label": "Button background",
-      "default": "#4A2A4D"
-    },
-    {
-      "type": "color",
-      "id": "button_text",
-      "label": "Button text color",
-      "default": "#FFFFFF"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "faq_item",
-      "name": "FAQ item",
-      "settings": [
-        {
-          "type": "select",
-          "id": "category",
-          "label": "Category",
-          "default": "category-1",
-          "options": [
-            { "value": "category-1", "label": "Category 1" },
-            { "value": "category-2", "label": "Category 2" },
-            { "value": "category-3", "label": "Category 3" },
-            { "value": "category-4", "label": "Category 4" }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "Is this for all hair types and textures?"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "Answer",
-          "default": "<p>Yes — HairScripts™ works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 20,
-  "presets": [
-    {
-      "name": "FAQ category tabs",
-      "blocks": [
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "category-1",
-            "question": "Is this for all hair types and textures?",
-            "answer": "<p>Yes — HairScripts™ works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+  {
+    "name": "FAQ category tabs",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Frequently Asked Questions"
+      },
+      {
+        "type": "richtext",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "<p>Answers to your most important questions about hair thinning, ingredients, and results.</p>"
+      },
+      {
+        "type": "text",
+        "id": "category_1_label",
+        "label": "Category 1 label",
+        "default": "Category A"
+      },
+      {
+        "type": "text",
+        "id": "category_2_label",
+        "label": "Category 2 label",
+        "default": "Category B"
+      }, {
+        "type": "text",
+        "id": "category_3_label",
+        "label": "Category 3 label",
+        "default": "Category C"
+      }, {
+        "type": "text",
+        "id": "category_4_label",
+        "label": "Category 4 label",
+        "default": "Category D"
+      }, {
+        "type": "text",
+        "id": "footer_text",
+        "label": "Footer text",
+        "default": "Still have questions?"
+      }, {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "Contact"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }, {
+        "type": "color",
+        "id": "section_bg",
+        "label": "Section background",
+        "default": "#DCEFEB"
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#211B18"
+      }, {
+        "type": "color",
+        "id": "subtext_color",
+        "label": "Subtext color",
+        "default": "#211B18"
+      }, {
+        "type": "color",
+        "id": "tab_bg",
+        "label": "Tab background",
+        "default": "#EEF8F6"
+      }, {
+        "type": "color",
+        "id": "tab_text",
+        "label": "Tab text color",
+        "default": "#211B18"
+      }, {
+        "type": "color",
+        "id": "tab_active_bg",
+        "label": "Active tab background",
+        "default": "#3D7E7A"
+      }, {
+        "type": "color",
+        "id": "tab_active_text",
+        "label": "Active tab text color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "item_border",
+        "label": "FAQ border color",
+        "default": "#A9BBB7"
+      }, {
+        "type": "color",
+        "id": "item_bg",
+        "label": "FAQ item background",
+        "default": "#DCEFEB"
+      }, {
+        "type": "color",
+        "id": "item_active_bg",
+        "label": "Active FAQ answer background",
+        "default": "#3D7F7D"
+      }, {
+        "type": "color",
+        "id": "question_color",
+        "label": "Question color",
+        "default": "#211B18"
+      }, {
+        "type": "color",
+        "id": "question_active_color",
+        "label": "Active question color",
+        "default": "#211B18"
+      }, {
+        "type": "color",
+        "id": "answer_color",
+        "label": "Answer color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "button_bg",
+        "label": "Button background",
+        "default": "#4A2A4D"
+      }, {
+        "type": "color",
+        "id": "button_text",
+        "label": "Button text color",
+        "default": "#FFFFFF"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq_item",
+        "name": "FAQ item",
+        "settings": [
+          {
+            "type": "select",
+            "id": "category",
+            "label": "Category",
+            "default": "category-1",
+            "options": [
+              {
+                "value": "category-1",
+                "label": "Category 1"
+              }, {
+                "value": "category-2",
+                "label": "Category 2"
+              }, {
+                "value": "category-3",
+                "label": "Category 3"
+              }, {
+                "value": "category-4",
+                "label": "Category 4"
+              }
+            ]
+          }, {
+            "type": "text",
+            "id": "question",
+            "label": "Question",
+            "default": "Is this for all hair types and textures?"
+          }, {
+            "type": "richtext",
+            "id": "answer",
+            "label": "Answer",
+            "default": "<p>Yes — HairScripts™ works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
           }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "category-1",
-            "question": "How soon will I see results?",
-            "answer": "<p>Some people notice early changes in how their hair feels within the first month, while fuller visible changes often take longer.</p>"
+        ]
+      }
+    ],
+    "max_blocks": 20,
+    "presets": [
+      {
+        "name": "FAQ category tabs",
+        "blocks": [
+          {
+            "type": "faq_item",
+            "settings": {
+              "category": "category-1",
+              "question": "Is this for all hair types and textures?",
+              "answer": "<p>Yes — HairScripts™ works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "category": "category-1",
+              "question": "How soon will I see results?",
+              "answer": "<p>Some people notice early changes in how their hair feels within the first month, while fuller visible changes often take longer.</p>"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "category": "category-1",
+              "question": "Will this make me shed more before it gets better?",
+              "answer": "<p>Not usually, but everyone is different. Hair cycles take time, so consistency matters more than overnight expectations.</p>"
+            }
+          },
+          {
+            "type": "faq_item",
+            "settings": {
+              "category": "category-1",
+              "question": "Can men use this too?",
+              "answer": "<p>This depends on the formula and positioning of the product, but many of the supportive ingredients can be relevant more broadly.</p>"
+            }
+          }, {
+            "type": "faq_item",
+            "settings": {
+              "category": "category-1",
+              "question": "What if I've had thinning for years?",
+              "answer": "<p>Long-term shedding can have several causes. That is exactly why a root-cause, long-view approach matters.</p>"
+            }
           }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "category-1",
-            "question": "Will this make me shed more before it gets better?",
-            "answer": "<p>Not usually, but everyone is different. Hair cycles take time, so consistency matters more than overnight expectations.</p>"
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "category-1",
-            "question": "Can men use this too?",
-            "answer": "<p>This depends on the formula and positioning of the product, but many of the supportive ingredients can be relevant more broadly.</p>"
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "category-1",
-            "question": "What if I've had thinning for years?",
-            "answer": "<p>Long-term shedding can have several causes. That is exactly why a root-cause, long-view approach matters.</p>"
-          }
-        }
-      ]
-    }
-  ]
-}
+        ]
+      }
+    ]
+  }
 {% endschema %}

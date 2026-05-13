@@ -6,7 +6,7 @@
 
   @param {number} product_media_size - Number of media items in the product
   @param {string} section_id - Unique section ID
-  @param {object} settings - Section settings object
+  @param {object} settings - Section settings object (`desktop_media_position`, `equal_columns`, optional `media_column_width` % when equal columns off)
   @param {string} media_gallery - Captured HTML for the product media gallery block
   @param {string} product_details - Captured HTML for the product details block
   @param {string} additional_blocks - Captured HTML for additional section blocks
@@ -74,6 +74,28 @@
     when 'content-full-width'
       assign content_width = 'full-width'
   endcase
+
+  # Desktop column widths (schema: media_column_width). DOM column 1 = first rendered column.
+  assign product_grid_css_vars = ''
+  if product_has_media
+    unless settings.equal_columns
+      assign media_pct = settings.media_column_width | default: 50 | plus: 0
+      if media_pct > 65
+        assign media_pct = 65
+      elsif media_pct < 35
+        assign media_pct = 35
+      endif
+      assign details_pct = 100 | minus: media_pct
+      if settings.desktop_media_position == 'left'
+        assign col_1_pct = media_pct
+        assign col_2_pct = details_pct
+      else
+        assign col_1_pct = details_pct
+        assign col_2_pct = media_pct
+      endif
+      assign product_grid_css_vars = '--product-information-col-1-pct: ' | append: col_1_pct | append: '%; --product-information-col-2-pct: ' | append: col_2_pct | append: '%;'
+    endunless
+  endif
 %}
 
 <div class="section-background color-{{ settings.color_scheme }}"></div>
@@ -91,6 +113,9 @@
   <div
     class="{{ product_grid_class }}"
     data-product-grid-content
+    {% if product_grid_css_vars != blank %}
+      style="{{ product_grid_css_vars }}"
+    {% endif %}
   >
     {% assign render_order_array = render_order | split: ',' %}
 
@@ -143,6 +168,7 @@
     height: 100%;
   }
 
+ 
   /* Mobile styles */
   @media screen and (max-width: 749px) {
     .product-information__media {
@@ -314,14 +340,62 @@
   }
 
   /*
-    FORCE PRODUCT MEDIA AND DETAILS TO 50 / 50
-    This overrides the default 2fr / 1fr and sidebar-width behavior.
+    Desktop media/details columns: widths from section schema (--product-information-col-* on the grid).
+    Skips equal-columns layout so the dedicated half-grid template applies.
   */
   @media screen and (min-width: 750px) {
-    .product-information__grid:not(.product-information--media-none) {
+    .product-information__grid:not(.product-information--media-none):not(.product-information__grid--half) {
       display: grid !important;
-      grid-template-columns: minmax(0, 50%) minmax(0, 50%) !important;
-      align-items: start;
+      grid-template-columns:
+        minmax(0, var(--product-information-col-1-pct, 50%)) minmax(0, var(--product-information-col-2-pct, 50%)) !important;
+      align-items: start !important;
+      align-content: start !important;
+    }
+
+    /* layout-panel-style sets --vertical-alignment: center on column groups; that centers blocks vs tall media */
+    .product-information__grid:not(.product-information--media-none)
+      .product-details
+      .group-block-content.layout-panel-flex--column {
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+    }
+
+    /* Only the outer __media wrapper should be sticky; inner sticky + header offset margins misalign columns */
+    .product-information__grid:not(.product-information--media-none)
+      .product-information__media
+      > media-gallery.sticky-content {
+      position: static !important;
+      top: auto !important;
+      margin-top: 0 !important;
+      z-index: auto;
+    }
+
+    /* Prevent slides stretch-to-tallest (makes short media look vertically centered in the row) */
+    .product-information__grid:not(.product-information--media-none) .product-information__media slideshow-component {
+      --slideshow-align-items: flex-start !important;
+    }
+
+    .product-information__grid:not(.product-information--media-none)
+      .product-information__media
+      .media-gallery--carousel
+      slideshow-component:has(slideshow-controls[thumbnails]) {
+      align-content: start !important;
+      justify-content: start !important;
+      justify-items: start !important;
+    }
+
+    /*
+      Thumbnail rail: column flex inherits justify-content: space-between from slideshow-controls,
+      which pins the first/last flex children to opposite ends when the rail is min-height: 100% tall.
+      Keep rail + thumbnails packed to block-start so the gallery meets the top of the media column.
+    */
+    .product-information__grid:not(.product-information--media-none)
+      .product-information__media
+      slideshow-controls[thumbnails]:is([pagination-position='left'], [pagination-position='right']):not(
+        [controls-on-media]
+      ) {
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
     }
 
     .product-information__grid.product-information--media-left .product-information__media {
@@ -330,8 +404,58 @@
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
+      align-self: start !important;
+      justify-self: stretch !important;
+      margin-block-start: 0 !important;
+      margin-inline-start: 0 !important;
+      padding-block-start: 0 !important;
+      padding-inline-start: 0 !important;
       padding-left: 0 !important;
       padding-right: calc(var(--gap, 0) / 2) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+      align-content: flex-start !important;
+      min-block-size: 0 !important;
+    }
+
+    /* Slideshow row defaults can vertically center slides; keep media flush to top of grid cell */
+    .product-information__grid.product-information--media-left .product-information__media slideshow-slides {
+      align-items: flex-start !important;
+    }
+
+    .product-information__grid.product-information--media-left .product-information__media media-gallery {
+      align-self: stretch !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: stretch !important;
+    }
+
+    .product-information__grid.product-information--media-left .product-information__media slideshow-component {
+      align-self: stretch !important;
+      width: 100% !important;
+    }
+
+    .product-information__grid.product-information--media-left .product-information__media slideshow-container {
+      align-self: start !important;
+      width: 100% !important;
+    }
+
+    .product-information__grid.product-information--media-left
+      .product-information__media
+      slideshow-slide.product-media-container {
+      align-self: flex-start !important;
+    }
+
+    /* Gallery block spacing-style can add block-start padding above the carousel */
+    .product-information__grid.product-information--media-left
+      .product-information__media
+      > media-gallery.spacing-style {
+      --padding-block-start: 0px;
+      --margin-block-start: 0px;
     }
 
     .product-information__grid.product-information--media-left .product-details {
@@ -340,6 +464,7 @@
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
+      align-self: start !important;
       padding-left: calc(var(--gap, 0) / 2) !important;
       padding-right: 0 !important;
     }
@@ -350,6 +475,7 @@
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
+      align-self: start !important;
       padding-left: 0 !important;
       padding-right: calc(var(--gap, 0) / 2) !important;
     }
@@ -360,8 +486,51 @@
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
+      align-self: start !important;
       padding-left: calc(var(--gap, 0) / 2) !important;
       padding-right: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+      align-content: flex-start !important;
+      min-block-size: 0 !important;
+    }
+
+    .product-information__grid.product-information--media-right .product-information__media slideshow-slides {
+      align-items: flex-start !important;
+    }
+
+    .product-information__grid.product-information--media-right .product-information__media media-gallery {
+      align-self: stretch !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: stretch !important;
+    }
+
+    .product-information__grid.product-information--media-right .product-information__media slideshow-component {
+      align-self: stretch !important;
+      width: 100% !important;
+    }
+
+    .product-information__grid.product-information--media-right .product-information__media slideshow-container {
+      align-self: start !important;
+      width: 100% !important;
+    }
+
+    .product-information__grid.product-information--media-right
+      .product-information__media
+      slideshow-slide.product-media-container {
+      align-self: flex-start !important;
+    }
+
+    .product-information__grid.product-information--media-right
+      .product-information__media
+      > media-gallery.spacing-style {
+      --padding-block-start: 0px;
+      --margin-block-start: 0px;
     }
 
     .section--full-width .product-information__grid.product-information--media-left .product-information__media,
@@ -388,6 +557,25 @@
     }
   }
 
+  /*
+    Align main gallery media to the start of the product grid column.
+    Global .product-media-container.constrain-height uses horizontal auto margins (centers
+    the slide in the slideshow flex row); reset that here so the image meets the left edge.
+  */
+  .product-information__media slideshow-slide.product-media-container.constrain-height {
+    margin-inline: 0;
+  }
+
+  /* Viewport-constrained slides use flex centering in gallery CSS; top-align on PDP */
+  .product-information__media .product-media-container.constrain-height {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+
+  .product-information__media slideshow-slide {
+    scroll-snap-align: start;
+  }
+
   @media screen and (max-width: 749px) {
     .product-information__grid:not(.product-information--media-none) {
       display: grid !important;
@@ -404,9 +592,18 @@
       padding-right: 0 !important;
     }
 
+
     .product-information__media {
       position: static !important;
       top: auto !important;
+    }
+
+    /*
+      RTE / text blocks in details: global rules (e.g. hero copy) use rte-formatter.spacing-style p at 18px.
+      Keep product PDP subcopy at 14px on small screens to match base typography.
+    */
+    .product-information .product-details rte-formatter.text-block.rte :is(p, li) {
+      font-size: 14px;
     }
   }
 

@@ -10,42 +10,44 @@
     <div class="hs-science-hero__grid">
 
       <div class="hs-science-hero__content">
-        {% if section.settings.heading != blank %}
-          <h1 class="hs-science-hero__heading">{{ section.settings.heading }}</h1>
-        {% endif %}
-
-        {% if section.settings.description != blank %}
-          <div class="hs-science-hero__description">{{ section.settings.description }}</div>
-        {% endif %}
-
-        <div class="hs-science-hero__buttons">
-          {% if section.settings.button_label != blank %}
-            <a
-              {% if section.settings.button_link != blank %}
-                href="{{ section.settings.button_link }}"
-              {% else %}
-                role="link"
-                aria-disabled="true"
-              {% endif %}
-              class="hs-science-hero__button hs-science-hero__button--primary"
-            >
-              {{ section.settings.button_label }}
-            </a>
+        <div class="hs-science-hero__text-container">
+          {% if section.settings.heading != blank %}
+            <h1 class="hs-science-hero__heading">{{ section.settings.heading }}</h1>
           {% endif %}
 
-          {% if section.settings.button_label_2 != blank %}
-            <a
-              {% if section.settings.button_link_2 != blank %}
-                href="{{ section.settings.button_link_2 }}"
-              {% else %}
-                role="link"
-                aria-disabled="true"
-              {% endif %}
-              class="hs-science-hero__button hs-science-hero__button--secondary"
-            >
-              {{ section.settings.button_label_2 }}
-            </a>
+          {% if section.settings.description != blank %}
+            <div class="hs-science-hero__description">{{ section.settings.description }}</div>
           {% endif %}
+
+          <div class="hs-science-hero__buttons">
+            {% if section.settings.button_label != blank %}
+              <a
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                {% else %}
+                  role="link"
+                  aria-disabled="true"
+                {% endif %}
+                class="hs-science-hero__button hs-science-hero__button--primary"
+              >
+                {{ section.settings.button_label }}
+              </a>
+            {% endif %}
+
+            {% if section.settings.button_label_2 != blank %}
+              <a
+                {% if section.settings.button_link_2 != blank %}
+                  href="{{ section.settings.button_link_2 }}"
+                {% else %}
+                  role="link"
+                  aria-disabled="true"
+                {% endif %}
+                class="hs-science-hero__button hs-science-hero__button--secondary"
+              >
+                {{ section.settings.button_label_2 }}
+              </a>
+            {% endif %}
+          </div>
         </div>
 
         <div class="hs-science-hero__bottom desktop">
@@ -62,9 +64,11 @@
                       alt: section.settings.creator_text
                   }}
                 {% else %}
-                  <span class="hs-science-hero__creator-fallback"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
-  <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
-</svg></span>
+                  <span class="hs-science-hero__creator-fallback">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                      <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+                    </svg>
+                  </span>
                 {% endif %}
               </div>
               <span class="hs-science-hero__creator-text">{{ section.settings.creator_text }}</span>
@@ -76,9 +80,11 @@
               {% for block in proof_blocks %}
                 {% if block.settings.text != blank %}
                   <div class="hs-science-hero__proof-item" {{ block.shopify_attributes }}>
-                    <span class="hs-science-hero__proof-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
-  <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
-</svg></span>
+                    <span class="hs-science-hero__proof-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                        <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+                      </svg>
+                    </span>
                     <span class="hs-science-hero__proof-text">{{ block.settings.text }}</span>
                   </div>
                 {% endif %}
@@ -89,7 +95,7 @@
       </div>
 
       <div class="hs-science-hero__visual">
-         <div class="hs-science-hero__bottom mobile">
+        <div class="hs-science-hero__bottom mobile">
           {% if section.settings.creator_text != blank %}
             <div class="hs-science-hero__creator">
               <div class="hs-science-hero__creator-image">
@@ -115,7 +121,11 @@
               {% for block in proof_blocks %}
                 {% if block.settings.text != blank %}
                   <div class="hs-science-hero__proof-item" {{ block.shopify_attributes }}>
-                    <span class="hs-science-hero__proof-icon">✓</span>
+                    <span class="hs-science-hero__proof-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                        <path d="M4.97154 9.94315C4.7075 9.94315 4.46047 9.81247 4.31172 9.59359C3.06913 7.76078 1.78776 6.47356 0.394817 5.65968C0.0149737 5.43762 -0.113057 4.9494 0.109005 4.56956C0.330536 4.18971 0.818755 4.06062 1.19913 4.28375C2.54266 5.06893 3.77888 6.21059 4.9556 7.75759C7.21925 4.56584 9.88719 1.9999 12.8988 0.120871C13.2734 -0.111816 13.7637 0.00133987 13.9964 0.37534C14.2291 0.748809 14.1159 1.24021 13.7419 1.4729C10.589 3.43959 7.93804 6.09318 5.63613 9.58509C5.4895 9.80768 5.24194 9.94209 4.97579 9.94368C4.97472 9.94315 4.97313 9.94315 4.97154 9.94315Z" fill="white"/>
+                      </svg>
+                    </span>
                     <span class="hs-science-hero__proof-text">{{ block.settings.text }}</span>
                   </div>
                 {% endif %}
@@ -145,9 +155,10 @@
 </section>
 
 <style>
-    #section-{{ section.id }} .hs-science-hero__visual{
-        display: none;
-    }
+  #section-{{ section.id }} .hs-science-hero__visual {
+    display: none;
+  }
+
   #section-{{ section.id }} {
     position: relative;
     overflow: hidden;
@@ -195,6 +206,10 @@
 
   #section-{{ section.id }} .hs-science-hero__content {
     width: 50%;
+  }
+
+  #section-{{ section.id }} .hs-science-hero__text-container {
+    width: 100%;
   }
 
   #section-{{ section.id }} .hs-science-hero__heading {
@@ -420,17 +435,27 @@
     filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.18));
   }
 
+  @media screen and (min-width: 1025px) {
+    #section-{{ section.id }} .hs-science-hero__content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #section-{{ section.id }} .hs-science-hero__text-container {
+      margin: auto 0 0;
+    }
+
+    #section-{{ section.id }} .hs-science-hero__bottom.desktop {
+      margin-top: auto;
+    }
+  }
+
   @media screen and (max-width: 1024px) {
     #section-{{ section.id }} {
-        height: 1200px;
+      height: 1200px;
     }
-    #section-{{ section.id }} .hs-science-hero__grid {
-        flex-direction: column;
-        padding-top: 100px;
-}
-#section-{{ section.id }} .hs-science-hero__content {
-    width: 100%;
-}
+
     #section-{{ section.id }} .hs-science-hero__bg {
       {% if section.settings.background_image_1024 != blank %}
         background-image: url('{{ section.settings.background_image_1024 | image_url: width: 1800 }}');
@@ -438,11 +463,39 @@
     }
 
     #section-{{ section.id }} .hs-science-hero__grid {
+      flex-direction: column;
+      padding-top: 100px;
       grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+      justify-content: space-between;
     }
+
+    #section-{{ section.id }} .hs-science-hero__content {
+      width: 100%;
+    }
+
+    #section-{{ section.id }} .hs-science-hero__text-container {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
     #section-{{ section.id }} h1.hs-science-hero__heading {
-        text-align: center;
+      text-align: center;
     }
+
+    #section-{{ section.id }} .hs-science-hero__description {
+      text-align: center;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    #section-{{ section.id }} .hs-science-hero__buttons {
+      justify-content: center;
+      flex-direction: column;
+      width: 350px;
+      margin: 0 auto;
+    }
+
     #section-{{ section.id }} .hs-science-hero__badges {
       left: 0;
     }
@@ -450,40 +503,25 @@
     #section-{{ section.id }} .hs-science-hero__product-image {
       max-width: 360px;
     }
-    #section-{{ section.id }} .hs-science-hero__visual{
-        display: block;
-        width: 100%;
+
+    #section-{{ section.id }} .hs-science-hero__visual {
+      display: block;
+      width: 100%;
     }
+
     #section-{{ section.id }} .hs-science-hero__bottom.desktop {
-    display: none;
-}
-#section-{{ section.id }} .hs-science-hero__grid {
-        justify-content: space-between;
-}
-#section-{{ section.id }} .hs-science-hero__description {
-    text-align: center;
-    max-width: 100%;
-    width: 100%;
-}
-#section-{{ section.id }} .hs-science-hero__buttons {
-    justify-content: center;
-    flex-direction: column;
-    width: 350px;
-    margin: 0 auto;
-}
+      display: none;
+    }
   } 
 
   @media screen and (max-width: 989px) {
-
     #section-{{ section.id }} {
-    height: 900px;
-}
+      height: 900px;
+      min-height: auto;
+    }
 
     #section-{{ section.id }} .hs-science-hero__heading {
-    font-size: 43px;
-}
-    #section-{{ section.id }} {
-      min-height: auto;
+      font-size: 43px;
     }
 
     #section-{{ section.id }} .hs-science-hero__container {
@@ -504,6 +542,8 @@
       min-height: auto;
       justify-content: center;
       padding-top: 10px;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     #section-{{ section.id }} .hs-science-hero__badges {
@@ -514,11 +554,6 @@
       align-self: flex-start;
     }
 
-    #section-{{ section.id }} .hs-science-hero__visual {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
     #section-{{ section.id }} .hs-science-hero__product-wrap {
       justify-content: center;
       max-width: 100%;
@@ -526,9 +561,10 @@
   }
 
   @media screen and (max-width: 768px) {
-    #section-{{ section.id }} .hs-science-hero__description{
+    #section-{{ section.id }} .hs-science-hero__description {
       font-size: 14px;
     }
+
     #section-{{ section.id }} .hs-science-hero__heading {
       font-size: 32px;
     }
@@ -536,8 +572,9 @@
 
   @media screen and (max-width: 749px) {
     #section-{{ section.id }} {
-    margin-top: -80px;
-  }
+      margin-top: -80px;
+    }
+
     #section-{{ section.id }} .hs-science-hero__overlay {
       background: linear-gradient(180deg, rgba(39, 22, 13, 0.34) 0%, rgba(39, 22, 13, 0.46) 55%, rgba(39, 22, 13, 0.70) 100%);
     }
@@ -569,10 +606,12 @@
   @media screen and (max-width: 450px) {
     #section-{{ section.id }} .hs-science-hero__buttons {
       width: 80%;
-}
+    }
+
     #section-{{ section.id }} .hs-science-hero__heading {
       font-size: 20px;
-}
+    }
+
     #section-{{ section.id }} .hs-science-hero__bg {
       {% if section.settings.background_image_450 != blank %}
         background-image: url('{{ section.settings.background_image_450 | image_url: width: 900 }}');
@@ -588,9 +627,10 @@
       width: 100%;
       max-width: 220px;
     }
+
     #section-{{ section.id }} {
-    height: 800px;
-}
+      height: 850px;
+    }
   }
 </style>
 

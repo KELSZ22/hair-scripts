@@ -116,7 +116,7 @@
       "name": "Bevy Learn Videos",
       "settings": {
         "heading": "LEARN DIRECTLY FROM BEVY",
-        "text": "<p>Get real, no-fluff guidance from Bev—breaking down the science behind hair thinning and what actually works.</p>",
+        "text": "<p>Most women have no idea what’s actually causing their hair to thin. That’s why they end up trying everything. These short videos break down what’s really happening at the follicle — finally, in a way that makes sense.<br/><br/></p>",
         "scroll_state": "start",
         "marquee_speed": 100,
         "card_gap": 26,
@@ -133,9 +133,9 @@
         "stat_mtVexa": {
           "type": "stat",
           "settings": {
-            "number": "44K",
+            "number": "46K",
             "suffix": "+",
-            "label": "YOUTUBE SUBSCRIBERS"
+            "label": "Growing Community of  Women Getting Real Answers"
           }
         },
         "stat_fUq9Aj": {
@@ -143,7 +143,7 @@
           "settings": {
             "number": "5M",
             "suffix": "+",
-            "label": "VIEWS ACROSS VIDEOS"
+            "label": "Views Across Educational Videos"
           }
         },
         "stat_7hqNxY": {
@@ -151,15 +151,15 @@
           "settings": {
             "number": "750",
             "suffix": "+",
-            "label": "CONTENT CREATED"
+            "label": "SCIENCE-BASED VIDEOS  CREATED"
           }
         },
         "stat_wRGiiE": {
           "type": "stat",
           "settings": {
-            "number": "40K",
-            "suffix": "+",
-            "label": "COMMUNITY MEMBERS"
+            "number": "10+ YEARS",
+            "suffix": "",
+            "label": "Inside the Pharmaceutical Industry"
           }
         }
       },
@@ -171,10 +171,10 @@
       ],
       "name": "HairScripts Bevy Stats",
       "settings": {
-        "profile_image": "shopify://shop_images/Mask_group.png",
+        "profile_image": "shopify://shop_images/Bevy_Picture.png",
         "profile_image_alt": "Bevy",
         "name": "BEVY",
-        "role": "Hair Educator & Content Creator",
+        "role": "Pharmaceutical Industry Expert + Certified Hair Loss Practitioner",
         "background_color_left": "#4b9793",
         "background_color_right": "#62bdb8",
         "text_color": "#ffffff",
@@ -246,8 +246,8 @@
       ],
       "name": "Video carousel",
       "settings": {
-        "heading": "NOT SURE WHAT’S CAUSING YOUR HAIR THINNING?",
-        "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding and what to do next."
+        "heading": "Your Hair Is Telling You Something. Let’s Decode It.",
+        "subheading": "Watch short, expert-led videos that explain what’s actually driving your shedding — and what to do about it."
       }
     },
     "hairscripts_playlists_iUrG7C": {
@@ -319,7 +319,7 @@
       "name": "HairScripts Playlists",
       "settings": {
         "heading": "EXPLORE BEV’S PLAYLISTS",
-        "text": "<p>Watch curated content designed to help you understand your hair—and finally see real results.</p>",
+        "text": "<p>The science, simplified. So you finally understand what’s happening at the follicle, why most products keep failing you, and what your hair actually needs to recover.<br/><br/><br/></p>",
         "button_label": "Watch All Playlist",
         "button_link": "",
         "background_color_left": "#4e9b97",
@@ -341,19 +341,19 @@
         "feature_Gaj7Fn": {
           "type": "feature",
           "settings": {
-            "text": "10+ Years Pharmaceutical Sales"
+            "text": "Pharmaceutical Industry Expert"
           }
         },
         "feature_LczJhn": {
           "type": "feature",
           "settings": {
-            "text": "Science-Informed Formulation"
+            "text": "Certified Hair Loss Practitioner"
           }
         },
         "feature_qp3V3b": {
           "type": "feature",
           "settings": {
-            "text": "Clinical Data Interpreter"
+            "text": "Science Explained In A Way You Can Actually Understand"
           }
         }
       },
@@ -370,7 +370,7 @@
         "mobile_main_image_alt": "HairScripts community comments mobile",
         "topline_text": "40K+ AND COUNTING",
         "heading": "JOIN HAIRSCRIPTS COMMUNITY",
-        "text": "<p>See what others are experiencing, ask questions, and learn directly from Bev. This is where your hair journey becomes clearer and more supported.</p>",
+        "text": "<p>A growing community of women learning what’s really happening with their hair — directly from someone who’s lived it and studied it professionally. This is where hair recovery starts making sense again.<br/></p>",
         "button_label": "Join Community",
         "button_link": "",
         "background_color": "#f3f3f3",

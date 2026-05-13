@@ -957,6 +957,8 @@
     "media_height": "Media height",
     "media_overlay": "Media overlay",
     "media_position": "Media position",
+    "media_column_width": "Media column width",
+    "media_column_width_info": "Desktop split between gallery and product details. Only applies when Equal columns is disabled.",
     "media_type": "Media type",
     "media_width": "Media width",
     "menu": "Menu",

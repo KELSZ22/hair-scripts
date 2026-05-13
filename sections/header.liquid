@@ -426,7 +426,7 @@ a.header.hs-science-hero__button.hs-science-hero__button--secondary{
     transition: opacity 0.2s ease, transform 0.2s ease;
         border: 1px solid rgba(255, 255, 255, 0.45);
     color: #FFFFFF;
-        margin-right: 20px;
+        margin-right: 5px;
 
 }
 
@@ -905,8 +905,13 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
         grid-area: rightB;
       }
     }
-  }
 
+  }
+  @media screen and (max-width: 768px) {
+      .header__columns.spacing-style {
+          padding: 9px 10px !important;
+}
+  }
   /* not ideal but we need to duplicate these styles for when touch comes into play
     We could avoid the duplication using js to set the data-menu-style attribute on small screens instead of using @media queries */
   #header-component[data-menu-style='drawer'] .header__columns {

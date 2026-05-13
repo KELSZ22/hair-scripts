@@ -25,7 +25,7 @@
 
   #section-{{ section.id }} .faq-split-media-column {
     width: 45%;
-    background: #DBEEEC;
+    background: #FAF7F2;
     max-width: 45%;
     flex: 0 0 45%;
     min-width: 0;
@@ -38,13 +38,12 @@
     display: flex;
     align-items: center;
     min-width: 0;
-
   }
 
   #section-{{ section.id }} .faq-split-media-wrap {
     position: relative;
     height: 100%;
-    min-height: 650px;
+    max-height: 750px;
     overflow: hidden;
   }
 
@@ -93,7 +92,7 @@
 
   #section-{{ section.id }} .faq-split-category-button {
     appearance: none;
-    border: 1px solid rgba(43, 34, 30, 0.18);
+    border: 1px solid rgba(33, 27, 24, 0.50);
     background: #fff;
     color: #2B221E;
     border-radius: 999px;
@@ -112,6 +111,44 @@
     color: #fff;
   }
 
+  #section-{{ section.id }} .faq-split-category-dropdown {
+    display: none;
+    position: relative;
+    width: 100%;
+    margin: 0 0 36px;
+  }
+
+  #section-{{ section.id }} .faq-split-category-select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    min-height: 56px;
+    padding: 0 56px 0 18px;
+    border: 1px solid rgba(33, 27, 24, 0.25);
+    border-radius: 999px;
+    background: #FAF7F2;
+    color: #2B221E;
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  #section-{{ section.id }} .faq-split-category-dropdown::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #2B221E;
+    border-bottom: 2px solid #2B221E;
+    transform: translateY(-65%) rotate(45deg);
+    pointer-events: none;
+  }
+
   #section-{{ section.id }} .faq-split-accordion {
     display: flex;
     flex-direction: column;
@@ -120,11 +157,11 @@
   }
 
   #section-{{ section.id }} .faq-split-item {
-    border-bottom: 1px solid rgba(43, 34, 30, 0.14);
+    border-bottom: 1px solid rgba(33, 27, 24, 0.50);
   }
 
   #section-{{ section.id }} .faq-split-item:first-child {
-    border-top: 1px solid rgba(43, 34, 30, 0.14);
+    border-top: 1px solid rgba(33, 27, 24, 0.50);
   }
 
   #section-{{ section.id }} .faq-split-item.is-hidden {
@@ -148,7 +185,7 @@
   #section-{{ section.id }} .faq-split-question-text {
     color: #2B221E;
     font-family: "DM Sans";
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -159,7 +196,7 @@
     flex: 0 0 18px;
     width: 18px;
     height: 18px;
-    border: 1px solid rgba(43, 34, 30, 0.45);
+    border: 1px solid #000;
     border-radius: 50%;
     transition: transform 0.3s ease;
   }
@@ -170,7 +207,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    background: #2B221E;
+    background: #000;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
@@ -254,6 +291,9 @@
   }
 
   @media screen and (max-width: 749px) {
+    #section-{{ section.id }} .faq-split-button {
+      font-size: 14px;
+    }
 
     #section-{{ section.id }} img.faq-split-image {
       border-radius: 10px;
@@ -269,10 +309,11 @@
 
     #section-{{ section.id }}.faq-mobile-faq_first .faq-split-grid {
       flex-direction: column-reverse;
-              gap: 20px;
+      gap: 20px;
     }
+
     #section-{{ section.id }} .faq-split-media-column {
-    border-radius: 11px;
+      border-radius: 11px;
     }
 
     #section-{{ section.id }} .faq-split-media-column,
@@ -303,7 +344,11 @@
     }
 
     #section-{{ section.id }} .faq-split-categories {
-      justify-content: center;
+      display: none;
+    }
+
+    #section-{{ section.id }} .faq-split-category-dropdown {
+      display: block;
       margin-bottom: 28px;
     }
 
@@ -317,6 +362,7 @@
     #section-{{ section.id }} .faq-split-content {
       padding: 0px;
     }
+
     #section-{{ section.id }} .faq-split-grid {
       padding: 40px 15px;
     }
@@ -328,11 +374,6 @@
     #section-{{ section.id }} .faq-split-subheading {
       font-size: 13px;
       margin-bottom: 20px;
-    }
-
-    #section-{{ section.id }} .faq-split-category-button {
-      padding: 8px 16px;
-      font-size: 12px;
     }
 
     #section-{{ section.id }} .faq-split-question {
@@ -411,6 +452,26 @@
               {% endif %}
             </div>
 
+            <div class="faq-split-category-dropdown">
+              <select class="faq-split-category-select" aria-label="FAQ categories">
+                {% if section.settings.category_1 != blank %}
+                  <option value="category_1" selected>{{ section.settings.category_1 }}</option>
+                {% endif %}
+
+                {% if section.settings.category_2 != blank %}
+                  <option value="category_2">{{ section.settings.category_2 }}</option>
+                {% endif %}
+
+                {% if section.settings.category_3 != blank %}
+                  <option value="category_3">{{ section.settings.category_3 }}</option>
+                {% endif %}
+
+                {% if section.settings.category_4 != blank %}
+                  <option value="category_4">{{ section.settings.category_4 }}</option>
+                {% endif %}
+              </select>
+            </div>
+
             {% if section.blocks.size > 0 %}
               <div class="faq-split-accordion">
                 {% for block in section.blocks %}
@@ -471,6 +532,7 @@
 
     const items = section.querySelectorAll('.faq-split-item');
     const categoryButtons = section.querySelectorAll('.faq-split-category-button');
+    const categorySelect = section.querySelector('.faq-split-category-select');
 
     function setInitialState(item) {
       const wrap = item.querySelector('.faq-split-answer-wrap');
@@ -551,6 +613,17 @@
           item.classList.add('is-hidden');
         }
       });
+
+      categoryButtons.forEach((button) => {
+        button.classList.toggle(
+          'is-active',
+          button.getAttribute('data-faq-category') === category
+        );
+      });
+
+      if (categorySelect && categorySelect.value !== category) {
+        categorySelect.value = category;
+      }
     }
 
     items.forEach((item) => {
@@ -581,20 +654,22 @@
     categoryButtons.forEach((button) => {
       button.addEventListener('click', function () {
         const selectedCategory = button.getAttribute('data-faq-category');
-
-        categoryButtons.forEach((otherButton) => {
-          otherButton.classList.remove('is-active');
-        });
-
-        button.classList.add('is-active');
         showCategory(selectedCategory);
       });
     });
+
+    if (categorySelect) {
+      categorySelect.addEventListener('change', function () {
+        showCategory(this.value);
+      });
+    }
 
     const activeCategoryButton = section.querySelector('.faq-split-category-button.is-active');
 
     if (activeCategoryButton) {
       showCategory(activeCategoryButton.getAttribute('data-faq-category'));
+    } else if (categorySelect && categorySelect.value) {
+      showCategory(categorySelect.value);
     } else {
       closeAllItems();
     }

@@ -27,14 +27,265 @@
 
 <script>
   (() => {
-    const carousels = document.querySelectorAll('.video-carousel-block');
+    const MODAL_ID = 'video-carousel-block-global-modal';
 
-    carousels.forEach((carousel) => {
-      if (carousel.dataset.videoCarouselReady === 'true') return;
+    function escapeAttr(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function getParsedUrl(url) {
+      try {
+        return new URL(url, window.location.origin);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function getYouTubeId(url) {
+      const parsedUrl = getParsedUrl(url);
+      if (!parsedUrl) return '';
+
+      const hostname = parsedUrl.hostname.replace('www.', '');
+
+      if (hostname === 'youtu.be') {
+        return parsedUrl.pathname.replace('/', '').split('?')[0];
+      }
+
+      if (hostname.includes('youtube.com')) {
+        if (parsedUrl.pathname.includes('/shorts/')) {
+          return parsedUrl.pathname.split('/shorts/')[1].split('/')[0];
+        }
+
+        if (parsedUrl.pathname.includes('/embed/')) {
+          return parsedUrl.pathname.split('/embed/')[1].split('/')[0];
+        }
+
+        return parsedUrl.searchParams.get('v') || '';
+      }
+
+      return '';
+    }
+
+    function getVimeoId(url) {
+      const parsedUrl = getParsedUrl(url);
+      if (!parsedUrl) return '';
+
+      const hostname = parsedUrl.hostname.replace('www.', '');
+      if (!hostname.includes('vimeo.com')) return '';
+
+      const parts = parsedUrl.pathname.split('/').filter(Boolean);
+
+      if (hostname.includes('player.vimeo.com') && parts[0] === 'video') {
+        return parts[1] || '';
+      }
+
+      return parts.length ? parts[parts.length - 1] : '';
+    }
+
+    function getLoomId(url) {
+      const parsedUrl = getParsedUrl(url);
+      if (!parsedUrl) return '';
+
+      const hostname = parsedUrl.hostname.replace('www.', '');
+      if (!hostname.includes('loom.com')) return '';
+
+      const parts = parsedUrl.pathname.split('/').filter(Boolean);
+
+      if (parts[0] === 'share' || parts[0] === 'embed') {
+        return parts[1] || '';
+      }
+
+      return '';
+    }
+
+    function getGoogleDriveId(url) {
+      const parsedUrl = getParsedUrl(url);
+      if (!parsedUrl) return '';
+
+      const hostname = parsedUrl.hostname.replace('www.', '');
+      if (!hostname.includes('drive.google.com')) return '';
+
+      const fileMatch = parsedUrl.pathname.match(/\/file\/d\/([^/]+)/);
+
+      if (fileMatch && fileMatch[1]) {
+        return fileMatch[1];
+      }
+
+      return parsedUrl.searchParams.get('id') || '';
+    }
+
+    function isDirectVideo(url) {
+      return /\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(url);
+    }
+
+    function buildVideoMarkup(videoUrl) {
+      const safeUrl = escapeAttr(videoUrl);
+      const youtubeId = getYouTubeId(videoUrl);
+      const vimeoId = getVimeoId(videoUrl);
+      const loomId = getLoomId(videoUrl);
+      const googleDriveId = getGoogleDriveId(videoUrl);
+
+      if (youtubeId) {
+        return `
+          <iframe
+            src="https://www.youtube.com/embed/${escapeAttr(youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+            title="Video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        `;
+      }
+
+      if (vimeoId) {
+        return `
+          <iframe
+            src="https://player.vimeo.com/video/${escapeAttr(vimeoId)}?autoplay=1"
+            title="Video player"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        `;
+      }
+
+      if (loomId) {
+        return `
+          <iframe
+            src="https://www.loom.com/embed/${escapeAttr(loomId)}?autoplay=1"
+            title="Video player"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        `;
+      }
+
+      if (googleDriveId) {
+        return `
+          <iframe
+            src="https://drive.google.com/file/d/${escapeAttr(googleDriveId)}/preview"
+            title="Video player"
+            allow="autoplay"
+            allowfullscreen
+          ></iframe>
+        `;
+      }
+
+      if (isDirectVideo(videoUrl)) {
+        return `
+          <video src="${safeUrl}" controls autoplay playsinline></video>
+        `;
+      }
+
+      return `
+        <div class="video-carousel-block__modal-message">
+          <p>This video link cannot be embedded directly.</p>
+          <a href="${safeUrl}" target="_blank" rel="noopener noreferrer">Open video</a>
+        </div>
+      `;
+    }
+
+    function createGlobalModal() {
+      let modal = document.getElementById(MODAL_ID);
+
+      if (modal) return modal;
+
+      modal = document.createElement('div');
+      modal.id = MODAL_ID;
+      modal.className = 'video-carousel-block__modal';
+      modal.setAttribute('aria-hidden', 'true');
+
+      modal.innerHTML = `
+        <div class="video-carousel-block__modal-overlay" data-video-modal-close></div>
+
+        <div class="video-carousel-block__modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+          <button type="button" class="video-carousel-block__modal-close" data-video-modal-close aria-label="Close video">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M5.5 5.5L16.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M16.5 5.5L5.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          <div class="video-carousel-block__modal-player" data-video-modal-player></div>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+
+      modal.querySelectorAll('[data-video-modal-close]').forEach((button) => {
+        button.addEventListener('click', closeVideoModal);
+      });
+
+      return modal;
+    }
+
+    function openVideoModal(videoUrl) {
+      const modal = createGlobalModal();
+      const player = modal.querySelector('[data-video-modal-player]');
+
+      if (!player || !videoUrl) return;
+
+      player.innerHTML = buildVideoMarkup(videoUrl);
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('video-carousel-block-modal-open');
+
+      const closeButton = modal.querySelector('.video-carousel-block__modal-close');
+
+      if (closeButton) {
+        closeButton.focus();
+      }
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById(MODAL_ID);
+      if (!modal) return;
+
+      const player = modal.querySelector('[data-video-modal-player]');
+
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('video-carousel-block-modal-open');
+
+      if (player) {
+        player.innerHTML = '';
+      }
+    }
+
+    function prepareVideoLinks(track) {
+      const links = track.querySelectorAll('a[href], [data-video-url]');
+
+      links.forEach((link) => {
+        const currentDataUrl = link.getAttribute('data-video-url');
+        const currentHref = link.getAttribute('href');
+        const videoUrl = currentDataUrl || currentHref;
+
+        if (!videoUrl || videoUrl === '#') return;
+
+        link.setAttribute('data-video-url', videoUrl);
+
+        if (link.tagName.toLowerCase() === 'a') {
+          link.setAttribute('href', '#');
+          link.removeAttribute('target');
+          link.removeAttribute('rel');
+          link.setAttribute('role', 'button');
+        }
+
+        link.classList.add('video-carousel-block__modal-trigger');
+      });
+    }
+
+    function initVideoCarouselBlock(carousel) {
+      if (!carousel || carousel.dataset.videoCarouselReady === 'true') return;
+
       carousel.dataset.videoCarouselReady = 'true';
 
       const track = carousel.querySelector('.video-carousel-block__track');
-
       if (!track) return;
 
       let originalCards = [];
@@ -46,6 +297,9 @@
       let scrollLeft = 0;
       let lastTime = performance.now();
       let resumeTimer = null;
+      let touchStartX = 0;
+      let hasTouchMoved = false;
+      let touchResetTimer = null;
 
       const speed = 32;
 
@@ -89,8 +343,17 @@
 
       const cloneCards = () => {
         removeOldClones();
+        prepareVideoLinks(track);
 
-        originalCards = Array.from(track.querySelectorAll('.video-carousel-block__card:not([data-video-carousel-clone="true"])'));
+        originalCards = Array.from(
+          track.querySelectorAll('.video-carousel-block__card:not([data-video-carousel-clone="true"])')
+        );
+
+        if (!originalCards.length) {
+          originalCards = Array.from(track.children).filter((item) => {
+            return item.getAttribute('data-video-carousel-clone') !== 'true';
+          });
+        }
 
         if (!originalCards.length) return;
 
@@ -108,6 +371,8 @@
 
           safetyCount += 1;
         }
+
+        prepareVideoLinks(track);
 
         if (loopWidth <= 0) {
           loopWidth = track.scrollWidth / 2;
@@ -136,7 +401,13 @@
         const delta = currentTime - lastTime;
         lastTime = currentTime;
 
-        if (!isPaused && !isDragging && loopWidth > 0 && track.scrollWidth > track.clientWidth) {
+        if (
+          !isPaused &&
+          !isDragging &&
+          loopWidth > 0 &&
+          track.scrollWidth > track.clientWidth &&
+          !document.body.classList.contains('video-carousel-block-modal-open')
+        ) {
           track.scrollLeft += speed * (delta / 1000);
           normalizeScroll();
         }
@@ -185,13 +456,12 @@
       track.addEventListener('mousemove', (event) => {
         if (!isDragging) return;
 
-        event.preventDefault();
-
         const x = event.pageX - track.offsetLeft;
         const walk = (x - startX) * 1.2;
 
-        if (Math.abs(walk) > 5) {
+        if (Math.abs(walk) > 8) {
           hasDragged = true;
+          event.preventDefault();
         }
 
         track.scrollLeft = scrollLeft - walk;
@@ -201,40 +471,119 @@
       track.addEventListener('mouseup', () => {
         isDragging = false;
         track.classList.remove('is-dragging');
+
+        window.setTimeout(() => {
+          hasDragged = false;
+        }, 80);
+
         resumeCarousel();
       });
 
       track.addEventListener('mouseleave', () => {
         isDragging = false;
         track.classList.remove('is-dragging');
+
+        window.setTimeout(() => {
+          hasDragged = false;
+        }, 80);
       });
 
-      track.addEventListener('touchstart', () => {
-        pauseCarousel();
-      });
+      track.addEventListener(
+        'touchstart',
+        (event) => {
+          pauseCarousel();
+          hasTouchMoved = false;
+          touchStartX = event.touches[0].clientX;
 
-      track.addEventListener('touchmove', () => {
-        normalizeScroll();
-      });
+          if (touchResetTimer) {
+            window.clearTimeout(touchResetTimer);
+            touchResetTimer = null;
+          }
+        },
+        { passive: true }
+      );
 
-      track.addEventListener('touchend', () => {
-        resumeCarousel();
-      });
+      track.addEventListener(
+        'touchmove',
+        (event) => {
+          const currentX = event.touches[0].clientX;
+
+          if (Math.abs(currentX - touchStartX) > 12) {
+            hasTouchMoved = true;
+          }
+
+          normalizeScroll();
+        },
+        { passive: true }
+      );
+
+      track.addEventListener(
+        'touchend',
+        () => {
+          resumeCarousel();
+
+          touchResetTimer = window.setTimeout(() => {
+            hasTouchMoved = false;
+          }, 120);
+        },
+        { passive: true }
+      );
 
       track.addEventListener(
         'click',
         (event) => {
-          if (!hasDragged) return;
+          const clickedItem = event.target.closest('[data-video-url], a, button');
+
+          if (!clickedItem || !track.contains(clickedItem)) return;
+
+          const videoUrl =
+            clickedItem.getAttribute('data-video-url') ||
+            clickedItem.dataset.videoUrl;
+
+          if (!videoUrl) return;
 
           event.preventDefault();
           event.stopPropagation();
+          event.stopImmediatePropagation();
 
-          hasDragged = false;
+          if (hasDragged || hasTouchMoved) {
+            hasDragged = false;
+            hasTouchMoved = false;
+            return;
+          }
+
+          pauseCarousel();
+          openVideoModal(videoUrl);
         },
         true
       );
 
       requestAnimationFrame(animate);
+    }
+
+    function initAllVideoCarouselBlocks(scope) {
+      const root = scope || document;
+      const carousels = root.querySelectorAll('.video-carousel-block');
+
+      carousels.forEach((carousel) => {
+        initVideoCarouselBlock(carousel);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createGlobalModal();
+      initAllVideoCarouselBlocks(document);
+    });
+
+    document.addEventListener('shopify:section:load', (event) => {
+      createGlobalModal();
+      initAllVideoCarouselBlocks(event.target);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeVideoModal();
+      }
     });
   })();
 </script>
@@ -428,6 +777,121 @@
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
   }
 
+  .video-carousel-block__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.22s ease,
+      visibility 0.22s ease;
+  }
+
+  .video-carousel-block__modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .video-carousel-block__modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(3px);
+  }
+
+  .video-carousel-block__modal-dialog {
+    position: relative;
+    z-index: 2;
+    width: min(920px, 100%);
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  }
+
+  .video-carousel-block__modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 4;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #211B18;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .video-carousel-block__modal-close:hover {
+    opacity: 0.85;
+  }
+
+  .video-carousel-block__modal-player {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+
+  .video-carousel-block__modal-player iframe,
+  .video-carousel-block__modal-player video {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
+  }
+
+  .video-carousel-block__modal-message {
+    min-height: 260px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .video-carousel-block__modal-message p {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .video-carousel-block__modal-message a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #211B18;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  body.video-carousel-block-modal-open {
+    overflow: hidden;
+  }
+
   @media screen and (max-width: 749px) {
     .video-carousel-block {
       width: 100%;
@@ -474,6 +938,21 @@
 
     .video-carousel-block__link:hover .video-carousel-block__image {
       transform: none;
+    }
+
+    .video-carousel-block__modal {
+      padding: 15px;
+    }
+
+    .video-carousel-block__modal-dialog {
+      border-radius: 10px;
+    }
+
+    .video-carousel-block__modal-close {
+      top: 8px;
+      right: 8px;
+      width: 34px;
+      height: 34px;
     }
   }
 

@@ -79,7 +79,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
+                "gap": 10,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -289,6 +289,7 @@
             },
             "variant_picker_R3rGDr": {
               "type": "variant-picker",
+              "disabled": true,
               "settings": {
                 "variant_style": "buttons",
                 "show_swatches": false,
@@ -392,7 +393,7 @@
                   "type": "video-carousel-item",
                   "name": "Video item",
                   "settings": {
-                    "youtube_link": "",
+                    "youtube_link": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn",
                     "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
                     "card_text": ""
                   },

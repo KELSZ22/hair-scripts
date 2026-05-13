@@ -194,7 +194,7 @@
     color: #FFFFFF;
     text-decoration: none;
     font-family: "DM Sans";
-    font-size: 18px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 1;
@@ -217,45 +217,90 @@
 
   @media screen and (max-width: 1024px) {
     #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
+      min-height: 850px;
+      padding: 45px 28px 360px;
+      align-items: flex-start;
       justify-content: center;
+      background-size: cover;
+      background-position: center bottom;
+
       {% if section.settings.background_image_1024 != blank %}
         background-image: url('{{ section.settings.background_image_1024 | image_url: width: 1800 }}');
       {% endif %}
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__inner {
+      max-width: 100%;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__content {
+      max-width: 560px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
+      margin: 0 auto;
     }
 
-    #section-{{ section.id }} h2.hair-assessment-banner-bg__heading {
+    #section-{{ section.id }} .hair-assessment-banner-bg__badge {
+      margin-bottom: 18px;
+      font-size: 12px;
+      padding: 9px 28px;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__heading {
+      max-width: 500px;
+      margin-bottom: 16px;
+      font-size: 31px;
+      line-height: 1.05;
+      letter-spacing: 0;
       text-align: center;
     }
 
-    #section-{{ section.id }} p.hair-assessment-banner-bg__subheading {
+    #section-{{ section.id }} .hair-assessment-banner-bg__subheading {
+      max-width: 540px !important;
+      margin-bottom: 22px;
+      font-size: 15px;
+      line-height: 1.25;
       text-align: center;
-      max-width: 100% !important;
+    }
+
+    #section-{{ section.id }} .two-buttons-container {
+      width: 100%;
+      max-width: 520px;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__button-wrap {
+      width: 100%;
+      margin-top: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__button {
+      width: 100%;
+      max-width: 420px;
+      min-height: 48px;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
     }
   }
 
   @media screen and (max-width: 989px) {
     #section-{{ section.id }} .hair-assessment-banner-bg__heading {
-      font-size: 32px;
-      letter-spacing: normal;
-    }
-
-    #section-{{ section.id }} .hair-assessment-banner-bg__badge {
-      font-size: 12px;
+      font-size: 30px;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__subheading {
-      font-size: 14px;
+      font-size: 15px;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__button {
@@ -265,27 +310,38 @@
 
   @media screen and (max-width: 768px) {
     #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
-      padding: 40px 15px;
+      min-height: 760px;
+      padding: 40px 15px 320px;
+      background-position: center bottom;
     }
 
-    #section-{{ section.id }} .two-buttons-container {
-      flex-direction: column;
+    #section-{{ section.id }} .hair-assessment-banner-bg__content {
+      max-width: 520px;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__heading {
       font-size: 26px;
     }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__subheading {
+      font-size: 14px;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__button {
+      max-width: 360px;
+    }
   }
 
   @media screen and (max-width: 749px) {
     #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
-      padding: 40px 15px;
+      min-height: 720px;
+      padding: 40px 15px 300px;
       background-position: center bottom;
     }
 
     #section-{{ section.id }} .hair-assessment-banner-bg__inner {
-      align-items: flex-end;
-      justify-content: flex-end;
+      align-items: center;
+      justify-content: flex-start;
       padding: 0;
     }
 
@@ -296,13 +352,45 @@
 
   @media screen and (max-width: 450px) {
     #section-{{ section.id }} .hair-assessment-banner-bg__wrapper {
+      min-height: 610px;
+      padding: 36px 18px 245px;
+      background-position: center bottom;
+
       {% if section.settings.background_image_450 != blank %}
         background-image: url('{{ section.settings.background_image_450 | image_url: width: 900 }}');
       {% endif %}
     }
 
+    #section-{{ section.id }} .hair-assessment-banner-bg__badge {
+      font-size: 10px;
+      padding: 8px 26px;
+      margin-bottom: 14px;
+    }
+
     #section-{{ section.id }} .hair-assessment-banner-bg__heading {
-      font-size: 20px;
+      max-width: 310px;
+      font-size: 18px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__subheading {
+      max-width: 320px !important;
+      font-size: 12px;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    #section-{{ section.id }} .two-buttons-container {
+      max-width: 280px;
+      gap: 10px;
+    }
+
+    #section-{{ section.id }} .hair-assessment-banner-bg__button {
+      max-width: 280px;
+      min-height: 39px;
+      padding: 12px 18px;
+      font-size: 12px;
     }
   }
 </style>
