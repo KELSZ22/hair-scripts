@@ -159,6 +159,7 @@
     "cart_title": "Cart",
     "cart_subtotal": "Subtotal",
     "cart_total": "Cart total",
+    "cart_drawer_upsell_theme_editor_hint": "Empty cart promotion is on, but no product is connected. In Header settings, choose “Product to promote”, or enter a product handle under “Product handle (fallback)”.",
     "checkout": "Check out",
     "collection_placeholder": "Collection title",
     "discount_code": "Discount code",

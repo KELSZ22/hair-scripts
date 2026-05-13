@@ -110,6 +110,16 @@
       fetchpriority="low"
     ></script>
 
+    {% liquid
+      assign cart_drawer_empty_footer_show = true
+      if section != blank and section.settings.cart_drawer_upsell_enable != false
+        assign upsell_pick = section.settings.cart_drawer_upsell_product
+        if upsell_pick != blank and section.settings.cart_drawer_upsell_banner_text != blank
+          assign cart_drawer_empty_footer_show = false
+        endif
+      endif
+    %}
+
     {% capture empty_cart_drawer_content %}
       <div class="cart-drawer__empty-wrapper">
         <div class="cart-drawer__header cart-drawer__header--empty">
@@ -160,9 +170,15 @@
             </a>
           </div>
 
-          <div class="cart-drawer__empty-footer">
-            SAVE UP TO 30% OFF
-          </div>
+          {%- if section != blank -%}
+            {% render 'cart-drawer-empty-upsell', section: section %}
+          {%- endif -%}
+
+          {% if cart_drawer_empty_footer_show %}
+            <div class="cart-drawer__empty-footer">
+              SAVE UP TO 30% OFF
+            </div>
+          {% endif %}
         </div>
       </div>
     {% endcapture %}

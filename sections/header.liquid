@@ -1764,6 +1764,203 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       ],
       "default": "default",
       "visible_if": "{{ section.settings.enable_transparent_header_collection }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.cart_drawer_empty_upsell"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_drawer_upsell_enable",
+      "label": "t:settings.cart_drawer_upsell_enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_banner_text",
+      "label": "t:settings.cart_drawer_upsell_banner_text",
+      "default": "SAVE UP TO 30% OFF",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_drawer_upsell_banner_color",
+      "label": "t:settings.cart_drawer_upsell_banner_color",
+      "default": "#237b84",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "product",
+      "id": "cart_drawer_upsell_product",
+      "label": "t:settings.cart_drawer_upsell_product",
+      "info": "t:info.cart_drawer_upsell_product"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_product_handle",
+      "label": "t:settings.cart_drawer_upsell_product_handle",
+      "info": "t:info.cart_drawer_upsell_product_handle",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "cart_drawer_upsell_image",
+      "label": "t:settings.cart_drawer_upsell_image",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_heading",
+      "label": "t:settings.cart_drawer_upsell_heading",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_billing_note",
+      "label": "t:settings.cart_drawer_upsell_billing_note",
+      "default": "Billed at $387.00 after 12 weeks",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_price",
+      "label": "t:settings.cart_drawer_upsell_price",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_compare_price",
+      "label": "t:settings.cart_drawer_upsell_compare_price",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_unit_note",
+      "label": "t:settings.cart_drawer_upsell_unit_note",
+      "default": "$1.43 per supplement",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_button_label",
+      "label": "t:settings.cart_drawer_upsell_button_label",
+      "default": "Add to Cart",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.cart_drawer_upsell_benefits",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_drawer_upsell_line_1_icon",
+      "label": "t:settings.cart_drawer_upsell_line_1_icon",
+      "options": [
+        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
+        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
+        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
+        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
+        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
+        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+      ],
+      "default": "truck",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_line_1_text",
+      "label": "t:settings.cart_drawer_upsell_line_1_text",
+      "default": "FREE SHIPPING to United States",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_drawer_upsell_line_2_icon",
+      "label": "t:settings.cart_drawer_upsell_line_2_icon",
+      "options": [
+        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
+        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
+        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
+        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
+        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
+        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+      ],
+      "default": "return",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_line_2_text",
+      "label": "t:settings.cart_drawer_upsell_line_2_text",
+      "default": "90-day money-back guarantee",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_drawer_upsell_line_3_icon",
+      "label": "t:settings.cart_drawer_upsell_line_3_icon",
+      "options": [
+        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
+        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
+        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
+        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
+        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
+        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+      ],
+      "default": "heart",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_line_3_text",
+      "label": "t:settings.cart_drawer_upsell_line_3_text",
+      "default": "Share with family and friends",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_drawer_upsell_line_4_icon",
+      "label": "t:settings.cart_drawer_upsell_line_4_icon",
+      "options": [
+        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
+        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
+        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
+        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
+        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
+        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+      ],
+      "default": "check_circle",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_line_4_text",
+      "label": "t:settings.cart_drawer_upsell_line_4_text",
+      "default": "Maximum Savings",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_drawer_upsell_line_5_icon",
+      "label": "t:settings.cart_drawer_upsell_line_5_icon",
+      "options": [
+        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
+        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
+        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
+        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
+        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
+        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+      ],
+      "default": "cancel",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_drawer_upsell_line_5_text",
+      "label": "t:settings.cart_drawer_upsell_line_5_text",
+      "default": "Cancel subscription anytime",
+      "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
     }
   ],
   "presets": []
