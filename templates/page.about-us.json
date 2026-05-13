@@ -74,11 +74,13 @@
         "title_1": "Founder, HairScripts™",
         "title_2": "Pharmaceutical Industry Expert",
         "title_3": "Certified Hair Loss Practitioner",
-        "bio_text": "<p>Bevy knows what it feels like to lose your hair during one of the hardest seasons of your life. In 2019, she was diagnosed with Androgenic Alopecia and lost nearly 60% of her hair — all while navigating significant health and personal challenges that left little room to slow down.</p><p><br/>What set Bevy apart wasn’t just her experience. With over a decade inside the pharmaceutical industry, she already knew how to read clinical data, evaluate formulations, and identify the gap between what a product claims and what the science actually requires. That gap was everywhere.<br/> <br/>Most formulas target one root cause. One. While hormonal hair loss — the kind that accelerates during stress, perimenopause, postpartum, and metabolic shifts — operates across nine simultaneously. HairScripts™ is the one capsule that handles all nine while you handle everything else. You shouldn’t have to become a hair loss expert to stop losing your hair. That’s the whole point.<br/><br/><br/></p>",
+        "bio_text": "<p>Bevy knows what it feels like to lose your hair during one of the hardest seasons of your life. In 2019, she was diagnosed with Androgenic Alopecia and lost nearly 60% of her hair — all while navigating significant health and personal challenges that left little room to slow down.<br/>What set Bevy apart wasn’t just her experience. With over a decade inside the pharmaceutical industry, she already knew how to read clinical data, evaluate formulations, and identify the gap between what a product claims and what the science actually requires. That gap was everywhere.<br/> <br/>Most formulas target one root cause. One. While hormonal hair loss — the kind that accelerates during stress, perimenopause, postpartum, and metabolic shifts — operates across nine simultaneously. HairScripts™ is the one capsule that handles all nine while you handle everything else. You shouldn’t have to become a hair loss expert to stop losing your hair. That’s the whole point.</p>",
         "founder_image": "shopify://shop_images/Rectangle_513_c951de22-fe57-4ae0-9704-6cfe3877b422.png",
         "badge_1": "10+ Years Pharmaceutical Industry Experience",
         "badge_2": "Certified Hair Loss Practitioner",
-        "badge_3": "Active YouTube Educator with a Growing Community"
+        "badge_3": "Active YouTube Educator with a Growing Community",
+        "star_count": 5,
+        "review_text": "Trusted by a growing community of women in the HairScripts family."
       }
     },
     "hairscripts_about_brand_promise_DnqVVb": {
@@ -145,7 +147,9 @@
       "settings": {
         "eyebrow": "WHAT WE STAND ON",
         "heading": "Our Brand Promise",
-        "subheading": "The principles this formula was built on — and the ones HairScripts™ is accountable to."
+        "subheading": "The principles this formula was built on — and the ones HairScripts™ is accountable to.",
+        "button_text": "Start My Protocol",
+        "button_url": ""
       }
     },
     "hairscripts_about_nine_pathways_LGmJ7w": {
@@ -233,11 +237,15 @@
         "body_text": "HairScripts™ was built for the woman who has tried things that didn’t work — not because she wasn’t consistent enough, but because the formula wasn’t built for her body. You don’t have to wait until you’ve identified your root cause to start supporting your follicles across all nine pathways. That’s the whole point of this formula. While you’re getting labs, doing the research, working it out — HairScripts™ is already working. You were never powerless. You just needed the right tool.",
         "portrait": "shopify://shop_images/Bevy_Picture.png",
         "attribution_name": "Bevy",
-        "attribution_title": "BEVY — Founder, HairScripts™ · Pharmaceutical Industry Expert · One of You"
+        "attribution_title": "BEVY — Founder, HairScripts™ · Pharmaceutical Industry Expert · One of You",
+        "attribution_title_mobile": "BEVY — Founder, HairScripts™ <br>Pharmaceutical Industry Expert · One of You"
       }
     },
     "hairscripts_about_join_community_FEbAVx": {
       "type": "hairscripts-about-join-community",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.contact-form {width: 100% !important; }}"
+      ],
       "name": "About - Join Community",
       "settings": {
         "image": "shopify://shop_images/image_1_a1fd4241-4afa-479b-b3f4-57cfafd4afb5.png",

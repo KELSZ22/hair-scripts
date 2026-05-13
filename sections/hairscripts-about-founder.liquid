@@ -4,20 +4,59 @@
     <div class="about-founder__left">
       <div class="about-founder__credentials">
         <h2 class="about-founder__name">{{ section.settings.founder_name }}</h2>
+
         <div class="about-founder__titles">
           {%- if section.settings.title_1 != blank -%}
             <p>{{ section.settings.title_1 }}</p>
           {%- endif -%}
+
           {%- if section.settings.title_2 != blank -%}
             <p>{{ section.settings.title_2 }}</p>
           {%- endif -%}
+
           {%- if section.settings.title_3 != blank -%}
             <p>{{ section.settings.title_3 }}</p>
           {%- endif -%}
         </div>
       </div>
+
       <div class="about-founder__bio">
         {{ section.settings.bio_text }}
+      </div>
+
+      <div class="about-founder__badges">
+        {%- if section.settings.badge_1 != blank -%}
+          <div class="about-founder__badge">
+            <span class="about-founder__badge-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M6.94419 12.9412C6.68016 12.9412 6.43313 12.8105 6.28438 12.5916C5.04179 10.7588 3.76041 9.47161 2.36747 8.65773C1.98763 8.43567 1.8596 7.94745 2.08166 7.56761C2.30319 7.18776 2.79141 7.05867 3.17179 7.28179C4.51532 8.06698 5.75154 9.20864 6.92826 10.7556C9.19191 7.56389 11.8598 4.99795 14.8715 3.11892C15.246 2.88623 15.7364 2.99939 15.9691 3.37339C16.2018 3.74686 16.0886 4.23826 15.7146 4.47095C12.5616 6.43764 9.91069 9.09123 7.60879 12.5831C7.46216 12.8057 7.2146 12.9401 6.94844 12.9417C6.94738 12.9412 6.94579 12.9412 6.94419 12.9412Z" fill="#63144F"/>
+              </svg>
+            </span>
+            <span class="about-founder__badge-text">{{ section.settings.badge_1 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge_2 != blank -%}
+          <div class="about-founder__badge">
+            <span class="about-founder__badge-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M6.94419 12.9412C6.68016 12.9412 6.43313 12.8105 6.28438 12.5916C5.04179 10.7588 3.76041 9.47161 2.36747 8.65773C1.98763 8.43567 1.8596 7.94745 2.08166 7.56761C2.30319 7.18776 2.79141 7.05867 3.17179 7.28179C4.51532 8.06698 5.75154 9.20864 6.92826 10.7556C9.19191 7.56389 11.8598 4.99795 14.8715 3.11892C15.246 2.88623 15.7364 2.99939 15.9691 3.37339C16.2018 3.74686 16.0886 4.23826 15.7146 4.47095C12.5616 6.43764 9.91069 9.09123 7.60879 12.5831C7.46216 12.8057 7.2146 12.9401 6.94844 12.9417C6.94738 12.9412 6.94579 12.9412 6.94419 12.9412Z" fill="#63144F"/>
+              </svg>
+            </span>
+            <span class="about-founder__badge-text">{{ section.settings.badge_2 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge_3 != blank -%}
+          <div class="about-founder__badge">
+            <span class="about-founder__badge-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M6.94419 12.9412C6.68016 12.9412 6.43313 12.8105 6.28438 12.5916C5.04179 10.7588 3.76041 9.47161 2.36747 8.65773C1.98763 8.43567 1.8596 7.94745 2.08166 7.56761C2.30319 7.18776 2.79141 7.05867 3.17179 7.28179C4.51532 8.06698 5.75154 9.20864 6.92826 10.7556C9.19191 7.56389 11.8598 4.99795 14.8715 3.11892C15.246 2.88623 15.7364 2.99939 15.9691 3.37339C16.2018 3.74686 16.0886 4.23826 15.7146 4.47095C12.5616 6.43764 9.91069 9.09123 7.60879 12.5831C7.46216 12.8057 7.2146 12.9401 6.94844 12.9417C6.94738 12.9412 6.94579 12.9412 6.94419 12.9412Z" fill="#63144F"/>
+              </svg>
+            </span>
+            <span class="about-founder__badge-text">{{ section.settings.badge_3 }}</span>
+          </div>
+        {%- endif -%}
       </div>
     </div>
 
@@ -26,7 +65,7 @@
         {%- if section.settings.founder_image != blank -%}
           {{
             section.settings.founder_image
-            | image_url: width: 800
+            | image_url: width: 900
             | image_tag:
               class: 'about-founder__photo',
               alt: section.settings.founder_image.alt | default: section.settings.founder_name,
@@ -37,32 +76,21 @@
         {%- endif -%}
       </div>
 
-      <div class="about-founder__badges">
-        {%- if section.settings.badge_1 != blank -%}
-          <div class="about-founder__badge">
-            <span class="about-founder__badge-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </span>
-            <span class="about-founder__badge-text">{{ section.settings.badge_1 }}</span>
+      {%- if section.settings.review_text != blank -%}
+        <div class="about-founder__review">
+          <div class="about-founder__stars" aria-label="{{ section.settings.star_count }} out of 5 stars">
+            {%- for i in (1..section.settings.star_count) -%}
+              <span class="about-founder__star">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                  <path d="M9.50029 14.152L14.9082 17.416L13.4729 11.2648L18.2506 7.12593L11.9592 6.59235L9.50029 0.791016L7.04137 6.59235L0.75 7.12593L5.52771 11.2648L4.09242 17.416L9.50029 14.152Z" fill="#EDB726"/>
+                </svg>
+              </span>
+            {%- endfor -%}
           </div>
-        {%- endif -%}
-        {%- if section.settings.badge_2 != blank -%}
-          <div class="about-founder__badge">
-            <span class="about-founder__badge-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </span>
-            <span class="about-founder__badge-text">{{ section.settings.badge_2 }}</span>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.badge_3 != blank -%}
-          <div class="about-founder__badge">
-            <span class="about-founder__badge-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </span>
-            <span class="about-founder__badge-text">{{ section.settings.badge_3 }}</span>
-          </div>
-        {%- endif -%}
-      </div>
+
+          <p class="about-founder__review-text">{{ section.settings.review_text }}</p>
+        </div>
+      {%- endif -%}
     </div>
 
   </div>
@@ -77,19 +105,20 @@
   #about-founder-{{ section.id }} .about-founder__inner {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 60px 40px;
+    padding: 24px 32px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 60px;
+    gap: 70px;
   }
 
   #about-founder-{{ section.id }} .about-founder__left {
-    flex: 0 0 auto;
-    width: 54%;
+    flex: 1 1 auto;
+    width: 56%;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 28px;
+    padding-top: 16px;
   }
 
   #about-founder-{{ section.id }} .about-founder__credentials {
@@ -117,71 +146,42 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.4;
+    line-height: 1.2;
     color: #6B6B6B;
     margin: 0;
   }
 
   #about-founder-{{ section.id }} .about-founder__bio {
+    max-width: 690px;
     font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.22;
     color: #211B18;
   }
 
   #about-founder-{{ section.id }} .about-founder__bio p {
-    margin: 0 0 16px;
+    margin: 0 0 18px;
   }
 
   #about-founder-{{ section.id }} .about-founder__bio p:last-child {
     margin-bottom: 0;
   }
 
-  #about-founder-{{ section.id }} .about-founder__right {
-    flex: 0 0 auto;
-    width: 41%;
-    display: flex;
-    flex-direction: column;
-    gap: 34px;
-  }
-
-  #about-founder-{{ section.id }} .about-founder__photo-card {
-    background-color: #3D7E7A;
-    border-radius: 19.634px;
-    padding: 23.561px;
-    overflow: hidden;
-  }
-
-  #about-founder-{{ section.id }} .about-founder__photo {
-    width: 100%;
-    height: auto;
-    border-radius: 9.817px;
-    display: block;
-    object-fit: cover;
-  }
-
-  #about-founder-{{ section.id }} .about-founder__photo-placeholder {
-    width: 100%;
-    aspect-ratio: 0.81;
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 9.817px;
-  }
-
   #about-founder-{{ section.id }} .about-founder__badges {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
   }
 
   #about-founder-{{ section.id }} .about-founder__badge {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
   }
 
   #about-founder-{{ section.id }} .about-founder__badge-icon {
-    flex-shrink: 0;
+    flex: 0 0 17px;
     width: 17px;
     height: 17px;
     display: flex;
@@ -189,11 +189,81 @@
     justify-content: center;
   }
 
+  #about-founder-{{ section.id }} .about-founder__badge-icon svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+  }
+
   #about-founder-{{ section.id }} .about-founder__badge-text {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "DM Sans";
     font-size: 18px;
-    line-height: 1;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__right {
+    flex: 0 0 auto;
+    width: 39%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__photo-card {
+    background-color: #3D7E7A;
+    border-radius: 14px;
+    padding: 17px;
+    overflow: hidden;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__photo {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+    object-fit: cover;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__photo-placeholder {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__review {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__stars {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__star {
+    display: flex;
+    width: 14px;
+    height: 14px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__star svg {
+    display: block;
+    width: 14px;
+    height: 14px;
+  }
+
+  #about-founder-{{ section.id }} .about-founder__review-text {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
     color: #211B18;
   }
 
@@ -201,17 +271,28 @@
     #about-founder-{{ section.id }} .about-founder__inner {
       flex-direction: column;
       gap: 40px;
+      padding: 48px 24px;
     }
 
     #about-founder-{{ section.id }} .about-founder__left,
     #about-founder-{{ section.id }} .about-founder__right {
       width: 100%;
     }
+
+    #about-founder-{{ section.id }} .about-founder__bio {
+      max-width: 100%;
+    }
   }
 
   @media screen and (max-width: 749px) {
     #about-founder-{{ section.id }} .about-founder__inner {
       padding: 40px 20px;
+      gap: 32px;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__left {
+      padding-top: 0;
+      gap: 24px;
     }
 
     #about-founder-{{ section.id }} .about-founder__name {
@@ -220,7 +301,29 @@
 
     #about-founder-{{ section.id }} .about-founder__bio,
     #about-founder-{{ section.id }} .about-founder__titles p {
-      font-size: 16px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__badge-text {
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__review {
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #about-founder-{{ section.id }} .about-founder__review-text {
+      font-size: 11px;
+    }
+    #about-founder-{{ section.id }} .about-founder__credentials {
+      border-bottom: 1px solid #211B18;
+      padding-bottom: 15px;
+    }
+    #about-founder-{{ section.id }} .about-founder__photo-card {
+      padding: 13px;
     }
   }
 </style>
@@ -234,55 +337,70 @@
     {
       "type": "text",
       "id": "founder_name",
-      "label": "Founder Name",
+      "label": "Founder name",
       "default": "BEVY"
     },
     {
       "type": "text",
       "id": "title_1",
-      "label": "Title Line 1",
+      "label": "Title line 1",
       "default": "Founder, HairScripts™"
     },
     {
       "type": "text",
       "id": "title_2",
-      "label": "Title Line 2",
-      "default": "Pharmaceutical Dermatology Expert"
+      "label": "Title line 2",
+      "default": "Pharmaceutical Industry Expert"
     },
     {
       "type": "text",
       "id": "title_3",
-      "label": "Title Line 3",
+      "label": "Title line 3",
       "default": "Certified Hair Loss Practitioner"
     },
     {
       "type": "richtext",
       "id": "bio_text",
-      "label": "Bio Text",
-      "default": "<p>Bevy knows what it feels like to lose your hair during one of the hardest seasons of your life. In 2019, she was diagnosed with Androgenic Alopecia and lost nearly 60% of her hair — all while navigating significant health and personal challenges that left little room to slow down.</p><p>With over a decade inside pharmaceutical dermatology, she already knew how to read clinical data, evaluate formulations, and identify the gap between what a product claims and what the biology actually requires.</p><p>Bevy formulated HairScripts™ herself — drawing directly on her pharmaceutical dermatology expertise to build a clinically-dosed, multi-pathway formula from the ground up. Every ingredient chosen for its documented mechanism of action. No fillers. No underdosed actives hiding behind a proprietary blend.</p>"
+      "label": "Bio text",
+      "default": "<p>Bevy knows what it feels like to lose your hair during one of the hardest seasons of your life. In 2019, she was diagnosed with Androgenic Alopecia and lost nearly 60% of her hair — all while navigating significant health and personal challenges that left little room to slow down.</p><p>What set Bevy apart wasn’t just her experience. With over a decade inside the pharmaceutical industry, she already knew how to read clinical data, evaluate formulations, and identify the gap between what a product claims and what the science actually requires. That gap was everywhere.</p><p>Most formulas target one root cause. One. While hormonal hair loss — the kind that accelerates during stress, perimenopause, postpartum, and metabolic shifts — operates across nine simultaneously.</p><p>HairScripts™ is the one capsule that handles all nine while you handle everything else. You shouldn’t have to become a hair loss expert to stop losing your hair. That’s the whole point.</p>"
     },
     {
       "type": "image_picker",
       "id": "founder_image",
-      "label": "Founder Photo"
+      "label": "Founder photo"
     },
     {
       "type": "text",
       "id": "badge_1",
-      "label": "Credential Badge 1",
-      "default": "10+ Years Pharmaceutical Experience"
+      "label": "Credential badge 1",
+      "default": "10+ Years Pharmaceutical Industry Experience"
     },
     {
       "type": "text",
       "id": "badge_2",
-      "label": "Credential Badge 2",
+      "label": "Credential badge 2",
       "default": "Certified Hair Loss Practitioner"
     },
     {
       "type": "text",
       "id": "badge_3",
-      "label": "Credential Badge 3",
-      "default": "YouTube Educator · Thousands in the Community"
+      "label": "Credential badge 3",
+      "default": "Active YouTube Educator with a Growing Community"
+    },
+    {
+      "type": "range",
+      "id": "star_count",
+      "label": "Star count",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "Trusted by a growing community of women in the HairScripts family."
     }
   ],
   "presets": [

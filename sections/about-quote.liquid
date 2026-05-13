@@ -23,9 +23,11 @@
           <div class="about-quote__portrait-placeholder"></div>
         {%- endif -%}
       </div>
+
       <div class="about-quote__attribution-text">
         <p class="about-quote__attribution-name">{{ section.settings.attribution_name }}</p>
-        <p class="about-quote__attribution-title">{{ section.settings.attribution_title }}</p>
+        <p class="about-quote__attribution-title desktop">{{ section.settings.attribution_title }}</p>
+        <p class="about-quote__attribution-title mobile">{{ section.settings.attribution_title_mobile }}</p>
       </div>
     </div>
 
@@ -42,17 +44,15 @@
   }
 
   #about-quote-{{ section.id }} .about-quote__inner {
-    max-width: 1440px;
+    max-width: 1069px;
     margin: 0 auto;
     padding: 0 40px;
     display: flex;
     flex-direction: column;
     gap: 28px;
     align-items: center;
-    max-width: 1069px;
   }
 
-  /* ── Text Block ── */
   #about-quote-{{ section.id }} .about-quote__text-block {
     display: flex;
     flex-direction: column;
@@ -81,7 +81,6 @@
     margin: 0;
   }
 
-  /* ── Attribution ── */
   #about-quote-{{ section.id }} .about-quote__attribution {
     display: flex;
     flex-direction: column;
@@ -94,30 +93,52 @@
     width: 199px;
     height: 199px;
     border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.5);
     flex-shrink: 0;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    border: none;
+  }
+
+  #about-quote-{{ section.id }} .about-quote__portrait-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(180deg, #7A4932 0%, #FFB796 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
   #about-quote-{{ section.id }} .about-quote__portrait {
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 34px);
+    height: calc(100% - 34px);
+    border-radius: 50%;
     object-fit: cover;
     display: block;
+    box-sizing: border-box;
   }
 
   #about-quote-{{ section.id }} .about-quote__portrait-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
+    width: calc(100% - 34px);
+    height: calc(100% - 34px);
     border-radius: 50%;
+    border: 8px solid #FF9A73;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
   }
 
   #about-quote-{{ section.id }} .about-quote__attribution-text {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 5px;
     text-align: center;
   }
 
@@ -132,13 +153,24 @@
     margin: 0;
   }
 
-  #about-quote-{{ section.id }} .about-quote__attribution-title {
+  #about-quote-{{ section.id }} .about-quote__attribution-title.desktop {
     font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 1;
     color: rgba(255, 255, 255, 0.7);
     margin: 0;
+    display: block;
+  }
+
+  #about-quote-{{ section.id }} .about-quote__attribution-title.mobile {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    display: none;
   }
 
   @media screen and (max-width: 990px) {
@@ -167,6 +199,14 @@
 
     #about-quote-{{ section.id }} .about-quote__body {
       font-size: 16px;
+    }
+
+    #about-quote-{{ section.id }} .about-quote__attribution-title.desktop {
+      display: none !important;
+    }
+
+    #about-quote-{{ section.id }} .about-quote__attribution-title.mobile {
+      display: block !important;
     }
   }
 </style>
@@ -204,6 +244,12 @@
       "type": "text",
       "id": "attribution_title",
       "label": "Title",
+      "default": "Founder, HairScripts™ · Pharmaceutical Dermatology Expert · One of You"
+    },
+    {
+      "type": "text",
+      "id": "attribution_title_mobile",
+      "label": "Title Mobile",
       "default": "Founder, HairScripts™ · Pharmaceutical Dermatology Expert · One of You"
     }
   ],

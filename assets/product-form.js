@@ -14,6 +14,24 @@ const ERROR_BUTTON_REENABLE_DELAY = 1000;
 const SUCCESS_MESSAGE_DISPLAY_DURATION = 5000;
 
 /**
+ * Path + query for Cart API `sections_url` when requesting bundled header/cart markup.
+ * Prefer the cart URL: reliable Liquid context for the drawer and avoids weak Referer on fetch().
+ */
+function bundledCartSectionsUrl() {
+  try {
+    const cartUrl = typeof Theme !== 'undefined' && Theme.routes?.cart_url ? String(Theme.routes.cart_url) : '';
+    if (cartUrl.startsWith('http')) {
+      const u = new URL(cartUrl);
+      return `${u.pathname}${u.search}`;
+    }
+    if (cartUrl.startsWith('/')) {
+      return cartUrl;
+    }
+  } catch (_) {}
+  return `${window.location.pathname}${window.location.search}`;
+}
+
+/**
  * @typedef {HTMLElement & {
  *   source: Element,
  *   destination: Element,
@@ -383,13 +401,17 @@ class ProductFormComponent extends Component {
     }
 
     const cartItemsComponents = document.querySelectorAll('cart-items-component');
-    let cartItemComponentsSectionIds = [];
+    const cartItemComponentsSectionIds = [];
     cartItemsComponents.forEach((item) => {
       if (item instanceof HTMLElement && item.dataset.sectionId) {
         cartItemComponentsSectionIds.push(item.dataset.sectionId);
       }
-      formData.append('sections', cartItemComponentsSectionIds.join(','));
     });
+    if (cartItemComponentsSectionIds.length > 0) {
+      formData.append('sections', cartItemComponentsSectionIds.slice(0, 5).join(','));
+      // Bundled section HTML uses Referer by default; fetch() may omit it — explicit URL keeps drawer markup in sync
+      formData.append('sections_url', bundledCartSectionsUrl());
+    }
 
     const fetchCfg = fetchConfig('javascript', { body: formData });
 
@@ -397,7 +419,7 @@ class ProductFormComponent extends Component {
       ...fetchCfg,
       headers: {
         ...fetchCfg.headers,
-        Accept: 'text/html',
+        Accept: 'application/json',
       },
     })
       .then((response) => response.json())
@@ -510,8 +532,12 @@ class ProductFormComponent extends Component {
         id: Number(item.variantId),
         quantity: item.quantity,
       })),
-      sections: cartItemComponentsSectionIds.join(','),
+      sections: cartItemComponentsSectionIds.slice(0, 5).join(','),
     };
+
+    if (cartItemComponentsSectionIds.length > 0) {
+      payload.sections_url = bundledCartSectionsUrl();
+    }
 
     fetch(Theme.routes.cart_add_url, {
       method: 'POST',

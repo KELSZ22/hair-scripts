@@ -409,11 +409,22 @@
 
   @media screen and (max-width: 768px) {
     #section-{{ section.id }} .review-carousel-wrapper {
-      padding: 40px 15px;
+      padding: 40px 0;
+    }
+
+    #section-{{ section.id }} .review-carousel-header {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    #section-{{ section.id }} .review-carousel-viewport {
+      padding-left: 0;
+      padding-right: 0;
+      width: 100%;
     }
 
     #section-{{ section.id }} .review-carousel-heading {
-      font-size: 26px;
+      font-size: 24px;
     }
   }
 
@@ -442,7 +453,7 @@
 
   @media screen and (max-width: 450px) {
     #section-{{ section.id }} .review-carousel-heading {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 </style>

@@ -2,14 +2,23 @@
   <div class="about-brand-promise__inner">
 
     <div class="about-brand-promise__header">
-      <p class="about-brand-promise__eyebrow">{{ section.settings.eyebrow }}</p>
-      <h2 class="about-brand-promise__heading">{{ section.settings.heading }}</h2>
-      <p class="about-brand-promise__subheading">{{ section.settings.subheading }}</p>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="about-brand-promise__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="about-brand-promise__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="about-brand-promise__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
     </div>
 
     <div class="about-brand-promise__grid">
+      {%- assign pillar_count = 0 -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'pillar' -%}
+          {%- assign pillar_count = pillar_count | plus: 1 -%}
+
           <div class="about-brand-promise__pillar" {{ block.shopify_attributes }}>
             <div class="about-brand-promise__pillar-icon">
               {%- if block.settings.icon != blank -%}
@@ -23,7 +32,7 @@
                     loading: 'lazy'
                 }}
               {%- else -%}
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#3D7E7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2C5F5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"></polyline></svg>
               {%- endif -%}
             </div>
             <div class="about-brand-promise__pillar-content">
@@ -33,11 +42,22 @@
           </div>
 
           {%- unless forloop.last -%}
-            <div class="about-brand-promise__divider" aria-hidden="true"></div>
+            {%- assign col_pos = pillar_count | modulo: 3 -%}
+            <div class="about-brand-promise__divider{% if col_pos == 0 %} about-brand-promise__divider--row-end{% endif %}" aria-hidden="true"></div>
           {%- endunless -%}
+
         {%- endif -%}
       {%- endfor -%}
     </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <a
+        href="{{ section.settings.button_url | default: '#' }}"
+        class="about-brand-promise__cta"
+      >
+        {{ section.settings.button_text }}
+      </a>
+    {%- endif -%}
 
   </div>
 </section>
@@ -55,17 +75,17 @@
     padding: 0 40px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    align-items: flex-start;
+    gap: 38px;
+    align-items: center;
   }
 
+  /* ── Header ── */
   #about-brand-promise-{{ section.id }} .about-brand-promise__header {
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
     text-align: center;
-    color: #211B18;
     width: 100%;
   }
 
@@ -76,7 +96,6 @@
     line-height: 1;
     color: #211B18;
     margin: 0;
-    max-width: 351px;
   }
 
   #about-brand-promise-{{ section.id }} .about-brand-promise__heading {
@@ -98,15 +117,17 @@
     margin: 0;
   }
 
+  /* ── Grid ── */
   #about-brand-promise-{{ section.id }} .about-brand-promise__grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 64px 0;
+    gap: 64px 51px;
     align-items: flex-start;
     justify-content: center;
     width: 100%;
   }
 
+  /* ── Pillars ── */
   #about-brand-promise-{{ section.id }} .about-brand-promise__pillar {
     display: flex;
     flex-direction: column;
@@ -114,6 +135,7 @@
     align-items: center;
     width: 342px;
     text-align: center;
+    flex-shrink: 0;
   }
 
   #about-brand-promise-{{ section.id }} .about-brand-promise__pillar-icon {
@@ -158,21 +180,60 @@
     margin: 0;
   }
 
+  /* ── Vertical dividers (desktop) ──
+     Width is 0 so the flex item takes no horizontal space.
+     The gap (51px each side) provides the visual spacing.
+     ::after draws the 1px visible line. */
   #about-brand-promise-{{ section.id }} .about-brand-promise__divider {
-    width: 1px;
+    width: 0;
     height: 196px;
-    background-color: #211B18;
-    opacity: 0.2;
     align-self: center;
     flex-shrink: 0;
-    margin: 0 26px;
+    position: relative;
   }
 
-  @media screen and (max-width: 1200px) {
-    #about-brand-promise-{{ section.id }} .about-brand-promise__divider {
-      display: none;
-    }
+  #about-brand-promise-{{ section.id }} .about-brand-promise__divider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #A9CFCD;
+  }
 
+  /* Row-end divider: hidden on desktop — sits between row 1 and row 2.
+     Shown on mobile as a horizontal line like all other dividers. */
+  #about-brand-promise-{{ section.id }} .about-brand-promise__divider--row-end {
+    display: none;
+  }
+
+  /* ── CTA button ── */
+  #about-brand-promise-{{ section.id }} .about-brand-promise__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    min-width: 220px;
+    padding: 15px 30px;
+    border-radius: 68px;
+    background: linear-gradient(90deg, #725270 0%, #725270 42.831%, #371834 100%);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #FAF7F2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  #about-brand-promise-{{ section.id }} .about-brand-promise__cta:hover {
+    opacity: 0.88;
+  }
+
+  /* ── Tablet ≤ 1200px ── */
+  @media screen and (max-width: 1200px) {
     #about-brand-promise-{{ section.id }} .about-brand-promise__grid {
       gap: 50px 30px;
     }
@@ -180,28 +241,66 @@
     #about-brand-promise-{{ section.id }} .about-brand-promise__pillar {
       width: calc(50% - 15px);
     }
+
+    #about-brand-promise-{{ section.id }} .about-brand-promise__divider {
+      display: none;
+    }
   }
 
+  /* ── Mobile ≤ 749px ── */
   @media screen and (max-width: 749px) {
     #about-brand-promise-{{ section.id }} {
       padding: 50px 0;
     }
 
     #about-brand-promise-{{ section.id }} .about-brand-promise__inner {
-      padding: 0 20px;
-      gap: 36px;
+      padding: 0 16px;
+      gap: 50px;
+    }
+
+    #about-brand-promise-{{ section.id }} .about-brand-promise__header {
+      gap: 6px;
     }
 
     #about-brand-promise-{{ section.id }} .about-brand-promise__heading {
-      font-size: 32px;
+      font-size: 20px;
     }
 
     #about-brand-promise-{{ section.id }} .about-brand-promise__subheading {
-      font-size: 16px;
+      display: none;
+    }
+
+    #about-brand-promise-{{ section.id }} .about-brand-promise__grid {
+      flex-direction: column;
+      gap: 0;
+      align-items: stretch;
     }
 
     #about-brand-promise-{{ section.id }} .about-brand-promise__pillar {
       width: 100%;
+      gap: 15px;
+      padding: 16px 0;
+    }
+
+    /* All dividers become horizontal lines on mobile, including row-end ones */
+    #about-brand-promise-{{ section.id }} .about-brand-promise__divider,
+    #about-brand-promise-{{ section.id }} .about-brand-promise__divider--row-end {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #A9CFCD;
+      position: static;
+      align-self: auto;
+    }
+
+    #about-brand-promise-{{ section.id }} .about-brand-promise__divider::after,
+    #about-brand-promise-{{ section.id }} .about-brand-promise__divider--row-end::after {
+      display: none;
+    }
+
+    #about-brand-promise-{{ section.id }} .about-brand-promise__cta {
+      width: 100%;
+      min-width: unset;
     }
   }
 </style>
@@ -227,8 +326,19 @@
     {
       "type": "text",
       "id": "subheading",
-      "label": "Subheading",
+      "label": "Subheading (hidden on mobile)",
       "default": "The principles this formula was built on — and the ones HairScripts™ is accountable to."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Start My Protocol"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
     }
   ],
   "blocks": [
@@ -245,13 +355,13 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Biology, Not Trends"
+          "default": "Science, Not Trends"
         },
         {
           "type": "textarea",
           "id": "text",
           "label": "Description",
-          "default": "Every ingredient was selected for its documented mechanism at the follicle level. Not its marketing appeal."
+          "default": "Every ingredient was selected for its documented mechanism at the follicle level. Not its marketing appeal. Not because it photographs well on a label."
         }
       ]
     }
@@ -263,7 +373,7 @@
         {
           "type": "pillar",
           "settings": {
-            "title": "Biology, Not Trends",
+            "title": "Science, Not Trends",
             "text": "Every ingredient was selected for its documented mechanism at the follicle level. Not its marketing appeal. Not because it photographs well on a label."
           }
         },
@@ -271,7 +381,7 @@
           "type": "pillar",
           "settings": {
             "title": "All Nine Pathways",
-            "text": "Nine biological drivers of hormonal hair loss. All addressed simultaneously. Because your biology doesn't work one pathway at a time — and your formula shouldn't either."
+            "text": "Nine root causes of hormonal hair loss. All addressed simultaneously. Because your body doesn't work one pathway at a time — and your formula shouldn't either."
           }
         },
         {
@@ -285,14 +395,14 @@
           "type": "pillar",
           "settings": {
             "title": "Built for Consistency",
-            "text": "Real follicle recovery takes 90 days minimum. That's biology — not a disclaimer. HairScripts™ compounds over time. It's not built to spike. It's built to last."
+            "text": "Real follicle recovery takes 90 days minimum. That's how hair grows — not a disclaimer. HairScripts™ compounds over time. It's not built to spike. It's built to last."
           }
         },
         {
           "type": "pillar",
           "settings": {
             "title": "Drug-Free. Pharma-Informed.",
-            "text": "Pharmaceutical formulation logic. Zero drugs. Zero prescription side effects. The clinical thinking — accessible, daily, and designed for your biology."
+            "text": "Pharmaceutical formulation logic. Zero drugs. Zero prescription side effects. The clinical thinking — accessible, daily, and designed for your body."
           }
         },
         {
