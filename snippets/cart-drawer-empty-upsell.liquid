@@ -66,51 +66,53 @@
     {%- endif -%}
 
     <div class="cart-drawer-empty-upsell__body">
-      <div class="cart-drawer-empty-upsell__row">
+      <div class="cart-drawer-empty-upsell__layout">
         <div class="cart-drawer-empty-upsell__media">
           {%- if upsell_image != blank -%}
             {{
               upsell_image
-              | image_url: width: 180
+              | image_url: width: 260
               | image_tag:
                 loading: 'lazy',
                 class: 'cart-drawer-empty-upsell__img',
-                widths: '90, 120, 180',
-                sizes: '72px',
+                widths: '90, 120, 180, 260',
+                sizes: '(min-width: 400px) 120px, 28vw',
                 alt: img_alt
             }}
           {%- endif -%}
         </div>
 
-        <div class="cart-drawer-empty-upsell__copy">
-          <p class="cart-drawer-empty-upsell__title">{{ heading | escape }}</p>
-          {%- if section.settings.cart_drawer_upsell_billing_note != blank -%}
-            <p class="cart-drawer-empty-upsell__billing">
-              {{ section.settings.cart_drawer_upsell_billing_note | escape }}
-            </p>
-          {%- endif -%}
-        </div>
+        <div class="cart-drawer-empty-upsell__main">
+          <div class="cart-drawer-empty-upsell__header">
+            <div class="cart-drawer-empty-upsell__copy">
+              <p class="cart-drawer-empty-upsell__title">{{ heading | escape }}</p>
+              {%- if section.settings.cart_drawer_upsell_billing_note != blank -%}
+                <p class="cart-drawer-empty-upsell__billing">
+                  {{ section.settings.cart_drawer_upsell_billing_note | escape }}
+                </p>
+              {%- endif -%}
+            </div>
 
-        <div class="cart-drawer-empty-upsell__prices">
-          {%- if price_override != blank -%}
-            <span class="cart-drawer-empty-upsell__price">{{ price_override | escape }}</span>
-          {%- else -%}
-            <span class="cart-drawer-empty-upsell__price">{{ variant.price | money }}</span>
-          {%- endif -%}
+            <div class="cart-drawer-empty-upsell__prices">
+              {%- if price_override != blank -%}
+                <span class="cart-drawer-empty-upsell__price">{{ price_override | escape }}</span>
+              {%- else -%}
+                <span class="cart-drawer-empty-upsell__price">{{ variant.price | money }}</span>
+              {%- endif -%}
 
-          {%- if compare_override != blank -%}
-            <span class="cart-drawer-empty-upsell__compare">{{ compare_override | escape }}</span>
-          {%- elsif variant.compare_at_price > variant.price -%}
-            <span class="cart-drawer-empty-upsell__compare">{{ variant.compare_at_price | money }}</span>
-          {%- endif -%}
+              {%- if compare_override != blank -%}
+                <span class="cart-drawer-empty-upsell__compare">{{ compare_override | escape }}</span>
+              {%- elsif variant.compare_at_price > variant.price -%}
+                <span class="cart-drawer-empty-upsell__compare">{{ variant.compare_at_price | money }}</span>
+              {%- endif -%}
 
-          {%- if section.settings.cart_drawer_upsell_unit_note != blank -%}
-            <span class="cart-drawer-empty-upsell__unit">
-              {{ section.settings.cart_drawer_upsell_unit_note | escape }}
-            </span>
-          {%- endif -%}
-        </div>
-      </div>
+              {%- if section.settings.cart_drawer_upsell_unit_note != blank -%}
+                <span class="cart-drawer-empty-upsell__unit">
+                  {{ section.settings.cart_drawer_upsell_unit_note | escape }}
+                </span>
+              {%- endif -%}
+            </div>
+          </div>
 
       <ul class="cart-drawer-empty-upsell__benefits" role="list">
         {%- for i in (1..5) -%}
@@ -154,53 +156,55 @@
         {%- endfor -%}
       </ul>
 
-      <product-form-component
-        data-section-id="{{ section.id }}"
-        data-product-id="{{ upsell_product.id }}"
-        data-product-url="{{ upsell_product.url }}"
-        on:submit="/handleSubmit"
-        data-quantity-default="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
-        data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
-        class="cart-drawer-empty-upsell__form-wrap"
-      >
-        <div
-          class="visually-hidden"
-          aria-live="assertive"
-          role="status"
-          aria-atomic="true"
-          ref="liveRegion"
-        ></div>
-        {%- form 'product',
-          upsell_product,
-          id: product_form_id,
-          novalidate: 'novalidate',
-          data-type: 'add-to-cart-form'
-        -%}
-          <input
-            type="hidden"
-            name="id"
-            ref="variantId"
-            value="{{ variant.id }}"
-            {% unless variant.available %}
-              disabled
-            {% endunless %}
+          <product-form-component
+            data-section-id="{{ section.id }}"
+            data-product-id="{{ upsell_product.id }}"
+            data-product-url="{{ upsell_product.url }}"
+            on:submit="/handleSubmit"
+            data-quantity-default="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
+            data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
+            class="cart-drawer-empty-upsell__form-wrap"
           >
-          <input
-            type="hidden"
-            name="quantity"
-            value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
-          >
-          {% render 'add-to-cart-button',
-            product: upsell_product,
-            can_add_to_cart: can_add_to_cart,
-            add_to_cart_text: btn_label,
-            class: 'button cart-drawer-empty-upsell__submit',
-            data_testid: 'cart-drawer-upsell-add',
-            show_variant_price: false,
-            show_shipping_blurb: false
-          %}
-        {%- endform -%}
-      </product-form-component>
+            <div
+              class="visually-hidden"
+              aria-live="assertive"
+              role="status"
+              aria-atomic="true"
+              ref="liveRegion"
+            ></div>
+            {%- form 'product',
+              upsell_product,
+              id: product_form_id,
+              novalidate: 'novalidate',
+              data-type: 'add-to-cart-form'
+            -%}
+              <input
+                type="hidden"
+                name="id"
+                ref="variantId"
+                value="{{ variant.id }}"
+                {% unless variant.available %}
+                  disabled
+                {% endunless %}
+              >
+              <input
+                type="hidden"
+                name="quantity"
+                value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
+              >
+              {% render 'add-to-cart-button',
+                product: upsell_product,
+                can_add_to_cart: can_add_to_cart,
+                add_to_cart_text: btn_label,
+                class: 'button cart-drawer-empty-upsell__submit',
+                data_testid: 'cart-drawer-upsell-add',
+                show_variant_price: false,
+                show_shipping_blurb: false
+              %}
+            {%- endform -%}
+          </product-form-component>
+        </div>
+      </div>
     </div>
   </div>
 {%- elsif request.design_mode and section != blank and section.settings.cart_drawer_upsell_enable != false -%}
@@ -236,7 +240,16 @@
     flex-shrink: 0;
     width: 100%;
     text-align: left;
-    background-color: var(--cd-cream, rgb(var(--color-background-rgb) / 1));
+    background-color: var(--cd-cream, #fdf8f4);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+  }
+
+  /* Banner sits flush at top of drawer — no rounding above promo strip */
+  .cart-drawer-empty-upsell:has(.cart-drawer-empty-upsell__banner) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   .cart-drawer-empty-upsell__banner {
@@ -252,26 +265,44 @@
   }
 
   .cart-drawer-empty-upsell__body {
-    padding: var(--padding-lg, 1rem) var(--padding-lg, 1rem) var(--padding-xl, 1.25rem);
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-md, 0.875rem);
+    padding: 1.25rem 1.5rem 1.5rem;
   }
 
-  .cart-drawer-empty-upsell__row {
-    display: grid;
-    grid-template-columns: 72px 1fr auto;
-    gap: var(--gap-sm, 0.5rem) var(--gap-md, 0.75rem);
-    align-items: start;
+  .cart-drawer-empty-upsell__layout {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-lg, 1.25rem);
   }
 
   .cart-drawer-empty-upsell__media {
-    width: 72px;
-    height: 72px;
-    border-radius: var(--style-border-radius-buttons, 10px);
+    flex: 0 0 27%;
+    min-width: 4.5rem;
+    max-width: 7.5rem;
+    aspect-ratio: 1;
+    border-radius: 8px;
     overflow: hidden;
     flex-shrink: 0;
     background: rgb(var(--color-foreground-rgb) / 0.06);
+  }
+
+  .cart-drawer-empty-upsell__main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cart-drawer-empty-upsell__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-md, 0.75rem);
+  }
+
+  .cart-drawer-empty-upsell__copy {
+    min-width: 0;
+    flex: 1;
   }
 
   .cart-drawer-empty-upsell__img {
@@ -284,7 +315,7 @@
   .cart-drawer-empty-upsell__title {
     margin: 0;
     font-family: var(--font-body--family, sans-serif);
-    font-size: var(--font-size--body-md, 1rem);
+    font-size: 14px;
     font-weight: 600;
     color: #1a1a1a;
     line-height: 1.25;
@@ -302,6 +333,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    flex-shrink: 0;
     gap: 0.125rem;
     text-align: right;
     min-width: 5rem;
@@ -331,7 +363,7 @@
   .cart-drawer-empty-upsell__benefits {
     list-style: none;
     margin: 0;
-    padding: var(--padding-md, 0.875rem) 0 0;
+    padding: 0.75rem 0 0;
     border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -355,7 +387,7 @@
     flex-shrink: 0;
     width: 1.125rem;
     height: 1.125rem;
-    color: rgb(var(--color-foreground-rgb) / 0.65);
+    color: #1a1a1a;
     margin-top: 0.1rem;
   }
 
@@ -369,26 +401,43 @@
     font-family: var(--font-body--family, sans-serif);
     font-size: 0.75rem;
     line-height: 1.35;
-    color: #444;
+    color: #1a1a1a;
   }
 
   .cart-drawer-empty-upsell__form-wrap {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     margin-top: 0.125rem;
   }
 
+  .cart-drawer-empty-upsell__form-wrap .custom-add-to-cart-wrapper {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .cart-drawer-empty-upsell__form-wrap .custom-add-to-cart-shipping-text {
+    display: none;
+  }
+
+  .cart-drawer-empty-upsell__form-wrap form {
+    width: auto;
+  }
+
   .cart-drawer-empty-upsell__submit {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     border-radius: 999px;
-    padding: 0.875rem 1.25rem;
-    background: linear-gradient(90deg, #725270 0%, #4d2449 69%, #481d44 84%, #371834 100%);
+    padding: 0.75rem 2.5rem;
+    background: linear-gradient(90deg, #6b4162 0%, #3d1a34 100%);
     color: #fff;
     font-family: var(--font-body--family, sans-serif);
     font-size: 0.9375rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     border: none;
+    box-shadow: none;
     cursor: pointer;
     transition: opacity 0.2s;
   }

@@ -30,9 +30,7 @@
           "blocks": {}
         }
       },
-      "block_order": [
-        "announcement_BxgCk9"
-      ],
+      "block_order": ["announcement_BxgCk9"],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -114,12 +112,29 @@
         "enable_transparent_header_product": false,
         "product_color_scheme": "default",
         "enable_transparent_header_collection": false,
-        "collection_color_scheme": "default"
+        "collection_color_scheme": "default",
+        "cart_drawer_upsell_enable": true,
+        "cart_drawer_upsell_banner_text": "SAVE UP TO 30% OFF",
+        "cart_drawer_upsell_banner_color": "#237b84",
+        "cart_drawer_upsell_product": "hairscripts-by-bevy-supplement-3-bottles",
+        "cart_drawer_upsell_product_handle": "",
+        "cart_drawer_upsell_heading": "",
+        "cart_drawer_upsell_billing_note": "Billed at $387.00 after 12 weeks",
+        "cart_drawer_upsell_price": "",
+        "cart_drawer_upsell_compare_price": "",
+        "cart_drawer_upsell_button_label": "Add to Cart",
+        "cart_drawer_upsell_line_1_icon": "truck",
+        "cart_drawer_upsell_line_1_text": "FREE SHIPPING to United States",
+        "cart_drawer_upsell_line_2_icon": "return",
+        "cart_drawer_upsell_line_2_text": "90-day money-back guarantee",
+        "cart_drawer_upsell_line_3_icon": "heart",
+        "cart_drawer_upsell_line_3_text": "Share with family and friends",
+        "cart_drawer_upsell_line_4_icon": "check_circle",
+        "cart_drawer_upsell_line_4_text": "Maximum Savings",
+        "cart_drawer_upsell_line_5_icon": "cancel",
+        "cart_drawer_upsell_line_5_text": "Cancel subscription anytime"
       }
     }
   },
-  "order": [
-    "header_announcements_9jGBFp",
-    "header_section"
-  ]
+  "order": ["header_announcements_9jGBFp", "header_section"]
 }
