@@ -84,10 +84,32 @@
 
 {% stylesheet %}
   .custom-product-accordion {
+    display: block;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  /*
+    Product details uses a column flex (.layout-panel-flex--column) with align-items from theme
+    settings (often flex-start). Shopify wraps each block in a div that then shrinks to content
+    width. Stretch that wrapper on desktop so the accordion row/summary span the full column.
+  */
+  @media screen and (min-width: 750px) {
+    .product-details .group-block-content.layout-panel-flex--column > *:has(> .custom-product-accordion) {
+      align-self: stretch;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
   }
 
   .custom-product-accordion__item {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     border-bottom: 1px solid rgba(33, 27, 24, 0.16);
   }
 
@@ -96,7 +118,10 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    box-sizing: border-box;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding: 18px 0;
     cursor: pointer;
     list-style: none;

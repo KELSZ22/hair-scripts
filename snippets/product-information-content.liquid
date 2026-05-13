@@ -120,12 +120,14 @@
     {% assign render_order_array = render_order | split: ',' %}
 
     {% capture media %}
-      <div
-        class="product-information__media"
-        data-testid="product-information-media"
-      >
-        {{ media_gallery }}
-      </div>
+     <div class="product-information__media-container">
+        <div
+          class="product-information__media"
+          data-testid="product-information-media"
+        >
+          {{ media_gallery }}
+        </div>
+     </div>
     {% endcapture %}
 
     {% for block in render_order_array %}
@@ -161,14 +163,47 @@
     order: 0;
     width: 0;
     min-width: 100%;
+    grid-row: 1;
+    align-self: start;
+    margin-block-start: 0;
+    padding-block-start: 0;
+  }
+
+  .product-information__media > media-gallery,
+  .product-information__media > media-gallery.spacing-style {
+    --padding-block-start: 0px;
+    --margin-block-start: 0px;
+    margin-block-start: 0;
+    padding-block-start: 0;
   }
 
   .product-information__media .product-media-gallery__placeholder-image {
     width: 100%;
     height: 100%;
   }
+  .product-information__media-container {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
- 
+  .spacing-style, .inherit-spacing {
+    margin-block-start: 0;
+    padding-block-start: 0;
+  }
+
+  /* RTE text blocks in details: override global gray rte-formatter.rte p (base.css) */
+  .product-information
+    .product-details
+    rte-formatter.text-block.rte:not(.product-description)
+    :is(p, li, h1, h2, h3, h4, h5, h6) {
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211b18);
+  }
+
+  .product-information .product-details rte-formatter.text-block.rte.product-description :is(p, li, h1, h2, h3, h4, h5, h6) {
+    color: var(--new-colors-gray-subhead, #6b6b6b);
+  }
+
   /* Mobile styles */
   @media screen and (max-width: 749px) {
     .product-information__media {
@@ -179,6 +214,8 @@
       grid-column: 2 / 3;
     }
   }
+
+  
 
   /* Desktop styles */
   @media screen and (min-width: 750px) {
@@ -582,6 +619,10 @@
       grid-template-columns: 1fr !important;
     }
 
+    .spacing-style, .inherit-spacing {
+    margin-block-start: 5px;
+  }
+
     .product-information__media,
     .product-details {
       grid-column: 1 / -1 !important;
@@ -610,5 +651,161 @@
   /* If the header is sticky, make product details content stick underneath the header */
   body:has(#header-group #header-component[data-sticky-state='active']) .product-details.sticky-content--desktop {
     --sticky-header-offset: var(--header-height);
+  }
+
+  /*
+    Recharge Subscription Widget v2 — visual restyle on PDP.
+    Targets exposed CSS parts (https://docs.rechargepayments.com) so styling
+    survives across Recharge widget updates and crosses the shadow boundary
+    without touching internal class names. Functionality is unchanged.
+  */
+  .product-information recharge-subscription-widget {
+    --rc-card-bg: #f7f2e9;
+    --rc-card-bg-selected: #c7e2dc;
+    --rc-card-border: #e8e0d0;
+    --rc-card-border-selected: #1e3a35;
+    --rc-text: #211b18;
+    --rc-muted: #6b6b6b;
+    --rc-badge-bg: #c2613f;
+    --rc-badge-text: #ffffff;
+    --rc-card-radius: 16px;
+    --rc-card-padding: 20px 22px 18px;
+    --rc-divider: rgba(33, 27, 24, 0.1);
+    --rc-widget-brand-color: #237b84 !important;
+
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    color: var(--rc-text);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /*
+    Product details renders each block in a Shopify wrapper (div#shopify-block-...) inside
+    .layout-panel-flex--column. With the theme's default flex-start cross alignment that
+    wrapper shrinks to content width, capping the Recharge widget. Stretch the wrapper on
+    desktop so the widget spans the full details column.
+  */
+  @media screen and (min-width: 750px) {
+    .product-details .group-block-content.layout-panel-flex--column > *:has(> recharge-subscription-widget) {
+      align-self: stretch;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+  }
+
+  .product-information recharge-subscription-widget::part(rc-content-wrap) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-plans-button) {
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 9999px;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-plans-button__selected) {
+    background-color: #c4a882;
+    border: none;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option) {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    padding: var(--rc-card-padding);
+    background: transparent;
+    border: 1px solid var(--rc-card-border);
+    border-radius: var(--rc-card-radius);
+    color: var(--rc-text);
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__selected) {
+    background: #D7E9E6;
+    border-color: #237b84;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__badge) {
+    position: absolute;
+    top: -10px;
+    right: 18px;
+    padding: 6px 14px;
+    background: #AF7153;
+    color: var(--rc-badge-text);
+    border-radius: 18px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__label) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__checked-indicator) {
+    --rc-widget-brand-color: #237b84;
+    color: #237b84;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__selector) {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--rc-text);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__prices) {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    text-align: right;
+    color: var(--rc-text);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    flex-direction: row;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__original-price) {
+    color: var(--rc-muted);
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-decoration: line-through;
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__discounted-price),
+  .product-information recharge-subscription-widget::part(rc-purchase-option__price) {
+    color: var(--rc-text);
+  }
+
+  .product-information recharge-subscription-widget::part(rc-purchase-option__sub-container) {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rc-divider);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-information recharge-subscription-widget::part(rc-purchase-option) {
+      transition: none;
+    }
   }
 {% endstylesheet %}

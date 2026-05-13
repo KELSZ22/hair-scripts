@@ -683,7 +683,8 @@ export class Slideshow extends Component {
       return;
     }
 
-    event.preventDefault();
+    /* Do not cancel mousedown here — it can suppress the click used for product zoom (media-gallery / zoom-dialog).
+       Drag still works; gallery images use draggable=false to limit native image-drag. */
     // Store initial position but don't start handling yet
     const { axis } = this.#scroll;
     const startPosition = event[axis];

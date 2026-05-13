@@ -421,6 +421,9 @@
             {% if media.presentation.focal_point != blank %}
               data-focal-point="{{ media.presentation.focal_point }}"
             {% endif %}
+            {% if block_settings.zoom and media.media_type == 'image' %}
+              on:click="/zoom/{{ forloop.index0 }}"
+            {% endif %}
           >
             {%- if block_settings.zoom and media.media_type == 'image' -%}
               <button
@@ -831,6 +834,93 @@
     }
   }
 
+  /*
+    Desktop zoom lightbox: mobile styles above already use horizontal flex + scroll-snap.
+    Without these rules, <ul.dialog-zoomed-gallery> stays display:block and each <li>
+    stacks vertically (empty center + thumbnails fixed on the right).
+  */
+  @media screen and (min-width: 750px) {
+    .dialog-zoomed-gallery {
+      overscroll-behavior: none;
+      scrollbar-width: none;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      padding-inline-end: calc(var(--thumbnail-width, 100px) + var(--padding-lg) * 2);
+    }
+
+    .dialog-zoomed-gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dialog-zoomed-gallery .product-media-container {
+      flex: 0 0 100%;
+      min-width: 100%;
+      width: 100%;
+      scroll-snap-align: start;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .dialog-zoomed-gallery .product-media-container--image .product-media {
+      aspect-ratio: auto;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .dialog-zoomed-gallery .product-media-container--video,
+    .dialog-zoomed-gallery .product-media-container--external_video {
+      align-content: center;
+    }
+
+    .dialog-zoomed-gallery
+      :is(.product-media-container--video, .product-media-container--external_video, .product-media-container--model)
+      .product-media {
+      aspect-ratio: auto;
+      align-items: center;
+      height: 100%;
+
+      .product-media__image {
+        height: 100%;
+      }
+    }
+
+    .dialog-zoomed-gallery .product-media__drag-zoom-wrapper {
+      display: flex;
+      aspect-ratio: auto;
+      height: 100%;
+      width: 100%;
+      overflow: scroll;
+      scrollbar-width: none;
+      justify-content: center;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .dialog-zoomed-gallery .product-media__drag-zoom-wrapper .product-media__image {
+      --product-media-fit: contain;
+
+      object-fit: var(--product-media-fit);
+      overflow: hidden;
+      transform: scale(var(--drag-zoom-scale))
+        translate(var(--drag-zoom-translate-x, 0), var(--drag-zoom-translate-y, 0));
+    }
+
+    zoom-dialog .dialog-zoomed-gallery__dialog::backdrop {
+      background: rgb(0 0 0 / 0.35);
+    }
+  }
+
   .dialog-zoomed-gallery__close-button {
     color: #fff;
     mix-blend-mode: difference;
@@ -859,7 +949,8 @@
   }
 
   .dialog-zoomed-gallery .product-media-container--model .product-media__image {
-    height: 100vh;
+    height: 100%;
+    max-height: min(100dvh, 100%);
   }
 
   :root:active-view-transition .dialog-zoomed-gallery__dialog {
