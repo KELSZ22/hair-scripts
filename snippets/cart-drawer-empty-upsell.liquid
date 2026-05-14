@@ -1,6 +1,6 @@
 {%- doc -%}
   Promotional upsell below the empty-cart message in the drawer. Content comes from header (or header-product) section settings.
-  Requires a product from the resource picker, or a valid product handle in “Product handle (fallback)”.
+  Requires a product from the resource picker, or a valid product handle in "Product handle (fallback)".
   @param {object} section - Header section (or header-product) with cart_drawer_upsell_* settings
 {%- enddoc -%}
 
@@ -66,6 +66,8 @@
     {%- endif -%}
 
     <div class="cart-drawer-empty-upsell__body">
+
+      <!-- Row 1: image + title/price side by side -->
       <div class="cart-drawer-empty-upsell__layout">
         <div class="cart-drawer-empty-upsell__media">
           {%- if upsell_image != blank -%}
@@ -113,11 +115,15 @@
               {%- endif -%}
             </div>
           </div>
+        </div>
+      </div>
+      <!-- END Row 1 -->
 
+      <!-- Row 2: benefits full width, outside __layout -->
       <ul class="cart-drawer-empty-upsell__benefits" role="list">
         {%- for i in (1..5) -%}
-        {%- assign icon_key = 'cart_drawer_upsell_line_' | append: i | append: '_icon' -%}
-        {%- assign text_key = 'cart_drawer_upsell_line_' | append: i | append: '_text' -%}
+          {%- assign icon_key = 'cart_drawer_upsell_line_' | append: i | append: '_icon' -%}
+          {%- assign text_key = 'cart_drawer_upsell_line_' | append: i | append: '_text' -%}
           {%- assign benefit_icon = section.settings[icon_key] -%}
           {%- assign benefit_text = section.settings[text_key] -%}
           {%- if benefit_text != blank -%}
@@ -155,56 +161,58 @@
           {%- endif -%}
         {%- endfor -%}
       </ul>
+      <!-- END Row 2 -->
 
-          <product-form-component
-            data-section-id="{{ section.id }}"
-            data-product-id="{{ upsell_product.id }}"
-            data-product-url="{{ upsell_product.url }}"
-            on:submit="/handleSubmit"
-            data-quantity-default="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
-            data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
-            class="cart-drawer-empty-upsell__form-wrap"
+      <!-- Row 3: Add to Cart button full width -->
+      <product-form-component
+        data-section-id="{{ section.id }}"
+        data-product-id="{{ upsell_product.id }}"
+        data-product-url="{{ upsell_product.url }}"
+        on:submit="/handleSubmit"
+        data-quantity-default="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
+        data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
+        class="cart-drawer-empty-upsell__form-wrap"
+      >
+        <div
+          class="visually-hidden"
+          aria-live="assertive"
+          role="status"
+          aria-atomic="true"
+          ref="liveRegion"
+        ></div>
+        {%- form 'product',
+          upsell_product,
+          id: product_form_id,
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          <input
+            type="hidden"
+            name="id"
+            ref="variantId"
+            value="{{ variant.id }}"
+            {% unless variant.available %}
+              disabled
+            {% endunless %}
           >
-            <div
-              class="visually-hidden"
-              aria-live="assertive"
-              role="status"
-              aria-atomic="true"
-              ref="liveRegion"
-            ></div>
-            {%- form 'product',
-              upsell_product,
-              id: product_form_id,
-              novalidate: 'novalidate',
-              data-type: 'add-to-cart-form'
-            -%}
-              <input
-                type="hidden"
-                name="id"
-                ref="variantId"
-                value="{{ variant.id }}"
-                {% unless variant.available %}
-                  disabled
-                {% endunless %}
-              >
-              <input
-                type="hidden"
-                name="quantity"
-                value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
-              >
-              {% render 'add-to-cart-button',
-                product: upsell_product,
-                can_add_to_cart: can_add_to_cart,
-                add_to_cart_text: btn_label,
-                class: 'button cart-drawer-empty-upsell__submit',
-                data_testid: 'cart-drawer-upsell-add',
-                show_variant_price: false,
-                show_shipping_blurb: false
-              %}
-            {%- endform -%}
-          </product-form-component>
-        </div>
-      </div>
+          <input
+            type="hidden"
+            name="quantity"
+            value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
+          >
+          {% render 'add-to-cart-button',
+            product: upsell_product,
+            can_add_to_cart: can_add_to_cart,
+            add_to_cart_text: btn_label,
+            class: 'button cart-drawer-empty-upsell__submit',
+            data_testid: 'cart-drawer-upsell-add',
+            show_variant_price: false,
+            show_shipping_blurb: false
+          %}
+        {%- endform -%}
+      </product-form-component>
+      <!-- END Row 3 -->
+
     </div>
   </div>
 {%- elsif request.design_mode and section != blank and section.settings.cart_drawer_upsell_enable != false -%}
@@ -244,9 +252,10 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+    container-type: inline-size;
+    container-name: drawer-upsell;
   }
 
-  /* Banner sits flush at top of drawer — no rounding above promo strip */
   .cart-drawer-empty-upsell:has(.cart-drawer-empty-upsell__banner) {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -266,6 +275,9 @@
 
   .cart-drawer-empty-upsell__body {
     padding: 1.25rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .cart-drawer-empty-upsell__layout {
@@ -295,14 +307,14 @@
 
   .cart-drawer-empty-upsell__header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--gap-md, 0.75rem);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    min-width: 0;
   }
 
   .cart-drawer-empty-upsell__copy {
     min-width: 0;
-    flex: 1;
   }
 
   .cart-drawer-empty-upsell__img {
@@ -331,12 +343,11 @@
 
   .cart-drawer-empty-upsell__prices {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    flex-shrink: 0;
-    gap: 0.125rem;
-    text-align: right;
-    min-width: 5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.5rem;
+    min-width: 0;
   }
 
   .cart-drawer-empty-upsell__price {
@@ -354,26 +365,24 @@
   }
 
   .cart-drawer-empty-upsell__unit {
+    flex-basis: 100%;
     font-family: var(--font-body--family, sans-serif);
     font-size: 0.6875rem;
     color: #777;
     margin-top: 0.125rem;
   }
 
+  /* Benefits now sits outside __layout so it's always full width */
   .cart-drawer-empty-upsell__benefits {
     list-style: none;
     margin: 0;
     padding: 0.75rem 0 0;
     border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--gap-sm, 0.5rem) var(--gap-md, 0.75rem);
-  }
-
-  @media screen and (max-width: 400px) {
-    .cart-drawer-empty-upsell__benefits {
-      grid-template-columns: 1fr;
-    }
   }
 
   .cart-drawer-empty-upsell__benefit {
@@ -381,20 +390,22 @@
     align-items: flex-start;
     gap: 0.375rem;
     margin: 0;
+    min-width: 0;
   }
 
   .cart-drawer-empty-upsell__benefit-icon {
     flex-shrink: 0;
-    width: 1.125rem;
-    height: 1.125rem;
     color: #1a1a1a;
-    margin-top: 0.1rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .cart-drawer-empty-upsell__benefit-icon svg {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 12px;
+    height: 12px;
+    align-items: center;
+    justify-content: center;
   }
 
   .cart-drawer-empty-upsell__benefit-text {
@@ -404,16 +415,17 @@
     color: #1a1a1a;
   }
 
+  /* Form wrap: full-width row, button intrinsic width (aligned with card copy) */
   .cart-drawer-empty-upsell__form-wrap {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    margin-top: 0.125rem;
   }
 
   .cart-drawer-empty-upsell__form-wrap .custom-add-to-cart-wrapper {
-    width: auto;
+    display: block;
+    width: fit-content;
     max-width: 100%;
   }
 
@@ -422,12 +434,18 @@
   }
 
   .cart-drawer-empty-upsell__form-wrap form {
-    width: auto;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
   }
 
   .cart-drawer-empty-upsell__submit {
-    width: auto;
+    width: fit-content;
     max-width: 100%;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 999px;
     padding: 0.75rem 2.5rem;
     background: linear-gradient(90deg, #6b4162 0%, #3d1a34 100%);
@@ -449,5 +467,17 @@
   .cart-drawer-empty-upsell__submit:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @container drawer-upsell (max-width: 31.25rem) {
+    .cart-drawer-empty-upsell__body {
+      padding: 1rem 1rem 1.25rem;
+      background-color: #FFF9F4;
+    }
+
+    /* Benefits already full-width, just confirm 2 cols on small containers */
+    .cart-drawer-empty-upsell__benefits {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
   }
 {% endstylesheet %}
