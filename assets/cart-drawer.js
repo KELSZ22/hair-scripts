@@ -12,9 +12,6 @@ import { isMobileBreakpoint } from '@theme/utilities';
  * @extends {DialogComponent}
  */
 class CartDrawerComponent extends DialogComponent {
-  /** @type {number} */
-  #summaryThreshold = 0.5;
-
   /** @type {AbortController | null} */
   #historyAbortController = null;
 
@@ -119,10 +116,7 @@ class CartDrawerComponent extends DialogComponent {
       return;
     }
 
-    const drawerHeight = dialog.getBoundingClientRect().height;
-    const summaryHeight = summary.getBoundingClientRect().height;
-    const ratio = summaryHeight / drawerHeight;
-    dialog.setAttribute('cart-summary-sticky', ratio > this.#summaryThreshold ? 'false' : 'true');
+    dialog.setAttribute('cart-summary-sticky', 'true');
   }
 }
 

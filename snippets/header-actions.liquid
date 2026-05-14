@@ -613,11 +613,33 @@
     flex-direction: column;
   }
 
+  .cart-drawer__dual-state {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .js-cart-drawer-filled:not([hidden]),
+  .js-cart-drawer-empty:not([hidden]) {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .js-cart-drawer-filled[hidden],
+  .js-cart-drawer-empty[hidden] {
+    display: none !important;
+  }
+
   .cart-drawer__empty-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
     min-height: 0;
+    height: 100%;
   }
 
   .cart-drawer__header {
@@ -692,13 +714,16 @@
   }
 
   .cart-drawer__content {
-    height: calc(100% - 65px);
     display: flex;
     flex-direction: column;
     padding: 0;
     background-color: var(--cd-cream);
-    flex-grow: 1;
-    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .cart-drawer__content:not(.cart-drawer__content--empty) {
+    overflow: hidden;
   }
 
   .cart-drawer__content--empty {
@@ -812,6 +837,7 @@
     padding: 20px 24px;
     overflow-y: auto;
     flex: 1;
+    min-height: 0;
 
     @media screen and (min-width: 750px) {
       padding: 24px 32px;
@@ -838,28 +864,19 @@
   .cart-drawer__summary {
     --cart-drawer-summary-padding: 20px;
 
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding: var(--cart-drawer-summary-padding) 24px 24px;
-    margin-top: auto;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     background-color: var(--cd-summary-bg);
     border-top: 1px solid rgba(44, 95, 92, 0.15);
 
     @media screen and (min-width: 750px) {
       padding: var(--cart-drawer-summary-padding) 32px 32px;
+      padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
     }
-  }
-
-  .cart-drawer__dialog[cart-summary-sticky='false'] .cart-drawer__summary {
-    position: static;
-  }
-
-  .cart-drawer__dialog[cart-summary-sticky='false'] .cart-drawer__items {
-    overflow: unset;
   }
 
   .cart-drawer__totals-row {
