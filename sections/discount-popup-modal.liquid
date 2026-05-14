@@ -1,0 +1,460 @@
+{% liquid
+  assign popup_enabled = section.settings.enable_popup
+  assign popup_delay = section.settings.popup_delay | times: 1000
+%}
+
+{% if popup_enabled %}
+  <div
+    id="discount-popup-{{ section.id }}"
+    class="discount-popup"
+    aria-hidden="true">
+    <div class="discount-popup__overlay"></div>
+
+    <div class="discount-popup__modal">
+      <button
+        class="discount-popup__close"
+        type="button"
+        aria-label="Close popup">
+        ×
+      </button>
+
+      <div class="discount-popup__grid">
+        <div class="discount-popup__image" style="
+            background-image: url('{{ section.settings.popup_image | image_url: width: 1200 }}');
+          ">
+</div>
+
+        <div class="discount-popup__content">
+          <div class="discount-popup__content-inner">
+            <div>
+              {% if section.settings.heading != blank %}
+                <h2 class="discount-popup__heading">
+                  {{ section.settings.heading }}
+                </h2>
+              {% endif %}
+
+              {% if section.settings.description != blank %}
+                <div class="discount-popup__description">
+                  {{ section.settings.description }}
+                </div>
+              {% endif %}
+            </div>
+
+            {% form 'customer'
+              , class: 'discount-popup__form' %}
+              {% if section.settings.success_redirect != blank %}
+                <input
+                  type="hidden"
+                  name="return_to"
+                  value="{{ section.settings.success_redirect | escape }}">
+              {% endif %}
+              <input
+                type="hidden"
+                name="contact[tags]"
+                value="newsletter">
+
+              <div class="discount-popup__input-group">
+                <input
+                  type="email"
+                  name="contact[email]"
+                  class="discount-popup__input"
+                  placeholder="{{ section.settings.placeholder }}"
+                  required>
+
+                <button type="submit" class="discount-popup__button">
+                  {{ section.settings.button_text }}
+                </button>
+              </div>
+
+              {% if form.posted_successfully? %}
+                <p class="discount-popup__success">
+                  Thank you for subscribing ✨
+                </p>
+              {% endif %}
+
+              {% if form.errors %}
+                <div class="discount-popup__errors">
+                  {{ form.errors | default_errors }}
+                </div>
+              {% endif %}
+            {% endform %}
+
+            {% if section.settings.footer_text != blank %}
+              <p class="discount-popup__footer">
+                {{ section.settings.footer_text }}
+              </p>
+            {% endif %}
+          </div>
+
+          {% if section.settings.bottom_text != blank %}
+            <div class="discount-popup__bottom">
+              {{ section.settings.bottom_text }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .discount-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .discount-popup.active {
+      display: flex;
+    }
+
+    .discount-popup__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(3px);
+    }
+
+    .discount-popup__modal {
+      position: relative;
+      width: 100%;
+      max-width: 980px;
+      background: {{ section.settings.modal_bg }};
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 2;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      animation: popupFade 0.35s ease;
+    }
+
+    .discount-popup__grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      min-height: 560px;
+    }
+
+    .discount-popup__image {
+      background-size: cover;
+      background-position: center;
+      min-height: 300px;
+    }
+
+    .discount-popup__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 42px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .discount-popup__close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: transparent;
+      border: none;
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+      color: #222;
+      z-index: 5;
+    }
+
+    .discount-popup__heading {
+      font-family: "Cormorant Garamond";
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-transform: uppercase;
+      color: #211B18;
+      margin-bottom: 10px;
+    }
+
+    .discount-popup__description {
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      color: #6B6B6B;
+    }
+
+    .discount-popup__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Scoped + compound selectors: beat base.css `input:not([type=checkbox], …)` and `input:hover` */
+    .discount-popup .discount-popup__input {
+      height: 58px;
+      border-radius: 999px;
+      border: 1px solid #CDCDCD;
+      padding: 0 24px;
+      font-size: 16px;
+      outline: none;
+      width: 100%;
+      background-color: transparent;
+      background-image: none;
+    }
+
+    .discount-popup .discount-popup__input:hover,
+    .discount-popup .discount-popup__input:focus,
+    .discount-popup .discount-popup__input:focus-visible {
+      background-color: transparent;
+      background-image: none;
+    }
+
+    .discount-popup .discount-popup__input:-webkit-autofill,
+    .discount-popup .discount-popup__input:-webkit-autofill:hover,
+    .discount-popup .discount-popup__input:-webkit-autofill:focus {
+      -webkit-text-fill-color: inherit;
+      transition: background-color 99999s ease-out 0s;
+      box-shadow: 0 0 0 1000px transparent inset;
+    }
+
+    .discount-popup__button {
+      height: 58px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(90deg, {{ section.settings.button_gradient_1 }}, {{ section.settings.button_gradient_2 }});
+      transition: transform 0.2s ease;
+    }
+
+    .discount-popup__button:hover {
+      transform: translateY(-2px);
+    }
+
+    .discount-popup__footer {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      color: #9F9F9F;
+      margin-top: 0;
+    }
+
+    .discount-popup__bottom {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      color: #9F9F9F;
+      margin-top: 51px;
+    }
+
+    .discount-popup__success {
+      margin-top: 12px;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .discount-popup__errors {
+      margin-top: 12px;
+      color: #d32f2f;
+    }
+
+    .discount-popup__input-group {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .discount-popup__content-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    @keyframes popupFade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .discount-popup__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .discount-popup__content {
+        order: 1;
+        padding: 60px 24px 30px;
+      }
+
+      .discount-popup__image {
+        order: 2;
+      }
+
+      .discount-popup__heading {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .discount-popup__description {
+        font-size: 14px;
+      }
+
+      .discount-popup__content-inner {
+        align-items: stretch;
+      }
+
+      .discount-popup__form {
+        width: 100%;
+      }
+
+      .discount-popup__button {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .discount-popup__modal {
+        max-height: 100vh;
+        overflow-y: auto;
+      }
+    }
+  </style>
+
+  <script>
+    (() => {
+      const popup = document.getElementById('discount-popup-{{ section.id }}');
+
+      if (!popup) return;
+
+      const closeBtn = popup.querySelector('.discount-popup__close');
+      const overlay = popup.querySelector('.discount-popup__overlay');
+
+      const delayMs = {{ popup_delay }};
+      const showPopup = () => {
+        popup.classList.add('active');
+        popup.setAttribute('aria-hidden', 'false');
+      };
+      if (delayMs <= 0) {
+        requestAnimationFrame(showPopup);
+      } else {
+        setTimeout(showPopup, delayMs);
+      }
+
+      const closePopup = () => {
+        popup.classList.remove('active');
+        popup.setAttribute('aria-hidden', 'true');
+      };
+
+      closeBtn.addEventListener('click', closePopup);
+      overlay.addEventListener('click', closePopup);
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Discount Popup Modal",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_popup",
+        "label": "Enable Popup",
+        "default": true,
+        "info": "When enabled, the popup runs on every page load. Closing it only hides it until the visitor opens another page or refreshes."
+      },
+      {
+        "type": "range",
+        "id": "popup_delay",
+        "label": "Popup delay (seconds)",
+        "info": "Set to 0 to show as soon as the page is ready (first frame after this section loads).",
+        "min": 0,
+        "max": 15,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "image_picker",
+        "id": "popup_image",
+        "label": "Popup Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "UNLOCK 10% OFF YOUR FIRST ORDER"
+      }, {
+        "type": "richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "<p>Start your journey to stronger, fuller-looking hair—plus get exclusive tips and early access.</p>"
+      }, {
+        "type": "text",
+        "id": "placeholder",
+        "label": "Input Placeholder",
+        "default": "Enter your email address here"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Get My 10% Off"
+      }, {
+        "type": "url",
+        "id": "success_redirect",
+        "label": "Redirect after signup",
+        "info": "Optional. After a successful email signup, visitors are sent to this URL. Leave empty to stay on the current page and show the thank-you message in the popup."
+      }, {
+        "type": "textarea",
+        "id": "footer_text",
+        "label": "Footer Text",
+        "default": "We respect your inbox. You may unsubscribe at any time."
+      }, {
+        "type": "textarea",
+        "id": "bottom_text",
+        "label": "Bottom Text",
+        "default": "FREE SHIPPING | 90-Day Results Commitment | Cancel Anytime"
+      }, {
+        "type": "color",
+        "id": "modal_bg",
+        "label": "Modal Background",
+        "default": "#f8f6f3"
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color",
+        "default": "#2d2926"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#666666"
+      }, {
+        "type": "color",
+        "id": "button_gradient_1",
+        "label": "Button Gradient Start",
+        "default": "#8a4d7b"
+      }, {
+        "type": "color",
+        "id": "button_gradient_2",
+        "label": "Button Gradient End",
+        "default": "#4b003b"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Discount Popup Modal"
+      }
+    ]
+  }
+{% endschema %}
