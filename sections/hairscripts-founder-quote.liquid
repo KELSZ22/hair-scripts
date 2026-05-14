@@ -323,7 +323,14 @@
     line-height: normal;
     margin: 0px;
   }
-
+  @media screen and (max-width: 1440px) {
+    #section-{{ section.id }} .founder-quote-content-column {
+    width: 40%;
+}
+    #section-{{ section.id }} .founder-quote-media-column {
+    width: 60%;
+}
+  }
   @media screen and (max-width: 1199px) {
     #section-{{ section.id }} .founder-quote-media-column,
     #section-{{ section.id }} .founder-quote-content-column {

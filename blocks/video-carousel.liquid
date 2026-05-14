@@ -1,6 +1,5 @@
 <div
   class="video-carousel-block"
-  data-fallback-video-url="{{ block.settings.fallback_video_url | escape }}"
   {{ block.shopify_attributes }}
 >
   {% if block.settings.heading != blank or block.settings.subheading != blank %}
@@ -258,8 +257,8 @@
       }
     }
 
-    function getValidVideoUrlFromElement(element, fallbackUrl) {
-      if (!element) return fallbackUrl || '';
+    function getValidVideoUrlFromElement(element) {
+      if (!element) return '';
 
       const dataUrl = element.getAttribute('data-video-url');
       const href = element.getAttribute('href');
@@ -277,17 +276,27 @@
         if (innerHref && innerHref !== '#') return innerHref;
       }
 
-      return fallbackUrl || '';
+      return '';
     }
 
-    function prepareVideoLinks(track, fallbackUrl) {
+    function prepareVideoLinks(track) {
       const links = track.querySelectorAll('a[href], [data-video-url]');
       const cards = track.querySelectorAll('.video-carousel-block__card, .video-carousel-block__link');
 
       links.forEach((link) => {
-        const videoUrl = getValidVideoUrlFromElement(link, fallbackUrl);
+        const videoUrl = getValidVideoUrlFromElement(link);
 
-        if (!videoUrl || videoUrl === '#') return;
+        link.classList.remove('video-carousel-block__modal-trigger');
+
+        if (!videoUrl || videoUrl === '#') {
+          link.removeAttribute('data-video-url');
+
+          if (link.tagName.toLowerCase() === 'a' && link.getAttribute('href') === '#') {
+            link.removeAttribute('role');
+          }
+
+          return;
+        }
 
         link.setAttribute('data-video-url', videoUrl);
         link.classList.add('video-carousel-block__modal-trigger');
@@ -301,9 +310,16 @@
       });
 
       cards.forEach((card) => {
-        const videoUrl = getValidVideoUrlFromElement(card, fallbackUrl);
+        const videoUrl = getValidVideoUrlFromElement(card);
 
-        if (!videoUrl || videoUrl === '#') return;
+        card.classList.remove('video-carousel-block__modal-trigger');
+
+        if (!videoUrl || videoUrl === '#') {
+          card.removeAttribute('data-video-url');
+          card.removeAttribute('role');
+          card.removeAttribute('tabindex');
+          return;
+        }
 
         card.setAttribute('data-video-url', videoUrl);
         card.classList.add('video-carousel-block__modal-trigger');
@@ -323,12 +339,11 @@
       const track = carousel.querySelector('.video-carousel-block__track');
       if (!track || !track.contains(event.target)) return;
 
-      const fallbackUrl = carousel.getAttribute('data-fallback-video-url') || '';
       const clickedItem = event.target.closest('[data-video-url], a[href], button, .video-carousel-block__card, .video-carousel-block__link');
 
       if (!clickedItem || !track.contains(clickedItem)) return;
 
-      const videoUrl = getValidVideoUrlFromElement(clickedItem, fallbackUrl);
+      const videoUrl = getValidVideoUrlFromElement(clickedItem);
 
       if (!videoUrl || videoUrl === '#') return;
 
@@ -353,8 +368,7 @@
       const track = carousel.querySelector('.video-carousel-block__track');
       if (!track || !track.contains(event.target)) return;
 
-      const fallbackUrl = carousel.getAttribute('data-fallback-video-url') || '';
-      const videoUrl = getValidVideoUrlFromElement(event.target, fallbackUrl);
+      const videoUrl = getValidVideoUrlFromElement(event.target);
 
       if (!videoUrl || videoUrl === '#') return;
 
@@ -383,8 +397,6 @@
       let touchResetTimer = null;
 
       const speed = 32;
-
-      const getFallbackUrl = () => carousel.getAttribute('data-fallback-video-url') || '';
 
       const updateCarouselWidth = () => {
         const rect = carousel.getBoundingClientRect();
@@ -427,7 +439,7 @@
       const cloneCards = () => {
         removeOldClones();
 
-        prepareVideoLinks(track, getFallbackUrl());
+        prepareVideoLinks(track);
 
         originalCards = Array.from(
           track.querySelectorAll('.video-carousel-block__card:not([data-video-carousel-clone="true"])')
@@ -456,7 +468,7 @@
           safetyCount += 1;
         }
 
-        prepareVideoLinks(track, getFallbackUrl());
+        prepareVideoLinks(track);
 
         if (loopWidth <= 0) {
           loopWidth = track.scrollWidth / 2;
@@ -785,7 +797,6 @@
       box-shadow 0.28s ease;
   }
 
-  .video-carousel-block__link::after,
   .video-carousel-block__modal-trigger::after {
     content: "";
     position: absolute;
@@ -808,7 +819,7 @@
     box-shadow: 0 10px 24px rgba(33, 27, 24, 0.14);
   }
 
-  .video-carousel-block__link:hover::after {
+  .video-carousel-block__modal-trigger:hover::after {
     transform: translate(-50%, -50%) scale(1.08);
   }
 
@@ -990,7 +1001,6 @@
       height: 205px;
     }
 
-    .video-carousel-block__link::after,
     .video-carousel-block__modal-trigger::after {
       width: 39px;
       height: 39px;
@@ -1001,7 +1011,7 @@
       box-shadow: none;
     }
 
-    .video-carousel-block__link:hover::after {
+    .video-carousel-block__modal-trigger:hover::after {
       transform: translate(-50%, -50%);
     }
 
@@ -1036,7 +1046,6 @@
       transition: none !important;
     }
 
-    .video-carousel-block__link::after,
     .video-carousel-block__modal-trigger::after {
       transform: translate(-50%, -50%) !important;
     }
@@ -1067,12 +1076,6 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next."
-    },
-    {
-      "type": "text",
-      "id": "fallback_video_url",
-      "label": "Fallback video URL",
-      "default": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn"
     }
   ],
   "presets": [

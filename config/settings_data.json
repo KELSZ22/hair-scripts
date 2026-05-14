@@ -80,6 +80,27 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
+    "sections": {
+      "discount-popup-modal": {
+        "type": "discount-popup-modal",
+        "settings": {
+          "enable_popup": true,
+          "popup_delay": 0,
+          "popup_image": "shopify://shop_images/popup-image.png",
+          "heading": "UNLOCK 10% OFF YOUR FIRST ORDER",
+          "description": "<p>Start your journey to stronger, fuller-looking hair—plus get exclusive tips and early access.</p>",
+          "placeholder": "Enter your email address here",
+          "button_text": "Get My 10% Off",
+          "footer_text": "We respect your inbox. You may unsubscribe at any time.",
+          "bottom_text": "FREE SHIPPING | 90-Day Results Commitment | Cancel Anytime",
+          "modal_bg": "#f8f6f3",
+          "heading_color": "#2d2926",
+          "text_color": "#666666",
+          "button_gradient_1": "#8a4d7b",
+          "button_gradient_2": "#4b003b"
+        }
+      }
+    },
     "content_for_index": [],
     "blocks": {
       "6478312753674380289": {

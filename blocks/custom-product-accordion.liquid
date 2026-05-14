@@ -1,49 +1,12 @@
 {% liquid
   assign accordion_product = closest.product
-  assign mf_description = blank
-  assign mf_key_benefits = blank
-  assign mf_ingredients = blank
-  if accordion_product != blank
-    assign mf_description = accordion_product.metafields.custom.description
-    assign mf_key_benefits = accordion_product.metafields.custom.key_benefits
-    assign mf_ingredients = accordion_product.metafields.custom.ingredients
-  endif
-  assign mf_rows = false
-  if mf_description != blank or mf_key_benefits != blank or mf_ingredients != blank
-    assign mf_rows = true
-  endif
-
-  assign heading_description = block.settings.heading_description | default: 'Description'
-  assign heading_key_benefits = block.settings.heading_key_benefits | default: 'Key benefits'
-  assign heading_ingredients = block.settings.heading_ingredients | default: 'Ingredients'
 %}
 
 <div
   class="custom-product-accordion"
   {{ block.shopify_attributes }}
 >
-  {% if mf_rows %}
-    {% if mf_description != blank %}
-      {% render 'custom-product-accordion-item',
-        heading: heading_description,
-        metafield: mf_description
-      %}
-    {% endif %}
-    {% if mf_key_benefits != blank %}
-      {% render 'custom-product-accordion-item',
-        heading: heading_key_benefits,
-        metafield: mf_key_benefits
-      %}
-    {% endif %}
-    {% if mf_ingredients != blank %}
-      {% render 'custom-product-accordion-item',
-        heading: heading_ingredients,
-        metafield: mf_ingredients
-      %}
-    {% endif %}
-  {% else %}
-    {% content_for 'blocks' %}
-  {% endif %}
+  {% content_for 'blocks' %}
 </div>
 
 <script>
@@ -132,11 +95,6 @@
     align-self: stretch;
   }
 
-  /*
-    Product details uses a column flex (.layout-panel-flex--column) with align-items from theme
-    settings (often flex-start). Shopify wraps each block in a div that then shrinks to content
-    width. Stretch that wrapper on desktop so the accordion row/summary span the full column.
-  */
   @media screen and (min-width: 750px) {
     .product-details .group-block-content.layout-panel-flex--column > *:has(> .custom-product-accordion) {
       align-self: stretch;
@@ -250,29 +208,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "When the product has any of the metafields custom.description, custom.key_benefits, or custom.ingredients, those rows are shown automatically. Otherwise, accordion rows configured below are used."
-    },
-    {
-      "type": "header",
-      "content": "Metafield row headings"
-    },
-    {
-      "type": "text",
-      "id": "heading_description",
-      "label": "Description heading",
-      "default": "Description"
-    },
-    {
-      "type": "text",
-      "id": "heading_key_benefits",
-      "label": "Key benefits heading",
-      "default": "Key benefits"
-    },
-    {
-      "type": "text",
-      "id": "heading_ingredients",
-      "label": "Ingredients heading",
-      "default": "Ingredients"
+      "content": "Only accordion rows added in the Shopify editor will be shown."
     }
   ],
   "presets": [

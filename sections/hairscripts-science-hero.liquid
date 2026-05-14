@@ -377,10 +377,7 @@
       padding: 60px 15px 0;
     }
 
-    #hs-science-hero-{{ section.id }} .hs-science-hero__heading {
-      width: 100%;
-      font-size: 24px;
-    }
+
 
     #hs-science-hero-{{ section.id }} .hs-science-hero__text {
       width: 100%;
@@ -422,6 +419,13 @@
 
     #hs-science-hero-{{ section.id }} .hs-science-hero__image {
       width: min(390px, 120vw);
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+        #hs-science-hero-{{ section.id }} .hs-science-hero__heading {
+      width: 100%;
+      font-size: 26px;
     }
   }
 

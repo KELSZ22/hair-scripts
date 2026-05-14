@@ -180,7 +180,7 @@
         "description": "If nothing has worked, it’s because most products only target one cause of hair loss. HairScripts™ targets all 9 major biological causes of thinning including stress signaling, androgen activity, inflammation, circulation, nutrient depletion, and follicle miniaturization.",
         "button_label": "Stop My Hair From Thinning Now",
         "button_link": "#",
-        "button_label_2": "Find My Hair Plan - Free Quiz",
+        "button_label_2": "",
         "button_link_2": "#",
         "creator_text": "Created by Bevy."
       }
@@ -1059,7 +1059,7 @@
       "settings": {
         "show_stars": true,
         "heading": "RESULTS WOMEN ARE TALKING ABOUT",
-        "subheading": "Women navigating postpartum shedding, hormonal thinning, and stress-related loss  sharing what actually happened. <br><br>Thousands in the community. Here’s what they’re saying.",
+        "subheading": "Women navigating postpartum shedding, hormonal thinning, and stress-related loss  sharing what actually happened. Thousands in the community. Here’s what they’re saying.",
         "button_label": "View All Reviews",
         "button_link": ""
       }
@@ -1067,18 +1067,7 @@
     "hair_assessment_banner_ajTAyL": {
       "type": "hair-assessment-banner",
       "name": "Hair assessment banner",
-      "settings": {
-        "background_image": "shopify://shop_images/Frame_1000009479_2.png",
-        "background_image_1024": "shopify://shop_images/Frame_1000009401_2.png",
-        "background_image_450": "shopify://shop_images/Frame_1000009400.png",
-        "badge_text": "FREE • TAKES 2 MINUTES",
-        "heading": "Not sure what's causing your hair thinning? Let's find out.",
-        "subheading": "In 10 questions, get a biological breakdown tailored to your life stage, hormonal pattern, and hair type so you know exactly what's working against your follicles and what to do about it.",
-        "button_label": "Stop My Hair From Thinning Now",
-        "button_link": "#",
-        "button_label2": "Take the Free Hair Assessment",
-        "button_link2": ""
-      }
+      "settings": {}
     }
   },
   "order": [
