@@ -61,6 +61,7 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "mobile_menu": "menu-mobile",
             "color_scheme": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
@@ -82,8 +83,8 @@
       "settings": {
         "logo_position": "center",
         "menu_position": "left",
-        "menu_text": "TAKE THE HAIR QUIZ",
-        "new-menu-url": "#",
+        "quiz_button_text": "",
+        "quiz_button_url": "",
         "menu_row": "top",
         "customer_account_menu": "customer-account-main-menu",
         "show_search": true,

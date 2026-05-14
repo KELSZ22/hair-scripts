@@ -1,5 +1,3 @@
-
-
 {% liquid
   assign order = 'logo,menu,localization,search,drawer_search,actions'
 
@@ -72,7 +70,6 @@
     assign search_class = 'search-action--hidden-on-drawer'
   endif
 
-  # Handle localization positioning
   if section.settings.localization_position == 'left'
     if section.settings.search_position == 'left'
       if shop.customer_accounts_enabled
@@ -96,20 +93,17 @@
       endif
     endif
   endif
+
   capture search
     render 'search', style: search_style, class: search_class, display_style: section.settings.actions_display_style
   endcapture
 
-  # Skip drawer search under specific conditions:
-  # Always render if search_row is bottom
-  # Don't render when shop.customer_accounts_enabled is false and search_position is left and search_style is not none
   assign skip_drawer_search = false
   if shop.customer_accounts_enabled == false and section.settings.search_position == 'left' and search_style != 'none'
     assign skip_drawer_search = true
   endif
 
   if section.settings.search_row == 'bottom' or search_style != 'none' and skip_drawer_search == false
-    # Mobile search duplicate for when search is not in the right order for mobile layout
     capture drawer_search
       render 'search', class: 'search-action--hidden-on-menu', style: search_style, display_style: section.settings.actions_display_style
     endcapture
@@ -167,7 +161,6 @@
     assign class = class | append: ' ' | append: collapse_header_paddings_class
   endif
 
-  # Determine transparent background value
   assign top_transparent = false
   assign bottom_transparent = false
 
@@ -195,6 +188,7 @@
     assign color_shadow = '--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));'
     assign form_style = localization_font | append: localization_font_size | append: color_shadow
   %}
+
   {% if show_language and show_country == false %}
     <div class="dropdown-localization mobile:hidden">
       {% render 'localization-form',
@@ -209,9 +203,18 @@
     <dropdown-localization-component
       class="dropdown-localization mobile:hidden"
     >
-      <a href="#" role="link" aria-disabled="true" class="header hs-science-hero__button hs-science-hero__button--secondary">
-              TAKE THE HAIR QUIZ
-            </a>
+      {% if section.settings.quiz_button_text != blank %}
+      <a
+        href="{% if section.settings.quiz_button_url != blank %}{{ section.settings.quiz_button_url }}{% else %}#{% endif %}"
+        class="header hs-science-hero__button hs-science-hero__button--secondary"
+        {% if section.settings.quiz_button_url == blank %}
+          role="link"
+          aria-disabled="true"
+        {% endif %}
+      >
+        {{ section.settings.quiz_button_text }}
+      </a>
+    {% endif %}
       {% comment %}
       <button
         type="button"
@@ -270,7 +273,8 @@
           {{- 'icon-caret.svg' | inline_asset_content -}}
         </span>
       </button>
-{% endcomment %}
+      {% endcomment %}
+
       <div
         class="localization-wrapper {{ section.settings.localization_position }}-bound color-{{ settings.popover_color_scheme }}"
         hidden
@@ -319,7 +323,6 @@
     data-transparent-color-scheme="{{ transparent_color_scheme_value }}"
   {% endif %}
   style="
-   
     {% if section.settings.actions_display_style == 'text' %}
       --header-actions-font-size: {{ section.settings.actions_font_size | default: '1rem' }};
       --header-actions-font-family: var(--font-{{ section.settings.actions_font | default: 'heading' }}--family);
@@ -329,12 +332,12 @@
   "
 >
   <div class="header__underlay header__underlay-closed"></div>
-  <div
-    class="header__underlay header__underlay-open"
-  ></div>
+  <div class="header__underlay header__underlay-open"></div>
+
   {%- if request.page_type == 'index' -%}
     <h1 class="visually-hidden">{{ shop.name }}</h1>
   {%- endif -%}
+
   {% for row in rows %}
     {% liquid
       assign scheme = 'color_scheme_' | append: row
@@ -383,6 +386,7 @@
     {% endcapture %}
 
     {% assign content = content | strip %}
+
     {% if content != blank %}
       <div
         class="{{ class | strip }}"
@@ -411,8 +415,8 @@
 ></script>
 
 {% stylesheet %}
-a.header.hs-science-hero__button.hs-science-hero__button--secondary{
-      display: inline-flex;
+  a.header.hs-science-hero__button.hs-science-hero__button--secondary {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 42px;
@@ -420,46 +424,53 @@ a.header.hs-science-hero__button.hs-science-hero__button--secondary{
     border-radius: 999px;
     text-decoration: none;
     font-family: "DM Sans";
-    font-size: 14px; 
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 1;
     transition: opacity 0.2s ease, transform 0.2s ease;
-        border: 1px solid rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.45);
     color: #FFFFFF;
+  }
 
-}
-overflow-list.overflow-menu.color-scheme-matches-parent span.menu-list__link-title {
+  overflow-list.overflow-menu.color-scheme-matches-parent span.menu-list__link-title {
     text-transform: uppercase;
-}
-span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-button__icon {
+  }
+
+  span.currency-code,
+  span.svg-wrapper.icon-caret,
+  span.svg-wrapper,
+  svg.account-button__icon {
     color: #fff;
-}
-#header-component[data-sticky-state="active"] span.currency-code, #header-component[data-sticky-state="active"] span.svg-wrapper.icon-caret, #header-component[data-sticky-state="active"] span.svg-wrapper, #header-component[data-sticky-state="active"] svg.account-button__icon {
+  }
+
+  #header-component[data-sticky-state="active"] span.currency-code,
+  #header-component[data-sticky-state="active"] span.svg-wrapper.icon-caret,
+  #header-component[data-sticky-state="active"] span.svg-wrapper,
+  #header-component[data-sticky-state="active"] svg.account-button__icon {
     color: #000;
-}
+  }
 
   #header-component[data-sticky-state="active"] {
     background: white;
-}
-  .header__row.header__row--top.color-scheme-1.section.section--full-width-margin.section--page-width{
+  }
+
+  .header__row.header__row--top.color-scheme-1.section.section--full-width-margin.section--page-width {
     display: flex;
   }
+
   .header__columns.spacing-style {
     width: 100%;
     padding: 9px 10px;
-}
-
+  }
 
   body {
     --header-height: 60px;
     --header-group-height: var(--header-height);
-    --transparent-header-offset-boolean: 0; /* stylelint-disable-line declaration-property-value-disallowed-list */
+    --transparent-header-offset-boolean: 0;
   }
 
-
   .header {
-    /* Set header paddings based on height setting */
     --header-padding: var(--padding-sm);
     --font-paragraph--line-height: 1;
     --header-content-transition-timing: 0s;
@@ -472,7 +483,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     .button,
     .button-secondary,
     .header-actions__action {
-      /* reset style from base.css */
       transition: color var(--header-content-transition-timing), border-color var(--header-content-transition-timing);
     }
   }
@@ -504,8 +514,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       var(--animation-speed-fast) var(--ease-out-cubic);
 
     --closed-underlay-height: 0px;
-
-    /* used to display the appropriate logo based on transparency state */
     --header-logo-display: none;
     --header-logo-inverse-display: block;
 
@@ -529,7 +537,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       --closed-underlay-height: 100%;
     }
 
-    /** For transparent header, apply inherit to rows when menu is not hovered */
     &:not([data-sticky-state='active']):not(:has(.menu-list__link:is(:hover, [aria-expanded='true']))) .header__row {
       --color-foreground: inherit;
       --color-foreground-rgb: inherit;
@@ -539,7 +546,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       --color-primary-button-text: inherit;
     }
 
-    /* Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
     &:has(.mega-menu__list:hover),
     &:has(.menu-list__link:is(:hover, [aria-expanded='true'])),
     &:has(.menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'])) {
@@ -555,7 +561,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* When top row has transparent background, make it inherit colors from header component */
   [data-transparent-color-scheme='top']:hover .header__row--top,
   [data-transparent-color-scheme='top']:focus-within .header__row--top,
   [data-transparent-color-scheme='both']:hover .header__row--top,
@@ -568,7 +573,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     --color-primary-button-text: inherit;
   }
 
-  /* When bottom row has transparent background, make it inherit colors from header component */
   [data-transparent-color-scheme='bottom']:hover .header__row--bottom,
   [data-transparent-color-scheme='bottom']:focus-within .header__row--bottom,
   [data-transparent-color-scheme='both']:hover .header__row--bottom,
@@ -586,7 +590,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     z-index: var(--layer-heightened);
   }
 
-  /* need default values for non-flash transitions on first overflow menu open */
   #header-component {
     --submenu-height: 0px;
     --full-open-header-height: 0px;
@@ -599,8 +602,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
   .header-section:has(> #header-component[sticky='always']),
   .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
     position: sticky;
-
-    /* Use -1 instead of 0 so intersection observer can track sticky state */
     top: -1px;
     z-index: var(--layer-sticky);
   }
@@ -624,9 +625,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     opacity: 0;
   }
 
-  /* ================================
-     * Underlays
-     * ================================ */
   .header__underlay {
     position: absolute;
     inset: 0;
@@ -649,7 +647,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       var(--color-scheme-bottom-row) var(--top-row-height) var(--header-height),
       var(--color-submenu) var(--header-height) 100%
     );
-    /* header-height is updated via js, the transition works automagically */
     transition: height var(--submenu-animation-speed) var(--ease-out-cubic);
   }
 
@@ -658,11 +655,10 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     position: absolute;
     inset: 0;
     box-shadow: var(--shadow-popover);
-    clip-path: inset(var(--header-height) 0 -100px 0); /* stylelint-disable-line */
+    clip-path: inset(var(--header-height) 0 -100px 0);
     transition: height var(--submenu-animation-speed) var(--ease-out-cubic);
   }
 
-  /* When top row has transparent background, make underlay inherit colors from header component */
   [data-transparent-color-scheme='top']:hover,
   [data-transparent-color-scheme='top']:focus-within,
   [data-transparent-color-scheme='both']:hover,
@@ -672,7 +668,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* When bottom row has transparent background, make underlay inherit colors from header component */
   [data-transparent-color-scheme='bottom']:hover,
   [data-transparent-color-scheme='bottom']:focus-within,
   [data-transparent-color-scheme='both']:hover,
@@ -695,21 +690,15 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* End Underlays ================ */
-
   .header__row {
-    /* The account component uses a different color scheme, but we need to override it to inherit the color of the header row */
     --color-account-icon: var(--color-foreground);
 
     position: relative;
-
-    /* Overwrite color from color scheme, background is controlled by the underlays */
     background-color: transparent;
 
     &:has(.mega-menu__list:hover),
     &:has(.menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'])),
     &:has(.menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'])) {
-      /* Only elevate the row when the submenu is open to avoid overlapping other elevated content */
       z-index: var(--layer-heightened);
     }
   }
@@ -745,7 +734,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     display: flex;
     align-items: center;
 
-    /* on mobile, header__column nodes are ignored to create a new grid-template-area based on all visible content */
     @media screen and (max-width: 749px) {
       display: contents;
     }
@@ -777,13 +765,11 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
   }
 
   .header__columns {
-    /* Three column layout */
     --header-left: 1fr;
     --header-center: auto;
     --header-right: 1fr;
     --header-template-columns: var(--header-left) var(--header-center) var(--header-right);
 
-    /* Mobile layout */
     --header-mobile-bookend: 44px;
 
     display: grid;
@@ -791,28 +777,23 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     grid-gap: var(--gap-xl);
     grid-template-columns: var(--header-template-columns);
 
-    /* If menu is in center column */
     &:has(.header__column--center header-menu) {
       --header-center: auto;
       --header-left: minmax(max-content, 1fr);
       --header-right: minmax(max-content, 1fr);
     }
 
-    /* If there is no center column, make the column the menu is in grow eagerly */
     &:where(:not(:has(.header__column--center))) {
       @media screen and (min-width: 750px) {
         --header-template-columns: var(--header-left) var(--header-right);
-
         grid-template-areas: 'left right';
       }
 
-      /* If the header-menu is in the right column */
       &:has(.header__column--right header-menu) {
         --header-right: auto;
         --header-left: minmax(max-content, 1fr);
       }
 
-      /* If the header-menu is in the left column */
       &:has(.header__column--left header-menu) {
         --header-left: auto;
         --header-right: minmax(max-content, 1fr);
@@ -852,8 +833,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* not ideal but we need to duplicate these styles for when touch comes into play
-    We could avoid the duplication using js to set the data-menu-style attribute on small screens instead of using @media queries */
   #header-component[data-menu-style='drawer'] .header__columns {
     --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
       var(--header-mobile-bookend) var(--header-mobile-bookend);
@@ -886,15 +865,11 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* Single column layout if there are no columns within */
   .header__columns:not(:has(.header__column)) {
     grid-template-columns: 1fr;
   }
 
-  /* Check for hover support to avoid unnecessary expensive recalculations when tapping on mobile */
   @media (hover: hover) {
-    /* Column-specific dimming effect when any interactive element is hovered
-        Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
     .header__column:has(header-menu:hover),
     .header__column:has(.header-actions__action:hover),
     .header__column:has(.header__icon--menu:hover) {
@@ -907,14 +882,12 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* Ensure smooth transitions for all interactive elements */
   header-menu,
   .header-actions__action,
   .header__icon--menu {
     transition: opacity var(--animation-speed) var(--animation-easing);
   }
 
-  /* Header action button styles */
   .header-actions__action {
     --button-color: var(--color-foreground);
     color: var(--button-color);
@@ -964,46 +937,36 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   }
 
-  /* When the header is transparent, add a margin to a potential header-section below it */
   .header-section:has(.header[transparent]) + .shopify-section {
     margin-top: var(--header-height);
   }
-
-  /* When the header is transparent, and when there is no header-section below it, offset the first main-section with
-     * the height of the header
-     */
 
   main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     &.spacing-style,
     .spacing-style {
       --section-top-offset: calc(var(--header-height) * var(--transparent-header-offset-boolean));
 
-      /* Any nested sections should not be offset */
       :is(.spacing-style, .inherit-spacing) {
         --section-top-offset: 0px;
       }
     }
 
-    /* Make sticky content immediately stick to the top of the page */
     .sticky-content {
       margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
     }
   }
 
-  /* Optimize layout performance for hidden menus */
   .header-menu .menu-list__submenu {
     content-visibility: auto;
     contain-intrinsic-size: 0px 500px;
   }
 
-  /* Force visibility when open/animating and in overflow submenu to prevent layout issues */
   .header-menu details[open] .menu-list__submenu,
   .header-menu .menu-list__submenu[data-active],
   .header-menu .menu-list__list-item[slot='overflow'] .menu-list__submenu {
     content-visibility: visible;
   }
 
-  /* Dropdown Localization Styles */
   .dropdown-localization__button {
     display: flex;
     position: relative;
@@ -1028,7 +991,7 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
   .dropdown-localization__button .icon-flag {
     width: var(--menu-localization-font-size, var(--icon-size-sm));
     height: var(--menu-localization-font-size, var(--icon-size-sm));
-    clip-path: circle(50%); /* stylelint-disable-line */
+    clip-path: circle(50%);
     background-position: center;
     background-size: cover;
     margin-inline-end: 4px;
@@ -1120,7 +1083,6 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     right: unset;
   }
 
-  /* Additional specificity due to dropdown-localization-component getting a low score */
   dropdown-localization-component .language-selector.language-selector {
     padding: 10px 8px 10px 16px;
   }
@@ -1224,15 +1186,14 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     },
     {
       "type": "text",
-      "id": "menu_text",
-      "label": "Menu Text",
-      "default": "TAKE THE HAIR QUIZ",
+      "id": "quiz_button_text",
+      "label": "Quiz button text",
+      "default": "TAKE THE HAIR QUIZ"
     },
     {
       "type": "url",
-      "id": "new-menu-url",
-      "label": "URL",
-
+      "id": "quiz_button_url",
+      "label": "Quiz button URL"
     },
     {
       "type": "select",
@@ -1797,12 +1758,30 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       "id": "cart_drawer_upsell_line_1_icon",
       "label": "t:settings.cart_drawer_upsell_line_1_icon",
       "options": [
-        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
-        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
-        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
-        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
-        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
-        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+        {
+          "value": "truck",
+          "label": "t:options.cart_drawer_upsell_icon_truck"
+        },
+        {
+          "value": "return",
+          "label": "t:options.cart_drawer_upsell_icon_return"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.cart_drawer_upsell_icon_heart"
+        },
+        {
+          "value": "check_circle",
+          "label": "t:options.cart_drawer_upsell_icon_check_circle"
+        },
+        {
+          "value": "cancel",
+          "label": "t:options.cart_drawer_upsell_icon_cancel"
+        },
+        {
+          "value": "info",
+          "label": "t:options.cart_drawer_upsell_icon_info"
+        }
       ],
       "default": "truck",
       "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
@@ -1819,12 +1798,30 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       "id": "cart_drawer_upsell_line_2_icon",
       "label": "t:settings.cart_drawer_upsell_line_2_icon",
       "options": [
-        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
-        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
-        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
-        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
-        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
-        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+        {
+          "value": "truck",
+          "label": "t:options.cart_drawer_upsell_icon_truck"
+        },
+        {
+          "value": "return",
+          "label": "t:options.cart_drawer_upsell_icon_return"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.cart_drawer_upsell_icon_heart"
+        },
+        {
+          "value": "check_circle",
+          "label": "t:options.cart_drawer_upsell_icon_check_circle"
+        },
+        {
+          "value": "cancel",
+          "label": "t:options.cart_drawer_upsell_icon_cancel"
+        },
+        {
+          "value": "info",
+          "label": "t:options.cart_drawer_upsell_icon_info"
+        }
       ],
       "default": "return",
       "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
@@ -1841,12 +1838,30 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       "id": "cart_drawer_upsell_line_3_icon",
       "label": "t:settings.cart_drawer_upsell_line_3_icon",
       "options": [
-        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
-        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
-        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
-        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
-        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
-        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+        {
+          "value": "truck",
+          "label": "t:options.cart_drawer_upsell_icon_truck"
+        },
+        {
+          "value": "return",
+          "label": "t:options.cart_drawer_upsell_icon_return"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.cart_drawer_upsell_icon_heart"
+        },
+        {
+          "value": "check_circle",
+          "label": "t:options.cart_drawer_upsell_icon_check_circle"
+        },
+        {
+          "value": "cancel",
+          "label": "t:options.cart_drawer_upsell_icon_cancel"
+        },
+        {
+          "value": "info",
+          "label": "t:options.cart_drawer_upsell_icon_info"
+        }
       ],
       "default": "heart",
       "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
@@ -1863,12 +1878,30 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       "id": "cart_drawer_upsell_line_4_icon",
       "label": "t:settings.cart_drawer_upsell_line_4_icon",
       "options": [
-        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
-        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
-        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
-        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
-        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
-        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+        {
+          "value": "truck",
+          "label": "t:options.cart_drawer_upsell_icon_truck"
+        },
+        {
+          "value": "return",
+          "label": "t:options.cart_drawer_upsell_icon_return"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.cart_drawer_upsell_icon_heart"
+        },
+        {
+          "value": "check_circle",
+          "label": "t:options.cart_drawer_upsell_icon_check_circle"
+        },
+        {
+          "value": "cancel",
+          "label": "t:options.cart_drawer_upsell_icon_cancel"
+        },
+        {
+          "value": "info",
+          "label": "t:options.cart_drawer_upsell_icon_info"
+        }
       ],
       "default": "check_circle",
       "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
@@ -1885,12 +1918,30 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
       "id": "cart_drawer_upsell_line_5_icon",
       "label": "t:settings.cart_drawer_upsell_line_5_icon",
       "options": [
-        { "value": "truck", "label": "t:options.cart_drawer_upsell_icon_truck" },
-        { "value": "return", "label": "t:options.cart_drawer_upsell_icon_return" },
-        { "value": "heart", "label": "t:options.cart_drawer_upsell_icon_heart" },
-        { "value": "check_circle", "label": "t:options.cart_drawer_upsell_icon_check_circle" },
-        { "value": "cancel", "label": "t:options.cart_drawer_upsell_icon_cancel" },
-        { "value": "info", "label": "t:options.cart_drawer_upsell_icon_info" }
+        {
+          "value": "truck",
+          "label": "t:options.cart_drawer_upsell_icon_truck"
+        },
+        {
+          "value": "return",
+          "label": "t:options.cart_drawer_upsell_icon_return"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.cart_drawer_upsell_icon_heart"
+        },
+        {
+          "value": "check_circle",
+          "label": "t:options.cart_drawer_upsell_icon_check_circle"
+        },
+        {
+          "value": "cancel",
+          "label": "t:options.cart_drawer_upsell_icon_cancel"
+        },
+        {
+          "value": "info",
+          "label": "t:options.cart_drawer_upsell_icon_info"
+        }
       ],
       "default": "cancel",
       "visible_if": "{{ section.settings.cart_drawer_upsell_enable }}"
@@ -1904,9 +1955,9 @@ span.currency-code, span.svg-wrapper.icon-caret, span.svg-wrapper, svg.account-b
     }
   ],
   "presets": [
-  {
-    "name": "Product Header"
-  }
-]
+    {
+      "name": "Product Header"
+    }
+  ]
 }
 {% endschema %}

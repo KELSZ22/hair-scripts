@@ -69,6 +69,22 @@
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'hair-concerns-placeholder' }}
                 {% endif %}
+
+                {% if block.settings.image_overlay_heading != blank or block.settings.image_overlay_text != blank %}
+                  <div class="hair-concerns-media-overlay">
+                    {% if block.settings.image_overlay_heading != blank %}
+                      <div class="hair-concerns-media-heading">
+                        {{ block.settings.image_overlay_heading | escape | newline_to_br }}
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.image_overlay_text != blank %}
+                      <div class="hair-concerns-media-text">
+                        {{ block.settings.image_overlay_text | escape | newline_to_br }}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
               </div>
 
               <div class="hair-concerns-info">
@@ -252,6 +268,17 @@
 
     #hair-concerns-{{ section.id }} .hair-concerns-media {
       min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(102, 102, 102, 0) 0%, #000000 100%);
     }
 
     #hair-concerns-{{ section.id }} .hair-concerns-media img,
@@ -261,6 +288,39 @@
       height: 100%;
       min-height: 100%;
       object-fit: cover;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-media-overlay {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 22px;
+      z-index: 2;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-media-heading {
+      margin: 0 0 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+      color: var(--Old-colors-Scheme-1-Text-Light, #FFF);
+      font-family: "Tenor Sans";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-media-text {
+      color: var(--Old-colors-Scheme-1-Shadow, #9F9F9F);
+      font-family: Fustat;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
 
     #hair-concerns-{{ section.id }} .hair-concerns-info {
@@ -353,9 +413,9 @@
       color: var(--New-Colors-Black, #2A2A2A);
       text-align: center;
       font-family: "DM Sans";
-      font-size: 18px;
+      font-size: 14px;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 700;
       line-height: normal;
       margin: 0 auto;
     }
@@ -416,6 +476,20 @@
         min-height: 280px;
       }
 
+      #hair-concerns-{{ section.id }} .hair-concerns-media-overlay {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      #hair-concerns-{{ section.id }} .hair-concerns-media-heading {
+        font-size: 16px;
+      }
+
+      #hair-concerns-{{ section.id }} .hair-concerns-media-text {
+        font-size: 10px;
+      }
+
       #hair-concerns-{{ section.id }} .hair-concerns-box {
         padding: 28px 20px;
       }
@@ -424,6 +498,10 @@
     @media screen and (max-width: 450px) {
       #hair-concerns-{{ section.id }} .hair-concerns-title {
         font-size: 20px;
+      }
+
+      #hair-concerns-{{ section.id }} .hair-concerns-media-heading {
+        font-size: 14px;
       }
     }
   </style>
@@ -629,6 +707,18 @@
           "type": "image_picker",
           "id": "image",
           "label": "Left image"
+        },
+        {
+          "type": "textarea",
+          "id": "image_overlay_heading",
+          "label": "Image overlay heading",
+          "default": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF."
+        },
+        {
+          "type": "textarea",
+          "id": "image_overlay_text",
+          "label": "Image overlay text",
+          "default": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg"
         },
         {
           "type": "text",

@@ -137,6 +137,7 @@
                 "review_badge_eVzNDY": {
                   "type": "review-badge",
                   "name": "Review badge",
+                  "disabled": true,
                   "settings": {
                     "review_text": "5.0 from 20,000+ Reviews",
                     "star_count": 5
@@ -257,6 +258,7 @@
             "take_our_quiz_qyiEBr": {
               "type": "take-our-quiz",
               "name": "Take our quiz",
+              "disabled": true,
               "settings": {
                 "quiz_text": "Is Hairscripts Right For Me? Take Our Quiz.",
                 "quiz_link": ""
@@ -345,7 +347,11 @@
             "custom_product_accordion_ft7p9j": {
               "type": "custom-product-accordion",
               "name": "Custom accordion",
-              "settings": {},
+              "settings": {
+                "heading_description": "Description",
+                "heading_key_benefits": "Key benefits",
+                "heading_ingredients": "Ingredients"
+              },
               "blocks": {
                 "custom_product_accordion_row_gjeNDa": {
                   "type": "custom-product-accordion-row",
@@ -625,13 +631,31 @@
           "settings": {
             "label": "Postpartum shedding",
             "image": "shopify://shop_images/Rectangle_534_1.webp",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
-            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "problem_text": "<p>After pregnancy, hormone levels shift fast. At the same time, iron stores are often depleted. That combination can push follicles out of the growth phase early which is why shedding suddenly feels excessive weeks or months later.</p>",
             "bottom_box_logo": "shopify://shop_images/logo_2.svg",
             "bottom_box_logo_width": 160,
             "bottom_box_logo_width_mobile": 140,
             "solution_label": "How we solve it",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts™ supports both pathways simultaneously. It helps support healthy follicle cycling, iron-dependent growth signaling, and stress-related shedding support without making you figure it all out yourself.</p>"
+          }
+        },
+        "tab_EwpFB8": {
+          "type": "tab",
+          "settings": {
+            "label": "Postpartum shedding",
+            "image_overlay_heading": "Estrogen drops. Androgen sensitivity climbs. Your hair feels it first.",
+            "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · Ashwagandha 350mg · Selenium · Vitamin D · Tocopherols & Tocotrienols 25mg",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
             "solution_heading": "More Than One Formula",
             "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
           }
@@ -640,6 +664,8 @@
           "type": "tab",
           "settings": {
             "label": " Perimenopause & Menopause",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -654,6 +680,8 @@
           "type": "tab",
           "settings": {
             "label": "Hormonal Thinning",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -668,6 +696,8 @@
           "type": "tab",
           "settings": {
             "label": "Stress-Related Shedding",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -682,6 +712,8 @@
           "type": "tab",
           "settings": {
             "label": "GLP-1 Medication Users",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -696,6 +728,8 @@
           "type": "tab",
           "settings": {
             "label": "Heavy Menstrual Cycles",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -710,6 +744,8 @@
           "type": "tab",
           "settings": {
             "label": "PCOS & Insulin Resistance",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -724,6 +760,8 @@
           "type": "tab",
           "settings": {
             "label": "Textured & Natural Hair",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -738,6 +776,8 @@
           "type": "tab",
           "settings": {
             "label": "Nutritional Deficiency",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -752,6 +792,8 @@
           "type": "tab",
           "settings": {
             "label": "Post-Illness or Post-Surgery Recovery",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -766,6 +808,8 @@
           "type": "tab",
           "settings": {
             "label": "High-Performing Women",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -780,6 +824,8 @@
           "type": "tab",
           "settings": {
             "label": "High-Performing Women",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -793,6 +839,7 @@
       },
       "block_order": [
         "tab_HT6hPz",
+        "tab_EwpFB8",
         "tab_ybTrBa",
         "tab_Eqptd3",
         "tab_TMPbV4",
@@ -828,6 +875,7 @@
     },
     "hair_assessment_banner_aHjkyY": {
       "type": "hair-assessment-banner",
+      "disabled": true,
       "name": "Hair assessment banner bg",
       "settings": {
         "background_image": "shopify://shop_images/Frame_1000009052.webp",
