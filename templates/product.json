@@ -386,7 +386,8 @@
               "name": "Video carousel",
               "settings": {
                 "heading": "Not Sure What’s Causing Your Hair Thinning?",
-                "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next."
+                "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next.",
+                "fallback_video_url": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn"
               },
               "blocks": {
                 "video_carousel_item_mzmXH7": {
@@ -638,7 +639,7 @@
         "tab_ybTrBa": {
           "type": "tab",
           "settings": {
-            "label": "Hormonal thinning & perimenopause",
+            "label": " Perimenopause & Menopause",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -652,7 +653,7 @@
         "tab_Eqptd3": {
           "type": "tab",
           "settings": {
-            "label": "Stress-related shedding",
+            "label": "Hormonal Thinning",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -666,7 +667,7 @@
         "tab_TMPbV4": {
           "type": "tab",
           "settings": {
-            "label": "Textured & natural hair",
+            "label": "Stress-Related Shedding",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -680,7 +681,7 @@
         "tab_rkXKXC": {
           "type": "tab",
           "settings": {
-            "label": "Nutritional deficiency-driven thinning",
+            "label": "GLP-1 Medication Users",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -694,7 +695,91 @@
         "tab_kPYKJL": {
           "type": "tab",
           "settings": {
-            "label": "Women who have tried everything else",
+            "label": "Heavy Menstrual Cycles",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_nH9yjN": {
+          "type": "tab",
+          "settings": {
+            "label": "PCOS & Insulin Resistance",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_M3JMBA": {
+          "type": "tab",
+          "settings": {
+            "label": "Textured & Natural Hair",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_JzKeL6": {
+          "type": "tab",
+          "settings": {
+            "label": "Nutritional Deficiency",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_CBjCht": {
+          "type": "tab",
+          "settings": {
+            "label": "Post-Illness or Post-Surgery Recovery",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_ndMJ4b": {
+          "type": "tab",
+          "settings": {
+            "label": "High-Performing Women",
+            "problem_label": "THE PROBLEM",
+            "problem_heading": "Hair Loss",
+            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_heading": "More Than One Formula",
+            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+          }
+        },
+        "tab_3dpjpA": {
+          "type": "tab",
+          "settings": {
+            "label": "High-Performing Women",
             "problem_label": "THE PROBLEM",
             "problem_heading": "Hair Loss",
             "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
@@ -712,7 +797,13 @@
         "tab_Eqptd3",
         "tab_TMPbV4",
         "tab_rkXKXC",
-        "tab_kPYKJL"
+        "tab_kPYKJL",
+        "tab_nH9yjN",
+        "tab_M3JMBA",
+        "tab_JzKeL6",
+        "tab_CBjCht",
+        "tab_ndMJ4b",
+        "tab_3dpjpA"
       ],
       "name": "Who this is for",
       "settings": {
