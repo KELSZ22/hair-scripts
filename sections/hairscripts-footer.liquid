@@ -1,4 +1,5 @@
 <div class="hs-footer" id="section-{{ section.id }}">
+  <span id="hs-footer" class="hs-footer__scroll-anchor" tabindex="-1" aria-hidden="true"></span>
   <div class="hs-footer__outer">
     <div class="hs-footer__wrapper">
 
@@ -223,6 +224,12 @@
   #section-{{ section.id }} {
     background: #171717;
     width: 100%;
+  }
+
+  #section-{{ section.id }} .hs-footer__scroll-anchor {
+    display: block;
+    height: 0;
+    scroll-margin-top: var(--header-height, 80px);
   }
 
   #section-{{ section.id }} .hs-footer__outer,

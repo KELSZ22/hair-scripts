@@ -26,9 +26,18 @@
           {% endif %}
 
           {% if section.settings.button_label != blank %}
+            {% liquid
+              assign scroll_to_footer = section.settings.scroll_to_footer
+              if scroll_to_footer == false and section.settings.button_link == '#hs-footer'
+                assign scroll_to_footer = true
+              endif
+            %}
             <div class="community-banner-button-wrap">
               <a
-                {% if section.settings.button_link != blank %}
+                {% if scroll_to_footer %}
+                  href="#hs-footer"
+                  data-scroll-target="hs-footer"
+                {% elsif section.settings.button_link != blank %}
                   href="{{ section.settings.button_link }}"
                 {% else %}
                   role="link"
@@ -250,6 +259,45 @@
   }
 </style>
 
+{% liquid
+  assign scroll_to_footer_script = section.settings.scroll_to_footer
+  if scroll_to_footer_script == false and section.settings.button_link == '#hs-footer'
+    assign scroll_to_footer_script = true
+  endif
+%}
+{% if scroll_to_footer_script %}
+  <script>
+    (function () {
+      const section = document.getElementById('section-{{ section.id }}');
+      if (!section) return;
+
+      const button = section.querySelector('[data-scroll-target]');
+      if (!button) return;
+
+      button.addEventListener('click', function (event) {
+        const targetId = button.getAttribute('data-scroll-target');
+        const target = targetId ? document.getElementById(targetId) : null;
+        if (!target) return;
+
+        event.preventDefault();
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'start',
+        });
+
+        const hash = '#' + targetId;
+        if (history.replaceState) {
+          history.replaceState(null, '', hash);
+        } else {
+          window.location.hash = hash;
+        }
+      });
+    })();
+  </script>
+{% endif %}
+
 {% schema %}
 {
   "name": "Community banner",
@@ -288,9 +336,17 @@
       "default": "Join Community"
     },
     {
+      "type": "checkbox",
+      "id": "scroll_to_footer",
+      "label": "Scroll to footer on click",
+      "default": true,
+      "info": "Smoothly scrolls to the newsletter signup in the site footer. Turn off to use Button link instead."
+    },
+    {
       "type": "url",
       "id": "button_link",
-      "label": "Button link"
+      "label": "Button link",
+      "info": "Only used when “Scroll to footer on click” is off."
     }
   ],
   "blocks": [

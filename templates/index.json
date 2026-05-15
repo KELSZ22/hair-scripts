@@ -1000,7 +1000,8 @@
         "heading": "Join the HairScripts Community",
         "subheading": "Science-backed education, real conversations, and a founder who shows up and explains things without the marketing script.",
         "button_label": "Join Community",
-        "button_link": "#hs-footer"
+        "scroll_to_footer": true,
+        "button_link": ""
       }
     },
     "hairscripts_review_carousel_PX4qXD": {
