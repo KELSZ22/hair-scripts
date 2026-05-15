@@ -179,7 +179,8 @@
     min-width: 205px;
     padding: 16px 28px;
     border-radius: 999px;
-    background: {{ section.settings.main_button_background }};
+    border-radius: 68px;
+    background: linear-gradient(90deg, #725270 0%, #725270 42.83%, #371834 100%), linear-gradient(90deg, #8D6B2C 0%, #C9AB64 24.52%, #D4C875 50%, #C9AB64 75%, #8D6B2C 100%);
     color: {{ section.settings.main_button_text_color }};
     text-decoration: none;
     text-align: center;
@@ -188,11 +189,11 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   #hs-playlists-{{ section.id }} .hs-playlists__main-button:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
   }
 
   #hs-playlists-{{ section.id }} .hspl-mobile-viewport {

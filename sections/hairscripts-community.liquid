@@ -287,11 +287,12 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
   }
 
-  #hs-community-{{ section.id }}.hs-community__button:hover {
-    opacity: 0.92;
+  #hs-community-{{ section.id }}
+  .hs-community__button:hover {
+    transform: translateY(-1px);
   }
 
   @media screen and (max-width: 1366px) {

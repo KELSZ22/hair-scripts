@@ -51,6 +51,10 @@
         {% endif %}
 
         <div class="sticky-add-to-cart__info hs-sticky-atc__info">
+          <p class="hs-sticky-atc__purchase-label">
+            One-time Purchase
+          </p>
+
           <p
             class="sticky-add-to-cart__title hs-sticky-atc__title"
             data-testid="sticky-product-title"
@@ -59,108 +63,43 @@
           </p>
 
           <div class="hs-sticky-atc__selectors">
-            {% comment %} {% if sticky_product.has_only_default_variant %}
-              <select class="hs-sticky-atc__select" aria-label="Product option">
-                <option selected>1 Bottle</option>
-              </select>
-            {% else %}
-              <select
-                class="hs-sticky-atc__select"
-                aria-label="Product option"
-                data-sticky-variant-select
-              >
-                {% for variant in sticky_product.variants %}
-                  <option
-                    value="{{ variant.id }}"
-                    data-price="{{ variant.price | money | escape }}"
-                    data-available="{{ variant.available }}"
-                    data-min="{{ variant.quantity_rule.min | default: 1 }}"
-                    data-max="{{ variant.quantity_rule.max }}"
-                    data-step="{{ variant.quantity_rule.increment | default: 1 }}"
-                    {% if variant.featured_image %}
-                      data-image="{{ variant.featured_image | image_url: width: 180 }}"
-                    {% endif %}
-                    {% if variant.id == sticky_current_variant.id %}
-                      selected
-                    {% endif %}
-                    {% unless variant.available %}
-                      disabled
-                    {% endunless %}
-                  >
-                    {{ variant.title }}
-                  </option>
-                {% endfor %}
-              </select>
-            {% endif %} {% endcomment %}
-
-            {% comment %} <select
+            <select
               class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
               aria-label="Purchase option"
               data-sticky-selling-plan-select
             >
-              <option value="">One-time Purchase</option>
+              {% assign ninety_day_plan = blank %}
+              {% assign thirty_day_plan = blank %}
 
               {% for selling_plan_group in sticky_product.selling_plan_groups %}
-              {% for selling_plan in selling_plan_group.selling_plans %}
-                {% unless selling_plan.name contains '6 month' or selling_plan.name contains '6 Month' %}
-                  <option value="{{ selling_plan.id }}">
-                    {{ selling_plan.name }}
-                  </option>
-                {% endunless %}
+                {% for selling_plan in selling_plan_group.selling_plans %}
+                  {% if selling_plan.name contains '90' %}
+                    {% assign ninety_day_plan = selling_plan %}
+                  {% endif %}
+
+                  {% if selling_plan.name contains '30' %}
+                    {% assign thirty_day_plan = selling_plan %}
+                  {% endif %}
+                {% endfor %}
               {% endfor %}
-            {% endfor %}
-            </select> {% endcomment %}
 
+              {% if ninety_day_plan != blank %}
+                <option value="{{ ninety_day_plan.id }}">
+                  90-day Supply
+                </option>
+              {% endif %}
 
-            <select
-  class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
-  aria-label="Purchase option"
-  data-sticky-selling-plan-select
->
+              {% if thirty_day_plan != blank %}
+                <option value="{{ thirty_day_plan.id }}">
+                  30-day Supply
+                </option>
+              {% endif %}
 
-  {% assign ninety_day_plan = blank %}
-  {% assign thirty_day_plan = blank %}
-
-  {% for selling_plan_group in sticky_product.selling_plan_groups %}
-    {% for selling_plan in selling_plan_group.selling_plans %}
-
-      {% if selling_plan.name contains '90' %}
-        {% assign ninety_day_plan = selling_plan %}
-      {% endif %}
-
-      {% if selling_plan.name contains '30' %}
-        {% assign thirty_day_plan = selling_plan %}
-      {% endif %}
-
-    {% endfor %}
-  {% endfor %}
-
-  {% if ninety_day_plan %}
-    <option value="{{ ninety_day_plan.id }}">
-      90-day Supply
-    </option>
-  {% endif %}
-
-  {% if thirty_day_plan %}
-    <option value="{{ thirty_day_plan.id }}">
-      30-day Supply
-    </option>
-  {% endif %}
-
-  <option value="">
-    One-time Purchase
-  </option>
-
-</select>
+              <option value="">
+                One-time Purchase
+              </option>
+            </select>
           </div>
-
-          {% comment %} <div
-            class="sticky-add-to-cart__price hs-sticky-atc__price"
-            data-testid="sticky-price-display"
-            data-sticky-price
-          >
-            {{ sticky_current_variant.price | money }}
-          </div> {% endcomment %}
         </div>
       </div>
 
@@ -199,42 +138,38 @@
           {% endunless %}
         >
           <span class="add-to-cart-text">
-  <span class="add-to-cart-text__content">
-    
-    <span class="hs-sticky-atc__button-inner">
-      
-      <span data-sticky-button-label>
-        {%- if sticky_current_variant.available -%}
-          {{- 'products.product.add_to_cart' | t -}}
-        {%- elsif sticky_current_variant == blank -%}
-          {{- 'products.product.unavailable' | t -}}
-        {%- else -%}
-          {{- 'products.product.sold_out' | t -}}
-        {%- endif -%}
-      </span>
+            <span class="add-to-cart-text__content">
+              <span class="hs-sticky-atc__button-inner">
+                <span data-sticky-button-label>
+                  {%- if sticky_current_variant.available -%}
+                    {{- 'products.product.add_to_cart' | t -}}
+                  {%- elsif sticky_current_variant == blank -%}
+                    {{- 'products.product.unavailable' | t -}}
+                  {%- else -%}
+                    {{- 'products.product.sold_out' | t -}}
+                  {%- endif -%}
+                </span>
 
-      <span class="hs-sticky-atc__button-divider"></span>
+                <span class="hs-sticky-atc__button-divider"></span>
 
-      <span
-        class="hs-sticky-atc__button-price"
-        data-sticky-price
-      >
-        {{ sticky_current_variant.price | money }}
-      </span>
+                <span
+                  class="hs-sticky-atc__button-price"
+                  data-sticky-price
+                >
+                  {{ sticky_current_variant.price | money }}
+                </span>
+              </span>
 
-    </span>
-
-    <span
-      class="hs-sticky-atc__theme-qty-ref"
-      ref="quantityDisplay"
-      aria-hidden="true"
-      style="display: none;"
-    >
-      <span ref="quantityNumber" data-sticky-theme-qty-number>{{ sticky_initial_quantity }}</span>
-    </span>
-
-  </span>
-</span>
+              <span
+                class="hs-sticky-atc__theme-qty-ref"
+                ref="quantityDisplay"
+                aria-hidden="true"
+                style="display: none;"
+              >
+                <span ref="quantityNumber" data-sticky-theme-qty-number>{{ sticky_initial_quantity }}</span>
+              </span>
+            </span>
+          </span>
 
           <span class="add-to-cart__added">
             <span class="svg-wrapper add-to-cart__added-icon">
@@ -339,6 +274,17 @@
       font-family: var(--hs-atc-body-font);
     }
 
+    #{{ sticky_id }} .hs-sticky-atc__purchase-label {
+      display: none;
+      margin: 0;
+      color: rgba(42, 42, 42, 0.62);
+      font-family: var(--hs-atc-body-font);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
     #{{ sticky_id }} .hs-sticky-atc__title {
       margin: 0 0 8px;
       color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
@@ -382,15 +328,6 @@
 
     #{{ sticky_id }} .hs-sticky-atc__select--purchase {
       width: 205px;
-    }
-
-    #{{ sticky_id }} .hs-sticky-atc__price {
-      color: #222222;
-      font-family: var(--hs-atc-body-font);
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.2;
     }
 
     #{{ sticky_id }} .hs-sticky-atc__right {
@@ -488,6 +425,17 @@
       cursor: not-allowed;
     }
 
+    #{{ sticky_id }} .hs-sticky-atc__button-inner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__button-divider::before {
+      content: " - ";
+    }
+
     #{{ sticky_id }} .hs-sticky-atc__button *,
     #{{ sticky_id }} .hs-sticky-atc__select *,
     #{{ sticky_id }} .hs-sticky-atc__qty * {
@@ -512,119 +460,151 @@
     }
 
     @media screen and (max-width: 768px) {
-      #{{ sticky_id }} .hs-sticky-atc__bar {
-        bottom: 0;
-        width: 100vw;
-        min-height: auto;
-        padding: 12px;
-        border-top: 1px solid #eeeeee;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__bar {
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    max-width: none;
+    min-height: auto;
+    padding: 16px;
+    border-top: 0;
+    background: #ffffff;
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.18);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+    border-radius: 0;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__left {
-        gap: 8px;
-        align-items: flex-start;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__left {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    flex: none;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__image {
-        width: 98px;
-        height: 94px;
-        flex-shrink: 0;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__image {
+    display: none;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__title {
-        margin: 0 0 8px;
-        color: var(--New-Colors-Black, #2A2A2A);
-        font-family: var(--hs-atc-body-font);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        text-transform: none;
-        letter-spacing: 0;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: initial;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__info {
+    width: 100%;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__selectors {
-        gap: 10px;
-        margin-bottom: 8px;
-        flex-wrap: nowrap;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__purchase-label {
+    display: block;
+    margin: 0 0 5px;
+    font-size: 16px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__select {
-        width: 100px;
-        height: 32px;
-        padding: 0 24px 0 8px;
-        font-size: 14px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__title {
+    margin: 0 0 8px;
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+    display: block;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__select--purchase {
-        width: 150px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__selectors {
+    gap: 0;
+    margin-bottom: 0;
+    flex-wrap: nowrap;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__price {
-        font-size: 14px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__select,
+  #{{ sticky_id }} .hs-sticky-atc__select--purchase {
+    width: 200px;
+    max-width: 100%;
+    height: 38px;
+    padding: 0 34px 0 8px;
+    border: 1px solid var(--hs-atc-border);
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #222222;
+    font-size: 16px;
+    line-height: 1;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__right {
-        width: 100%;
-        justify-content: space-between;
-        gap: 10px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__qty {
-        height: 48px;
-        min-width: 112px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__qty {
+    height: 44px;
+    min-width: 88px;
+    padding: 0 11px;
+    gap: 8px;
+    border-radius: 999px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__qty-number {
-        min-width: 16px;
-        height: 28px;
-        font-size: 14px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__qty-btn {
+    width: 18px;
+    height: 28px;
+    font-size: 16px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__button {
-        height: 48px;
-        min-width: 0;
-        flex: 1;
-        font-size: 15px;
-      }
-    }
+  #{{ sticky_id }} .hs-sticky-atc__qty-number {
+    min-width: 12px;
+    height: 28px;
+    font-size: 16px;
+  }
 
-    @media screen and (max-width: 420px) {
-      #{{ sticky_id }} .hs-sticky-atc__bar {
-        padding: 10px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__button {
+    height: 44px;
+    min-width: 0;
+    flex: 1;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-size: 16px;
+  }
+}
 
-      #{{ sticky_id }} .hs-sticky-atc__left {
-        gap: 8px;
-      }
+@media screen and (max-width: 420px) {
+  #{{ sticky_id }} .hs-sticky-atc__select,
+  #{{ sticky_id }} .hs-sticky-atc__select--purchase {
+    width: 200px;
+    height: 38px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__image {
-        width: 96px;
-        height: 94px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__qty {
+    min-width: 86px;
+    height: 44px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__selectors {
-        gap: 8px;
-      }
+  #{{ sticky_id }} .hs-sticky-atc__button {
+    height: 44px;
+    padding: 0 14px;
+  }
+}
 
-      #{{ sticky_id }} .hs-sticky-atc__select {
-        width: 96px;
-        font-size: 14px;
-      }
+@media screen and (max-width: 360px) {
+  #{{ sticky_id }} .hs-sticky-atc__select,
+  #{{ sticky_id }} .hs-sticky-atc__select--purchase {
+    width: 190px;
+  }
 
-      #{{ sticky_id }} .hs-sticky-atc__select--purchase {
-        width: 145px;
-      }
-    }
+  #{{ sticky_id }} .hs-sticky-atc__qty {
+    min-width: 82px;
+    padding: 0 9px;
+  }
+
+  #{{ sticky_id }} .hs-sticky-atc__button {
+    padding: 0 12px;
+  }
+}
   </style>
 
   <script>
@@ -662,10 +642,6 @@
 
         const isBelowFold = currentScroll > viewportHeight;
 
-        /*
-          Hide the sticky bar when the user reaches the bottom of the page.
-          Increase bottomOffset if you want it to disappear sooner.
-        */
         const bottomOffset = 24;
         const isAtPageBottom = currentScroll + viewportHeight >= pageHeight - bottomOffset;
 
