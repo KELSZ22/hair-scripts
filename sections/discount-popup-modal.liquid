@@ -342,6 +342,26 @@
 
       if (!popup) return;
 
+      const STORAGE_KEY = 'hairscripts-discount-popup-last-dismissed';
+      const RESHOW_MS = 30 * 60 * 1000;
+
+      const getLastDismissed = () => {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const ts = parseInt(raw, 10);
+        return Number.isNaN(ts) ? null : ts;
+      };
+
+      const markDismissed = () => {
+        localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      };
+
+      const shouldShowPopup = () => {
+        const last = getLastDismissed();
+        if (last === null) return true;
+        return Date.now() - last >= RESHOW_MS;
+      };
+
       const closeBtn = popup.querySelector('.discount-popup__close');
       const overlay = popup.querySelector('.discount-popup__overlay');
 
@@ -350,19 +370,29 @@
         popup.classList.add('active');
         popup.setAttribute('aria-hidden', 'false');
       };
+
+      const closePopup = () => {
+        popup.classList.remove('active');
+        popup.setAttribute('aria-hidden', 'true');
+        markDismissed();
+      };
+
+      closeBtn.addEventListener('click', closePopup);
+      overlay.addEventListener('click', closePopup);
+
+      {% if form.posted_successfully? %}
+        requestAnimationFrame(showPopup);
+        markDismissed();
+        return;
+      {% endif %}
+
+      if (!shouldShowPopup()) return;
+
       if (delayMs <= 0) {
         requestAnimationFrame(showPopup);
       } else {
         setTimeout(showPopup, delayMs);
       }
-
-      const closePopup = () => {
-        popup.classList.remove('active');
-        popup.setAttribute('aria-hidden', 'true');
-      };
-
-      closeBtn.addEventListener('click', closePopup);
-      overlay.addEventListener('click', closePopup);
     })();
   </script>
 {% endif %}
@@ -376,7 +406,7 @@
         "id": "enable_popup",
         "label": "Enable Popup",
         "default": true,
-        "info": "When enabled, the popup runs on every page load. Closing it only hides it until the visitor opens another page or refreshes."
+        "info": "Shown on the homepage only. After a visitor closes it or signs up, it stays hidden for 30 minutes before it can appear again."
       },
       {
         "type": "range",

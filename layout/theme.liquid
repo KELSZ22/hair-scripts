@@ -151,7 +151,9 @@
       {% render 'quick-add-modal' %}
     {% endif %}
 
-    {% section 'discount-popup-modal' %}
+    {% if template.name == 'index' %}
+      {% section 'discount-popup-modal' %}
+    {% endif %}
 
     <script>
       /* =============================================
