@@ -44,6 +44,42 @@
             </button>
           {% endfor %}
         </div>
+
+        <div class="hair-concerns-mobile-dropdown">
+          <button
+            type="button"
+            class="hair-concerns-mobile-trigger"
+            aria-expanded="false"
+            aria-controls="hair-concerns-mobile-menu-{{ section.id }}"
+          >
+            <span class="hair-concerns-mobile-trigger-text">
+              {{ section.blocks.first.settings.label }}
+            </span>
+
+            <span class="hair-concerns-mobile-trigger-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+
+          <div
+            id="hair-concerns-mobile-menu-{{ section.id }}"
+            class="hair-concerns-mobile-menu"
+            hidden
+          >
+            {% for block in section.blocks %}
+              <button
+                type="button"
+                class="hair-concerns-mobile-option{% if forloop.first %} is-active{% endif %}"
+                data-tab-target="hair-concerns-panel-{{ section.id }}-{{ block.id }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                {{ block.settings.label }}
+              </button>
+            {% endfor %}
+          </div>
+        </div>
       {% endif %}
     </div>
 
@@ -194,9 +230,9 @@
       color: {{ section.settings.pill_text_color }};
       border-radius: 999px;
       min-height: 44px;
-      padding: 5px 10px;
+      padding: 10px 18px;
       font-family: "DM Sans";
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
@@ -212,6 +248,100 @@
       background: #C4A882;
       color: #fff;
       border-color: #C4A882;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-dropdown {
+      display: none;
+      position: relative;
+      width: 100%;
+      max-width: 620px;
+      margin: 24px auto 0;
+
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-trigger {
+      appearance: none;
+      width: 100%;
+      min-height: 54px;
+      padding: 14px 18px;
+      border: 1px solid {{ section.settings.pill_border_color }};
+      border-radius: 999px;
+      background: #C4A882;
+      color: #fff;
+      font-family: "DM Sans";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-trigger-text {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-trigger-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      transition: transform 0.25s ease;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-dropdown.is-open .hair-concerns-mobile-trigger-icon {
+      transform: rotate(180deg);
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 8px);
+      padding: 8px;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-menu[hidden] {
+      display: none;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-option {
+      appearance: none;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 44px;
+      padding: 11px 14px;
+      border: 0;
+      border-radius: 14px;
+      background: transparent;
+      color: #2A2A2A;
+      font-family: "DM Sans";
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.25;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-option:hover,
+    #hair-concerns-{{ section.id }} .hair-concerns-mobile-option.is-active {
+      background: #C4A882;
+      color: #fff;
     }
 
     #hair-concerns-{{ section.id }} .hair-concerns-panels {
@@ -415,7 +545,7 @@
       font-family: "DM Sans";
       font-size: 14px;
       font-style: normal;
-      font-weight: 300;
+      font-weight: 700;
       line-height: normal;
       margin: 0 auto;
     }
@@ -463,13 +593,11 @@
 
     @media screen and (max-width: 767px) {
       #hair-concerns-{{ section.id }} .hair-concerns-tabs {
-        gap: 10px;
+        display: none;
       }
 
-      #hair-concerns-{{ section.id }} .hair-concerns-tab {
-        min-height: 40px;
-        padding: 5px 10px;
-        font-size: 10px;
+      #hair-concerns-{{ section.id }} .hair-concerns-mobile-dropdown {
+        display: block;
       }
 
       #hair-concerns-{{ section.id }} .hair-concerns-media {
@@ -503,6 +631,16 @@
       #hair-concerns-{{ section.id }} .hair-concerns-media-heading {
         font-size: 14px;
       }
+
+      #hair-concerns-{{ section.id }} .hair-concerns-mobile-trigger {
+        min-height: 50px;
+        padding: 13px 16px;
+        font-size: 13px;
+      }
+
+      #hair-concerns-{{ section.id }} .hair-concerns-mobile-option {
+        font-size: 13px;
+      }
     }
   </style>
 
@@ -512,46 +650,88 @@
       if (!section) return;
 
       var tabs = section.querySelectorAll('.hair-concerns-tab');
+      var mobileOptions = section.querySelectorAll('.hair-concerns-mobile-option');
       var panels = section.querySelectorAll('.hair-concerns-panel');
       var panelsWrap = section.querySelector('.hair-concerns-panels');
+      var mobileDropdown = section.querySelector('.hair-concerns-mobile-dropdown');
+      var mobileTrigger = section.querySelector('.hair-concerns-mobile-trigger');
+      var mobileTriggerText = section.querySelector('.hair-concerns-mobile-trigger-text');
+      var mobileMenu = section.querySelector('.hair-concerns-mobile-menu');
       var animationDuration = 350;
       var isAnimating = false;
 
-      function activateTab(tab) {
-        if (isAnimating || tab.classList.contains('is-active')) return;
+      function closeMobileDropdown() {
+        if (!mobileDropdown || !mobileTrigger || !mobileMenu) return;
 
-        var targetId = tab.getAttribute('data-tab-target');
+        mobileDropdown.classList.remove('is-open');
+        mobileTrigger.setAttribute('aria-expanded', 'false');
+        mobileMenu.hidden = true;
+      }
+
+      function toggleMobileDropdown() {
+        if (!mobileDropdown || !mobileTrigger || !mobileMenu) return;
+
+        var isOpen = mobileDropdown.classList.contains('is-open');
+
+        if (isOpen) {
+          closeMobileDropdown();
+          return;
+        }
+
+        mobileDropdown.classList.add('is-open');
+        mobileTrigger.setAttribute('aria-expanded', 'true');
+        mobileMenu.hidden = false;
+      }
+
+      function setActiveTriggers(targetId, label) {
+        tabs.forEach(function(item) {
+          var isActive = item.getAttribute('data-tab-target') === targetId;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        mobileOptions.forEach(function(item) {
+          var isActive = item.getAttribute('data-tab-target') === targetId;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        if (mobileTriggerText && label) {
+          mobileTriggerText.textContent = label;
+        }
+      }
+
+      function activateTab(trigger) {
+        if (isAnimating) return;
+
+        var targetId = trigger.getAttribute('data-tab-target');
         var targetPanel = section.querySelector('#' + targetId);
-        var currentTab = section.querySelector('.hair-concerns-tab.is-active');
         var currentPanel = section.querySelector('.hair-concerns-panel.is-active');
+        var label = trigger.textContent.trim();
 
         if (!targetPanel) return;
 
-        if (!currentPanel) {
-          tabs.forEach(function(item) {
-            item.classList.remove('is-active');
-            item.setAttribute('aria-selected', 'false');
-          });
+        if (targetPanel.classList.contains('is-active')) {
+          setActiveTriggers(targetId, label);
+          closeMobileDropdown();
+          return;
+        }
 
+        if (!currentPanel) {
           panels.forEach(function(panel) {
             panel.classList.remove('is-active');
           });
 
-          tab.classList.add('is-active');
-          tab.setAttribute('aria-selected', 'true');
+          setActiveTriggers(targetId, label);
           targetPanel.classList.add('is-active');
+          closeMobileDropdown();
           return;
         }
 
         isAnimating = true;
 
-        if (currentTab) {
-          currentTab.classList.remove('is-active');
-          currentTab.setAttribute('aria-selected', 'false');
-        }
-
-        tab.classList.add('is-active');
-        tab.setAttribute('aria-selected', 'true');
+        setActiveTriggers(targetId, label);
+        closeMobileDropdown();
 
         var currentHeight = currentPanel.offsetHeight;
         panelsWrap.style.height = currentHeight + 'px';
@@ -581,6 +761,31 @@
         tab.addEventListener('click', function() {
           activateTab(tab);
         });
+      });
+
+      mobileOptions.forEach(function(option) {
+        option.addEventListener('click', function() {
+          activateTab(option);
+        });
+      });
+
+      if (mobileTrigger) {
+        mobileTrigger.addEventListener('click', function(event) {
+          event.preventDefault();
+          toggleMobileDropdown();
+        });
+      }
+
+      document.addEventListener('click', function(event) {
+        if (!section.contains(event.target)) {
+          closeMobileDropdown();
+        }
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          closeMobileDropdown();
+        }
       });
     })();
   </script>

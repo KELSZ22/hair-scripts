@@ -69,7 +69,7 @@
     "hairscripts_about_founder_HkGzmj": {
       "type": "hairscripts-about-founder",
       "custom_css": [
-        "body{background-color: white}"
+        "body {background-color: white;}"
       ],
       "name": "About - Founder Bio",
       "settings": {
@@ -152,7 +152,7 @@
         "heading": "Our Brand Promise",
         "subheading": "The principles this formula was built on — and the ones HairScripts™ is accountable to.",
         "button_text": "Start My Protocol",
-        "button_url": ""
+        "button_url": "shopify://collections/all"
       }
     },
     "hairscripts_about_nine_pathways_LGmJ7w": {

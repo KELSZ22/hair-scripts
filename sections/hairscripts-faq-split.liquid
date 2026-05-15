@@ -187,7 +187,7 @@
     font-family: "DM Sans";
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
   }
 
@@ -509,6 +509,7 @@
                   <a
                     {% if section.settings.button_link != blank %}
                       href="{{ section.settings.button_link }}"
+                      target="_blank"
                     {% else %}
                       role="link"
                       aria-disabled="true"
