@@ -19,56 +19,70 @@
           <div class="hs-video-carousel-viewport">
             <div class="hs-video-carousel-track">
               {% for block in section.blocks %}
-                <div class="hs-video-carousel-slide" {{ block.shopify_attributes }}>
-                  {% if block.settings.video_link != blank %}
-                    <button
-                      type="button"
-                      class="hs-video-carousel-card hs-video-carousel-card-button"
-                      data-hs-video-url="{{ block.settings.video_link | escape }}"
-                      aria-label="Play video{% if block.settings.title != blank %}: {{ block.settings.title | escape }}{% endif %}"
-                    >
-                  {% else %}
-                    <div class="hs-video-carousel-card">
-                  {% endif %}
+                {% assign video_url = block.settings.video_link | append: '' %}
+                {% assign youtube_id = blank %}
 
+                {% if video_url contains 'youtu.be/' %}
+                  {% assign youtube_id = video_url | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+                {% elsif video_url contains 'youtube.com/shorts/' %}
+                  {% assign youtube_id = video_url | split: 'youtube.com/shorts/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+                {% elsif video_url contains 'youtube.com/embed/' %}
+                  {% assign youtube_id = video_url | split: 'youtube.com/embed/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+                {% elsif video_url contains 'youtube.com/live/' %}
+                  {% assign youtube_id = video_url | split: 'youtube.com/live/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+                {% elsif video_url contains 'v=' %}
+                  {% assign youtube_id = video_url | split: 'v=' | last | split: '&' | first | split: '#' | first %}
+                {% endif %}
+
+                <div class="hs-video-carousel-slide" {{ block.shopify_attributes }}>
+                  <div
+                    class="hs-video-carousel-card{% if block.settings.video_link != blank %} hs-video-carousel-card-button{% endif %}"
+                    {% if block.settings.video_link != blank %}
+                      role="button"
+                      tabindex="0"
+                      data-hs-video-url="{{ block.settings.video_link | escape }}"
+                      data-hs-youtube-id="{{ youtube_id | escape }}"
+                      aria-label="Play YouTube video"
+                    {% endif %}
+                  >
                     <div class="hs-video-carousel-thumb-wrap">
-                      {% if block.settings.thumbnail != blank %}
-                        {{
-                          block.settings.thumbnail
-                          | image_url: width: 900
-                          | image_tag:
-                            class: 'hs-video-carousel-thumb',
-                            loading: 'lazy',
-                            widths: '300, 500, 700, 900',
-                            sizes: '(min-width: 1200px) 20vw, (min-width: 750px) 33vw, 72vw',
-                            alt: block.settings.title
-                        }}
+                      {% if youtube_id != blank %}
+                        <img
+                          class="hs-video-carousel-thumb"
+                          src="https://img.youtube.com/vi/{{ youtube_id }}/maxresdefault.jpg"
+                          onerror="this.onerror=null; this.src='https://img.youtube.com/vi/{{ youtube_id }}/hqdefault.jpg';"
+                          alt="YouTube video thumbnail"
+                          loading="lazy"
+                        >
                       {% else %}
                         {{ 'image' | placeholder_svg_tag: 'hs-video-carousel-thumb hs-video-carousel-placeholder' }}
                       {% endif %}
 
-                      <span class="hs-video-carousel-play" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69" fill="none">
-                          <path d="M34.5 5.17578C18.6473 5.17578 5.75 18.0731 5.75 33.9258C5.75 49.7784 18.6473 62.6758 34.5 62.6758C50.3527 62.6758 63.25 49.7784 63.25 33.9258C63.25 18.0731 50.3527 5.17578 34.5 5.17578ZM34.5 9.48828C48.022 9.48828 58.9375 20.4038 58.9375 33.9258C58.9375 47.4478 48.022 58.3633 34.5 58.3633C20.978 58.3633 10.0625 47.4478 10.0625 33.9258C10.0625 20.4038 20.978 9.48828 34.5 9.48828ZM28.2615 22.4258C27.8852 22.42 27.5058 22.5139 27.1665 22.7065C26.488 23.086 26.0715 23.8029 26.0715 24.582V43.2695C26.0715 44.0487 26.488 44.7655 27.1665 45.145C27.4943 45.3319 27.8627 45.4258 28.2278 45.4258C28.6159 45.4258 29.0031 45.3239 29.3452 45.1169L44.7646 35.7732C45.4115 35.3822 45.8035 34.6819 45.8035 33.9258C45.8035 33.1697 45.4115 32.4722 44.7646 32.0784L29.3452 22.7346C29.0132 22.5334 28.6377 22.4315 28.2615 22.4258Z" fill="white"/>
-                        </svg>
-                      </span>
+                      {% if block.settings.video_link != blank %}
+                        <span class="hs-video-carousel-play" aria-hidden="true">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69" fill="none">
+                            <path d="M34.5 5.17578C18.6473 5.17578 5.75 18.0731 5.75 33.9258C5.75 49.7784 18.6473 62.6758 34.5 62.6758C50.3527 62.6758 63.25 49.7784 63.25 33.9258C63.25 18.0731 50.3527 5.17578 34.5 5.17578ZM34.5 9.48828C48.022 9.48828 58.9375 20.4038 58.9375 33.9258C58.9375 47.4478 48.022 58.3633 34.5 58.3633C20.978 58.3633 10.0625 47.4478 10.0625 33.9258C10.0625 20.4038 20.978 9.48828 34.5 9.48828ZM28.2615 22.4258C27.8852 22.42 27.5058 22.5139 27.1665 22.7065C26.488 23.086 26.0715 23.8029 26.0715 24.582V43.2695C26.0715 44.0487 26.488 44.7655 27.1665 45.145C27.4943 45.3319 27.8627 45.4258 28.2278 45.4258C28.6159 45.4258 29.0031 45.3239 29.3452 45.1169L44.7646 35.7732C45.4115 35.3822 45.8035 34.6819 45.8035 33.9258C45.8035 33.1697 45.4115 32.4722 44.7646 32.0784L29.3452 22.7346C29.0132 22.5334 28.6377 22.4315 28.2615 22.4258Z" fill="white"/>
+                          </svg>
+                        </span>
+                      {% endif %}
                     </div>
 
                     <div class="hs-video-carousel-content">
-                      {% if block.settings.title != blank %}
-                        <h3 class="hs-video-carousel-title">{{ block.settings.title }}</h3>
-                      {% endif %}
-
-                      {% if block.settings.subtitle != blank %}
-                        <p class="hs-video-carousel-subtitle">{{ block.settings.subtitle }}</p>
+                      {% if block.settings.video_link != blank %}
+                        <h3
+                          class="hs-video-carousel-title"
+                          data-hs-youtube-title
+                          data-video-url="{{ block.settings.video_link | escape }}"
+                        >
+                          Loading video title...
+                        </h3>
+                      {% else %}
+                        <h3 class="hs-video-carousel-title">
+                          Video
+                        </h3>
                       {% endif %}
                     </div>
-
-                  {% if block.settings.video_link != blank %}
-                    </button>
-                  {% else %}
-                    </div>
-                  {% endif %}
+                  </div>
                 </div>
               {% endfor %}
             </div>
@@ -88,7 +102,7 @@
                     type="button"
                     class="review-carousel-dot{% if forloop.first %} is-active{% endif %}"
                     data-index="{{ forloop.index0 }}"
-                    aria-label="Go to review {{ forloop.index }}"
+                    aria-label="Go to video {{ forloop.index }}"
                     aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
                   ></button>
                 {% endfor %}
@@ -104,21 +118,6 @@
         </div>
       {% endif %}
 
-    </div>
-  </div>
-
-  <div class="hs-video-modal" aria-hidden="true">
-    <div class="hs-video-modal__overlay" data-hs-video-modal-close></div>
-
-    <div class="hs-video-modal__dialog" role="dialog" aria-modal="true" aria-label="Video player">
-      <button type="button" class="hs-video-modal__close" data-hs-video-modal-close aria-label="Close video">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <path d="M5.5 5.5L16.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-          <path d="M16.5 5.5L5.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-      <div class="hs-video-modal__player" data-hs-video-player></div>
     </div>
   </div>
 </div>
@@ -196,10 +195,14 @@
     text-align: left;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
+    cursor: default;
     appearance: none;
     -webkit-appearance: none;
     font: inherit;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-card-button {
+    cursor: pointer;
   }
 
   #section-{{ section.id }} .hs-video-carousel-card-button:hover .hs-video-carousel-play {
@@ -212,11 +215,14 @@
     border-radius: 8px;
     background: #3D7E7A;
     padding: 12px;
+    height: clamp(260px, 30vw, 420px);
+    box-sizing: border-box;
   }
 
   #section-{{ section.id }} .hs-video-carousel-thumb {
     display: block;
     width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 6px;
   }
@@ -248,28 +254,40 @@
     display: block;
   }
 
+  #section-{{ section.id }} .hs-video-carousel-thumb-wrap.is-playing {
+    background: #000;
+  }
+
+  #section-{{ section.id }} .hs-video-carousel-inline-player {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 6px;
+    background: #000;
+  }
+
+  #section-{{ section.id }} video.hs-video-carousel-inline-player {
+    object-fit: cover;
+  }
+
   #section-{{ section.id }} .hs-video-carousel-content {
     padding-top: 10px;
   }
 
   #section-{{ section.id }} .hs-video-carousel-title {
-    margin: 0 0 4px;
+    margin: 0;
     color: #2B221E;
     font-family: "DM Sans";
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: 1.4;
-  }
 
-  #section-{{ section.id }} .hs-video-carousel-subtitle {
-    margin: 0;
-    color: #4B433E;
-    font-family: "DM Sans";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   #section-{{ section.id }} .review-carousel-controls {
@@ -327,91 +345,14 @@
     transform: scale(1.05);
   }
 
-  #section-{{ section.id }} .hs-video-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-  }
-
-  #section-{{ section.id }} .hs-video-modal.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  #section-{{ section.id }} .hs-video-modal__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(3px);
-  }
-
-  #section-{{ section.id }} .hs-video-modal__dialog {
-    position: relative;
-    z-index: 2;
-    width: min(920px, 100%);
-    background: #000;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
-  }
-
-  #section-{{ section.id }} .hs-video-modal__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 4;
-    width: 38px;
-    height: 38px;
-    border: 0;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.92);
-    color: #211B18;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  #section-{{ section.id }} .hs-video-modal__close:hover {
-    opacity: 0.85;
-  }
-
-  #section-{{ section.id }} .hs-video-modal__player {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
-  }
-
-  #section-{{ section.id }} .hs-video-modal__player iframe,
-  #section-{{ section.id }} .hs-video-modal__player video {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #000;
-  }
-
-  body.hs-video-modal-open {
-    overflow: hidden;
-  }
-
   @media screen and (max-width: 1024px) {
     #section-{{ section.id }} .hs-video-carousel-slide {
       flex: 0 0 calc((100% - 42px) / 3.25);
       max-width: calc((100% - 42px) / 3.25);
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-thumb-wrap {
+      height: 380px;
     }
   }
 
@@ -436,11 +377,6 @@
 
     #section-{{ section.id }} .hs-video-carousel-title {
       text-align: center;
-    }
-
-    #section-{{ section.id }} .hs-video-carousel-subtitle {
-      text-align: center;
-      font-size: 14px;
     }
   }
 
@@ -476,23 +412,12 @@
       max-width: 72%;
     }
 
+    #section-{{ section.id }} .hs-video-carousel-thumb-wrap {
+      height: 360px;
+    }
+
     #section-{{ section.id }} .review-carousel-controls {
       display: none;
-    }
-
-    #section-{{ section.id }} .hs-video-modal {
-      padding: 15px;
-    }
-
-    #section-{{ section.id }} .hs-video-modal__dialog {
-      border-radius: 10px;
-    }
-
-    #section-{{ section.id }} .hs-video-modal__close {
-      top: 8px;
-      right: 8px;
-      width: 34px;
-      height: 34px;
     }
   }
 
@@ -500,6 +425,10 @@
     #section-{{ section.id }} .hs-video-carousel-slide {
       flex: 0 0 72%;
       max-width: 72%;
+    }
+
+    #section-{{ section.id }} .hs-video-carousel-thumb-wrap {
+      height: 330px;
     }
 
     #section-{{ section.id }} .review-carousel-controls {
@@ -511,11 +440,17 @@
     #section-{{ section.id }} .hs-video-carousel-heading {
       font-size: 24px;
     }
+
+    #section-{{ section.id }} .hs-video-carousel-thumb-wrap {
+      height: 300px;
+    }
   }
 </style>
 
 <script>
   (function () {
+    const youtubeTitleCache = new Map();
+
     function initHsVideoCarousel(section) {
       if (!section || section.dataset.carouselReady === 'true') return;
 
@@ -528,10 +463,6 @@
       const prevButton = section.querySelector('.review-carousel-prev');
       const nextButton = section.querySelector('.review-carousel-next');
       const dots = Array.from(section.querySelectorAll('.review-carousel-dot'));
-
-      const modal = section.querySelector('.hs-video-modal');
-      const player = section.querySelector('[data-hs-video-player]');
-      const closeButtons = Array.from(section.querySelectorAll('[data-hs-video-modal-close]'));
 
       const originalSlides = Array.from(track.children).map(function (slide) {
         return slide.cloneNode(true);
@@ -548,6 +479,9 @@
       let resizeTimer;
       let startX = 0;
       let endX = 0;
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let lastVideoActivationTime = 0;
 
       function mod(value, total) {
         return ((value % total) + total) % total;
@@ -612,6 +546,70 @@
         setActiveDot();
       }
 
+      function fetchYouTubeTitle(videoUrl) {
+        if (!videoUrl) return Promise.resolve('Watch video');
+
+        if (youtubeTitleCache.has(videoUrl)) {
+          return youtubeTitleCache.get(videoUrl);
+        }
+
+        const request = fetch('https://www.youtube.com/oembed?url=' + encodeURIComponent(videoUrl) + '&format=json')
+          .then(function (response) {
+            if (!response.ok) throw new Error('YouTube oEmbed failed');
+            return response.json();
+          })
+          .then(function (data) {
+            return data && data.title ? data.title : 'Watch video';
+          })
+          .catch(function () {
+            return fetch('https://noembed.com/embed?url=' + encodeURIComponent(videoUrl))
+              .then(function (response) {
+                if (!response.ok) throw new Error('Noembed failed');
+                return response.json();
+              })
+              .then(function (data) {
+                return data && data.title ? data.title : 'Watch video';
+              })
+              .catch(function () {
+                return 'Watch video';
+              });
+          });
+
+        youtubeTitleCache.set(videoUrl, request);
+
+        return request;
+      }
+
+      function updateYouTubeTitles() {
+        const titleElements = Array.from(track.querySelectorAll('[data-hs-youtube-title]'));
+
+        titleElements.forEach(function (titleElement) {
+          const videoUrl = titleElement.getAttribute('data-video-url');
+
+          if (!videoUrl) {
+            titleElement.textContent = 'Watch video';
+            return;
+          }
+
+          fetchYouTubeTitle(videoUrl).then(function (title) {
+            titleElement.textContent = title;
+            titleElement.setAttribute('title', title);
+
+            const card = titleElement.closest('.hs-video-carousel-card-button');
+
+            if (card) {
+              card.setAttribute('aria-label', 'Play video: ' + title);
+            }
+
+            const image = card ? card.querySelector('.hs-video-carousel-thumb') : null;
+
+            if (image) {
+              image.setAttribute('alt', title);
+            }
+          });
+        });
+      }
+
       function buildTrack(activeIndex) {
         cloneCount = Math.max(getVisibleCount() + 2, 4);
 
@@ -633,6 +631,7 @@
 
         requestAnimationFrame(function () {
           updateSlider(false);
+          updateYouTubeTitles();
         });
       }
 
@@ -735,68 +734,120 @@
         return /\.(mp4|webm|ogg)(\?.*)?$/i.test(url);
       }
 
-      function buildVideoMarkup(videoUrl) {
+      function createIframe(src) {
+        const iframe = document.createElement('iframe');
+
+        iframe.className = 'hs-video-carousel-inline-player';
+        iframe.src = src;
+        iframe.title = 'Video player';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.loading = 'eager';
+
+        return iframe;
+      }
+
+      function createVideo(src) {
+        const video = document.createElement('video');
+
+        video.className = 'hs-video-carousel-inline-player';
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+
+        video.addEventListener('loadedmetadata', function () {
+          video.play().catch(function () {});
+        });
+
+        return video;
+      }
+
+      function buildVideoElement(videoUrl) {
         const youtubeId = getYouTubeId(videoUrl);
         const vimeoId = getVimeoId(videoUrl);
 
         if (youtubeId) {
-          return '<iframe src="https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&rel=0" title="Video player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+          return createIframe('https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1');
         }
 
         if (vimeoId) {
-          return '<iframe src="https://player.vimeo.com/video/' + vimeoId + '?autoplay=1" title="Video player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+          return createIframe('https://player.vimeo.com/video/' + vimeoId + '?autoplay=1&muted=1&playsinline=1');
         }
 
         if (isDirectVideo(videoUrl)) {
-          return '<video src="' + videoUrl + '" controls autoplay playsinline></video>';
+          return createVideo(videoUrl);
         }
 
-        return '<iframe src="' + videoUrl + '" title="Video player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+        return createIframe(videoUrl);
       }
 
-      function openVideoModal(videoUrl) {
-        if (!modal || !player || !videoUrl) return;
+      function playVideoInsideCard(videoCard) {
+        if (!videoCard) return;
 
-        player.innerHTML = buildVideoMarkup(videoUrl);
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('hs-video-modal-open');
+        const videoUrl = videoCard.getAttribute('data-hs-video-url');
+        const thumbWrap = videoCard.querySelector('.hs-video-carousel-thumb-wrap');
 
-        const closeButton = modal.querySelector('.hs-video-modal__close');
-        if (closeButton) {
-          closeButton.focus();
-        }
+        if (!videoUrl || !thumbWrap || thumbWrap.classList.contains('is-playing')) return;
+
+        const videoElement = buildVideoElement(videoUrl);
+
+        thumbWrap.innerHTML = '';
+        thumbWrap.appendChild(videoElement);
+        thumbWrap.classList.add('is-playing');
+        videoCard.classList.add('is-playing');
       }
 
-      function closeVideoModal() {
-        if (!modal || !player) return;
+      function activateVideoFromEvent(event) {
+        const videoCard = event.target.closest('.hs-video-carousel-card-button');
 
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('hs-video-modal-open');
-
-        player.innerHTML = '';
-      }
-
-      track.addEventListener('click', function (event) {
-        const videoButton = event.target.closest('.hs-video-carousel-card-button');
-        if (!videoButton) return;
+        if (!videoCard || !track.contains(videoCard)) return false;
 
         event.preventDefault();
+        event.stopPropagation();
 
-        const videoUrl = videoButton.getAttribute('data-hs-video-url');
-        openVideoModal(videoUrl);
-      });
+        lastVideoActivationTime = Date.now();
+        playVideoInsideCard(videoCard);
 
-      closeButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          closeVideoModal();
-        });
-      });
+        return true;
+      }
 
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && modal && modal.classList.contains('is-open')) {
-          closeVideoModal();
+      track.addEventListener('pointerdown', function (event) {
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+      }, true);
+
+      track.addEventListener('pointerup', function (event) {
+        const movedX = Math.abs(event.clientX - pointerStartX);
+        const movedY = Math.abs(event.clientY - pointerStartY);
+        const isDrag = movedX > 8 || movedY > 8;
+
+        if (isDrag) return;
+
+        activateVideoFromEvent(event);
+      }, true);
+
+      track.addEventListener('click', function (event) {
+        if (Date.now() - lastVideoActivationTime < 500) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+
+        activateVideoFromEvent(event);
+      }, true);
+
+      track.addEventListener('keydown', function (event) {
+        const videoCard = event.target.closest('.hs-video-carousel-card-button');
+
+        if (!videoCard || !track.contains(videoCard)) return;
+
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          event.stopPropagation();
+
+          playVideoInsideCard(videoCard);
         }
       });
 
@@ -897,26 +948,9 @@
       "name": "Video card",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "thumbnail",
-          "label": "Thumbnail image"
-        },
-        {
           "type": "url",
           "id": "video_link",
-          "label": "Video link"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Your Hair Isn’t Dry... It’s Leaking"
-        },
-        {
-          "type": "text",
-          "id": "subtitle",
-          "label": "Subtitle",
-          "default": "Moisture"
+          "label": "YouTube video link"
         }
       ]
     }
@@ -926,39 +960,19 @@
       "name": "Video carousel",
       "blocks": [
         {
-          "type": "video_card",
-          "settings": {
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
-          }
+          "type": "video_card"
         },
         {
-          "type": "video_card",
-          "settings": {
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
-          }
+          "type": "video_card"
         },
         {
-          "type": "video_card",
-          "settings": {
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
-          }
+          "type": "video_card"
         },
         {
-          "type": "video_card",
-          "settings": {
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
-          }
+          "type": "video_card"
         },
         {
-          "type": "video_card",
-          "settings": {
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
-          }
+          "type": "video_card"
         }
       ]
     }

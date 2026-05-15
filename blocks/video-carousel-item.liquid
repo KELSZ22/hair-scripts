@@ -1,3 +1,18 @@
+{% assign video_url = block.settings.youtube_link | append: '' %}
+{% assign youtube_id = blank %}
+
+{% if video_url contains 'youtu.be/' %}
+  {% assign youtube_id = video_url | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+{% elsif video_url contains 'youtube.com/shorts/' %}
+  {% assign youtube_id = video_url | split: 'youtube.com/shorts/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+{% elsif video_url contains 'youtube.com/embed/' %}
+  {% assign youtube_id = video_url | split: 'youtube.com/embed/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+{% elsif video_url contains 'youtube.com/live/' %}
+  {% assign youtube_id = video_url | split: 'youtube.com/live/' | last | split: '?' | first | split: '&' | first | split: '/' | first %}
+{% elsif video_url contains 'v=' %}
+  {% assign youtube_id = video_url | split: 'v=' | last | split: '&' | first | split: '#' | first %}
+{% endif %}
+
 <div
   class="video-carousel-block__card"
   {{ block.shopify_attributes }}
@@ -6,19 +21,19 @@
     <a
       href="{{ block.settings.youtube_link }}"
       class="video-carousel-block__link"
+      data-video-url="{{ block.settings.youtube_link | escape }}"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="{{ block.settings.card_text | default: 'Open YouTube video' | escape }}"
     >
-      {% if block.settings.thumbnail != blank %}
-        {{
-          block.settings.thumbnail
-          | image_url: width: 600
-          | image_tag:
-            loading: 'lazy',
-            class: 'video-carousel-block__image',
-            alt: block.settings.card_text
-        }}
+      {% if youtube_id != blank %}
+        <img
+          src="https://img.youtube.com/vi/{{ youtube_id }}/maxresdefault.jpg"
+          onerror="this.onerror=null; this.src='https://img.youtube.com/vi/{{ youtube_id }}/hqdefault.jpg';"
+          loading="lazy"
+          class="video-carousel-block__image"
+          alt="{{ block.settings.card_text | default: 'YouTube video thumbnail' | escape }}"
+        >
       {% else %}
         <div class="video-carousel-block__placeholder"></div>
       {% endif %}
@@ -31,18 +46,7 @@
     </a>
   {% else %}
     <div class="video-carousel-block__link">
-      {% if block.settings.thumbnail != blank %}
-        {{
-          block.settings.thumbnail
-          | image_url: width: 600
-          | image_tag:
-            loading: 'lazy',
-            class: 'video-carousel-block__image',
-            alt: block.settings.card_text
-        }}
-      {% else %}
-        <div class="video-carousel-block__placeholder"></div>
-      {% endif %}
+      <div class="video-carousel-block__placeholder"></div>
 
       {% if block.settings.card_text != blank %}
         <span class="video-carousel-block__card-title">
@@ -60,12 +64,7 @@
     {
       "type": "url",
       "id": "youtube_link",
-      "label": "YouTube link"
-    },
-    {
-      "type": "image_picker",
-      "id": "thumbnail",
-      "label": "Thumbnail image"
+      "label": "YouTube / Shorts link"
     },
     {
       "type": "text",

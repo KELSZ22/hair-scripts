@@ -20,7 +20,7 @@
             "bg-color": "#237b84",
             "text": "FREE SHIPPING ON ALL SUBSCRIPTIONS",
             "textlink": "Subscribe Now",
-            "link": "#",
+            "link": "shopify://products/hairscripts-by-bevy-supplement",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",

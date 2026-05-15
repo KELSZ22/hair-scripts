@@ -107,6 +107,15 @@
         "color_scheme": ""
       }
     },
+    "hs_text_image_mA8aha": {
+      "type": "hs-text-image",
+      "name": "HS Text Image",
+      "settings": {
+        "heading": "LOREM IMPSUM DOLOR SIT AMET",
+        "text": "<p>Hair supplements fail for one reason: they don’t match what’s actually causing the loss. They add ingredients to a label without addressing the specific mechanisms shutting your growth cycle down. This page exists so you never have to guess again. By the time you finish reading, you’ll know exactly what’s happening inside your follicles and exactly how HairScripts™ fixes it.</p>",
+        "image": "shopify://shop_images/Mask_group.webp"
+      }
+    },
     "hairscripts_formulated_by_YbkLAj": {
       "type": "hairscripts-formulated-by",
       "blocks": {
@@ -219,6 +228,89 @@
         "card_border_color": "#4da9a3",
         "card_background_color": "#f7f3ec",
         "color_scheme": ""
+      }
+    },
+    "hs_formula_pathways_kYiekG": {
+      "type": "hs-formula-pathways",
+      "blocks": {
+        "pathway_8DNKP8": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Androgen / DHT activity"
+          }
+        },
+        "pathway_am9yFi": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Thyroid–follicle function"
+          }
+        },
+        "pathway_ALHJVK": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Stress & cortisol signaling"
+          }
+        },
+        "pathway_7FzJq9": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Insulin resistance"
+          }
+        },
+        "pathway_wmbJdA": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Scalp inflammation"
+          }
+        },
+        "pathway_XgGmqY": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Oxidative follicle damage"
+          }
+        },
+        "pathway_UqJitU": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Scalp microcirculation"
+          }
+        },
+        "pathway_afU7Ed": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Structural strand integrity"
+          }
+        },
+        "pathway_tVtYGA": {
+          "type": "pathway",
+          "settings": {
+            "item_text": "Nutrient depletion"
+          }
+        }
+      },
+      "block_order": [
+        "pathway_8DNKP8",
+        "pathway_am9yFi",
+        "pathway_ALHJVK",
+        "pathway_7FzJq9",
+        "pathway_wmbJdA",
+        "pathway_XgGmqY",
+        "pathway_UqJitU",
+        "pathway_afU7Ed",
+        "pathway_tVtYGA"
+      ],
+      "name": "HS Formula Pathways",
+      "settings": {
+        "eyebrow_color": "#211b18",
+        "heading_color": "#211b18",
+        "text_color": "#6b6b6b",
+        "item_text_color": "#211b18",
+        "eyebrow": "THE FORMULA",
+        "heading": "NINE PATHWAYS. ONE FORMULA.",
+        "text": "<p>HairScripts™ addresses every root cause of hormonal hair loss — simultaneously. So you’re covered at every level, from day one.</p>",
+        "button_label": "Start My Protocol",
+        "button_link": "",
+        "image": "shopify://shop_images/image_2_1.webp"
       }
     },
     "hairscripts_root_causes_kk7yKx": {
@@ -373,7 +465,7 @@
       ],
       "name": "Key ingredients grid",
       "settings": {
-        "eyebrow": "KEY INGREDIENTS",
+        "eyebrow": "=",
         "heading": "Key Ingredients",
         "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
         "section_bg": "#2f6665",
@@ -462,15 +554,35 @@
         "tag_text_color": "#333333",
         "color_scheme": ""
       }
+    },
+    "hs_formula_pathways_VzYtQp": {
+      "type": "hs-formula-pathways",
+      "name": "HS Formula Pathways",
+      "settings": {
+        "background_image": "shopify://shop_images/Frame_1000009020.png",
+        "eyebrow_color": "#211b18",
+        "heading_color": "#faf7f2",
+        "text_color": "#faf7f2",
+        "item_text_color": "#211b18",
+        "eyebrow": "",
+        "heading": "NINE PATThis Is Why It Works When Everything Else Didn’tHWAYS. ONE FORMULA.",
+        "text": "<p>Not because it has more ingredients. Because it has the right mechanisms — all nine of them — working simultaneously inside your follicle. The same way your hair loss has been operating. Nine pathways. Nineteen ingredients. One formula built around what’s actually happening inside your body.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image": "shopify://shop_images/Frame_1000009525.webp"
+      }
     }
   },
   "order": [
     "main",
     "hairscripts_science_hero_qGPWVW",
+    "hs_text_image_mA8aha",
     "hairscripts_formulated_by_YbkLAj",
     "hairscripts_hair_cycle_XRjCbX",
+    "hs_formula_pathways_kYiekG",
     "hairscripts_root_causes_kk7yKx",
     "key_ingredients_grid_drWHkt",
-    "hairscripts_growth_timeline_zAd8Mn"
+    "hairscripts_growth_timeline_zAd8Mn",
+    "hs_formula_pathways_VzYtQp"
   ]
 }

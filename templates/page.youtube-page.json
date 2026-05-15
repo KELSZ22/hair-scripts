@@ -188,13 +188,114 @@
         "color_scheme": ""
       }
     },
+    "hairscripts_video_carousel_Jy3tjE": {
+      "type": "hairscripts-video-carousel",
+      "blocks": {
+        "video_card_crHxcc": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/62yR32tBUCM",
+            "title": "Unlock Thicker Hair With Nutrafol",
+            "subtitle": ""
+          }
+        },
+        "video_card_CdCgYQ": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/B48I8yMpWxQ",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": ""
+          }
+        },
+        "video_card_KxQkqV": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/FKR3qsJEHjE",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": ""
+          }
+        },
+        "video_card_z6qdNK": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/IblrcC4GDVE",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": ""
+          }
+        },
+        "video_card_C7R3CR": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/j96ncvazk1Y",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": ""
+          }
+        },
+        "video_card_yyYPzB": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/jXrx6q-ed30",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_fBtHjz": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/KrnuZSNhqp8",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_XWBxiz": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/UVcH5smb_l4",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_Dq7eEd": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/wMMC_3R_sxo",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        },
+        "video_card_XrQQRw": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/xdDkR4VhqVo",
+            "title": "Your Hair Isn’t Dry... It’s Leaking",
+            "subtitle": "Moisture"
+          }
+        }
+      },
+      "block_order": [
+        "video_card_crHxcc",
+        "video_card_CdCgYQ",
+        "video_card_KxQkqV",
+        "video_card_z6qdNK",
+        "video_card_C7R3CR",
+        "video_card_yyYPzB",
+        "video_card_fBtHjz",
+        "video_card_XWBxiz",
+        "video_card_Dq7eEd",
+        "video_card_XrQQRw"
+      ],
+      "name": "Video carousel",
+      "settings": {
+        "heading": "Your Hair Is Telling You Something. Let’s Decode It.",
+        "subheading": "Watch short, expert-led videos that explain what’s actually driving your shedding — and what to do about it."
+      }
+    },
     "hairscripts_video_carousel_W6t93F": {
       "type": "hairscripts-video-carousel",
       "blocks": {
         "video_card_Jx4Gad": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
             "subtitle": "Moisture"
@@ -203,7 +304,6 @@
         "video_card_fxjQfn": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_3.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
             "subtitle": "Moisture"
@@ -212,7 +312,6 @@
         "video_card_agjQgt": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_4.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
             "subtitle": "Moisture"
@@ -221,7 +320,6 @@
         "video_card_fkgCEd": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_5.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
             "subtitle": "Moisture"
@@ -230,7 +328,6 @@
         "video_card_dJTfCk": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_6.png",
             "video_link": "",
             "title": "Your Hair Isn’t Dry... It’s Leaking",
             "subtitle": "Moisture"
@@ -244,6 +341,7 @@
         "video_card_fkgCEd",
         "video_card_dJTfCk"
       ],
+      "disabled": true,
       "name": "Video carousel",
       "settings": {
         "heading": "Your Hair Is Telling You Something. Let’s Decode It.",
@@ -321,7 +419,7 @@
         "heading": "EXPLORE BEV’S PLAYLISTS",
         "text": "<p>The science, simplified. So you finally understand what’s happening at the follicle, why most products keep failing you, and what your hair actually needs to recover.<br/><br/><br/></p>",
         "button_label": "Watch All Playlist",
-        "button_link": "",
+        "button_link": "https://www.youtube.com/@hairscriptsbybevy/playlists",
         "background_color_left": "#4e9b97",
         "background_color_right": "#62bbb8",
         "star_color": "#63144f",
@@ -372,7 +470,7 @@
         "heading": "JOIN HAIRSCRIPTS COMMUNITY",
         "text": "<p>A growing community of women learning what’s really happening with their hair — directly from someone who’s lived it and studied it professionally. This is where hair recovery starts making sense again.<br/></p>",
         "button_label": "Join Community",
-        "button_link": "",
+        "button_link": "shopify://pages/contact",
         "background_color": "#f3f3f3",
         "star_color": "#63144f",
         "check_color": "#63144f",
@@ -389,6 +487,7 @@
     "main",
     "bevy_learn_directly_PxEhkE",
     "hairscripts_bevy_stats_8kqEP7",
+    "hairscripts_video_carousel_Jy3tjE",
     "hairscripts_video_carousel_W6t93F",
     "hairscripts_playlists_iUrG7C",
     "hairscripts_community_eeYEmb"

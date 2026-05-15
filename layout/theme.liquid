@@ -152,5 +152,217 @@
     {% endif %}
 
     {% section 'discount-popup-modal' %}
+
+    <script>
+      /* =============================================
+   PASTE THIS IN theme.liquid just before </body>
+   OR in a custom JS file loaded on the page
+   ============================================= */
+
+(function injectRechargeStyles() {
+  const css = `
+    /* === PURCHASE OPTION GROUP === */
+    .rc-purchase-option-group {
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* === CONTENT WRAP === */
+    .rc-selection__root {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* === CARD BASE === */
+    .rc-purchase-option {
+      position: relative;
+      border: 1.5px solid #e0dbd5;
+      border-radius: 16px;
+      background: #ffffff;
+      padding: 20px 20px 16px;
+      cursor: pointer;
+    }
+
+    /* === SELECTED CARD (teal bg) === */
+    .rc-purchase-option[rc-selected] {
+      background: #dff0ec;
+      border: 2px solid #3a8c7a;
+    }
+
+    /* === BEST VALUE BADGE === */
+    .rc-purchase-option__badge {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      background: #c07038;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 0 14px 0 14px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* === LABEL ROW (radio + title | price) === */
+    .rc-purchase-option__label {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      width: 100%;
+    }
+
+    /* === SELECTOR (radio + title text) === */
+    .rc-purchase-option__selector {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      flex: 1;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.3;
+    }
+
+    /* Hide native radio */
+    .rc-purchase-option__input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* === PRICE COLUMN (right-aligned) === */
+    .rc-purchase-option__prices {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .rc-price {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .rc-price.strike-through {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    /* === SUB-CONTAINER (benefits below label) === */
+    .rc-purchase-option__sub-container {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* === BENEFITS LIST === */
+    [part="rc-benefits__list"] {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    [part="rc-benefits__list"] li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #2a2a2a;
+      line-height: 1.35;
+    }
+
+    /* === MOBILE === */
+    @media (max-width: 399px) {
+      .rc-purchase-option {
+        padding: 16px 14px 14px;
+        border-radius: 14px;
+      }
+      .rc-purchase-option__selector { font-size: 14px; }
+      .rc-price { font-size: 15px; }
+      .rc-purchase-option__badge { font-size: 10px; padding: 5px 11px; }
+      [part="rc-benefits__list"] li { font-size: 13px; gap: 8px; }
+    }
+
+    /* === DESKTOP === */
+    @media (min-width: 600px) {
+      .rc-purchase-option { padding: 22px 24px 18px; }
+      .rc-purchase-option__selector { font-size: 16px; }
+      .rc-price { font-size: 18px; }
+    }
+  `;
+
+  function inject(shadowRoot) {
+    const style = document.createElement('style');
+    style.textContent = css;
+    shadowRoot.appendChild(style);
+  }
+
+  function findAndInject() {
+    // rc-widget__root is the custom element that holds the shadow DOM
+    const targets = [
+      'rc-widget',
+      'rc-purchase-option-group',
+      'rc-subscription-widget',
+    ];
+
+    targets.forEach(selector => {
+      document.querySelectorAll(selector).forEach(el => {
+        if (el.shadowRoot && !el.shadowRoot.querySelector('style[data-rc-injected]')) {
+          const style = document.createElement('style');
+          style.setAttribute('data-rc-injected', 'true');
+          style.textContent = css;
+          el.shadowRoot.appendChild(style);
+        }
+      });
+    });
+
+    // Also try injecting into any shadow root that contains rc-purchase-option
+    document.querySelectorAll('*').forEach(el => {
+      if (el.shadowRoot) {
+        const inner = el.shadowRoot.querySelector('.rc-purchase-option, .rc-purchase-option-group');
+        if (inner && !el.shadowRoot.querySelector('style[data-rc-injected]')) {
+          const style = document.createElement('style');
+          style.setAttribute('data-rc-injected', 'true');
+          style.textContent = css;
+          el.shadowRoot.appendChild(style);
+        }
+      }
+    });
+  }
+
+  // Run on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', findAndInject);
+  } else {
+    findAndInject();
+  }
+
+  // Also observe for dynamically added Recharge elements
+  const observer = new MutationObserver(() => findAndInject());
+  observer.observe(document.body, { childList: true, subtree: true });
+
+})();
+    </script>
+
+
+
   </body>
 </html>

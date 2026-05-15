@@ -1,0 +1,533 @@
+{% assign rc_product = product %}
+{% assign rc_variant = product.selected_or_first_available_variant %}
+{% assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id %}
+
+<div class="rc-custom-widget" id="rc-custom-widget-{{ rc_product.id }}">
+
+  <div class="rc-card rc-card--selected" id="rc-subscription-card" data-type="subscription">
+    <span class="rc-badge">Best Value</span>
+    <label class="rc-card__label" for="rc-radio-subscription">
+      <div class="rc-card__selector">
+        <input class="rc-radio-input" type="radio" id="rc-radio-subscription" name="rc-purchase-option" value="subscription" checked>
+        <span class="rc-radio-dot rc-radio-dot--selected"></span>
+        <div class="rc-card__title-group">
+          <span class="rc-card__title">90-Day Subscription</span>
+          <span class="rc-card__subtitle">Billed monthly. 3-month commitment</span>
+        </div>
+      </div>
+      <div class="rc-card__prices">
+        <div class="rc-price-row">
+          <span class="rc-price--main">$45<span class="rc-price--mo">/mo</span></span>
+          <span class="rc-price--original">$169.00/mo</span>
+        </div>
+        <div class="rc-price-sub-row">
+          <span class="rc-price--per">$1.43 per supplement</span>
+          <span class="rc-price--save">save 53%</span>
+        </div>
+      </div>
+    </label>
+    <div class="rc-divider"></div>
+    <ul class="rc-benefits">
+      <li>
+        
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.5 13.5V4.5C10.5 4.10218 10.342 3.72064 10.0607 3.43934C9.77936 3.15804 9.39782 3 9 3H3C2.60218 3 2.22064 3.15804 1.93934 3.43934C1.65804 3.72064 1.5 4.10218 1.5 4.5V12.75C1.5 12.9489 1.57902 13.1397 1.71967 13.2803C1.86032 13.421 2.05109 13.5 2.25 13.5H3.75" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.25 13.5H6.75" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.25 13.5H15.75C15.9489 13.5 16.1397 13.421 16.2803 13.2803C16.421 13.1397 16.5 12.9489 16.5 12.75V10.0125C16.4997 9.8423 16.4415 9.67726 16.335 9.5445L13.725 6.282C13.6549 6.19416 13.5659 6.12321 13.4646 6.0744C13.3633 6.02559 13.2524 6.00016 13.14 6H10.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.75 15C13.5784 15 14.25 14.3284 14.25 13.5C14.25 12.6716 13.5784 12 12.75 12C11.9216 12 11.25 12.6716 11.25 13.5C11.25 14.3284 11.9216 15 12.75 15Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.25 15C6.07843 15 6.75 14.3284 6.75 13.5C6.75 12.6716 6.07843 12 5.25 12C4.42157 12 3.75 12.6716 3.75 13.5C3.75 14.3284 4.42157 15 5.25 15Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+        FREE SHIPPING to United States
+      </li>
+      <li>
+        
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1257_3163)">
+<path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.69678 3.69727L14.3025 14.3038" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1257_3163">
+<rect width="18" height="18" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+        Cancel or pause anytime
+      </li>
+      <li>
+        
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1257_3147)">
+<path d="M2.8874 6.46532C2.77793 5.97221 2.79474 5.45945 2.93627 4.97457C3.0778 4.48969 3.33946 4.0484 3.697 3.69161C4.05454 3.33482 4.49638 3.07408 4.98156 2.93356C5.46673 2.79305 5.97953 2.77732 6.4724 2.88782C6.74368 2.46354 7.1174 2.11439 7.55911 1.87253C8.00082 1.63068 8.49631 1.50391 8.9999 1.50391C9.50349 1.50391 9.99898 1.63068 10.4407 1.87253C10.8824 2.11439 11.2561 2.46354 11.5274 2.88782C12.021 2.77683 12.5347 2.7925 13.0206 2.93335C13.5066 3.07421 13.949 3.33567 14.3068 3.69343C14.6645 4.05119 14.926 4.49362 15.0669 4.97957C15.2077 5.46551 15.2234 5.97919 15.1124 6.47282C15.5367 6.7441 15.8858 7.11782 16.1277 7.55953C16.3695 8.00124 16.4963 8.49673 16.4963 9.00032C16.4963 9.50391 16.3695 9.99939 16.1277 10.4411C15.8858 10.8828 15.5367 11.2565 15.1124 11.5278C15.2229 12.0207 15.2072 12.5335 15.0667 13.0187C14.9261 13.5038 14.6654 13.9457 14.3086 14.3032C13.9518 14.6608 13.5105 14.9224 13.0256 15.0639C12.5408 15.2055 12.028 15.2223 11.5349 15.1128C11.264 15.5387 10.89 15.8894 10.4475 16.1323C10.005 16.3752 9.50842 16.5026 9.00365 16.5026C8.49888 16.5026 8.00227 16.3752 7.55981 16.1323C7.11734 15.8894 6.74333 15.5387 6.4724 15.1128C5.97953 15.2233 5.46673 15.2076 4.98156 15.0671C4.49638 14.9266 4.05454 14.6658 3.697 14.309C3.33946 13.9522 3.0778 13.5109 2.93627 13.0261C2.79474 12.5412 2.77793 12.0284 2.8874 11.5353C2.45987 11.2647 2.10771 10.8904 1.86369 10.4472C1.61966 10.004 1.4917 9.50627 1.4917 9.00032C1.4917 8.49436 1.61966 7.99663 1.86369 7.55341C2.10771 7.11019 2.45987 6.73588 2.8874 6.46532Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.25 6.75L6.75 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.75 6.75H6.7575" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.25 11.25H11.2575" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1257_3147">
+<rect width="18" height="18" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+        Maximum Savings
+      </li>
+      <li>
+        
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 3V8.25C15 9.04565 14.6839 9.80871 14.1213 10.3713C13.5587 10.9339 12.7956 11.25 12 11.25H3" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.75 7.5L3 11.25L6.75 15" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+        90-day money-back guarantee
+      </li>
+      <li>
+        
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.5 7.1254C1.50002 6.2908 1.7532 5.47583 2.2261 4.78814C2.699 4.10045 3.36939 3.57239 4.14871 3.2737C4.92803 2.975 5.77962 2.91973 6.59101 3.11518C7.4024 3.31063 8.13542 3.74761 8.69325 4.3684C8.73254 4.41041 8.78004 4.4439 8.83281 4.4668C8.88557 4.48969 8.94248 4.50151 9 4.50151C9.05752 4.50151 9.11443 4.48969 9.16719 4.4668C9.21996 4.4439 9.26746 4.41041 9.30675 4.3684C9.86283 3.74357 10.596 3.30292 11.4087 3.1051C12.2214 2.90727 13.0751 2.96166 13.8562 3.26101C14.6372 3.56036 15.3085 4.09049 15.7808 4.78082C16.2531 5.47116 16.504 6.28897 16.5 7.1254C16.5 8.8429 15.375 10.1254 14.25 11.2504L10.131 15.2351C9.99125 15.3957 9.81895 15.5246 9.62553 15.6134C9.43212 15.7022 9.22203 15.7488 9.00922 15.7501C8.7964 15.7515 8.58574 15.7075 8.39122 15.6212C8.19669 15.5349 8.02277 15.4081 7.881 15.2494L3.75 11.2504C2.625 10.1254 1.5 8.8504 1.5 7.1254Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+        Share with family and friends
+      </li>
+    </ul>
+  </div>
+
+  <div class="rc-card rc-card--onetime" id="rc-onetime-card" data-type="onetime">
+    <label class="rc-card__label" for="rc-radio-onetime">
+      <div class="rc-card__selector">
+        <input class="rc-radio-input" type="radio" id="rc-radio-onetime" name="rc-purchase-option" value="onetime">
+        <span class="rc-radio-dot"></span>
+        <span class="rc-card__title">30-Day Supply</span>
+      </div>
+      <div class="rc-card__prices">
+        <span class="rc-price--main rc-price--onetime">$49<span class="rc-price--mo">/mo</span></span>
+        <span class="rc-price--per rc-price--per-right">$2.30 per supplement</span>
+      </div>
+    </label>
+    <div class="rc-divider"></div>
+    <ul class="rc-benefits">
+      <li>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.5 13.5V4.5C10.5 4.10218 10.342 3.72064 10.0607 3.43934C9.77936 3.15804 9.39782 3 9 3H3C2.60218 3 2.22064 3.15804 1.93934 3.43934C1.65804 3.72064 1.5 4.10218 1.5 4.5V12.75C1.5 12.9489 1.57902 13.1397 1.71967 13.2803C1.86032 13.421 2.05109 13.5 2.25 13.5H3.75" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.25 13.5H6.75" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.25 13.5H15.75C15.9489 13.5 16.1397 13.421 16.2803 13.2803C16.421 13.1397 16.5 12.9489 16.5 12.75V10.0125C16.4997 9.8423 16.4415 9.67726 16.335 9.5445L13.725 6.282C13.6549 6.19416 13.5659 6.12321 13.4646 6.0744C13.3633 6.02559 13.2524 6.00016 13.14 6H10.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.75 15C13.5784 15 14.25 14.3284 14.25 13.5C14.25 12.6716 13.5784 12 12.75 12C11.9216 12 11.25 12.6716 11.25 13.5C11.25 14.3284 11.9216 15 12.75 15Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.25 15C6.07843 15 6.75 14.3284 6.75 13.5C6.75 12.6716 6.07843 12 5.25 12C4.42157 12 3.75 12.6716 3.75 13.5C3.75 14.3284 4.42157 15 5.25 15Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+        FREE SHIPPING to United States
+      </li>
+      <li>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1257_3163)">
+<path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.69678 3.69727L14.3025 14.3038" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1257_3163">
+<rect width="18" height="18" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+        Cancel or pause anytime
+      </li>
+    </ul>
+  </div>
+
+  <p class="rc-onetime-link-row">
+    Prefer to try without subscribing?
+    <a href="#" class="rc-onetime-link" id="rc-onetime-trigger">One Time Purchase $69</a>
+  </p>
+
+  <div class="rc-status" id="rc-status" style="display:none;"></div>
+
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fustat:wght@400;600;700;800&display=swap');
+
+  .rc-custom-widget {
+    width: 140%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'Fustat', sans-serif;
+    box-sizing: border-box;
+  }
+  .rc-card {
+    position: relative;
+    border: 1.5px solid #ddd8d2;
+    border-radius: 16px;
+    background: transparent;
+    padding: 18px 20px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .rc-card--selected {
+    background: #dff0ec;
+    border: 2px solid #3a8c7a;
+    padding-top: 28px;
+  }
+  .rc-badge {
+    position: absolute;
+    top: -16px;
+    left: 87%;
+    transform: translateX(-50%);
+    background: #b07040;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 22px;
+    border-radius: 999px;
+    line-height: 1;
+    white-space: nowrap;
+    font-family: 'Fustat', sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .rc-card__label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .rc-card__selector {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+  .rc-radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+  .rc-radio-dot {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    border: 2px solid #bbb;
+    background: #fff;
+    box-sizing: border-box;
+    margin-top: 3px;
+    flex-shrink: 0;
+    transition: border-color 0.15s, border-width 0.15s;
+  }
+  .rc-radio-dot--selected {
+    border-color: #3a7f6e;
+    border-width: 6px;
+  }
+  .rc-card__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .rc-card__title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.2;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-card__subtitle {
+    font-size: 12.5px;
+    color: #666;
+    font-weight: 400;
+    line-height: 1.3;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-card__prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .rc-price-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .rc-price--main {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-price--mo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-price--original {
+    font-size: 13px;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: 400;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-price-sub-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  .rc-price--per {
+    font-size: 12px;
+    color: #888;
+    font-weight: 400;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-price--save {
+    font-size: 12px;
+    font-weight: 700;
+    color: #c0392b;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-price--onetime {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .rc-price--per-right { text-align: right; }
+  .rc-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.09);
+    margin: 16px 0;
+  }
+  .rc-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rc-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #2a2a2a;
+    line-height: 1.35;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-benefits li svg { flex-shrink: 0; color: #444; opacity: 0.75; }
+  .rc-onetime-link-row {
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    margin: 4px 0 0;
+    line-height: 1.5;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-onetime-link {
+    color: #3a7f6e;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-status {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    font-family: 'Fustat', sans-serif;
+  }
+  .rc-status--error { background:#fff0f0; color:#c0392b; border:1px solid #f5c6c6; }
+  .rc-status--success { background:#f0faf6; color:#27ae60; border:1px solid #b2dfcc; }
+
+  @media (max-width: 480px) {
+    .rc-card { padding: 16px 14px 18px; border-radius: 14px; }
+    .rc-card--selected { padding-top: 28px; }
+    .rc-card__title { font-size: 15px; }
+    .rc-card__subtitle { font-size: 11.5px; }
+    .rc-price--main { font-size: 18px; }
+    .rc-price--mo { font-size: 12px; }
+    .rc-price--original { font-size: 11.5px; }
+    .rc-price--per, .rc-price--save { font-size: 11px; }
+    .rc-badge { font-size: 10px; padding: 6px 16px; top: -14px; }
+    .rc-benefits li { font-size: 12.5px; gap: 8px; }
+    .rc-benefits li svg { width: 16px; height: 16px; }
+    .rc-card__label { gap: 8px; }
+    .rc-price-sub-row { gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+  }
+  @media (min-width: 600px) {
+    .rc-card { padding: 20px 24px 22px; }
+    .rc-card--selected { padding-top: 32px; }
+    .rc-card__title { font-size: 18px; }
+    .rc-price--main { font-size: 24px; }
+    .rc-badge { font-size: 12px; padding: 8px 24px; top: -17px; }
+    .rc-benefits li { font-size: 14px; }
+  }
+  @media screen and (max-width: 768px) {
+    .rc-custom-widget {
+    width: 100%;
+    }
+}
+
+</style>
+
+<script>
+(function() {
+  function init() {
+    var widget = document.getElementById('rc-custom-widget-{{ rc_product.id }}');
+    if (!widget) return;
+
+    var subCard  = widget.querySelector('#rc-subscription-card');
+    var oneCard  = widget.querySelector('#rc-onetime-card');
+    var subDot   = subCard.querySelector('.rc-radio-dot');
+    var oneDot   = oneCard.querySelector('.rc-radio-dot');
+    var oneLink  = widget.querySelector('#rc-onetime-trigger');
+    var statusEl = widget.querySelector('#rc-status');
+
+    var PLANS = {
+      sub90: '2117107817',
+      sub30: '1968406633',
+      onetime: ''
+    };
+
+    var currentPlanId = PLANS.sub90;
+
+    var formId = '{{ product_form_id }}';
+    var productForm = document.getElementById(formId);
+
+    if (!productForm) {
+      productForm = document.querySelector('form[data-type="add-to-cart-form"]');
+    }
+
+    if (!productForm) {
+      console.warn('RC Widget: product form not found with id:', formId);
+      return;
+    }
+
+    var sellingPlanInput = productForm.querySelector('input[name="selling_plan"]');
+    if (!sellingPlanInput) {
+      sellingPlanInput = document.createElement('input');
+      sellingPlanInput.type = 'hidden';
+      sellingPlanInput.name = 'selling_plan';
+      productForm.appendChild(sellingPlanInput);
+    }
+
+    function updateATCPrice(priceText) {
+      var priceEl = document.querySelector('.add-to-cart-text__price');
+      if (priceEl) priceEl.textContent = priceText;
+
+      var priceBlock = document.querySelector('.price__current, .price-item--regular, [data-price]');
+      if (priceBlock) priceBlock.textContent = priceText;
+    }
+
+    function setSellingPlan(planId, priceText) {
+      currentPlanId = planId;
+      if (planId) {
+        sellingPlanInput.value = planId;
+        sellingPlanInput.disabled = false;
+      } else {
+        sellingPlanInput.value = '';
+        sellingPlanInput.disabled = true;
+      }
+      if (priceText) updateATCPrice(priceText);
+    }
+
+    function activateSubscription90() {
+      subCard.classList.add('rc-card--selected');
+      oneCard.classList.remove('rc-card--selected');
+      subDot.classList.add('rc-radio-dot--selected');
+      oneDot.classList.remove('rc-radio-dot--selected');
+      subCard.querySelector('input').checked = true;
+      setSellingPlan(PLANS.sub90, '$45.00');
+    }
+
+    function activateSubscription30() {
+      oneCard.classList.add('rc-card--selected');
+      subCard.classList.remove('rc-card--selected');
+      oneDot.classList.add('rc-radio-dot--selected');
+      subDot.classList.remove('rc-radio-dot--selected');
+      oneCard.querySelector('input').checked = true;
+      setSellingPlan(PLANS.sub30, '$49.00');
+    }
+
+    function activateOnetime() {
+      oneCard.classList.add('rc-card--selected');
+      subCard.classList.remove('rc-card--selected');
+      oneDot.classList.add('rc-radio-dot--selected');
+      subDot.classList.remove('rc-radio-dot--selected');
+      oneCard.querySelector('input').checked = true;
+      setSellingPlan(PLANS.onetime, '$69.00');
+    }
+
+    subCard.addEventListener('click', activateSubscription90);
+    oneCard.addEventListener('click', activateSubscription30);
+
+    if (oneLink) {
+      oneLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        activateOnetime();
+      });
+    }
+
+    productForm.addEventListener('submit', function(e) {
+      if (currentPlanId) {
+        sellingPlanInput.disabled = false;
+        sellingPlanInput.value = currentPlanId;
+      } else {
+        sellingPlanInput.disabled = true;
+        sellingPlanInput.value = '';
+      }
+    }, true);
+
+    var productFormComponent = productForm.closest('product-form-component');
+    if (productFormComponent) {
+      productFormComponent.addEventListener('submit', function(e) {
+        if (currentPlanId) {
+          sellingPlanInput.disabled = false;
+          sellingPlanInput.value = currentPlanId;
+        } else {
+          sellingPlanInput.disabled = true;
+        }
+      }, true);
+    }
+
+    var observer = new MutationObserver(function() {
+      var existing = productForm.querySelector('input[name="selling_plan"]');
+      if (!existing) {
+        productForm.appendChild(sellingPlanInput);
+      }
+      if (currentPlanId && sellingPlanInput.value !== currentPlanId) {
+        sellingPlanInput.value = currentPlanId;
+        sellingPlanInput.disabled = false;
+      }
+    });
+    observer.observe(productForm, { childList: true, subtree: true });
+
+    setSellingPlan(PLANS.sub90, '$45.00');
+
+    console.log('RC Widget initialized. Form:', formId, '| selling_plan input:', sellingPlanInput);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+</script>

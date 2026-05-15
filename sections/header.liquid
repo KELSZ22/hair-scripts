@@ -205,17 +205,17 @@
       class="dropdown-localization mobile:hidden"
     >
       {% if section.settings.quiz_button_text != blank %}
-      <a
-        href="{% if section.settings.quiz_button_url != blank %}{{ section.settings.quiz_button_url }}{% else %}#{% endif %}"
-        class="header hs-science-hero__button hs-science-hero__button--secondary"
-        {% if section.settings.quiz_button_url == blank %}
-          role="link"
-          aria-disabled="true"
-        {% endif %}
-      >
-        {{ section.settings.quiz_button_text }}
-      </a>
-    {% endif %}
+        <a
+          href="{% if section.settings.quiz_button_url != blank %}{{ section.settings.quiz_button_url }}{% else %}#{% endif %}"
+          class="header hs-science-hero__button hs-science-hero__button--secondary"
+          {% if section.settings.quiz_button_url == blank %}
+            role="link"
+            aria-disabled="true"
+          {% endif %}
+        >
+          {{ section.settings.quiz_button_text }}
+        </a>
+      {% endif %}
 
       {% comment %}
       <button
@@ -416,6 +416,39 @@
   type="module"
 ></script>
 
+<script>
+  (function () {
+    function initHsHeaderScrollState() {
+      const headerGroup = document.querySelector('#header-group');
+
+      if (!headerGroup) return;
+
+      function updateHeaderScrollState() {
+        if (window.scrollY > 10) {
+          headerGroup.classList.add('hs-header-is-scrolled');
+        } else {
+          headerGroup.classList.remove('hs-header-is-scrolled');
+        }
+      }
+
+      updateHeaderScrollState();
+
+      if (headerGroup.dataset.hsScrollReady === 'true') return;
+
+      headerGroup.dataset.hsScrollReady = 'true';
+      window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHsHeaderScrollState);
+    } else {
+      initHsHeaderScrollState();
+    }
+
+    document.addEventListener('shopify:section:load', initHsHeaderScrollState);
+  })();
+</script>
+
 {% stylesheet %}
   a.header.hs-science-hero__button.hs-science-hero__button--secondary {
     display: inline-flex;
@@ -458,6 +491,13 @@
     background: white;
   }
 
+  #header-component[data-sticky-state="active"] .header__row,
+  #header-component[data-sticky-state="active"] .header__underlay,
+  #header-component[data-sticky-state="active"] .header__underlay-closed,
+  #header-component[data-sticky-state="active"] .header__underlay-open {
+    background: white;
+  }
+
   #header-component.product-page span.currency-code,
   #header-component.product-page span.svg-wrapper.icon-caret,
   #header-component.product-page span.svg-wrapper,
@@ -492,7 +532,7 @@
 
   #header-component.product-page summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path,
   #header-component:not(.home-page):not(.product-page) summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path {
-    stroke: #000;
+    fill: #000;
   }
 
   #header-component.product-page,
@@ -651,14 +691,58 @@
   }
 
   #header-group:has(#header-component[sticky]) {
-    display: contents;
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: var(--layer-sticky);
   }
 
-  .header-section:has(> #header-component[sticky='always']),
-  .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
-    position: sticky;
-    top: -1px;
-    z-index: var(--layer-sticky);
+  #header-group:has(#header-component[sticky]) .header-section:has(> #header-component[sticky='always']),
+  #header-group:has(#header-component[sticky]) .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']),
+  #header-group:has(#header-component[sticky]) .shopify-section.shopify-section-group-header-group {
+    position: relative;
+    top: auto;
+    z-index: auto;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component {
+    background: #ffffff !important;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component[transparent] {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component .header__row,
+  #header-group.hs-header-is-scrolled #header-component .header__underlay,
+  #header-group.hs-header-is-scrolled #header-component .header__underlay-closed,
+  #header-group.hs-header-is-scrolled #header-component .header__underlay-open {
+    background: #ffffff !important;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component span.menu-list__link-title,
+  #header-group.hs-header-is-scrolled #header-component span.currency-code,
+  #header-group.hs-header-is-scrolled #header-component span.svg-wrapper,
+  #header-group.hs-header-is-scrolled #header-component svg.account-button__icon {
+    color: #000000 !important;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component span.svg-wrapper svg path,
+  #header-group.hs-header-is-scrolled #header-component shopify-account span svg path,
+  #header-group.hs-header-is-scrolled #header-component summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path {
+    fill: #000000 !important;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component img.header-logo__image {
+    filter: brightness(0) !important;
+  }
+
+  #header-group.hs-header-is-scrolled #header-component a.header.hs-science-hero__button.hs-science-hero__button--secondary {
+    border-color: #c4a882 !important;
+    color: #000000 !important;
   }
 
   .header[data-sticky-state] {

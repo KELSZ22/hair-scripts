@@ -100,12 +100,14 @@
               <option value="">One-time Purchase</option>
 
               {% for selling_plan_group in sticky_product.selling_plan_groups %}
-                {% for selling_plan in selling_plan_group.selling_plans %}
+              {% for selling_plan in selling_plan_group.selling_plans %}
+                {% unless selling_plan.name contains '6 month' or selling_plan.name contains '6 Month' %}
                   <option value="{{ selling_plan.id }}">
                     {{ selling_plan.name }}
                   </option>
-                {% endfor %}
+                {% endunless %}
               {% endfor %}
+            {% endfor %}
             </select>
           </div>
 

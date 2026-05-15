@@ -1,0 +1,178 @@
+<section id="hs-text-image-{{ section.id }}" class="hs-text-image">
+  <div class="hs-text-image__inner">
+    <div class="hs-text-image__content">
+      {% if section.settings.heading != blank %}
+        <h2 class="hs-text-image__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="hs-text-image__text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="hs-text-image__media">
+      {% if section.settings.image != blank %}
+        {{
+          section.settings.image
+          | image_url: width: 1000
+          | image_tag:
+            class: 'hs-text-image__image',
+            loading: 'lazy',
+            widths: '375, 550, 750, 1000',
+            sizes: '(max-width: 768px) 100vw, 50vw'
+        }}
+      {% else %}
+        <div class="hs-text-image__placeholder">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #hs-text-image-{{ section.id }} {
+    background: #F8F5F0;
+    border-bottom: 2px solid #4DC3B4;
+    padding: 60px 40px;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 186px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__content {
+    margin: 0;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__heading {
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+
+    /* NewTypography/HEADING/H3 */
+    font-family: "Cormorant Garamond", serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+
+    margin: 0 0 16px;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__text {
+    color: var(--new-colors-gray-subhead, #6B6B6B);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    margin: 0;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__text p {
+    margin: 0;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__media {
+    display: flex;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__placeholder {
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #EAE5DD;
+  }
+
+  #hs-text-image-{{ section.id }} .hs-text-image__placeholder svg {
+    max-width: 100%;
+    display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+    #hs-text-image-{{ section.id }} {
+      padding: 60px 15px;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__inner {
+      grid-template-columns: 1fr;
+      gap: 21px;
+      max-width: none;
+      margin: 0;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__content {
+      text-align: center;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__heading {
+      font-size: 24px;
+      margin: 0 0 10px;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__text {
+      font-size: 14px;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__media {
+      display: block;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__image {
+      border-radius: 5px;
+    }
+
+    #hs-text-image-{{ section.id }} .hs-text-image__placeholder {
+      border-radius: 5px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "HS Text Image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "LOREM IMPSUM DOLOR SIT AMET"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Hair supplements fail for one reason: they don’t match what’s actually causing the loss. They add ingredients to a label without addressing the specific mechanisms shutting your growth cycle down. This page exists so you never have to guess again. By the time you finish reading, you’ll know exactly what’s happening inside your follicles and exactly how HairScripts™ fixes it.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "HS Text Image"
+    }
+  ]
+}
+{% endschema %}

@@ -107,8 +107,19 @@
             </div>
 
             <button type="submit" class="hs-footer__newsletter-button">
-              {{ section.settings.newsletter_button_label }}
+              <span class="hs-footer__newsletter-button-text">
+                {{ section.settings.newsletter_button_label }}
+              </span>
+              <span class="hs-footer__newsletter-spinner" aria-hidden="true"></span>
             </button>
+
+            <div class="hs-footer__form-message" aria-live="polite"></div>
+
+            {% if form.posted_successfully? %}
+              <div class="hs-footer__form-message hs-footer__form-message--success">
+                Thank you! You are now subscribed.
+              </div>
+            {% endif %}
 
             {% if form.errors %}
               <div class="hs-footer__form-message hs-footer__form-message--error">
@@ -405,6 +416,7 @@
   }
 
   #section-{{ section.id }} .hs-footer__newsletter-button {
+    position: relative;
     width: 100%;
     height: 38px;
     border: none;
@@ -415,20 +427,69 @@
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #section-{{ section.id }} .hs-footer__newsletter-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.82;
+  }
+
+  #section-{{ section.id }} .hs-footer__newsletter-button-text {
+    transition: opacity 0.2s ease;
+  }
+
+  #section-{{ section.id }} .hs-footer__newsletter-button.is-loading .hs-footer__newsletter-button-text {
+    opacity: 0;
+  }
+
+  #section-{{ section.id }} .hs-footer__newsletter-spinner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: #FFFFFF;
+    border-radius: 999px;
+    opacity: 0;
+    pointer-events: none;
+    animation: hs-footer-spin 0.75s linear infinite;
+  }
+
+  #section-{{ section.id }} .hs-footer__newsletter-button.is-loading .hs-footer__newsletter-spinner {
+    opacity: 1;
+  }
+
+  @keyframes hs-footer-spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   #section-{{ section.id }} .hs-footer__form-message {
+    display: none;
     margin: 10px 0 0;
     font-family: "DM Sans";
     font-size: 11px;
     line-height: 1.4;
+    text-align: center;
   }
 
-  #section-{{ section.id }} .hs-footer__form-message--success {
+  #section-{{ section.id }} .hs-footer__form-message.is-visible,
+  #section-{{ section.id }} .hs-footer__form-message--success,
+  #section-{{ section.id }} .hs-footer__form-message--error {
+    display: block;
+  }
+
+  #section-{{ section.id }} .hs-footer__form-message--success,
+  #section-{{ section.id }} .hs-footer__form-message.is-success {
     color: #FFFFFF;
   }
 
-  #section-{{ section.id }} .hs-footer__form-message--error {
+  #section-{{ section.id }} .hs-footer__form-message--error,
+  #section-{{ section.id }} .hs-footer__form-message.is-error {
     color: #f0c8c8;
   }
 
@@ -596,6 +657,7 @@
     #section-{{ section.id }} .hs-footer__wrapper {
       padding: 40px 15px;
     }
+
     #section-{{ section.id }} .hs-footer__signup-heading {
       border-bottom: 0;
     }
@@ -654,12 +716,123 @@
       width: 45%;
     }
   }
+
   @media screen and (max-width: 309px) {
     #section-{{ section.id }} .hs-footer__menu-col {
-    width: 100%;
-}
+      width: 100%;
+    }
   }
 </style>
+
+<script>
+  (function () {
+    function initHsFooterNewsletter(scope) {
+      const root = scope || document;
+      const forms = root.querySelectorAll('.hs-footer__newsletter-form');
+
+      forms.forEach(function (form) {
+        if (form.dataset.hsFooterNewsletterReady === 'true') return;
+
+        form.dataset.hsFooterNewsletterReady = 'true';
+
+        const input = form.querySelector('.hs-footer__newsletter-input');
+        const button = form.querySelector('.hs-footer__newsletter-button');
+        const message = form.querySelector('.hs-footer__form-message');
+
+        if (!input || !button || !message) return;
+
+        function setLoading(isLoading) {
+          button.disabled = isLoading;
+          button.classList.toggle('is-loading', isLoading);
+        }
+
+        function clearMessage() {
+          message.textContent = '';
+          message.classList.remove('is-visible', 'is-success', 'is-error');
+        }
+
+        function showMessage(type, text) {
+          message.textContent = text;
+          message.classList.remove('is-success', 'is-error');
+          message.classList.add('is-visible', type === 'success' ? 'is-success' : 'is-error');
+        }
+
+        function isValidEmail(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const email = input.value.trim();
+
+          clearMessage();
+
+          if (!email || !isValidEmail(email)) {
+            showMessage('error', 'Please enter a valid email address.');
+            return;
+          }
+
+          setLoading(true);
+
+          const formData = new FormData(form);
+
+          fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            credentials: 'same-origin',
+            headers: {
+              Accept: 'text/html'
+            }
+          })
+            .then(function (response) {
+              return response.text().then(function (html) {
+                return {
+                  ok: response.ok,
+                  html: html
+                };
+              });
+            })
+            .then(function (result) {
+              const html = result.html || '';
+              const hasError =
+                !result.ok ||
+                html.includes('form-status-list--error') ||
+                html.includes('errors') ||
+                html.includes('shopify-challenge__container') ||
+                html.includes('Please adjust the following');
+
+              if (hasError) {
+                showMessage('error', 'Something went wrong. Please try again.');
+                return;
+              }
+
+              showMessage('success', 'Thank you! You are now subscribed.');
+              form.reset();
+            })
+            .catch(function () {
+              showMessage('error', 'Something went wrong. Please try again.');
+            })
+            .finally(function () {
+              setLoading(false);
+            });
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        initHsFooterNewsletter(document);
+      });
+    } else {
+      initHsFooterNewsletter(document);
+    }
+
+    document.addEventListener('shopify:section:load', function (event) {
+      initHsFooterNewsletter(event.target);
+    });
+  })();
+</script>
 
 {% schema %}
 {

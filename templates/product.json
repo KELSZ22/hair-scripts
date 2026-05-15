@@ -305,7 +305,16 @@
             },
             "recharge_subscriptions_subscription_widget_v2_UX7egK": {
               "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+              "disabled": true,
               "settings": {}
+            },
+            "custom_liquid_TpAyia": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "{% render 'recharge', product: product %}"
+              },
+              "blocks": {}
             },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
@@ -347,11 +356,7 @@
             "custom_product_accordion_ft7p9j": {
               "type": "custom-product-accordion",
               "name": "Custom accordion",
-              "settings": {
-                "heading_description": "Description",
-                "heading_key_benefits": "Key benefits",
-                "heading_ingredients": "Ingredients"
-              },
+              "settings": {},
               "blocks": {
                 "custom_product_accordion_row_aY6cUn": {
                   "type": "custom-product-accordion-row",
@@ -382,8 +387,7 @@
               "name": "Video carousel",
               "settings": {
                 "heading": "Not Sure What’s Causing Your Hair Thinning?",
-                "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next.",
-                "fallback_video_url": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn"
+                "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next."
               },
               "blocks": {
                 "video_carousel_item_mzmXH7": {
@@ -453,6 +457,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "recharge_subscriptions_subscription_widget_v2_UX7egK",
+            "custom_liquid_TpAyia",
             "buy_buttons_eYQEYi",
             "custom_product_accordion_ft7p9j",
             "video_carousel_B3UbdW"
@@ -620,7 +625,7 @@
           "type": "tab",
           "settings": {
             "label": "Postpartum shedding",
-            "image": "shopify://shop_images/POSTPARTUM_SHEDDING.png",
+            "image": "shopify://shop_images/POSTPARTUM_SHEDDING.webp",
             "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
             "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
@@ -638,7 +643,7 @@
           "type": "tab",
           "settings": {
             "label": " Perimenopause & Menopause",
-            "image": "shopify://shop_images/PERIMENOPAUSE_MENOPAUSE_1.png",
+            "image": "shopify://shop_images/PERIMENOPAUSE_MENOPAUSE.webp",
             "image_overlay_heading": "Estrogen drops. Androgen sensitivity climbs. Your hair feels it first.",
             "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · Ashwagandha 350mg · Selenium · Vitamin D · Tocopherols & Tocotrienols 25mg",
             "problem_label": "THE PROBLEM",
@@ -656,7 +661,7 @@
           "type": "tab",
           "settings": {
             "label": "Hormonal Thinning",
-            "image": "shopify://shop_images/HORMONAL_THINNING.png",
+            "image": "shopify://shop_images/HORMONAL_THINNING.webp",
             "image_overlay_heading": "Hormonal thinning is rarely just hormonal.",
             "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · L-Citrulline 250mg · CoQ10 80mg",
             "problem_label": "THE PROBLEM",
@@ -674,7 +679,7 @@
           "type": "tab",
           "settings": {
             "label": " Stress-related Shedding",
-            "image": "shopify://shop_images/STRESS-RELATED_SHEDDING.png",
+            "image": "shopify://shop_images/STRESS-RELATED_SHEDDING.webp",
             "image_overlay_heading": "High stress doesn’t always show up immediately in your hair.",
             "image_overlay_text": "Key Ingredients: Ashwagandha 350mg · Tocopherols & Tocotrienols 25mg · L-Citrulline 250mg · Alpha-Lipoic Acid 100mg",
             "problem_label": "THE PROBLEM",
@@ -692,7 +697,7 @@
           "type": "tab",
           "settings": {
             "label": "GLP-1 Medication Users",
-            "image": "shopify://shop_images/GLP-1_MEDICATION_USERS.png",
+            "image": "shopify://shop_images/GLP-1_MEDICATION_USERS.webp",
             "image_overlay_heading": "Rapid weight loss can trigger nutrient depletion and shedding 2–4 months in.",
             "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Zinc Bisglycinate 15mg · Vitamin D 125% DV · Hydrolyzed Collagen 300mg · Pea Protein 100mg · Ashwagandha 350mg",
             "problem_label": "THE PROBLEM",
@@ -710,7 +715,7 @@
           "type": "tab",
           "settings": {
             "label": "Heavy Menstrual Cycles",
-            "image": "shopify://shop_images/HEAVY_MENSTRUAL_CYCLES.png",
+            "image": "shopify://shop_images/HEAVY_MENSTRUAL_CYCLES.webp",
             "image_overlay_heading": "Heavy periods quietly drain your ferritin. Your follicles feel it before your labs do.",
             "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Vitamin D · Zinc Bisglycinate 15mg · Hydrolyzed Collagen 300mg",
             "problem_label": "THE PROBLEM",
@@ -728,7 +733,7 @@
           "type": "tab",
           "settings": {
             "label": "PCOS & Insulin Resistance",
-            "image": "shopify://shop_images/PCOS_INSULIN_RESISTANCE.png",
+            "image": "shopify://shop_images/PCOS_INSULIN_RESISTANCE.webp",
             "image_overlay_heading": "Elevated androgens. Insulin sensitivity issues. Thinning at the crown.",
             "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · Alpha-Lipoic Acid 100mg · Zinc Bisglycinate 15mg · Vitamin D",
             "problem_label": "THE PROBLEM",
@@ -746,7 +751,7 @@
           "type": "tab",
           "settings": {
             "label": "Textured & Natural Hair",
-            "image": "shopify://shop_images/TEXTURED_NATURAL_HAIR.png",
+            "image": "shopify://shop_images/TEXTURED_NATURAL_HAIR.webp",
             "image_overlay_heading": "Growth means nothing if the strand can’t hold onto length.",
             "image_overlay_text": "Key Ingredients: Hydrolyzed Collagen 300mg · MSM 150mg · L-Citrulline 250mg · Pea Protein 100mg · Hyaluronic Acid 50mg",
             "problem_label": "THE PROBLEM",
@@ -763,7 +768,7 @@
           "type": "tab",
           "settings": {
             "label": "Nutritional Deficiency-driven Thinning",
-            "image": "shopify://shop_images/NUTRITIONAL_DEFICIENCY-DRIVEN_THINNING.png",
+            "image": "shopify://shop_images/NUTRITIONAL_DEFICIENCY-DRIVEN_THINNING.webp",
             "image_overlay_heading": "Your follicles may not be getting what they need — even with a healthy diet.",
             "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Zinc Bisglycinate · Vitamin D 125% DV · Selenium 127% DV · Copper · Niacin · Black Pepper Fruit Extract (absorption)",
             "problem_label": "THE PROBLEM",
@@ -781,7 +786,7 @@
           "type": "tab",
           "settings": {
             "label": "Post-Illness or Post-Surgery Recovery",
-            "image": "shopify://shop_images/POST-ILLNESS_OR_POST-SURGERY_RECOVERY.png",
+            "image": "shopify://shop_images/POST-ILLNESS_OR_POST-SURGERY_RECOVERY.webp",
             "image_overlay_heading": "Major physical stress pushes follicles into mass dormancy. The shedding comes later.",
             "image_overlay_text": "Key Ingredients: Vitamin D 125% DV · Ferrochel® Iron · Zinc · Ashwagandha 350mg · Hydrolyzed Collagen 300mg · Pea Protein 100mg · CoQ10 80mg",
             "problem_label": "THE PROBLEM",
@@ -799,7 +804,7 @@
           "type": "tab",
           "settings": {
             "label": "High-performing Women In Demanding Careers",
-            "image": "shopify://shop_images/HIGH-PERFORMING_WOMEN_IN_DEMANDING_CAREERS_Image_Prompt.png",
+            "image": "shopify://shop_images/HIGH-PERFORMING_WOMEN_IN_DEMANDING_CAREERS.webp",
             "image_overlay_heading": "Chronic stress is the quiet driver of cortisol-mediated shedding.",
             "image_overlay_text": "Key Ingredients: Ashwagandha 350mg · Tocopherols & Tocotrienols 25mg · L-Citrulline 250mg · Alpha-Lipoic Acid 100mg · Grape Seed Extract 100mg",
             "problem_label": "THE PROBLEM",
@@ -817,7 +822,7 @@
           "type": "tab",
           "settings": {
             "label": "Women Who Have Tried Everything Else",
-            "image": "shopify://shop_images/WOMEN_WHO_HAVE_TRIED_EVERYTHING_ELSE.png",
+            "image": "shopify://shop_images/WOMEN_WHO_HAVE_TRIED_EVERYTHING_ELSE.webp",
             "image_overlay_heading": "Starting over keeps feeling exhausting because the formula was wrong.",
             "image_overlay_text": "Key Ingredients: All 19 ingredients in the formula — working across 9 biological pathways simultaneously",
             "problem_label": "THE PROBLEM",
@@ -1189,9 +1194,9 @@
       ],
       "name": "Real results women",
       "settings": {
-        "before_image": "shopify://shop_images/image_6.png",
+        "before_image": "shopify://shop_images/Frame_1000008877_1.webp",
         "before_label": "Before",
-        "after_image": "shopify://shop_images/image_5.png",
+        "after_image": "shopify://shop_images/Frame_1000008878_1_1.webp",
         "after_label": "After",
         "eyebrow": "",
         "heading": "Real Results, From Real Women",
