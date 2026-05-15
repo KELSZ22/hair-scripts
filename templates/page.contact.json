@@ -151,14 +151,14 @@
       "name": "Contact Form",
       "settings": {
         "image": "shopify://shop_images/image_1.png",
-        "heading": "Have Questions? <br>We're Here to Help",
+        "heading": "Have Questions? We're Here to Help",
         "subheading": "Whether you're just getting started or looking for the right solution, our team is here to guide you every step of the way.",
         "label_name": "Full Name",
         "label_email": "Email",
         "label_message": "How can we help you?",
         "button_label": "Send Message",
         "success_message": "Thank you for reaching out! We'll be in touch shortly.",
-        "contact_email": "info@hairscriptsbybevy.com"
+        "contact_email": ""
       }
     }
   },

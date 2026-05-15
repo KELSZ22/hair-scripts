@@ -106,7 +106,7 @@
       "settings": {
         "media_type_1": "image",
         "mobile_media_type_1": "image",
-        "image_1": "shopify://shop_images/Frame_1000008726.webp",
+        "image_1": "shopify://shop_images/home-hero-desktop.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -173,7 +173,7 @@
       ],
       "name": "Hair Home Hero",
       "settings": {
-        "background_image": "shopify://shop_images/HairScripts_Desktop_Banner.webp",
+        "background_image": "shopify://shop_images/home-hero-desktop.webp",
         "background_image_1024": "shopify://shop_images/Frame_1000009463_1.png",
         "creator_image": "shopify://shop_images/Frame_1000009061.png",
         "heading": "SCIENCE DESIGNED FOR VISIBLY <br> FULLER HEALTHIER HAIR",
