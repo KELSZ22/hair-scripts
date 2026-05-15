@@ -395,7 +395,6 @@
                   "name": "Video item",
                   "settings": {
                     "youtube_link": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -405,7 +404,6 @@
                   "name": "Video item",
                   "settings": {
                     "youtube_link": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_3.png",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -415,7 +413,6 @@
                   "name": "Video item",
                   "settings": {
                     "youtube_link": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_4.png",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -425,7 +422,6 @@
                   "name": "Video item",
                   "settings": {
                     "youtube_link": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_5.png",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -435,7 +431,6 @@
                   "name": "Video item",
                   "settings": {
                     "youtube_link": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_6.png",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -944,7 +939,7 @@
         "top_heading": "IS THIS WHAT YOU'RE GOING THROUGH?",
         "bottom_text": "Without addressing the root cause, whether hormonal, nutrient, or stress-related shedding continues.",
         "main_heading": "HAIRSCRIPT'S WAS BUILT TO CHANGE THAT.",
-        "section_bg": "#f5efe7",
+        "section_bg": "#ffffff",
         "top_bar_color": "#2d6a68",
         "subtext_color": "#6d6259",
         "icon_color": "#6a5c50"

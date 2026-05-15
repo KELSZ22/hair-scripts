@@ -197,8 +197,22 @@
 
       {% if section.settings.copyright_text != blank %}
         <div class="hs-footer__bottom">
-          <p class="hs-footer__copyright">{{ section.settings.copyright_text }}</p>
-        </div>
+<p class="hs-footer__copyright">
+  © 2026 HairScripts. All rights reserved.
+  <span class="hs-footer__copyright-divider">|</span>
+
+  <span class="hs-footer__credit-break">
+    <a
+      href="https://launchtoprofitmedia.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hs-footer__credit-link"
+    >
+      Optimized by Launch to Profit Media
+    </a>
+  </span>
+</p>
+</div>
       {% endif %}
 
     </div>
@@ -600,6 +614,28 @@
     line-height: normal;
   }
 
+  #section-{{ section.id }} .hs-footer__credit-link {
+  color: rgba(255,255,255,0.42);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+#section-{{ section.id }} .hs-footer__credit-link:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 749px) {
+  #section-{{ section.id }} .hs-footer__credit-break {
+    display: block;
+    margin-top: 4px;
+  }
+
+  #section-{{ section.id }} .hs-footer__copyright-divider {
+    display: none;
+  }
+}
+
   @media screen and (max-width: 1366px) {
     .hs-footer__brand-col {
       width: 50%;
@@ -957,7 +993,7 @@
       "type": "textarea",
       "id": "copyright_text",
       "label": "Copyright text",
-      "default": "© 2026 HairScripts. All rights reserved. | Optimized by Launch to Profit Media"
+      "default": "© 2026 HairScripts. All rights reserved. | Optimized by  Launch to Profit Media"
     }
   ],
   "presets": [

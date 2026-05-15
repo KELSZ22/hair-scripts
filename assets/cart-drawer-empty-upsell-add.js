@@ -1,24 +1,14 @@
 import { CartAddEvent, CartErrorEvent } from '@theme/events';
 
-/** Matches upsell form in cart drawer (Shopify {% form %} may not preserve arbitrary data-*). */
 const FORM_SELECTOR = 'form.cart-drawer-empty-upsell__form';
 
-/**
- * Same-origin cart.js (markets / locale prefix live on Shopify.routes.root).
- * @returns {string}
- */
 function getCartJsUrl() {
-  const shopify = /** @type {any} */ (typeof Shopify !== 'undefined' ? Shopify : {});
+  const shopify = (typeof Shopify !== 'undefined' ? Shopify : {});
   const root = shopify.routes?.root != null ? String(shopify.routes.root) : '/';
   const normalized = root.endsWith('/') ? root : `${root}/`;
   return `${normalized}cart.js`;
 }
 
-/**
- * Cart add URL: same source as `assets/product-form.js` (`Theme.routes.cart_add_url`).
- * @param {HTMLFormElement} form
- * @returns {string}
- */
 function getCartAddUrl(form) {
   if (typeof Theme !== 'undefined' && Theme.routes?.cart_add_url) {
     return Theme.routes.cart_add_url;
@@ -35,11 +25,6 @@ function getCartAddUrl(form) {
   return '';
 }
 
-/**
- * Use the preview origin for Cart AJAX during `shopify theme dev`.
- * @param {string} url
- * @returns {string}
- */
 function cartAddUrlForFetch(url) {
   if (!url) return url;
   const trimmed = url.trim();
@@ -58,10 +43,6 @@ function cartAddUrlForFetch(url) {
   }
 }
 
-/**
- * Same fly pattern as `assets/sticky-add-to-cart.js` (`fly-to-cart--sticky` + upsell image).
- * @param {HTMLFormElement} form
- */
 async function playDrawerUpsellFlyToCart(form) {
   const root = form.closest('.cart-drawer-empty-upsell');
   const cartIcon = document.querySelector('.header-actions__cart-icon');
@@ -77,9 +58,7 @@ async function playDrawerUpsellFlyToCart(form) {
 
   if (!customElements.get('fly-to-cart')) return;
 
-  const flyToCartElement = /** @type {HTMLElement & { source: Element; destination: Element; useSourceSize: string }} */ (
-    document.createElement('fly-to-cart')
-  );
+  const flyToCartElement = document.createElement('fly-to-cart');
   flyToCartElement.classList.add('fly-to-cart--sticky');
   flyToCartElement.style.setProperty('background-image', `url(${img.currentSrc || img.src})`);
   flyToCartElement.useSourceSize = 'true';
@@ -88,12 +67,9 @@ async function playDrawerUpsellFlyToCart(form) {
   document.body.appendChild(flyToCartElement);
 }
 
-/**
- * One delegated listener for the empty-drawer upsell form (header has no PDP product-form to puppet).
- */
 function bindCartDrawerUpsellSubmit() {
-  if (/** @type {any} */ (globalThis).__hairScriptsCartDrawerUpsellSubmitBound) return;
-  /** @type {any} */ (globalThis).__hairScriptsCartDrawerUpsellSubmitBound = true;
+  if (globalThis.__hairScriptsCartDrawerUpsellSubmitBound) return;
+  globalThis.__hairScriptsCartDrawerUpsellSubmitBound = true;
 
   document.addEventListener(
     'submit',
@@ -101,7 +77,7 @@ function bindCartDrawerUpsellSubmit() {
       const form = event.target instanceof HTMLFormElement ? event.target : null;
       if (!form?.matches(FORM_SELECTOR)) return;
 
-      const variantInput = /** @type {HTMLInputElement | null} */ (form.querySelector('input[name="id"]'));
+      const variantInput = form.querySelector('input[name="id"]');
       if (!variantInput?.value || variantInput.disabled) return;
 
       const cartAddUrl = getCartAddUrl(form);
@@ -118,7 +94,6 @@ function bindCartDrawerUpsellSubmit() {
       if (toDisable instanceof HTMLButtonElement) toDisable.disabled = true;
 
       const cartItemsComponents = document.querySelectorAll('cart-items-component');
-      /** @type {string[]} */
       const sectionIds = [];
       cartItemsComponents.forEach((item) => {
         if (item instanceof HTMLElement && item.dataset.sectionId) {
@@ -126,11 +101,10 @@ function bindCartDrawerUpsellSubmit() {
         }
       });
 
-      const qtyInput = /** @type {HTMLInputElement | null} */ (form.querySelector('input[name="quantity"]'));
+      const qtyInput = form.querySelector('input[name="quantity"]');
       const quantity = Math.max(1, Number(qtyInput?.value) || 1);
       const variantId = variantInput.value;
 
-      /** @type {{ items: Array<{ id: number; quantity: number }>; sections?: string }} */
       const payload = {
         items: [{ id: Number(variantId), quantity }],
       };
@@ -141,7 +115,6 @@ function bindCartDrawerUpsellSubmit() {
       const productId = productIdRaw ?? undefined;
 
       try {
-        // JSON POST matches `product-form.js` batch add (multipart FormData can misbehave with some theme-dev proxies).
         const response = await fetch(cartAddUrlForFetch(cartAddUrl), {
           method: 'POST',
           headers: {
@@ -172,9 +145,7 @@ function bindCartDrawerUpsellSubmit() {
         try {
           const cartRes = await fetch(getCartJsUrl());
           cart = await cartRes.json();
-        } catch (_) {
-          // cart add succeeded; cart.js fetch is optional for event payload
-        }
+        } catch (_) {}
 
         const hasCartCount = cart && typeof cart.item_count === 'number';
 
@@ -186,6 +157,19 @@ function bindCartDrawerUpsellSubmit() {
             sections: data.sections,
           })
         );
+
+        if (data.sections) {
+          cartItemsComponents.forEach((component) => {
+            if (!(component instanceof HTMLElement)) return;
+            const sectionId = component.dataset.sectionId;
+            if (!sectionId || !data.sections[sectionId]) return;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data.sections[sectionId], 'text/html');
+            const updated = doc.querySelector('cart-items-component');
+            if (updated) component.innerHTML = updated.innerHTML;
+          });
+        }
+
       } catch (error) {
         console.error(error);
       } finally {

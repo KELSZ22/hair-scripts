@@ -826,91 +826,61 @@
         "video_card_8NrQtV": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009530.webp",
-            "video_link": "https://www.youtube.com/shorts/62yR32tBUCM",
-            "title": "Unlock Thicker Hair With Nutrafol",
-            "subtitle": ""
+            "video_link": "https://www.youtube.com/shorts/62yR32tBUCM"
           }
         },
         "video_card_nYj77j": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009531.webp",
-            "video_link": "https://www.youtube.com/shorts/B48I8yMpWxQ",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": ""
+            "video_link": "https://www.youtube.com/shorts/B48I8yMpWxQ"
           }
         },
         "video_card_pbnWRt": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009532.webp",
-            "video_link": "https://www.youtube.com/shorts/FKR3qsJEHjE",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": ""
+            "video_link": "https://www.youtube.com/shorts/FKR3qsJEHjE"
           }
         },
         "video_card_L7VcRD": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009533.webp",
-            "video_link": "https://www.youtube.com/shorts/IblrcC4GDVE",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": ""
+            "video_link": "https://www.youtube.com/shorts/IblrcC4GDVE"
           }
         },
         "video_card_YpUapX": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009534.webp",
-            "video_link": "https://www.youtube.com/shorts/j96ncvazk1Y",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": ""
+            "video_link": "https://www.youtube.com/shorts/j96ncvazk1Y"
           }
         },
         "video_card_94DAwQ": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009535.webp",
-            "video_link": "https://www.youtube.com/shorts/jXrx6q-ed30",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/jXrx6q-ed30"
           }
         },
         "video_card_xUF8YM": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009536.webp",
-            "video_link": "https://www.youtube.com/shorts/KrnuZSNhqp8",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/KrnuZSNhqp8"
           }
         },
         "video_card_PyenVr": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009537.webp",
-            "video_link": "https://www.youtube.com/shorts/UVcH5smb_l4",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/UVcH5smb_l4"
           }
         },
         "video_card_ikJDMB": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009538.webp",
-            "video_link": "https://www.youtube.com/shorts/wMMC_3R_sxo",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/wMMC_3R_sxo"
           }
         },
         "video_card_kj3h4x": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Frame_1000009539.webp",
-            "video_link": "https://www.youtube.com/shorts/xdDkR4VhqVo",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/xdDkR4VhqVo"
           }
         }
       },
@@ -1030,7 +1000,7 @@
         "heading": "Join the HairScripts Community",
         "subheading": "Science-backed education, real conversations, and a founder who shows up and explains things without the marketing script.",
         "button_label": "Join Community",
-        "button_link": "shopify://pages/contact"
+        "button_link": "#hs-footer"
       }
     },
     "hairscripts_review_carousel_PX4qXD": {

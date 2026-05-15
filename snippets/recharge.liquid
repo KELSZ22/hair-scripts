@@ -4,6 +4,11 @@
 
 <div class="rc-custom-widget" id="rc-custom-widget-{{ rc_product.id }}">
 
+  <div class="rc-widget-header">
+    <span class="rc-widget-title">Subscribe & Save</span>
+    <span class="rc-widget-desc">Recommended: 2–3 months minimum for visible results.</span>
+  </div>
+
   <div class="rc-card rc-card--selected" id="rc-subscription-card" data-type="subscription">
     <span class="rc-badge">Best Value</span>
     <label class="rc-card__label" for="rc-radio-subscription">
@@ -12,7 +17,7 @@
         <span class="rc-radio-dot rc-radio-dot--selected"></span>
         <div class="rc-card__title-group">
           <span class="rc-card__title">90-Day Subscription</span>
-          <span class="rc-card__subtitle">Billed monthly. 3-month commitment</span>
+          <span class="rc-card__subtitle">Billed $130 every 12 weeks</span>
         </div>
       </div>
       <div class="rc-card__prices">
@@ -21,7 +26,7 @@
           <span class="rc-price--original">$169.00/mo</span>
         </div>
         <div class="rc-price-sub-row">
-          <span class="rc-price--per">$1.43 per supplement</span>
+          <span class="rc-price--per"></span>
           <span class="rc-price--save">save 53%</span>
         </div>
       </div>
@@ -99,7 +104,10 @@
       <div class="rc-card__selector">
         <input class="rc-radio-input" type="radio" id="rc-radio-onetime" name="rc-purchase-option" value="onetime">
         <span class="rc-radio-dot"></span>
-        <span class="rc-card__title">30-Day Supply</span>
+        <div class="rc-card__title-group">
+          <span class="rc-card__title">30-Day Supply</span>
+          <span class="rc-card__subtitle">Billed $49 every 30 days</span>
+        </div>
       </div>
       <div class="rc-card__prices">
         <span class="rc-price--main rc-price--onetime">$49<span class="rc-price--mo">/mo</span></span>
@@ -155,6 +163,26 @@
     gap: 12px;
     font-family: 'Fustat', sans-serif;
     box-sizing: border-box;
+  }
+  .rc-widget-header {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0 2px;
+  }
+  .rc-widget-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    font-family: 'Fustat', sans-serif;
+    line-height: 1.2;
+  }
+  .rc-widget-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #237B84;
+    font-family: 'Fustat', sans-serif;
+    line-height: 1.4;
   }
   .rc-card {
     position: relative;
@@ -368,6 +396,8 @@
     .rc-benefits li svg { width: 16px; height: 16px; }
     .rc-card__label { gap: 8px; }
     .rc-price-sub-row { gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+    .rc-widget-title { font-size: 16px; }
+    .rc-widget-desc { font-size: 12px; }
   }
   @media (min-width: 600px) {
     .rc-card { padding: 20px 24px 22px; }
@@ -376,6 +406,8 @@
     .rc-price--main { font-size: 24px; }
     .rc-badge { font-size: 12px; padding: 8px 24px; top: -17px; }
     .rc-benefits li { font-size: 14px; }
+    .rc-widget-title { font-size: 14px; }
+    .rc-widget-desc { font-size: 12px; }
   }
   @media screen and (max-width: 768px) {
     .rc-custom-widget {

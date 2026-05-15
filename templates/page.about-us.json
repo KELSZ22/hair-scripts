@@ -68,6 +68,9 @@
     },
     "hairscripts_about_founder_HkGzmj": {
       "type": "hairscripts-about-founder",
+      "custom_css": [
+        "body{background-color: white}"
+      ],
       "name": "About - Founder Bio",
       "settings": {
         "founder_name": "BEVY",
