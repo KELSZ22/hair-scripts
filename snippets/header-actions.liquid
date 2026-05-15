@@ -476,8 +476,9 @@
       });
     }
     async function refresh(e) {
-      const c = e && e.detail && (e.detail.cartData || e.detail.cart);
-      if (c) {
+      const d = e && e.detail;
+      const c = d && (d.cartData || d.cart || d.resource);
+      if (c && typeof c.item_count === 'number') {
         applyCart(c);
         return;
       }
@@ -487,6 +488,7 @@
         applyCart(await res.json());
       } catch (_) {}
     }
+    document.addEventListener('cart:update', refresh);
     document.addEventListener('cart:updated', refresh);
     document.addEventListener('cart:change', refresh);
     document.addEventListener('cart:refresh', refresh);

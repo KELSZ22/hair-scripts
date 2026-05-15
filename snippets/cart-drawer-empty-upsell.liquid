@@ -55,7 +55,10 @@
     assign img_alt = upsell_image.alt | default: heading
   -%}
 
-  <div class="cart-drawer-empty-upsell">
+  <div
+    class="cart-drawer-empty-upsell"
+    data-cart-add-url="{{ routes.cart_add_url | append: '.js' }}"
+  >
     {%- if section.settings.cart_drawer_upsell_banner_text != blank -%}
       <div
         class="cart-drawer-empty-upsell__banner"
@@ -163,33 +166,21 @@
       </ul>
       <!-- END Row 2 -->
 
-      <!-- Row 3: Add to Cart button full width -->
-      <product-form-component
-        data-section-id="{{ section.id }}"
-        data-product-id="{{ upsell_product.id }}"
-        data-product-url="{{ upsell_product.url }}"
-        on:submit="/handleSubmit"
-        data-quantity-default="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
-        data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
+      <!-- Row 3: AJAX add like product-form.js (sticky bar puppets PDP form; drawer uses Theme.routes.cart_add_url in JS). -->
+      <div
         class="cart-drawer-empty-upsell__form-wrap"
+        data-cart-drawer-upsell-product-id="{{ upsell_product.id }}"
       >
-        <div
-          class="visually-hidden"
-          aria-live="assertive"
-          role="status"
-          aria-atomic="true"
-          ref="liveRegion"
-        ></div>
         {%- form 'product',
           upsell_product,
           id: product_form_id,
+          class: 'shopify-product-form cart-drawer-empty-upsell__form',
           novalidate: 'novalidate',
           data-type: 'add-to-cart-form'
         -%}
           <input
             type="hidden"
             name="id"
-            ref="variantId"
             value="{{ variant.id }}"
             {% unless variant.available %}
               disabled
@@ -200,17 +191,23 @@
             name="quantity"
             value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
           >
-          {% render 'add-to-cart-button',
-            product: upsell_product,
-            can_add_to_cart: can_add_to_cart,
-            add_to_cart_text: btn_label,
-            class: 'button cart-drawer-empty-upsell__submit',
-            data_testid: 'cart-drawer-upsell-add',
-            show_variant_price: false,
-            show_shipping_blurb: false
-          %}
+          <button
+            type="submit"
+            name="add"
+            class="button cart-drawer-empty-upsell__submit"
+            data-testid="cart-drawer-upsell-add"
+            {% unless can_add_to_cart %}
+              disabled
+            {% endunless %}
+          >
+            {{- btn_label | escape -}}
+          </button>
         {%- endform -%}
-      </product-form-component>
+      </div>
+      <script
+        type="module"
+        src="{{ 'cart-drawer-empty-upsell-add.js' | asset_url }}"
+      ></script>
       <!-- END Row 3 -->
 
     </div>
@@ -245,6 +242,8 @@
   }
 
   .cart-drawer-empty-upsell {
+    position: relative;
+    z-index: 1;
     flex-shrink: 0;
     width: 100%;
     text-align: left;
@@ -417,20 +416,12 @@
 
   /* Form wrap: full-width row, button intrinsic width (aligned with card copy) */
   .cart-drawer-empty-upsell__form-wrap {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-  }
-
-  .cart-drawer-empty-upsell__form-wrap .custom-add-to-cart-wrapper {
-    display: block;
-    width: fit-content;
-    max-width: 100%;
-  }
-
-  .cart-drawer-empty-upsell__form-wrap .custom-add-to-cart-shipping-text {
-    display: none;
   }
 
   .cart-drawer-empty-upsell__form-wrap form {
