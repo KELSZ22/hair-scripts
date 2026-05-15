@@ -11,12 +11,13 @@
     <div class="about-quote__attribution">
       <div class="about-quote__portrait-wrap">
         {%- if section.settings.portrait != blank -%}
-          {{ section.settings.portrait
- | image_url: width: 400
- | image_tag:
- class: 'about-quote__portrait',
- alt: section.settings.portrait.alt | default: section.settings.attribution_name,
- loading: 'lazy'
+          {{
+            section.settings.portrait
+            | image_url: width: 400
+            | image_tag:
+              class: 'about-quote__portrait',
+              alt: section.settings.portrait.alt | default: section.settings.attribution_name,
+              loading: 'lazy'
           }}
         {%- else -%}
           <div class="about-quote__portrait-placeholder"></div>
@@ -38,12 +39,11 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    background: linear-gradient(125.46deg, #63CEC7 0%, #3D7E7A 100%);
+    background: linear-gradient(116deg, #63CEC7 -35.03%, #3D7E7A 83.49%), url(<path-to-image>) lightgray -97.728px -218.717px / 109.205% 109.205% no-repeat;
     padding: 57px 0;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__inner {
+  #about-quote-{{ section.id }} .about-quote__inner {
     max-width: 1069px;
     margin: 0 auto;
     padding: 0 40px;
@@ -53,8 +53,7 @@
     align-items: center;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__text-block {
+  #about-quote-{{ section.id }} .about-quote__text-block {
     display: flex;
     flex-direction: column;
     gap: 26px;
@@ -62,10 +61,8 @@
     width: 100%;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__quote {
-    font-family: 'Cormorant Garamond'
-    , serif;
+  #about-quote-{{ section.id }} .about-quote__quote {
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-style: normal;
     font-size: 32px;
@@ -75,10 +72,8 @@
     margin: 0;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__body {
-    font-family: 'DM Sans'
-    , sans-serif;
+  #about-quote-{{ section.id }} .about-quote__body {
+    font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     font-size: 18px;
     line-height: 1.6;
@@ -86,8 +81,7 @@
     margin: 0;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__attribution {
+  #about-quote-{{ section.id }} .about-quote__attribution {
     display: flex;
     flex-direction: column;
     gap: 17px;
@@ -95,8 +89,7 @@
     width: 430px;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__portrait-wrap {
+  #about-quote-{{ section.id }} .about-quote__portrait-wrap {
     width: 199px;
     height: 199px;
     border-radius: 50%;
@@ -109,22 +102,22 @@
     border: none;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__portrait-wrap::before {
+  #about-quote-{{ section.id }} .about-quote__portrait-wrap::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 50%;
     padding: 3px;
     background: linear-gradient(180deg, #7A4932 0%, #FFB796 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__portrait {
+  #about-quote-{{ section.id }} .about-quote__portrait {
     width: calc(100% - 34px);
     height: calc(100% - 34px);
     border-radius: 50%;
@@ -133,8 +126,7 @@
     box-sizing: border-box;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__portrait-placeholder {
+  #about-quote-{{ section.id }} .about-quote__portrait-placeholder {
     width: calc(100% - 34px);
     height: calc(100% - 34px);
     border-radius: 50%;
@@ -143,18 +135,15 @@
     box-sizing: border-box;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__attribution-text {
+  #about-quote-{{ section.id }} .about-quote__attribution-text {
     display: flex;
     flex-direction: column;
     gap: 5px;
     text-align: center;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__attribution-name {
-    font-family: 'Cormorant Garamond'
-    , serif;
+  #about-quote-{{ section.id }} .about-quote__attribution-name {
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-style: normal;
     font-size: 20px;
@@ -164,10 +153,8 @@
     margin: 0;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__attribution-title.desktop {
-    font-family: 'DM Sans'
-    , sans-serif;
+  #about-quote-{{ section.id }} .about-quote__attribution-title.desktop {
+    font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 1;
@@ -176,10 +163,8 @@
     display: block;
   }
 
-  #about-quote-{{ section.id }}
-  .about-quote__attribution-title.mobile {
-    font-family: 'DM Sans'
-    , sans-serif;
+  #about-quote-{{ section.id }} .about-quote__attribution-title.mobile {
+    font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 1;
@@ -194,8 +179,7 @@
       max-width: 430px;
     }
 
-    #about-quote-{{ section.id }}
-    .about-quote__quote {
+    #about-quote-{{ section.id }} .about-quote__quote {
       font-size: 26px;
     }
   }
@@ -205,77 +189,74 @@
       padding: 50px 0;
     }
 
-    #about-quote-{{ section.id }}
-    .about-quote__inner {
+    #about-quote-{{ section.id }} .about-quote__inner {
       padding: 0 20px;
     }
 
-    #about-quote-{{ section.id }}
-    .about-quote__quote {
+    #about-quote-{{ section.id }} .about-quote__quote {
       font-size: 22px;
     }
 
-    #about-quote-{{ section.id }}
-    .about-quote__body {
+    #about-quote-{{ section.id }} .about-quote__body {
       font-size: 16px;
     }
 
-    #about-quote-{{ section.id }}
-    .about-quote__attribution-title.desktop {
+    #about-quote-{{ section.id }} .about-quote__attribution-title.desktop {
       display: none !important;
     }
 
-    #about-quote-{{ section.id }}
-    .about-quote__attribution-title.mobile {
+    #about-quote-{{ section.id }} .about-quote__attribution-title.mobile {
       display: block !important;
     }
   }
 </style>
 
 {% schema %}
-  {
-    "name": "About - Quote Banner",
-    "tag": "section",
-    "class": "about-quote-section",
-    "settings": [
-      {
-        "type": "textarea",
-        "id": "quote",
-        "label": "Quote Text",
-        "default": "\"You don't have to have all the answers yet. Your follicles just need to be supported while you find them.\""
-      },
-      {
-        "type": "textarea",
-        "id": "body_text",
-        "label": "Body Text",
-        "default": "HairScripts™ was built for the woman who has tried things that didn't work — not because she wasn't consistent enough, but because the formula wasn't built for her biology. You don't have to wait until you've identified your root cause to start supporting your follicles across all nine pathways. That's the whole point of this formula."
-      },
-      {
-        "type": "image_picker",
-        "id": "portrait",
-        "label": "Portrait Photo"
-      },
-      {
-        "type": "text",
-        "id": "attribution_name",
-        "label": "Name",
-        "default": "Bevy"
-      }, {
-        "type": "text",
-        "id": "attribution_title",
-        "label": "Title",
-        "default": "Founder, HairScripts™ · Pharmaceutical Dermatology Expert · One of You"
-      }, {
-        "type": "text",
-        "id": "attribution_title_mobile",
-        "label": "Title Mobile",
-        "default": "Founder, HairScripts™ · Pharmaceutical Dermatology Expert · One of You"
-      }
-    ],
-    "presets": [
-      {
-        "name": "About - Quote Banner"
-      }
-    ]
-  }
+{
+  "name": "About - Quote Banner",
+  "tag": "section",
+  "class": "about-quote-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote Text",
+      "default": "\"You don't have to have all the answers yet. Your follicles just need to be supported while you find them.\""
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "HairScripts™ was built for the woman who has tried things that didn't work — not because she wasn't consistent enough, but because the formula wasn't built for her biology. You don't have to wait until you've identified your root cause to start supporting your follicles across all nine pathways. That's the whole point of this formula."
+    },
+    {
+      "type": "image_picker",
+      "id": "portrait",
+      "label": "Portrait Photo"
+    },
+    {
+      "type": "text",
+      "id": "attribution_name",
+      "label": "Name",
+      "default": "Bevy"
+    },
+    {
+      "type": "text",
+      "id": "attribution_title",
+      "label": "Title",
+      "default": "Founder, HairScripts™ · Pharmaceutical Dermatology Expert · One of You"
+    },
+    {
+      "type": "text",
+      "id": "attribution_title_mobile",
+      "label": "Title Mobile",
+      "default": "Founder, HairScripts™ · Pharmaceutical Dermatology Expert · One of You"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About - Quote Banner"
+    }
+  ]
+}
 {% endschema %}

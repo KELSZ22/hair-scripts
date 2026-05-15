@@ -92,7 +92,7 @@
               </select>
             {% endif %}
 
-            <select
+            {% comment %} <select
               class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
               aria-label="Purchase option"
               data-sticky-selling-plan-select
@@ -108,16 +108,58 @@
                 {% endunless %}
               {% endfor %}
             {% endfor %}
-            </select>
+            </select> {% endcomment %}
+
+
+            <select
+  class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
+  aria-label="Purchase option"
+  data-sticky-selling-plan-select
+>
+
+  {% assign ninety_day_plan = blank %}
+  {% assign thirty_day_plan = blank %}
+
+  {% for selling_plan_group in sticky_product.selling_plan_groups %}
+    {% for selling_plan in selling_plan_group.selling_plans %}
+
+      {% if selling_plan.name contains '90' %}
+        {% assign ninety_day_plan = selling_plan %}
+      {% endif %}
+
+      {% if selling_plan.name contains '30' %}
+        {% assign thirty_day_plan = selling_plan %}
+      {% endif %}
+
+    {% endfor %}
+  {% endfor %}
+
+  {% if ninety_day_plan %}
+    <option value="{{ ninety_day_plan.id }}">
+      90-day Supply
+    </option>
+  {% endif %}
+
+  {% if thirty_day_plan %}
+    <option value="{{ thirty_day_plan.id }}">
+      30-day Supply
+    </option>
+  {% endif %}
+
+  <option value="">
+    One-time Purchase
+  </option>
+
+</select>
           </div>
 
-          <div
+          {% comment %} <div
             class="sticky-add-to-cart__price hs-sticky-atc__price"
             data-testid="sticky-price-display"
             data-sticky-price
           >
             {{ sticky_current_variant.price | money }}
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
 
@@ -156,27 +198,42 @@
           {% endunless %}
         >
           <span class="add-to-cart-text">
-            <span class="add-to-cart-text__content">
-              <span data-sticky-button-label>
-                {%- if sticky_current_variant.available -%}
-                  {{- 'products.product.add_to_cart' | t -}}
-                {%- elsif sticky_current_variant == blank -%}
-                  {{- 'products.product.unavailable' | t -}}
-                {%- else -%}
-                  {{- 'products.product.sold_out' | t -}}
-                {%- endif -%}
-              </span>
+  <span class="add-to-cart-text__content">
+    
+    <span class="hs-sticky-atc__button-inner">
+      
+      <span data-sticky-button-label>
+        {%- if sticky_current_variant.available -%}
+          {{- 'products.product.add_to_cart' | t -}}
+        {%- elsif sticky_current_variant == blank -%}
+          {{- 'products.product.unavailable' | t -}}
+        {%- else -%}
+          {{- 'products.product.sold_out' | t -}}
+        {%- endif -%}
+      </span>
 
-              <span
-                class="hs-sticky-atc__theme-qty-ref"
-                ref="quantityDisplay"
-                aria-hidden="true"
-                style="display: none;"
-              >
-                <span ref="quantityNumber" data-sticky-theme-qty-number>{{ sticky_initial_quantity }}</span>
-              </span>
-            </span>
-          </span>
+      <span class="hs-sticky-atc__button-divider"></span>
+
+      <span
+        class="hs-sticky-atc__button-price"
+        data-sticky-price
+      >
+        {{ sticky_current_variant.price | money }}
+      </span>
+
+    </span>
+
+    <span
+      class="hs-sticky-atc__theme-qty-ref"
+      ref="quantityDisplay"
+      aria-hidden="true"
+      style="display: none;"
+    >
+      <span ref="quantityNumber" data-sticky-theme-qty-number>{{ sticky_initial_quantity }}</span>
+    </span>
+
+  </span>
+</span>
 
           <span class="add-to-cart__added">
             <span class="svg-wrapper add-to-cart__added-icon">
@@ -278,7 +335,7 @@
       margin: 0 0 8px;
       color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
       font-family: "Cormorant Garamond", serif;
-      font-size: 20px;
+      font-size: 18px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;

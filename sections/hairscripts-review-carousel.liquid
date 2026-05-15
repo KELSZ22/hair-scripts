@@ -31,7 +31,7 @@
           <p class="review-carousel-subheading">{{ section.settings.subheading }}</p>
         {% endif %}
 
-        {% if section.settings.button_label != blank %}
+        {% comment %} {% if section.settings.button_label != blank %}
           <div class="review-carousel-button-wrap">
             <a
               {% if section.settings.button_link != blank %}
@@ -45,7 +45,7 @@
               {{ section.settings.button_label }}
             </a>
           </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
       </div>
 
       {% if section.blocks.size > 0 %}

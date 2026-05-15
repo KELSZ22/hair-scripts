@@ -2,6 +2,40 @@ import { CartAddEvent, CartErrorEvent } from '@theme/events';
 
 const FORM_SELECTOR = 'form.cart-drawer-empty-upsell__form';
 
+const RECHARGE_SELLING_PLAN_ID = null;
+
+async function getRechargeSellingPlanId(productId) {
+  if (RECHARGE_SELLING_PLAN_ID) return RECHARGE_SELLING_PLAN_ID;
+  try {
+    const res = await fetch(`/products.json?ids=${productId}`);
+    const data = await res.json();
+    const product = data?.products?.[0];
+    if (!product) return null;
+    const productRes = await fetch(`/products/${product.handle}.js`);
+    const productData = await productRes.json();
+    const groups = productData?.selling_plan_groups;
+    if (!groups || groups.length === 0) return null;
+    for (const group of groups) {
+      for (const plan of group.selling_plans || []) {
+        const name = (plan.name || '').toLowerCase();
+        const desc = (plan.description || '').toLowerCase();
+        if (
+          name.includes('90') ||
+          name.includes('12 week') ||
+          name.includes('quarterly') ||
+          desc.includes('90') ||
+          desc.includes('12 week')
+        ) {
+          return plan.id;
+        }
+      }
+    }
+    return groups[0]?.selling_plans?.[0]?.id ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function getCartJsUrl() {
   const shopify = (typeof Shopify !== 'undefined' ? Shopify : {});
   const root = shopify.routes?.root != null ? String(shopify.routes.root) : '/';
@@ -105,14 +139,23 @@ function bindCartDrawerUpsellSubmit() {
       const quantity = Math.max(1, Number(qtyInput?.value) || 1);
       const variantId = variantInput.value;
 
-      const payload = {
-        items: [{ id: Number(variantId), quantity }],
-      };
-      const sectionsParam = [...new Set(sectionIds)].join(',');
-      if (sectionsParam) payload.sections = sectionsParam;
-
       const productIdRaw = form.closest('[data-cart-drawer-upsell-product-id]')?.getAttribute('data-cart-drawer-upsell-product-id');
       const productId = productIdRaw ?? undefined;
+
+      const sellingPlanId = productId ? await getRechargeSellingPlanId(productId) : null;
+
+      const cartItem = {
+        id: Number(variantId),
+        quantity,
+      };
+
+      if (sellingPlanId) {
+        cartItem.selling_plan = sellingPlanId;
+      }
+
+      const payload = { items: [cartItem] };
+      const sectionsParam = [...new Set(sectionIds)].join(',');
+      if (sectionsParam) payload.sections = sectionsParam;
 
       try {
         const response = await fetch(cartAddUrlForFetch(cartAddUrl), {

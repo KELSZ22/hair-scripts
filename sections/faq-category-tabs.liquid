@@ -160,7 +160,7 @@
       {% endfor %}
     </div>
 
-    <div class="faq-category-tabs__footer">
+    {% comment %} <div class="faq-category-tabs__footer">
       {% if section.settings.footer_text != blank %}
         <div class="faq-category-tabs__footer-text">{{ section.settings.footer_text }}</div>
       {% endif %}
@@ -170,7 +170,7 @@
           {{ section.settings.button_label }}
         </a>
       {% endif %}
-    </div>
+    </div> {% endcomment %}
   </div>
 
   <style>

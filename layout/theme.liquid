@@ -365,6 +365,32 @@
     </script>
 
 
+<script>
+  function setExternalLinks() {
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
 
+      if (
+        href &&
+        href.startsWith('http') &&
+        !href.includes(window.location.hostname)
+      ) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+    });
+  }
+
+  setExternalLinks();
+
+  const observer = new MutationObserver(() => {
+    setExternalLinks();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
   </body>
 </html>

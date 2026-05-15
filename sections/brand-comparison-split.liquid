@@ -20,7 +20,7 @@
       <div class="bcs-product bcs-product--left">
         {% if section.settings.left_image != blank %}
           <img
-            src="{{ section.settings.left_image | image_url: width: 900 }}"
+            src="{{ section.settings.left_image | image_url: width: 600 }}"
             alt="{{ section.settings.left_image.alt | default: section.settings.left_heading | escape }}"
             loading="lazy"
             width="{{ section.settings.left_image.width }}"
@@ -93,7 +93,7 @@
       <div class="bcs-product bcs-product--right">
         {% if section.settings.right_image != blank %}
           <img
-            src="{{ section.settings.right_image | image_url: width: 900 }}"
+            src="{{ section.settings.right_image | image_url: width: 600 }}"
             alt="{{ section.settings.right_image.alt | default: section.settings.right_heading | escape }}"
             loading="lazy"
             width="{{ section.settings.right_image.width }}"
@@ -302,7 +302,7 @@
       min-width: 0;
       color: var(--bcs-row-text);
       font-family: "DM Sans";
-      font-size: 18px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;

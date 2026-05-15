@@ -394,7 +394,7 @@
                   "type": "video-carousel-item",
                   "name": "Video item",
                   "settings": {
-                    "youtube_link": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn",
+                    "youtube_link": "https://www.youtube.com/shorts/62yR32tBUCM",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -403,7 +403,7 @@
                   "type": "video-carousel-item",
                   "name": "Video item",
                   "settings": {
-                    "youtube_link": "",
+                    "youtube_link": "https://www.youtube.com/shorts/B48I8yMpWxQ",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -412,7 +412,7 @@
                   "type": "video-carousel-item",
                   "name": "Video item",
                   "settings": {
-                    "youtube_link": "",
+                    "youtube_link": "https://www.youtube.com/shorts/FKR3qsJEHjE",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -421,7 +421,7 @@
                   "type": "video-carousel-item",
                   "name": "Video item",
                   "settings": {
-                    "youtube_link": "",
+                    "youtube_link": "https://www.youtube.com/shorts/IblrcC4GDVE",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -430,7 +430,52 @@
                   "type": "video-carousel-item",
                   "name": "Video item",
                   "settings": {
-                    "youtube_link": "",
+                    "youtube_link": "https://www.youtube.com/shorts/j96ncvazk1Y",
+                    "card_text": ""
+                  },
+                  "blocks": {}
+                },
+                "video_carousel_item_qJYc3V": {
+                  "type": "video-carousel-item",
+                  "name": "Video item",
+                  "settings": {
+                    "youtube_link": "https://www.youtube.com/shorts/jXrx6q-ed30",
+                    "card_text": ""
+                  },
+                  "blocks": {}
+                },
+                "video_carousel_item_RBR3Ce": {
+                  "type": "video-carousel-item",
+                  "name": "Video item",
+                  "settings": {
+                    "youtube_link": "https://www.youtube.com/shorts/KrnuZSNhqp8",
+                    "card_text": ""
+                  },
+                  "blocks": {}
+                },
+                "video_carousel_item_NezPnN": {
+                  "type": "video-carousel-item",
+                  "name": "Video item",
+                  "settings": {
+                    "youtube_link": "https://www.youtube.com/shorts/UVcH5smb_l4",
+                    "card_text": ""
+                  },
+                  "blocks": {}
+                },
+                "video_carousel_item_tHJnnh": {
+                  "type": "video-carousel-item",
+                  "name": "Video item",
+                  "settings": {
+                    "youtube_link": "https://www.youtube.com/shorts/wMMC_3R_sxo",
+                    "card_text": ""
+                  },
+                  "blocks": {}
+                },
+                "video_carousel_item_HHhQ6p": {
+                  "type": "video-carousel-item",
+                  "name": "Video item",
+                  "settings": {
+                    "youtube_link": "https://www.youtube.com/shorts/xdDkR4VhqVo",
                     "card_text": ""
                   },
                   "blocks": {}
@@ -441,7 +486,12 @@
                 "video_carousel_item_NwT7Bc",
                 "video_carousel_item_RqTHgH",
                 "video_carousel_item_8TUER3",
-                "video_carousel_item_P3KBrk"
+                "video_carousel_item_P3KBrk",
+                "video_carousel_item_qJYc3V",
+                "video_carousel_item_RBR3Ce",
+                "video_carousel_item_NezPnN",
+                "video_carousel_item_tHJnnh",
+                "video_carousel_item_HHhQ6p"
               ]
             }
           },
@@ -1332,7 +1382,7 @@
         "category_4_label": "Category 4",
         "footer_text": "Still have questions?",
         "button_label": "Contact us",
-        "button_link": "",
+        "button_link": "shopify://pages/contact",
         "section_bg": "#d8e6e3",
         "heading_color": "#6a5b51",
         "subtext_color": "#75685f",
