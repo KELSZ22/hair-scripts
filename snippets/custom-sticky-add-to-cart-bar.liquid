@@ -17,6 +17,7 @@
     id="{{ sticky_id }}"
     class="sticky-add-to-cart hs-sticky-atc"
     data-below-fold="false"
+    data-at-page-bottom="false"
     data-variant-available="{{ sticky_current_variant.available }}"
     data-product-id="{{ sticky_product.id }}"
     data-current-variant-id="{{ sticky_current_variant.id }}"
@@ -58,7 +59,7 @@
           </p>
 
           <div class="hs-sticky-atc__selectors">
-            {% if sticky_product.has_only_default_variant %}
+            {% comment %} {% if sticky_product.has_only_default_variant %}
               <select class="hs-sticky-atc__select" aria-label="Product option">
                 <option selected>1 Bottle</option>
               </select>
@@ -90,7 +91,7 @@
                   </option>
                 {% endfor %}
               </select>
-            {% endif %}
+            {% endif %} {% endcomment %}
 
             {% comment %} <select
               class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
@@ -262,7 +263,7 @@
       z-index: calc(var(--layer-sticky, 1000) - 1);
       width: 100vw;
       min-height: 118px;
-      padding: 22px 60px;
+      padding: 15px 60px;
       background: #ffffff;
       color: var(--hs-atc-text);
       box-shadow: var(--hs-atc-shadow);
@@ -286,6 +287,13 @@
       pointer-events: auto;
       transform: translateX(-50%) translateY(0) !important;
       display: flex !important;
+    }
+
+    #{{ sticky_id }}[data-at-page-bottom='true'] .hs-sticky-atc__bar {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transform: translateX(-50%) translateY(110%) !important;
     }
 
     #{{ sticky_id }} .hs-sticky-atc__bar::before {
@@ -454,7 +462,7 @@
       background: linear-gradient(90deg, var(--hs-atc-purple), var(--hs-atc-purple-dark));
       color: #ffffff;
       font-family: var(--hs-atc-body-font);
-      font-size: 18px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 1;
@@ -628,7 +636,7 @@
       root.dataset.hsStickyReady = 'true';
 
       const stickyBar = root.querySelector('.hs-sticky-atc__bar');
-      const variantSelect = root.querySelector('[data-sticky-variant-select]');
+      const variantSelect = null;
       const qtyMinus = root.querySelector('[data-sticky-qty-minus]');
       const qtyPlus = root.querySelector('[data-sticky-qty-plus]');
       const qtyNumber = root.querySelector('[data-sticky-qty-number]');
@@ -645,11 +653,24 @@
       let isTicking = false;
 
       const updateStickyVisibility = () => {
-        const foldPosition = window.innerHeight || document.documentElement.clientHeight || 0;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
         const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-        const isBelowFold = currentScroll > foldPosition;
+        const pageHeight = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+
+        const isBelowFold = currentScroll > viewportHeight;
+
+        /*
+          Hide the sticky bar when the user reaches the bottom of the page.
+          Increase bottomOffset if you want it to disappear sooner.
+        */
+        const bottomOffset = 24;
+        const isAtPageBottom = currentScroll + viewportHeight >= pageHeight - bottomOffset;
 
         root.setAttribute('data-below-fold', isBelowFold ? 'true' : 'false');
+        root.setAttribute('data-at-page-bottom', isAtPageBottom ? 'true' : 'false');
 
         if (stickyBar) {
           stickyBar.setAttribute('data-stuck', 'true');

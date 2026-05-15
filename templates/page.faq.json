@@ -84,7 +84,7 @@
         "category_4": "Category D",
         "footer_text": "Still have questions?",
         "button_label": "Contact Us",
-        "button_link": ""
+        "button_link": "shopify://pages/contact"
       }
     }
   },

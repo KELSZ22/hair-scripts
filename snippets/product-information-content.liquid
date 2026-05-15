@@ -648,6 +648,12 @@
     }
   }
 
+  @media screen and (max-width: 450px){
+        .product-information .product-details rte-formatter.text-block.rte :is(p, li) {
+      font-size: 10px !important;
+    }
+  }
+
   /* If the header is sticky, make product details content stick underneath the header */
   body:has(#header-group #header-component[data-sticky-state='active']) .product-details.sticky-content--desktop {
     --sticky-header-offset: var(--header-height);
@@ -808,4 +814,116 @@
       transition: none;
     }
   }
+  @media screen and (max-width: 749px) {
+  .hs-mobile-product-eyebrow-holder {
+    order: -10;
+    width: 100%;
+    padding: 14px 16px 8px;
+    text-align: center;
+  }
+
+  .hs-mobile-product-eyebrow-holder rte-formatter,
+  .hs-mobile-product-eyebrow-holder p {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0;
+    text-align: center;
+  }
+  rte-formatter.spacing-style.text-block {
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 9999px;
+    background: var(--Old-colors-Scheme-1-Hover-Links, #D7E9E6);
+  }
+  rte-formatter.spacing-style.text-block p{
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    text-align: center;
+
+    /* NewTypography/Paragraph/Regular */
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
 {% endstylesheet %}
+
+<script>
+(function () {
+  const mobileQuery = window.matchMedia('(max-width: 749px)');
+
+  let eyebrowBlock = null;
+  let originalParent = null;
+  let originalNextSibling = null;
+  let mobileHolder = null;
+
+  function findEyebrowBlock() {
+    return Array.from(document.querySelectorAll('rte-formatter.text-block')).find(function (el) {
+      return el.textContent.trim().includes('For women 18+') &&
+        el.textContent.trim().includes('hair thinning');
+    });
+  }
+
+  function createMobileHolder() {
+    const mediaContainer = document.querySelector('.product-information__media-container');
+    const productGrid = document.querySelector('.product-information__grid');
+
+    if (!mediaContainer || !productGrid) return null;
+
+    let holder = document.querySelector('.hs-mobile-product-eyebrow-holder');
+
+    if (!holder) {
+      holder = document.createElement('div');
+      holder.className = 'hs-mobile-product-eyebrow-holder';
+      productGrid.insertBefore(holder, mediaContainer);
+    }
+
+    return holder;
+  }
+
+  function moveEyebrowForMobile() {
+    if (!eyebrowBlock) {
+      eyebrowBlock = findEyebrowBlock();
+      if (!eyebrowBlock) return;
+
+      originalParent = eyebrowBlock.parentNode;
+      originalNextSibling = eyebrowBlock.nextSibling;
+    }
+
+    mobileHolder = createMobileHolder();
+    if (!mobileHolder) return;
+
+    if (eyebrowBlock.parentNode !== mobileHolder) {
+      mobileHolder.appendChild(eyebrowBlock);
+    }
+  }
+
+  function restoreEyebrowForDesktop() {
+    if (!eyebrowBlock || !originalParent) return;
+
+    if (eyebrowBlock.parentNode !== originalParent) {
+      originalParent.insertBefore(eyebrowBlock, originalNextSibling);
+    }
+  }
+
+  function handleLayoutChange() {
+    if (mobileQuery.matches) {
+      moveEyebrowForMobile();
+    } else {
+      restoreEyebrowForDesktop();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleLayoutChange);
+  } else {
+    handleLayoutChange();
+  }
+
+  mobileQuery.addEventListener('change', handleLayoutChange);
+})();
+</script>
