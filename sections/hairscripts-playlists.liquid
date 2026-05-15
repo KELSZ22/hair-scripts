@@ -1,15 +1,19 @@
 <section
   id="hs-playlists-{{ section.id }}"
   class="hs-playlists color-{{ section.settings.color_scheme }}"
-  data-hspl-section="{{ section.id }}"
->
+  data-hspl-section="{{ section.id }}">
   <div class="hs-playlists__inner">
     <div class="hs-playlists__header">
       <div class="hs-playlists__stars" aria-hidden="true">
         {% for i in (1..5) %}
           <span class="hs-playlists__star">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17" fill="none">
-              <path d="M8.75029 13.361L14.1582 16.625L12.7229 10.4738L17.5006 6.33492L11.2092 5.80133L8.75029 0L6.29137 5.80133L0 6.33492L4.77771 10.4738L3.34242 16.625L8.75029 13.361Z" fill="{{ section.settings.star_color }}"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="17"
+              viewBox="0 0 18 17"
+              fill="none">
+              <path d="M8.75029 13.361L14.1582 16.625L12.7229 10.4738L17.5006 6.33492L11.2092 5.80133L8.75029 0L6.29137 5.80133L0 6.33492L4.77771 10.4738L3.34242 16.625L8.75029 13.361Z" fill="{{ section.settings.star_color }}" />
             </svg>
           </span>
         {% endfor %}
@@ -30,8 +34,8 @@
       {% if section.settings.button_label != blank %}
         <a
           href="{{ section.settings.button_link | default: '#' }}"
-          class="hs-playlists__main-button"
-        >
+          target="_blank"
+          class="hs-playlists__main-button">
           {{ section.settings.button_label }}
         </a>
       {% endif %}
@@ -44,8 +48,9 @@
             <a
               class="hs-playlists__image-link"
               href="{{ block.settings.link | default: '#' }}"
-              {% if block.settings.link == blank %}aria-label="{{ block.settings.title | escape }}"{% endif %}
-            >
+              {% if block.settings.link == blank %}
+              aria-label="{{ block.settings.title | escape }}"
+              {% endif %}>
               {% if block.settings.layer_image_2 != blank %}
                 <img
                   src="{{ block.settings.layer_image_2 | image_url: width: 1200 }}"
@@ -53,8 +58,7 @@
                   class="hs-playlists__image-layer hs-playlists__image-layer--back"
                   loading="lazy"
                   width="{{ block.settings.layer_image_2.width }}"
-                  height="{{ block.settings.layer_image_2.height }}"
-                >
+                  height="{{ block.settings.layer_image_2.height }}">
               {% endif %}
 
               {% if block.settings.layer_image_1 != blank %}
@@ -64,8 +68,7 @@
                   class="hs-playlists__image-layer hs-playlists__image-layer--middle"
                   loading="lazy"
                   width="{{ block.settings.layer_image_1.width }}"
-                  height="{{ block.settings.layer_image_1.height }}"
-                >
+                  height="{{ block.settings.layer_image_1.height }}">
               {% endif %}
 
               {% if block.settings.image != blank %}
@@ -75,8 +78,7 @@
                   class="hs-playlists__image"
                   loading="lazy"
                   width="{{ block.settings.image.width }}"
-                  height="{{ block.settings.image.height }}"
-                >
+                  height="{{ block.settings.image.height }}">
               {% else %}
                 {{ 'image' | placeholder_svg_tag: 'hs-playlists__image hs-playlists__image--placeholder' }}
               {% endif %}
@@ -91,10 +93,7 @@
             {% endif %}
 
             {% if block.settings.button_label != blank %}
-              <a
-                href="{{ block.settings.link | default: '#' }}"
-                class="hs-playlists__card-button"
-              >
+              <a href="{{ block.settings.link | default: '#' }}" class="hs-playlists__card-button">
                 {{ block.settings.button_label }}
               </a>
             {% endif %}
@@ -109,27 +108,26 @@
   #hs-playlists-{{ section.id }} {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(
-      90deg,
-      {{ section.settings.background_color_left }} 0%,
-      {{ section.settings.background_color_right }} 100%
-    );
+    background: linear-gradient(90deg, {{ section.settings.background_color_left }} 0%, {{ section.settings.background_color_right }} 100%);
     color: {{ section.settings.text_color }};
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__inner {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__inner {
     padding: 60px 40px;
     box-sizing: border-box;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__header {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__header {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__stars {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__stars {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,16 +135,22 @@
     margin-bottom: 18px;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__star {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__star {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     line-height: normal;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__heading {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__heading {
     margin: 0;
-    font-family: "Cormorant Garamond", Cormorant, Georgia, "Times New Roman", serif;
+    font-family: "Cormorant Garamond"
+    , Cormorant
+    , Georgia
+    , "Times New Roman"
+    , serif;
     font-size: 32px;
     font-style: normal;
     font-weight: 400;
@@ -155,9 +159,12 @@
     color: {{ section.settings.heading_color }};
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__text {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__text {
     margin-top: 14px;
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family: "DM Sans"
+    , Arial
+    , sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -165,12 +172,14 @@
     color: {{ section.settings.text_color }};
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__text p {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__text p {
     margin: 0;
     line-height: normal;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__main-button {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__main-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -182,7 +191,9 @@
     color: {{ section.settings.main_button_text_color }};
     text-decoration: none;
     text-align: center;
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family: "DM Sans"
+    , Arial
+    , sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -190,23 +201,26 @@
     transition: opacity 0.2s ease;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__main-button:hover {
+  #hs-playlists-{{ section.id }}.hs-playlists__main-button:hover {
     opacity: 0.9;
   }
 
-  #hs-playlists-{{ section.id }} .hspl-mobile-viewport {
+  #hs-playlists-{{ section.id }}
+  .hspl-mobile-viewport {
     width: 100%;
     margin-top: 50px;
     overflow: visible;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__grid {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 38px;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__card {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -214,7 +228,8 @@
     min-width: 0;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image-link {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image-link {
     position: relative;
     display: block;
     width: 100%;
@@ -226,8 +241,10 @@
     user-select: none;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image,
-  #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image
+  , #hs-playlists-{{ section.id }}
+  .hs-playlists__image-layer {
     display: block;
     height: 216px;
     object-fit: cover;
@@ -237,20 +254,23 @@
     user-select: none;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image {
     position: relative;
     z-index: 3;
     width: 100%;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image-layer {
     position: absolute;
     pointer-events: none;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image-layer--middle {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image-layer--middle {
     top: 9px;
     left: 8px;
     right: 8px;
@@ -258,7 +278,8 @@
     z-index: 2;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image-layer--back {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image-layer--back {
     top: 0;
     left: 16px;
     right: 16px;
@@ -266,16 +287,20 @@
     z-index: 1;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__image--placeholder {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__image--placeholder {
     background: rgba(255, 255, 255, 0.12);
     border-radius: 12px;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__card-title {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__card-title {
     margin: 12px 0 0;
     color: var(--New-Colors-BG-light, #FAF7F2);
     text-align: center;
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family: "DM Sans"
+    , Arial
+    , sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -288,7 +313,8 @@
     text-underline-position: from-font;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__card-title a {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__card-title a {
     color: inherit;
     text-decoration-line: inherit;
     text-decoration-style: inherit;
@@ -298,7 +324,8 @@
     text-underline-position: inherit;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__card-button {
+  #hs-playlists-{{ section.id }}
+  .hs-playlists__card-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -310,7 +337,9 @@
     color: {{ section.settings.card_button_text_color }};
     text-decoration: none;
     text-align: center;
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family: "DM Sans"
+    , Arial
+    , sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -318,7 +347,7 @@
     transition: opacity 0.2s ease;
   }
 
-  #hs-playlists-{{ section.id }} .hs-playlists__card-button:hover {
+  #hs-playlists-{{ section.id }}.hs-playlists__card-button:hover {
     opacity: 0.92;
   }
 
@@ -327,8 +356,10 @@
       gap: 24px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__image,
-    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__image
+    , #hs-playlists-{{ section.id }}
+    .hs-playlists__image-layer {
       height: 190px;
     }
   }
@@ -339,8 +370,10 @@
       gap: 36px 22px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__image,
-    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__image
+    , #hs-playlists-{{ section.id }}
+    .hs-playlists__image-layer {
       height: 220px;
     }
   }
@@ -350,32 +383,38 @@
       padding: 60px 0 60px 15px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__header {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__header {
       padding-right: 15px;
       box-sizing: border-box;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__stars {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__stars {
       margin-bottom: 16px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__heading {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__heading {
       font-size: 26px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__text {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__text {
       margin-top: 12px;
       font-size: 14px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__main-button {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__main-button {
       margin-top: 24px;
       min-width: 190px;
       padding: 14px 24px;
       font-size: 16px;
     }
 
-    #hs-playlists-{{ section.id }} .hspl-mobile-viewport {
+    #hs-playlists-{{ section.id }}
+    .hspl-mobile-viewport {
       overflow: hidden;
       width: 100%;
       margin-top: 44px;
@@ -384,7 +423,8 @@
       touch-action: pan-y;
     }
 
-    #hs-playlists-{{ section.id }} .hspl-mobile-track {
+    #hs-playlists-{{ section.id }}
+    .hspl-mobile-track {
       display: flex;
       grid-template-columns: none;
       gap: 22px;
@@ -392,17 +432,21 @@
       transition: transform 0.35s ease;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__card {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__card {
       flex: 0 0 calc((100% - 22px) / 2.18);
       max-width: calc((100% - 22px) / 2.18);
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__image,
-    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__image
+    , #hs-playlists-{{ section.id }}
+    .hs-playlists__image-layer {
       height: 220px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__card-button {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__card-button {
       min-width: 190px;
       padding: 13px 22px;
       font-size: 14px;
@@ -415,17 +459,21 @@
       font-size: 20px;
     }
 
-    #hs-playlists-{{ section.id }} .hspl-mobile-track {
+    #hs-playlists-{{ section.id }}
+    .hspl-mobile-track {
       gap: 14px;
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__card {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__card {
       flex: 0 0 calc((100% - 14px) / 1.18);
       max-width: calc((100% - 14px) / 1.18);
     }
 
-    #hs-playlists-{{ section.id }} .hs-playlists__image,
-    #hs-playlists-{{ section.id }} .hs-playlists__image-layer {
+    #hs-playlists-{{ section.id }}
+    .hs-playlists__image
+    , #hs-playlists-{{ section.id }}
+    .hs-playlists__image-layer {
       height: 180px;
     }
   }
@@ -697,191 +745,172 @@
 </script>
 
 {% schema %}
-{
-  "name": "HairScripts Playlists",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "EXPLORE BEV’S PLAYLISTS"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Watch curated content designed to help you understand your hair—and finally see real results.</p>"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Top button label",
-      "default": "Watch All Playlist"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Top button link"
-    },
-    {
-      "type": "color",
-      "id": "background_color_left",
-      "label": "Background color left",
-      "default": "#4E9B97"
-    },
-    {
-      "type": "color",
-      "id": "background_color_right",
-      "label": "Background color right",
-      "default": "#62BBB8"
-    },
-    {
-      "type": "color",
-      "id": "star_color",
-      "label": "Star color",
-      "default": "#63144F"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "main_button_background",
-      "label": "Top button background",
-      "default": "#5B2455"
-    },
-    {
-      "type": "color",
-      "id": "main_button_text_color",
-      "label": "Top button text color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "card_title_color",
-      "label": "Card title color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "card_button_background",
-      "label": "Card button background",
-      "default": "#F4EFE9"
-    },
-    {
-      "type": "color",
-      "id": "card_button_text_color",
-      "label": "Card button text color",
-      "default": "#C79A63"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "default": "background-1"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "playlist",
-      "name": "Playlist card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Main image"
-        },
-        {
-          "type": "text",
-          "id": "image_alt",
-          "label": "Main image alt text",
-          "default": "Playlist thumbnail"
-        },
-        {
-          "type": "image_picker",
-          "id": "layer_image_1",
-          "label": "Layer image 1"
-        },
-        {
-          "type": "text",
-          "id": "layer_image_1_alt",
-          "label": "Layer image 1 alt text",
-          "default": "Playlist layer image"
-        },
-        {
-          "type": "image_picker",
-          "id": "layer_image_2",
-          "label": "Layer image 2"
-        },
-        {
-          "type": "text",
-          "id": "layer_image_2_alt",
-          "label": "Layer image 2 alt text",
-          "default": "Playlist back layer image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Skin Care Routines"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "Watch Playlist"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "HairScripts Playlists",
-      "blocks": [
-        {
-          "type": "playlist",
-          "settings": {
-            "title": "Skin Care Routines",
-            "button_label": "Watch Playlist"
+  {
+    "name": "HairScripts Playlists",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "EXPLORE BEV’S PLAYLISTS"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Watch curated content designed to help you understand your hair—and finally see real results.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Top button label",
+        "default": "Watch All Playlist"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Top button link"
+      }, {
+        "type": "color",
+        "id": "background_color_left",
+        "label": "Background color left",
+        "default": "#4E9B97"
+      }, {
+        "type": "color",
+        "id": "background_color_right",
+        "label": "Background color right",
+        "default": "#62BBB8"
+      }, {
+        "type": "color",
+        "id": "star_color",
+        "label": "Star color",
+        "default": "#63144F"
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "main_button_background",
+        "label": "Top button background",
+        "default": "#5B2455"
+      }, {
+        "type": "color",
+        "id": "main_button_text_color",
+        "label": "Top button text color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "card_title_color",
+        "label": "Card title color",
+        "default": "#FFFFFF"
+      }, {
+        "type": "color",
+        "id": "card_button_background",
+        "label": "Card button background",
+        "default": "#F4EFE9"
+      }, {
+        "type": "color",
+        "id": "card_button_text_color",
+        "label": "Card button text color",
+        "default": "#C79A63"
+      }, {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "Color scheme",
+        "default": "background-1"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "playlist",
+        "name": "Playlist card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Main image"
+          },
+          {
+            "type": "text",
+            "id": "image_alt",
+            "label": "Main image alt text",
+            "default": "Playlist thumbnail"
+          },
+          {
+            "type": "image_picker",
+            "id": "layer_image_1",
+            "label": "Layer image 1"
+          },
+          {
+            "type": "text",
+            "id": "layer_image_1_alt",
+            "label": "Layer image 1 alt text",
+            "default": "Playlist layer image"
+          }, {
+            "type": "image_picker",
+            "id": "layer_image_2",
+            "label": "Layer image 2"
+          }, {
+            "type": "text",
+            "id": "layer_image_2_alt",
+            "label": "Layer image 2 alt text",
+            "default": "Playlist back layer image"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Skin Care Routines"
+          }, {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label",
+            "default": "Watch Playlist"
+          }, {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
           }
-        },
-        {
-          "type": "playlist",
-          "settings": {
-            "title": "Product Recommendations",
-            "button_label": "Watch Playlist"
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "HairScripts Playlists",
+        "blocks": [
+          {
+            "type": "playlist",
+            "settings": {
+              "title": "Skin Care Routines",
+              "button_label": "Watch Playlist"
+            }
+          }, {
+            "type": "playlist",
+            "settings": {
+              "title": "Product Recommendations",
+              "button_label": "Watch Playlist"
+            }
+          }, {
+            "type": "playlist",
+            "settings": {
+              "title": "Hair Growth/Hair Loss Solutions",
+              "button_label": "Watch Playlist"
+            }
+          }, {
+            "type": "playlist",
+            "settings": {
+              "title": "Super Natural Podcast",
+              "button_label": "Watch Playlist"
+            }
           }
-        },
-        {
-          "type": "playlist",
-          "settings": {
-            "title": "Hair Growth/Hair Loss Solutions",
-            "button_label": "Watch Playlist"
-          }
-        },
-        {
-          "type": "playlist",
-          "settings": {
-            "title": "Super Natural Podcast",
-            "button_label": "Watch Playlist"
-          }
-        }
-      ]
-    }
-  ]
-}
+        ]
+      }
+    ]
+  }
 {% endschema %}

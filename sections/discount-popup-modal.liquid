@@ -65,6 +65,11 @@
                   {{ section.settings.button_text }}
                 </button>
               </div>
+              {% if section.settings.footer_text != blank %}
+                <p class="discount-popup__footer">
+                  {{ section.settings.footer_text }}
+                </p>
+              {% endif %}
 
               {% if form.posted_successfully? %}
                 <p class="discount-popup__success">
@@ -79,11 +84,7 @@
               {% endif %}
             {% endform %}
 
-            {% if section.settings.footer_text != blank %}
-              <p class="discount-popup__footer">
-                {{ section.settings.footer_text }}
-              </p>
-            {% endif %}
+
           </div>
 
           {% if section.settings.bottom_text != blank %}
@@ -176,6 +177,7 @@
     }
 
     .discount-popup__description {
+      font-family: "DM Sans";
       font-size: 18px;
       font-style: normal;
       font-weight: 400;
@@ -218,6 +220,7 @@
     }
 
     .discount-popup__button {
+      font-family: "DM Sans";
       height: 58px;
       border: none;
       border-radius: 999px;
