@@ -27,16 +27,16 @@
 
           {% if section.settings.button_label != blank %}
             {% liquid
-              assign scroll_to_footer = section.settings.scroll_to_footer
-              if scroll_to_footer == false and section.settings.button_link == '#hs-footer'
-                assign scroll_to_footer = true
+              assign open_discount_popup = section.settings.scroll_to_footer
+              if open_discount_popup == false and section.settings.button_link == '#hs-footer'
+                assign open_discount_popup = true
               endif
             %}
             <div class="community-banner-button-wrap">
               <a
-                {% if scroll_to_footer %}
-                  href="#hs-footer"
-                  data-scroll-target="hs-footer"
+                {% if open_discount_popup %}
+                  href="#"
+                  data-open-discount-popup
                 {% elsif section.settings.button_link != blank %}
                   href="{{ section.settings.button_link }}"
                 {% else %}
@@ -261,39 +261,23 @@
 </style>
 
 {% liquid
-  assign scroll_to_footer_script = section.settings.scroll_to_footer
-  if scroll_to_footer_script == false and section.settings.button_link == '#hs-footer'
-    assign scroll_to_footer_script = true
+  assign open_discount_popup_script = section.settings.scroll_to_footer
+  if open_discount_popup_script == false and section.settings.button_link == '#hs-footer'
+    assign open_discount_popup_script = true
   endif
 %}
-{% if scroll_to_footer_script %}
+{% if open_discount_popup_script %}
   <script>
     (function () {
       const section = document.getElementById('section-{{ section.id }}');
       if (!section) return;
 
-      const button = section.querySelector('[data-scroll-target]');
+      const button = section.querySelector('[data-open-discount-popup]');
       if (!button) return;
 
       button.addEventListener('click', function (event) {
-        const targetId = button.getAttribute('data-scroll-target');
-        const target = targetId ? document.getElementById(targetId) : null;
-        if (!target) return;
-
         event.preventDefault();
-
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        target.scrollIntoView({
-          behavior: prefersReducedMotion ? 'auto' : 'smooth',
-          block: 'start',
-        });
-
-        const hash = '#' + targetId;
-        if (history.replaceState) {
-          history.replaceState(null, '', hash);
-        } else {
-          window.location.hash = hash;
-        }
+        document.dispatchEvent(new CustomEvent('hairscripts:open-discount-popup'));
       });
     })();
   </script>
@@ -339,15 +323,15 @@
     {
       "type": "checkbox",
       "id": "scroll_to_footer",
-      "label": "Scroll to footer on click",
+      "label": "Open discount popup on click",
       "default": true,
-      "info": "Smoothly scrolls to the newsletter signup in the site footer. Turn off to use Button link instead."
+      "info": "Opens the discount signup popup. Turn off to use Button link instead."
     },
     {
       "type": "url",
       "id": "button_link",
       "label": "Button link",
-      "info": "Only used when “Scroll to footer on click” is off."
+      "info": "Only used when “Open discount popup on click” is off."
     }
   ],
   "blocks": [

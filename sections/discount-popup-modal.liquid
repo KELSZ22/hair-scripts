@@ -380,6 +380,8 @@
         markDismissed();
       };
 
+      document.addEventListener('hairscripts:open-discount-popup', showPopup);
+
       closeBtn.addEventListener('click', closePopup);
       overlay.addEventListener('click', closePopup);
 
