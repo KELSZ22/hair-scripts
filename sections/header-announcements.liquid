@@ -65,14 +65,6 @@
     grid-area: stack;
   }
 
-  .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child) {
-    grid: none;
-  }
-
-  .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child) > * {
-    grid-area: unset;
-  }
-
   .announcement-bar__slide {
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     content-visibility: visible;

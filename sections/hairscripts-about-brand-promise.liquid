@@ -41,10 +41,10 @@
             </div>
           </div>
 
-          {%- unless forloop.last -%}
+
             {%- assign col_pos = pillar_count | modulo: 3 -%}
             <div class="about-brand-promise__divider{% if col_pos == 0 %} about-brand-promise__divider--row-end{% endif %}" aria-hidden="true"></div>
-          {%- endunless -%}
+
 
         {%- endif -%}
       {%- endfor -%}
@@ -54,7 +54,6 @@
       <a
         href="{{ section.settings.button_url | default: '#' }}"
         class="about-brand-promise__cta"
-        target="_blank"
       >
         {{ section.settings.button_text }}
       </a>

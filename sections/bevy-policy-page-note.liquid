@@ -76,7 +76,7 @@
   #bevy-policy-custom-text-{{ section.id }} {
     width: 100%;
     padding: 60px 50px;
-    background: #F7F2EC;
+    background: #fff;
     box-sizing: border-box;
   }
 
@@ -421,11 +421,13 @@
     }
 
     #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type {
-      gap: 10px;
+      flex-direction: column;
+      align-items: start;
+      gap: 0;
     }
 
     #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type::after {
-      font-size: 9px;
+      font-size: 14px;
     }
 
     #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h2 {
@@ -460,7 +462,7 @@
     }
 
     #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__content h1:first-of-type::after {
-      font-size: 8px;
+      font-size: 14px;
     }
 
     #bevy-policy-custom-text-{{ section.id }} .bevy-policy-custom-text__questions-box {

@@ -61,7 +61,6 @@
                 <a
                   {% if section.settings.research_link != blank %}
                     href="{{ section.settings.research_link }}"
-                    target="_blank"
                   {% else %}
                     role="link"
                     aria-disabled="true"
@@ -345,7 +344,9 @@
     #section-{{ section.id }} .advanced-support-wrapper {;
     padding: 40px 15px;
   }
-
+    #section-{{ section.id }} .advanced-support-pill {
+      width: 100%;
+    }
     #section-{{ section.id }} .advanced-support-header {
       margin-bottom: 18px;
     }

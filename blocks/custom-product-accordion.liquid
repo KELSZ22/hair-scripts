@@ -294,7 +294,7 @@
     gap: 5px;
     margin: 0;
     padding: 10px;
-    background-color: #3d7e7a;
+    background-color: #3d7e7a !important;
     color: #ffffff;
     border-radius: 10px;
   }
@@ -483,6 +483,21 @@
     Ingredients bullet list:
     .custom-product-accordion__ingredient-list {}
   */
+
+.custom-product-accordion__item--2 p.custom-product-accordion__paragraph:not(.custom-product-accordion__paragraph--2-1) {
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #ffffff !important;
+    background-color: #3d7e7a !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    margin: 0 0 5px !important;
+}
+p.custom-product-accordion__paragraph.custom-product-accordion__paragraph--2-1 {
+    margin-bottom: 15px;
+}
 {% endstylesheet %}
 
 {% schema %}
