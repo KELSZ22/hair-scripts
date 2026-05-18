@@ -1,0 +1,231 @@
+{%- doc -%}
+  Renders accordion richtext. When bullet_list mode is on, converts paragraph-based
+  ingredient copy (with • markers) into a semantic <ul> — works with theme editor richtext.
+{%- enddoc -%}
+
+{% liquid
+  assign use_bullet_list = false
+  assign is_benefits_list = false
+
+  if content_list_style == 'bullet_list'
+    assign use_bullet_list = true
+  elsif heading != blank and heading contains 'Ingredient'
+    assign use_bullet_list = true
+  endif
+
+  if heading != blank and heading contains 'Ingredient'
+    assign is_benefits_list = false
+  elsif heading != blank and heading contains 'Benefit'
+    assign is_benefits_list = true
+  endif
+
+  if is_benefits_list
+    assign card_list_ul_open = '<ul class="custom-product-accordion__ingredient-list custom-product-accordion__ingredient-list--benefits">'
+  else
+    assign card_list_ul_open = '<ul class="custom-product-accordion__ingredient-list">'
+  endif
+%}
+
+{% liquid
+  if is_benefits_list
+    assign benefit_check_markup = '<span class="custom-product-accordion__benefit-check" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 9.15L7.35 12L13.5 5.85" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="custom-product-accordion__benefit-text">'
+    assign benefit_li_open = '<li>' | append: benefit_check_markup
+    assign benefit_li_close = '</span></li>'
+  else
+    assign benefit_li_open = '<li>'
+    assign benefit_li_close = '</li>'
+  endif
+%}
+
+{% if use_bullet_list and content != blank %}
+  {% unless content contains '<ul' %}
+    {% liquid
+      assign intro_html = ''
+      assign list_items = ''
+      assign segments = content | split: '</p>'
+    %}
+
+    {% for segment in segments %}
+      {% assign chunk = segment | strip %}
+      {% if chunk == blank %}
+        {% continue %}
+      {% endif %}
+
+      {% assign inner = chunk %}
+      {% if chunk contains '<p>' %}
+        {% assign inner = chunk | split: '<p>' | last | strip %}
+      {% elsif chunk contains '<p ' %}
+        {% assign inner = chunk | split: '>' | last | strip %}
+      {% endif %}
+
+      {% liquid
+        assign has_item_bullet = false
+        if inner contains '•' or inner contains '&bull;' or inner contains '&#8226;' or inner contains '<strong>•' or inner contains '<strong> •'
+          assign has_item_bullet = true
+        endif
+      %}
+      {% if has_item_bullet %}
+        {% assign intro_part = blank %}
+        {% assign item_html = inner %}
+
+        {% if inner contains '<strong>•' %}
+          {% assign intro_part = inner | split: '<strong>•' | first | strip %}
+          {% assign item_html = inner | split: '<strong>•' | last | strip | prepend: '<strong>' %}
+        {% elsif inner contains '<strong> •' %}
+          {% assign intro_part = inner | split: '<strong> •' | first | strip %}
+          {% assign item_html = inner | split: '<strong> •' | last | strip | prepend: '<strong>' %}
+        {% endif %}
+
+        {% if intro_part != blank %}
+          {% unless intro_part contains '•' %}
+            {% assign intro_html = intro_html | append: '<p>' | append: intro_part | append: '</p>' %}
+          {% endunless %}
+        {% endif %}
+
+        {% assign item_html = item_html | replace: '<strong>• ', '<strong>' | replace: '<strong> • ', '<strong>' | replace: '<strong>•', '<strong>' %}
+        {% assign item_html = item_html | replace: '<br></strong>', '</strong><br>' | replace: '<br/></strong>', '</strong><br>' | replace: '<br /></strong>', '</strong><br>' %}
+        {% liquid
+          assign item_markup = item_html
+          if item_html contains '</strong><br>'
+            assign item_markup = item_html | replace: '</strong><br>', '</strong><span class="custom-product-accordion__ingredient-desc">' | append: '</span>'
+          elsif item_html contains '</strong>'
+            assign item_markup = item_html | replace: '</strong>', '</strong><span class="custom-product-accordion__ingredient-desc">' | append: '</span>'
+          endif
+          assign item_markup = item_markup | replace: '<br>', '' | replace: '<br/>', '' | replace: '<br />', ''
+        %}
+        {% assign list_items = list_items | append: '<li>' | append: item_markup | append: '</li>' %}
+      {% else %}
+        {% assign intro_html = intro_html | append: '<p>' | append: inner | append: '</p>' %}
+      {% endif %}
+    {% endfor %}
+
+    {% capture ingredient_list_markup %}
+      {{ intro_html }}
+      {% if list_items != blank %}
+        {{ card_list_ul_open }}
+          {{ list_items }}
+        </ul>
+      {% endif %}
+    {% endcapture %}
+    {% assign ingredient_output = ingredient_list_markup | replace: '<br></strong>', '</strong><br>' | replace: '<br/></strong>', '</strong><br>' | replace: '<br /></strong>', '</strong><br>' | replace: '<br></li>', '</li>' | replace: '<br/></li>', '</li>' | replace: '<br /></li>', '</li>' %}
+    {{ ingredient_output }}
+  {% else %}
+    {% liquid
+      if content contains 'custom-product-accordion__ingredient-list'
+        assign ingredient_list_markup = content
+      elsif content contains '<ul>'
+        assign ingredient_list_markup = content | replace: '<ul>', card_list_ul_open
+      else
+        assign ingredient_list_markup = content | replace: '<ul ', '<ul class="custom-product-accordion__ingredient-list" '
+      endif
+
+      assign ingredient_output = ingredient_list_markup | replace: '<br></strong>', '</strong><br>' | replace: '<br/></strong>', '</strong><br>' | replace: '<br /></strong>', '</strong><br>' | replace: '<br></li>', '</li>' | replace: '<br/></li>', '</li>' | replace: '<br /></li>', '</li>'
+
+      if ingredient_output contains '</strong><br'
+        assign ingredient_output = ingredient_output | replace: '</strong><br>', '</strong><span class="custom-product-accordion__ingredient-desc">' | replace: '</li>', '</span></li>' | replace: '</span></span></li>', '</span></li>'
+      endif
+
+      if is_benefits_list
+        assign ingredient_output = ingredient_output | replace: '<li>', benefit_li_open | replace: '</li>', benefit_li_close
+      endif
+    %}
+    {{ ingredient_output }}
+  {% endunless %}
+{% else %}
+  {% liquid
+    if content contains 'custom-product-accordion__ingredient-list'
+      assign accordion_card_output = content
+    elsif content contains '<ul>'
+      assign accordion_card_output = content | replace: '<ul>', card_list_ul_open
+    elsif content contains '<ul '
+      assign accordion_card_output = content | replace: '<ul ', '<ul class="custom-product-accordion__ingredient-list" '
+    else
+      assign accordion_card_output = content
+    endif
+
+    if is_benefits_list
+      assign accordion_card_output = accordion_card_output | replace: '<li>', benefit_li_open | replace: '</li>', benefit_li_close
+    endif
+  %}
+  {{ accordion_card_output }}
+{% endif %}
+
+{% stylesheet %}
+  .custom-product-accordion__ingredient-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .custom-product-accordion__ingredient-list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 10px;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list > li br {
+    display: none;
+  }
+
+  .custom-product-accordion__ingredient-list > li > * {
+    margin: 0;
+  }
+
+  .custom-product-accordion__ingredient-list > li strong {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list > li .custom-product-accordion__ingredient-desc {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list > li:not(:has(strong)) {
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list--benefits > li {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .custom-product-accordion__benefit-check {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__benefit-check svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .custom-product-accordion__benefit-text {
+    flex: 1;
+    min-width: 0;
+  }
+{% endstylesheet %}

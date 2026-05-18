@@ -47,26 +47,63 @@
     background: #3D7E7A;
   }
 
-  /* make announcement text side by side, but NOT far apart */
+  /* Side-by-side announcements; two items use equal columns with a centered separator */
   aside.announcement-bar slideshow-component,
   aside.announcement-bar slideshow-container,
   aside.announcement-bar slideshow-slides,
   aside.announcement-bar .slideshow,
   aside.announcement-bar .slideshow__slides,
   aside.announcement-bar .slideshow-slides,
-  aside.announcement-bar .announcement-bar__slider,
+  aside.announcement-bar .announcement-bar__slider {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    transform: none !important;
+    animation: none !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
   aside.announcement-bar .announcement-bar__slides {
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
     flex-wrap: nowrap !important;
-    gap: 30px !important;
     transform: none !important;
     animation: none !important;
     overflow: visible !important;
     width: 100% !important;
-    
+  }
+
+  aside.announcement-bar .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child) {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    gap: 0 !important;
+  }
+
+  aside.announcement-bar .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child)::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 14px;
+    background-color: #fff9f4;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    margin-inline: clamp(8px, 2vw, 14px);
+  }
+
+  aside.announcement-bar .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child) > .announcement-bar__slide:first-child {
+    grid-column: 1;
+    justify-self: end;
+  }
+
+  aside.announcement-bar .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child) > .announcement-bar__slide:last-child {
+    grid-column: 3;
+    justify-self: start;
   }
   .announcement-bar__slide {
     margin-inline: unset !important;
@@ -209,17 +246,12 @@
   }
 
   @media (max-width: 768px) {
-    aside.announcement-bar slideshow-component,
-    aside.announcement-bar slideshow-container,
-    aside.announcement-bar slideshow-slides,
-    aside.announcement-bar .slideshow,
-    aside.announcement-bar .slideshow__slides,
-    aside.announcement-bar .slideshow-slides,
-    aside.announcement-bar .announcement-bar__slider,
-    aside.announcement-bar .announcement-bar__slides {
-      gap: 24px !important;
+    aside.announcement-bar .announcement-bar__slides:not(:has(> .announcement-bar__slide:nth-child(2):last-child)) {
       flex-wrap: wrap !important;
-      justify-content: center !important;
+    }
+
+    aside.announcement-bar .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child)::after {
+      margin-inline: clamp(6px, 1.5vw, 10px);
     }
 
     aside.announcement-bar .announcement-bar__slide,
@@ -234,15 +266,8 @@
   }
 
   @media (max-width: 400px) {
-    aside.announcement-bar slideshow-component,
-    aside.announcement-bar slideshow-container,
-    aside.announcement-bar slideshow-slides,
-    aside.announcement-bar .slideshow,
-    aside.announcement-bar .slideshow__slides,
-    aside.announcement-bar .slideshow-slides,
-    aside.announcement-bar .announcement-bar__slider,
-    aside.announcement-bar .announcement-bar__slides {
-      gap: 10px !important;
+    aside.announcement-bar .announcement-bar__slides:has(> .announcement-bar__slide:nth-child(2):last-child)::after {
+      margin-inline: 6px;
     }
 
     p.announcement-bar__text {

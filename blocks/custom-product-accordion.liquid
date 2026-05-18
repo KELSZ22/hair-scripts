@@ -11,13 +11,14 @@
 
 <script>
   (() => {
-    const accordions = document.querySelectorAll('.custom-product-accordion');
+    const initCustomProductAccordion = (root = document) => {
+      const accordions = root.querySelectorAll('.custom-product-accordion');
 
-    accordions.forEach((accordion) => {
-      if (accordion.dataset.customAccordionReady === 'true') return;
-      accordion.dataset.customAccordionReady = 'true';
+      accordions.forEach((accordion) => {
+        if (accordion.dataset.customAccordionReady === 'true') return;
+        accordion.dataset.customAccordionReady = 'true';
 
-      const items = accordion.querySelectorAll('.custom-product-accordion__item');
+        const items = accordion.querySelectorAll('.custom-product-accordion__item');
 
       /*
         This adds numbers to every accordion item.
@@ -76,7 +77,116 @@
         });
       });
 
-      const closeItem = (item) => {
+      const stripIngredientBullet = (listItem) => {
+        const strong = listItem.querySelector('strong');
+        if (!strong) return;
+        strong.textContent = strong.textContent.replace(/^\s*•\s*/, '');
+      };
+
+      const wrapIngredientDescription = (listItem) => {
+        listItem.querySelectorAll('br').forEach((br) => br.remove());
+
+        const strong = listItem.querySelector('strong');
+        if (!strong || listItem.querySelector('.custom-product-accordion__ingredient-desc')) return;
+
+        const descriptionNodes = [];
+        let node = strong.nextSibling;
+
+        while (node) {
+          const next = node.nextSibling;
+
+          if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) {
+            node.remove();
+            node = next;
+            continue;
+          }
+
+          descriptionNodes.push(node);
+          node = next;
+        }
+
+        if (descriptionNodes.length === 0) return;
+
+        const description = document.createElement('span');
+        description.className = 'custom-product-accordion__ingredient-desc';
+        descriptionNodes.forEach((descriptionNode) => description.append(descriptionNode));
+        strong.insertAdjacentElement('afterend', description);
+      };
+
+      const normalizeIngredientListItems = (list) => {
+        if (!list) return;
+        list.querySelectorAll(':scope > li').forEach((listItem) => {
+          stripIngredientBullet(listItem);
+          wrapIngredientDescription(listItem);
+        });
+      };
+
+      const formatRichtextBulletList = (contentEl) => {
+        if (!contentEl || contentEl.dataset.bulletListReady === 'true') return;
+        if (contentEl.querySelector('ul')) return;
+
+        const paragraphs = [...contentEl.querySelectorAll(':scope > p')];
+        if (paragraphs.length === 0) return;
+
+        const hasBulletParagraph = paragraphs.some(
+          (paragraph) =>
+            paragraph.textContent.includes('•') ||
+            paragraph.innerHTML.includes('&bull;') ||
+            paragraph.innerHTML.includes('&#8226;')
+        );
+        if (!hasBulletParagraph) return;
+
+        contentEl.dataset.bulletListReady = 'true';
+
+        const list = document.createElement('ul');
+        list.className = 'custom-product-accordion__ingredient-list';
+
+        const addListItem = (html) => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = html;
+          stripIngredientBullet(listItem);
+          wrapIngredientDescription(listItem);
+          list.appendChild(listItem);
+        };
+
+        paragraphs.forEach((paragraph) => {
+          const html = paragraph.innerHTML;
+
+          if (!html.includes('•')) return;
+
+          const bulletMatch = html.match(/<strong>\s*•/i);
+          if (bulletMatch && typeof bulletMatch.index === 'number' && bulletMatch.index > 0) {
+            const introHtml = html.slice(0, bulletMatch.index).replace(/(<br\s*\/?>\s*)+$/gi, '');
+            const itemHtml = html.slice(bulletMatch.index);
+
+            if (introHtml.trim()) {
+              paragraph.innerHTML = introHtml;
+            } else {
+              paragraph.remove();
+            }
+
+            addListItem(itemHtml);
+            return;
+          }
+
+          addListItem(html);
+          paragraph.remove();
+        });
+
+        if (list.children.length === 0) return;
+
+        const introParagraph = contentEl.querySelector(':scope > p');
+        if (introParagraph) {
+          introParagraph.insertAdjacentElement('afterend', list);
+        } else {
+          contentEl.appendChild(list);
+        }
+      };
+
+      accordion.querySelectorAll('.custom-product-accordion__content--bullet-list').forEach(formatRichtextBulletList);
+      accordion.querySelectorAll('.custom-product-accordion__ingredient-list').forEach(normalizeIngredientListItems);
+
+        const closeItem = (item) => {
         const contentWrap = item.querySelector('.custom-product-accordion__content-wrap');
 
         if (!contentWrap || !item.open) return;
@@ -139,21 +249,118 @@
           }
         });
       });
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => initCustomProductAccordion());
+    } else {
+      initCustomProductAccordion();
+    }
+
+    document.addEventListener('shopify:section:load', (event) => {
+      initCustomProductAccordion(event.target);
     });
   })();
 </script>
 
 {% stylesheet %}
   .custom-product-accordion {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     align-self: stretch;
   }
 
-  .custom-product-accordion__content ul {
-    margin: 0px;
+  .custom-product-accordion__icon svg path {
+    fill: var(--Old-colors-Scheme-1-Text-Dark, #211b18);
+  }
+
+  .custom-product-accordion__ingredient-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .custom-product-accordion__ingredient-list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 10px;
+    background-color: #3d7e7a;
+    color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .custom-product-accordion__ingredient-list > li br {
+    display: none;
+  }
+
+  .custom-product-accordion__ingredient-list > li > * {
+    margin: 0;
+  }
+
+  .custom-product-accordion__ingredient-list > li strong {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list > li .custom-product-accordion__ingredient-desc {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list > li:not(:has(strong)) {
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__ingredient-list--benefits > li {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .custom-product-accordion__benefit-check {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    color: #ffffff;
+  }
+
+  .custom-product-accordion__benefit-check svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .custom-product-accordion__benefit-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .custom-product-accordion__content--bullet-list > p:last-of-type {
+    margin-bottom: 0;
   }
 
   @media screen and (min-width: 750px) {
@@ -171,8 +378,6 @@
     max-width: 100%;
     min-width: 0;
     border-bottom: 1px solid rgba(33, 27, 24, 0.16);
-    padding: 0 20px;
-    border-radius: 10px;
   }
 
   .custom-product-accordion__summary {
@@ -196,7 +401,7 @@
   .custom-product-accordion__title {
     flex: 1;
     overflow: hidden;
-    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+    color: var(--Old-colors-Scheme-1-Text-Dark, #211b18);
     text-align: left;
     text-overflow: ellipsis;
 
@@ -242,13 +447,17 @@
 
   .custom-product-accordion__content {
     padding: 0 0 18px;
-    color: var(--new-colors-gray-subhead, #6B6B6B);
+    color: var(--new-colors-gray-subhead, #6b6b6b);
 
     font-family: "DM Sans", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+
+  .custom-product-accordion__content :is(p, .custom-product-accordion__paragraph) {
+    color: var(--new-colors-gray-subhead, #6b6b6b);
   }
 
   .custom-product-accordion__content p {
@@ -271,8 +480,8 @@
     Accordion 2 first paragraph:
     .custom-product-accordion__paragraph--2-1 {}
 
-    Accordion 2 second paragraph:
-    .custom-product-accordion__paragraph--2-2 {}
+    Ingredients bullet list:
+    .custom-product-accordion__ingredient-list {}
   */
 {% endstylesheet %}
 

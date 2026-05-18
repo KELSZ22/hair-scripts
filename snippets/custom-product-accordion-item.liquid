@@ -1,14 +1,28 @@
 {%- doc -%}
-  One accordion panel for `custom-product-accordion`. Pass either `metafield` (product metafield drop) or `content` (richtext HTML). Omits output when there is nothing to show.
+  One accordion panel for `custom-product-accordion`. Pass `content` (richtext HTML from
+  the theme editor) or `metafield` (product metafield drop). Omits output when empty.
 {%- enddoc -%}
-{% assign panel_html = blank %}
-{% if metafield != blank %}
-  {% capture panel_html %}
-    {{ metafield | metafield_tag }}
-  {% endcapture %}
-{% elsif content != blank %}
-  {% assign panel_html = content %}
-{% endif %}
+{% liquid
+  assign panel_html = blank
+  assign use_bullet_list = false
+
+  if content_list_style == 'bullet_list'
+    assign use_bullet_list = true
+  elsif heading != blank and heading contains 'Ingredient'
+    assign use_bullet_list = true
+  endif
+
+  if metafield != blank
+    capture panel_html
+      echo metafield | metafield_tag
+    endcapture
+  elsif content != blank
+    capture panel_html
+      render 'custom-product-accordion-content', content: content, content_list_style: content_list_style, heading: heading
+    endcapture
+  endif
+%}
+
 {% if heading != blank and panel_html != blank %}
   {% capture accordion_icon_minus %}
     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -40,7 +54,7 @@
     </summary>
 
     <div class="custom-product-accordion__content-wrap">
-      <div class="custom-product-accordion__content">
+      <div class="custom-product-accordion__content{% if use_bullet_list %} custom-product-accordion__content--bullet-list{% endif %}">
         {{ panel_html }}
       </div>
     </div>
