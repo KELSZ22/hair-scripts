@@ -24,7 +24,6 @@
               <a
                 {% if section.settings.button_link != blank %}
                   href="{{ section.settings.button_link }}"
-                  target="_blank"
                 {% else %}
                   role="link"
                   aria-disabled="true"
@@ -609,6 +608,15 @@
 
     #section-{{ section.id }} .hs-science-hero__heading {
       font-size: 32px;
+    }
+
+    h1.hs-science-hero__heading {
+    font-size: 24px !important;
+    }
+
+    .hs-science-hero__buttons  {
+    width: 90% !important;
+    font-size: 17px !important;
     }
   }
 

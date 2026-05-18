@@ -14,6 +14,22 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
+        "announcement_CnJyLh": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "bg-color": "",
+            "text": "Available in the US ONLY |",
+            "textlink": "",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
@@ -31,6 +47,7 @@
         }
       },
       "block_order": [
+        "announcement_CnJyLh",
         "announcement_BxgCk9"
       ],
       "name": "t:names.announcement_bar",

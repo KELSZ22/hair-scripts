@@ -19,6 +19,63 @@
 
       const items = accordion.querySelectorAll('.custom-product-accordion__item');
 
+      /*
+        This adds numbers to every accordion item.
+
+        Example:
+        Accordion 1 = .custom-product-accordion__item--1
+        Accordion 2 = .custom-product-accordion__item--2
+        Accordion 3 = .custom-product-accordion__item--3
+
+        It also numbers the content and every p tag inside the content.
+      */
+      items.forEach((item, index) => {
+        const accordionNumber = index + 1;
+        const summary = item.querySelector('.custom-product-accordion__summary');
+        const title = item.querySelector('.custom-product-accordion__title');
+        const icon = item.querySelector('.custom-product-accordion__icon');
+        const contentWrap = item.querySelector('.custom-product-accordion__content-wrap');
+        const content = item.querySelector('.custom-product-accordion__content');
+        const paragraphs = content ? content.querySelectorAll('p') : [];
+
+        item.classList.add(`custom-product-accordion__item--${accordionNumber}`);
+        item.setAttribute('data-accordion-index', accordionNumber);
+
+        if (summary) {
+          summary.classList.add(`custom-product-accordion__summary--${accordionNumber}`);
+          summary.setAttribute('data-accordion-index', accordionNumber);
+        }
+
+        if (title) {
+          title.classList.add(`custom-product-accordion__title--${accordionNumber}`);
+          title.setAttribute('data-accordion-index', accordionNumber);
+        }
+
+        if (icon) {
+          icon.classList.add(`custom-product-accordion__icon--${accordionNumber}`);
+          icon.setAttribute('data-accordion-index', accordionNumber);
+        }
+
+        if (contentWrap) {
+          contentWrap.classList.add(`custom-product-accordion__content-wrap--${accordionNumber}`);
+          contentWrap.setAttribute('data-accordion-index', accordionNumber);
+        }
+
+        if (content) {
+          content.classList.add(`custom-product-accordion__content--${accordionNumber}`);
+          content.setAttribute('data-accordion-index', accordionNumber);
+        }
+
+        paragraphs.forEach((paragraph, paragraphIndex) => {
+          const paragraphNumber = paragraphIndex + 1;
+
+          paragraph.classList.add('custom-product-accordion__paragraph');
+          paragraph.classList.add(`custom-product-accordion__paragraph--${accordionNumber}-${paragraphNumber}`);
+          paragraph.setAttribute('data-accordion-index', accordionNumber);
+          paragraph.setAttribute('data-paragraph-index', paragraphNumber);
+        });
+      });
+
       const closeItem = (item) => {
         const contentWrap = item.querySelector('.custom-product-accordion__content-wrap');
 
@@ -95,6 +152,10 @@
     align-self: stretch;
   }
 
+  .custom-product-accordion__content ul {
+    margin: 0px;
+  }
+
   @media screen and (min-width: 750px) {
     .product-details .group-block-content.layout-panel-flex--column > *:has(> .custom-product-accordion) {
       align-self: stretch;
@@ -110,6 +171,8 @@
     max-width: 100%;
     min-width: 0;
     border-bottom: 1px solid rgba(33, 27, 24, 0.16);
+    padding: 0 20px;
+    border-radius: 10px;
   }
 
   .custom-product-accordion__summary {
@@ -195,6 +258,22 @@
   .custom-product-accordion__content p + p {
     margin-top: 10px;
   }
+
+  /*
+    Now you can target each accordion separately.
+
+    Whole accordion 2:
+    .custom-product-accordion__item--2 {}
+
+    Accordion 2 content:
+    .custom-product-accordion__content--2 {}
+
+    Accordion 2 first paragraph:
+    .custom-product-accordion__paragraph--2-1 {}
+
+    Accordion 2 second paragraph:
+    .custom-product-accordion__paragraph--2-2 {}
+  */
 {% endstylesheet %}
 
 {% schema %}

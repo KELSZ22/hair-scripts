@@ -1080,7 +1080,7 @@
     }
 
     .media-gallery--carousel .slideshow-controls__thumbnail {
-      width: 100px !important;
+      width: 95px !important;
       height: 100px !important;
       display: flex !important;
       align-items: center;
@@ -1092,6 +1092,7 @@
       overflow: hidden;
       background: #f3f3f3;
       flex: 0 0 100px;
+      box-sizing: border-box !important;
     }
 
     .media-gallery--carousel .slideshow-controls__thumbnail img {
@@ -1101,6 +1102,7 @@
       object-fit: contain;
       border-radius: 0 !important;
       background: #f3f3f3;
+      box-sizing: border-box !important;
     }
 
     .media-gallery--carousel slideshow-container {
@@ -1149,9 +1151,10 @@
       .shopify-model-viewer-ui__controls-area {
       bottom: calc(var(--minimum-touch-target) + var(--padding-sm));
     }
+
     .slideshow-controls__thumbnails {
-    padding-block: 0 !important;
-}
+      padding-block: 0 !important;
+    }
   }
 
   @media screen and (min-width: 750px) {
@@ -1198,7 +1201,7 @@
       gap: 8px;
       overflow-x: auto;
       overflow-y: hidden;
-      padding: 0;
+      padding: 1px !important;
       margin: 0;
       scrollbar-width: none;
       mask-image: none !important;
@@ -1224,6 +1227,7 @@
       display: flex !important;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box !important;
     }
 
     .media-gallery--carousel .media-gallery__mobile-controls.hs-mobile-gallery-thumbnails .slideshow-controls__thumbnail img {
@@ -1233,6 +1237,57 @@
       border-radius: 0 !important;
       background: transparent !important;
       display: block;
+      box-sizing: border-box !important;
+    }
+  }
+
+  /* Default transparent border prevents active border from being cut off */
+  .media-gallery--carousel .slideshow-controls__thumbnail,
+  .media-gallery--carousel .media-gallery__mobile-controls.hs-mobile-gallery-thumbnails .slideshow-controls__thumbnail,
+  .dialog-thumbnails-list__thumbnail {
+    border: 1px solid transparent !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Active thumbnail border - desktop, mobile, and zoom dialog */
+  .media-gallery--carousel .slideshow-controls__thumbnail[aria-selected='true'],
+  .media-gallery--carousel .slideshow-controls__thumbnail[aria-current='true'],
+  .media-gallery--carousel .slideshow-controls__thumbnail[aria-pressed='true'],
+  .media-gallery--carousel .slideshow-controls__thumbnail.active,
+  .media-gallery--carousel .slideshow-controls__thumbnail.is-active,
+  .dialog-thumbnails-list__thumbnail[aria-selected='true'] {
+    border: 1.5px solid #3D7E7A !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+  }
+
+  .media-gallery--carousel .slideshow-controls__thumbnail img,
+  .media-gallery--carousel .media-gallery__mobile-controls.hs-mobile-gallery-thumbnails .slideshow-controls__thumbnail img,
+  .dialog-thumbnails-list__thumbnail img {
+    box-sizing: border-box !important;
+  }
+
+  .media-gallery--carousel .slideshow-controls__thumbnail[aria-selected='true'] img,
+  .media-gallery--carousel .slideshow-controls__thumbnail[aria-current='true'] img,
+  .media-gallery--carousel .slideshow-controls__thumbnail[aria-pressed='true'] img,
+  .media-gallery--carousel .slideshow-controls__thumbnail.active img,
+  .media-gallery--carousel .slideshow-controls__thumbnail.is-active img,
+  .dialog-thumbnails-list__thumbnail[aria-selected='true'] img {
+    border: none !important;
+  }
+
+  /* Give thumbnail scroll wrappers tiny breathing room so borders do not get shaved off */
+  .media-gallery--carousel slideshow-controls[thumbnails],
+  .media-gallery--carousel .media-gallery__mobile-controls.hs-mobile-gallery-thumbnails scroll-hint,
+  .media-gallery--carousel .media-gallery__mobile-controls.hs-mobile-gallery-thumbnails .slideshow-controls__thumbnails-container {
+    padding: 1px !important;
+  }
+
+  @supports (anchor-name: --test) {
+    .dialog-thumbnails-list:has(.dialog-thumbnails-list__thumbnail:is([aria-selected='true']))::after {
+      border: 1px solid #3D7E7A !important;
+      outline: none !important;
+      box-sizing: border-box !important;
     }
   }
 {% endstylesheet %}

@@ -40,13 +40,17 @@
             {% endif %}
 
             {% if block.settings.result != blank %}
-              <p class="hs-root-causes__card-result">
-                {{ block.settings.result }}<span class="hs-root-causes__arrow">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M0.5 5.9H9.6L5.2 1.5L6.6 0.1L13.5 7L6.6 13.9L5.2 12.5L9.6 8.1H0.5V5.9Z" fill="white"></path>
-</svg>
-                </span>
-              </p>
+            <p class="hs-root-causes__card-result">
+  <span class="hs-root-causes__arrow">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.5 5.9H9.6L5.2 1.5L6.6 0.1L13.5 7L6.6 13.9L5.2 12.5L9.6 8.1H0.5V5.9Z" fill="white"></path>
+    </svg>
+  </span>
+
+  <span>
+    {{ block.settings.result }}
+  </span>
+</p>
             {% endif %}
           </div>
 
@@ -178,11 +182,14 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    font-style: italic;
   }
 
   #hs-root-causes-{{ section.id }} .hs-root-causes__arrow {
-    display: inline-block;
-    margin-right: 4px;
+     display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   }
 
   #hs-root-causes-{{ section.id }} .hs-root-causes__number {
@@ -244,11 +251,14 @@
 
     #hs-root-causes-{{ section.id }} .hs-root-causes__card-text {
       font-size: 12px;
+            font-style: italic;
+
     }
 
     #hs-root-causes-{{ section.id }} .hs-root-causes__card-result {
       margin-top: 14px;
       font-size: 12px;
+      font-style: italic;
     }
 
     #hs-root-causes-{{ section.id }} .hs-root-causes__number {

@@ -246,6 +246,7 @@
     },
     "hairscripts_about_join_community_FEbAVx": {
       "type": "hairscripts-about-join-community",
+      "disabled": true,
       "custom_css": [
         "@media screen and (max-width: 749px) {.contact-form {width: 100% !important; }}"
       ],

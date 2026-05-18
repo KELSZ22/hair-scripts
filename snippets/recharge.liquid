@@ -17,7 +17,7 @@
         <span class="rc-radio-dot rc-radio-dot--selected"></span>
         <div class="rc-card__title-group">
           <span class="rc-card__title">90-Day Subscription</span>
-          <span class="rc-card__subtitle">Billed $130 every 12 weeks</span>
+          <span class="rc-card__subtitle">Billed $135 every 12 weeks</span>
         </div>
       </div>
       <div class="rc-card__prices">
@@ -27,7 +27,7 @@
         </div>
         <div class="rc-price-sub-row">
           <span class="rc-price--per"></span>
-          <span class="rc-price--save">save 53%</span>
+          <span class="rc-price--save">save 34%</span>
         </div>
       </div>
     </label>
@@ -458,6 +458,23 @@
       productForm.appendChild(sellingPlanInput);
     }
 
+    function showStatus(type, message) {
+      if (!statusEl) return;
+
+      statusEl.style.display = 'block';
+      statusEl.classList.remove('rc-status--error', 'rc-status--success');
+
+      if (type === 'error') {
+        statusEl.classList.add('rc-status--error');
+      }
+
+      if (type === 'success') {
+        statusEl.classList.add('rc-status--success');
+      }
+
+      statusEl.textContent = message;
+    }
+
     function updateATCPrice(priceText) {
       var priceEl = document.querySelector('.add-to-cart-text__price');
       if (priceEl) priceEl.textContent = priceText;
@@ -466,43 +483,91 @@
       if (priceBlock) priceBlock.textContent = priceText;
     }
 
-    function setSellingPlan(planId, priceText) {
-      currentPlanId = planId;
-      if (planId) {
-        sellingPlanInput.value = planId;
+    function syncSellingPlanInput() {
+      if (currentPlanId) {
         sellingPlanInput.disabled = false;
+        sellingPlanInput.value = currentPlanId;
       } else {
         sellingPlanInput.value = '';
         sellingPlanInput.disabled = true;
       }
-      if (priceText) updateATCPrice(priceText);
+    }
+
+    function setSellingPlan(planId, priceText) {
+      currentPlanId = planId;
+      syncSellingPlanInput();
+
+      if (priceText) {
+        updateATCPrice(priceText);
+      }
     }
 
     function activateSubscription90() {
       subCard.classList.add('rc-card--selected');
       oneCard.classList.remove('rc-card--selected');
+
       subDot.classList.add('rc-radio-dot--selected');
       oneDot.classList.remove('rc-radio-dot--selected');
+
       subCard.querySelector('input').checked = true;
+
       setSellingPlan(PLANS.sub90, '$45.00');
     }
 
     function activateSubscription30() {
       oneCard.classList.add('rc-card--selected');
       subCard.classList.remove('rc-card--selected');
+
       oneDot.classList.add('rc-radio-dot--selected');
       subDot.classList.remove('rc-radio-dot--selected');
+
       oneCard.querySelector('input').checked = true;
+
       setSellingPlan(PLANS.sub30, '$49.00');
     }
 
     function activateOnetime() {
-      oneCard.classList.add('rc-card--selected');
       subCard.classList.remove('rc-card--selected');
-      oneDot.classList.add('rc-radio-dot--selected');
+      oneCard.classList.remove('rc-card--selected');
+
       subDot.classList.remove('rc-radio-dot--selected');
+      oneDot.classList.remove('rc-radio-dot--selected');
+
       oneCard.querySelector('input').checked = true;
+
       setSellingPlan(PLANS.onetime, '$69.00');
+    }
+
+    function submitProductForm() {
+      syncSellingPlanInput();
+
+      var submitButton = productForm.querySelector(
+        'button[name="add"], button[type="submit"], input[type="submit"], .product-form__submit, .add-to-cart-button'
+      );
+
+      if (submitButton && submitButton.disabled) {
+        showStatus('error', 'This product is not available right now.');
+        return;
+      }
+
+      showStatus('success', 'Adding one-time purchase to cart...');
+
+      if (submitButton && typeof submitButton.click === 'function') {
+        submitButton.click();
+        return;
+      }
+
+      if (typeof productForm.requestSubmit === 'function') {
+        productForm.requestSubmit();
+        return;
+      }
+
+      var submitEvent = new Event('submit', {
+        bubbles: true,
+        cancelable: true
+      });
+
+      productForm.dispatchEvent(submitEvent);
     }
 
     subCard.addEventListener('click', activateSubscription90);
@@ -512,43 +577,40 @@
       oneLink.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+
         activateOnetime();
+
+        setTimeout(function() {
+          submitProductForm();
+        }, 50);
       });
     }
 
-    productForm.addEventListener('submit', function(e) {
-      if (currentPlanId) {
-        sellingPlanInput.disabled = false;
-        sellingPlanInput.value = currentPlanId;
-      } else {
-        sellingPlanInput.disabled = true;
-        sellingPlanInput.value = '';
-      }
+    productForm.addEventListener('submit', function() {
+      syncSellingPlanInput();
     }, true);
 
     var productFormComponent = productForm.closest('product-form-component');
     if (productFormComponent) {
-      productFormComponent.addEventListener('submit', function(e) {
-        if (currentPlanId) {
-          sellingPlanInput.disabled = false;
-          sellingPlanInput.value = currentPlanId;
-        } else {
-          sellingPlanInput.disabled = true;
-        }
+      productFormComponent.addEventListener('submit', function() {
+        syncSellingPlanInput();
       }, true);
     }
 
     var observer = new MutationObserver(function() {
       var existing = productForm.querySelector('input[name="selling_plan"]');
+
       if (!existing) {
         productForm.appendChild(sellingPlanInput);
       }
-      if (currentPlanId && sellingPlanInput.value !== currentPlanId) {
-        sellingPlanInput.value = currentPlanId;
-        sellingPlanInput.disabled = false;
-      }
+
+      syncSellingPlanInput();
     });
-    observer.observe(productForm, { childList: true, subtree: true });
+
+    observer.observe(productForm, {
+      childList: true,
+      subtree: true
+    });
 
     setSellingPlan(PLANS.sub90, '$45.00');
 
@@ -560,6 +622,5 @@
   } else {
     init();
   }
-
 })();
 </script>

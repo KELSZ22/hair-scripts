@@ -90,14 +90,14 @@
       "name": "HairScripts Science Hero",
       "settings": {
         "bg_image": "shopify://shop_images/orange-wall-with-window-shadow-background-presentation-product-advertising-3d-rendering_1.webp",
-        "hero_image": "shopify://shop_images/smiley-young-woman-styling-hair-medium-shot_1_1.webp",
+        "hero_image": "shopify://shop_images/image_71.webp",
         "hero_image_alt": "Woman combing natural hair",
         "eyebrow": "Science & Education",
         "heading": "YOUR HAIR DOESN’T THIN<br> WITHOUT A REASON.",
         "text": "<p>Most products treat the symptom. HairScripts addresses what’s actually causing it. Here’s what’s happening at the follicle — and why it matters.</p>",
         "desktop_height": 520,
         "image_width": 700,
-        "image_right_position": -100,
+        "image_right_position": -15,
         "image_bottom_position": -60,
         "left_overlay_opacity": 0,
         "heading_color": "#ffffff",
@@ -111,9 +111,9 @@
       "type": "hs-text-image",
       "name": "HS Text Image",
       "settings": {
-        "heading": "LOREM IMPSUM DOLOR SIT AMET",
+        "heading": "",
         "text": "<p>Hair supplements fail for one reason: they don’t match what’s actually causing the loss. They add ingredients to a label without addressing the specific mechanisms shutting your growth cycle down. This page exists so you never have to guess again. By the time you finish reading, you’ll know exactly what’s happening inside your follicles and exactly how HairScripts™ fixes it.</p>",
-        "image": "shopify://shop_images/Mask_group.webp"
+        "image": "shopify://shop_images/7062_1.png"
       }
     },
     "hairscripts_formulated_by_YbkLAj": {
@@ -216,7 +216,7 @@
         "eyebrow": "HOW HAIR ACTUALLY GROWS",
         "heading": "First, Understand the Cycle They’re Disrupting. Your Hair Grows in Three Phases. FOUR-PHASE CYCLE.",
         "text": "<p><em>Hormones, stress, and nutrient gaps are collapsing all three.</em></p>",
-        "main_image": "shopify://shop_images/portrait-young-beautiful-woman-with-hairbrush_2.webp",
+        "main_image": "shopify://shop_images/image_73.png",
         "main_image_alt": "Woman holding a hair brush",
         "background_color": "#ffffff",
         "border_color": "#4da9a3",
@@ -309,7 +309,7 @@
         "heading": "NINE PATHWAYS. ONE FORMULA.",
         "text": "<p>HairScripts™ addresses every root cause of hormonal hair loss — simultaneously. So you’re covered at every level, from day one.</p>",
         "button_label": "Start My Protocol",
-        "button_link": "shopify://collections/all",
+        "button_link": "shopify://products/hairscripts-by-bevy-supplement",
         "image": "shopify://shop_images/image_2_1.webp"
       }
     },
@@ -465,9 +465,9 @@
       ],
       "name": "Key ingredients grid",
       "settings": {
-        "eyebrow": "=",
+        "eyebrow": "",
         "heading": "Key Ingredients",
-        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+        "description": "",
         "section_bg": "#2f6665",
         "heading_color": "#f5efe4",
         "text_color": "#d9e7e2",

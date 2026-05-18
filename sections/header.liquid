@@ -70,7 +70,6 @@
     assign search_class = 'search-action--hidden-on-drawer'
   endif
 
-  # Handle localization positioning
   if section.settings.localization_position == 'left'
     if section.settings.search_position == 'left'
       if shop.customer_accounts_enabled
@@ -308,7 +307,7 @@
 
 <header-component
   id="header-component"
-  class="{{ class }}{% if request.page_type == 'product' %} product-page{% endif %}{% if request.page_type == 'index' %} home-page{% endif %}"
+  class="{{ class }}{% if request.page_type == 'index' %} home-page{% else %} others-page{% endif %}"
   data-theme-color="rgb({{ section.settings.color_scheme_top.settings.background.rgb }})"
   {% if transparent %}
     transparent="{{ transparent }}"
@@ -498,55 +497,36 @@
     background: white;
   }
 
-  #header-component.product-page span.currency-code,
-  #header-component.product-page span.svg-wrapper.icon-caret,
-  #header-component.product-page span.svg-wrapper,
-  #header-component.product-page svg.account-button__icon,
-  #header-component:not(.home-page):not(.product-page) span.currency-code,
-  #header-component:not(.home-page):not(.product-page) span.svg-wrapper.icon-caret,
-  #header-component:not(.home-page):not(.product-page) span.svg-wrapper,
-  #header-component:not(.home-page):not(.product-page) svg.account-button__icon {
+  #header-component.others-page span.currency-code,
+  #header-component.others-page span.svg-wrapper.icon-caret,
+  #header-component.others-page span.svg-wrapper,
+  #header-component.others-page svg.account-button__icon {
     color: #000;
   }
 
-  #header-component.product-page a.header.hs-science-hero__button.hs-science-hero__button--secondary,
-  #header-component:not(.home-page):not(.product-page) a.header.hs-science-hero__button.hs-science-hero__button--secondary {
+  #header-component.others-page a.header.hs-science-hero__button.hs-science-hero__button--secondary {
     border-color: #c4a882;
     color: #000;
   }
 
-  #header-component.product-page span.svg-wrapper svg path,
-  #header-component:not(.home-page):not(.product-page) span.svg-wrapper svg path {
+  #header-component.others-page span.svg-wrapper svg path,
+  #header-component.others-page shopify-account span svg path,
+  #header-component.others-page span.something svg path,
+  #header-component.others-page summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path {
     fill: #000;
   }
-
-  #header-component.product-page shopify-account span svg path,
-  #header-component:not(.home-page):not(.product-page) shopify-account span svg path {
-    fill: #000;
-  }
-
-  #header-component.product-page span.something svg path,
-  #header-component:not(.home-page):not(.product-page) span.something svg path {
-    fill: #000;
-  }
-
-  #header-component.product-page summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path,
-  #header-component:not(.home-page):not(.product-page) summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path {
-    fill: #000;
-  }
-
-  #header-component.product-page,
-  #header-component:not(.home-page):not(.product-page) {
+  .header.others-page summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg g path {
+    stroke: #000;
+}
+  #header-component.others-page {
     background: white;
   }
 
-  #header-component.product-page span.menu-list__link-title,
-  #header-component:not(.home-page):not(.product-page) span.menu-list__link-title {
+  #header-component.others-page span.menu-list__link-title {
     color: #000;
   }
 
-  #header-component.product-page img.header-logo__image,
-  #header-component:not(.home-page):not(.product-page) img.header-logo__image {
+  #header-component.others-page img.header-logo__image {
     filter: brightness(0);
   }
 
@@ -734,6 +714,10 @@
   #header-group.hs-header-is-scrolled #header-component shopify-account span svg path,
   #header-group.hs-header-is-scrolled #header-component summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg path {
     fill: #000000 !important;
+  }
+
+  #header-group.hs-header-is-scrolled summary.header__icon.header__icon--menu.header__icon--summary span.svg-wrapper.header-drawer-icon.header-drawer-icon--open svg g path {
+    stroke: #000;
   }
 
   #header-group.hs-header-is-scrolled #header-component img.header-logo__image {

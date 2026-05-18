@@ -96,6 +96,14 @@
       assign product_grid_css_vars = '--product-information-col-1-pct: ' | append: col_1_pct | append: '%; --product-information-col-2-pct: ' | append: col_2_pct | append: '%;'
     endunless
   endif
+
+  assign hs_mobile_product_title = ''
+
+  if closest.product != blank
+    assign hs_mobile_product_title = closest.product.title
+  elsif product != blank
+    assign hs_mobile_product_title = product.title
+  endif
 %}
 
 <div class="section-background color-{{ settings.color_scheme }}"></div>
@@ -117,17 +125,23 @@
       style="{{ product_grid_css_vars }}"
     {% endif %}
   >
+    {% if hs_mobile_product_title != blank %}
+      <h1 class="hs-mobile-product-title">
+        {{ hs_mobile_product_title | escape }}
+      </h1>
+    {% endif %}
+
     {% assign render_order_array = render_order | split: ',' %}
 
     {% capture media %}
-     <div class="product-information__media-container">
+      <div class="product-information__media-container">
         <div
           class="product-information__media"
           data-testid="product-information-media"
         >
           {{ media_gallery }}
         </div>
-     </div>
+      </div>
     {% endcapture %}
 
     {% for block in render_order_array %}
@@ -152,6 +166,10 @@
     display: grid;
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
+  }
+
+  .hs-mobile-product-title {
+    display: none;
   }
 
   /* Default column positions */
@@ -181,13 +199,15 @@
     width: 100%;
     height: 100%;
   }
+
   .product-information__media-container {
     position: sticky;
     top: 0;
     z-index: 1;
   }
 
-  .spacing-style, .inherit-spacing {
+  .spacing-style,
+  .inherit-spacing {
     margin-block-start: 0;
     padding-block-start: 0;
   }
@@ -206,16 +226,71 @@
 
   /* Mobile styles */
   @media screen and (max-width: 749px) {
-    .product-information__media {
-      grid-column: 1 / -1;
+    .product-information__grid:not(.product-information--media-none) {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
     }
 
+    .hs-mobile-product-title {
+      display: block;
+      grid-column: 1 / -1 !important;
+      width: 100%;
+      margin: 0 0 14px;
+      color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .product-information .product-details .product-title,
+    .product-information .product-details [data-testid="product-title"],
+    .product-information .product-details :is(h1, h2, h3):first-child {
+      display: none !important;
+    }
+
+    .product-information__media-container,
+    .product-information__media,
     .product-details {
-      grid-column: 2 / 3;
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .product-information__media-container,
+    .product-information__media {
+      position: static !important;
+      top: auto !important;
+    }
+
+    .spacing-style,
+    .inherit-spacing {
+      margin-block-start: 5px;
+    }
+
+    /*
+      RTE / text blocks in details: global rules (e.g. hero copy) use rte-formatter.spacing-style p at 18px.
+      Keep product PDP subcopy at 14px on small screens to match base typography.
+    */
+    .product-information .product-details rte-formatter.text-block.rte :is(p, li) {
+      font-size: 14px;
     }
   }
 
-  
+  @media screen and (max-width: 450px) {
+    .hs-mobile-product-title {
+      font-size: 28px;
+    }
+
+    .product-information .product-details rte-formatter.text-block.rte :is(p, li) {
+      font-size: 10px !important;
+    }
+  }
 
   /* Desktop styles */
   @media screen and (min-width: 750px) {
@@ -613,47 +688,6 @@
     scroll-snap-align: start;
   }
 
-  @media screen and (max-width: 749px) {
-    .product-information__grid:not(.product-information--media-none) {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-    }
-
-    .spacing-style, .inherit-spacing {
-    margin-block-start: 5px;
-  }
-
-    .product-information__media,
-    .product-details {
-      grid-column: 1 / -1 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-
-
-    .product-information__media {
-      position: static !important;
-      top: auto !important;
-    }
-
-    /*
-      RTE / text blocks in details: global rules (e.g. hero copy) use rte-formatter.spacing-style p at 18px.
-      Keep product PDP subcopy at 14px on small screens to match base typography.
-    */
-    .product-information .product-details rte-formatter.text-block.rte :is(p, li) {
-      font-size: 14px;
-    }
-  }
-
-  @media screen and (max-width: 450px){
-        .product-information .product-details rte-formatter.text-block.rte :is(p, li) {
-      font-size: 10px !important;
-    }
-  }
-
   /* If the header is sticky, make product details content stick underneath the header */
   body:has(#header-group #header-component[data-sticky-state='active']) .product-details.sticky-content--desktop {
     --sticky-header-offset: var(--header-height);
@@ -814,114 +848,119 @@
       transition: none;
     }
   }
+
   @media screen and (max-width: 749px) {
-  .hs-mobile-product-eyebrow-holder {
-    order: -10;
-    width: 100%;
-    margin-bottom: 15px;
-  }
+    .hs-mobile-product-eyebrow-holder {
+      order: -10;
+      width: fit-content;
+      max-width: 100%;
+      justify-self: start;
+      align-self: start;
+      margin-bottom: 15px;
+    }
 
-  .hs-mobile-product-eyebrow-holder rte-formatter,
-  .hs-mobile-product-eyebrow-holder p {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0;
-  }
-  .hs-mobile-product-eyebrow-holder rte-formatter.spacing-style.text-block {
-    display: flex;
-    padding: 5px 10px;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 9999px;
-    background: var(--Old-colors-Scheme-1-Hover-Links, #D7E9E6);
-  }
-  .hs-mobile-product-eyebrow-holder rte-formatter.spacing-style.text-block p{
-    color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
-    text-align: center;
+    .hs-mobile-product-eyebrow-holder rte-formatter,
+    .hs-mobile-product-eyebrow-holder p {
+      width: auto !important;
+      max-width: 100% !important;
+      margin: 0;
+    }
 
-    /* NewTypography/Paragraph/Regular */
-    font-family: "DM Sans";
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    .hs-mobile-product-eyebrow-holder rte-formatter.spacing-style.text-block {
+      display: inline-flex;
+      width: auto !important;
+      max-width: 100%;
+      padding: 5px 10px;
+      align-items: center;
+      gap: 10px;
+      border-radius: 9999px;
+      background: var(--Old-colors-Scheme-1-Hover-Links, #D7E9E6);
+    }
+
+    .hs-mobile-product-eyebrow-holder rte-formatter.spacing-style.text-block p {
+      color: var(--Old-colors-Scheme-1-Text-Dark, #211B18);
+      text-align: center;
+      font-family: "DM Sans";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
-}
 {% endstylesheet %}
 
 <script>
-(function () {
-  const mobileQuery = window.matchMedia('(max-width: 749px)');
+  (function () {
+    const mobileQuery = window.matchMedia('(max-width: 749px)');
 
-  let eyebrowBlock = null;
-  let originalParent = null;
-  let originalNextSibling = null;
-  let mobileHolder = null;
+    let eyebrowBlock = null;
+    let originalParent = null;
+    let originalNextSibling = null;
+    let mobileHolder = null;
 
-  function findEyebrowBlock() {
-    return Array.from(document.querySelectorAll('rte-formatter.text-block')).find(function (el) {
-      return el.textContent.trim().includes('For women 18+') &&
-        el.textContent.trim().includes('hair thinning');
-    });
-  }
-
-  function createMobileHolder() {
-    const mediaContainer = document.querySelector('.product-information__media-container');
-    const productGrid = document.querySelector('.product-information__grid');
-
-    if (!mediaContainer || !productGrid) return null;
-
-    let holder = document.querySelector('.hs-mobile-product-eyebrow-holder');
-
-    if (!holder) {
-      holder = document.createElement('div');
-      holder.className = 'hs-mobile-product-eyebrow-holder';
-      productGrid.insertBefore(holder, mediaContainer);
+    function findEyebrowBlock() {
+      return Array.from(document.querySelectorAll('rte-formatter.text-block')).find(function (el) {
+        return el.textContent.trim().includes('For women 18+') &&
+          el.textContent.trim().includes('hair thinning');
+      });
     }
 
-    return holder;
-  }
+    function createMobileHolder() {
+      const mediaContainer = document.querySelector('.product-information__media-container');
+      const productGrid = document.querySelector('.product-information__grid');
 
-  function moveEyebrowForMobile() {
-    if (!eyebrowBlock) {
-      eyebrowBlock = findEyebrowBlock();
-      if (!eyebrowBlock) return;
+      if (!mediaContainer || !productGrid) return null;
 
-      originalParent = eyebrowBlock.parentNode;
-      originalNextSibling = eyebrowBlock.nextSibling;
+      let holder = document.querySelector('.hs-mobile-product-eyebrow-holder');
+
+      if (!holder) {
+        holder = document.createElement('div');
+        holder.className = 'hs-mobile-product-eyebrow-holder';
+        productGrid.insertBefore(holder, mediaContainer);
+      }
+
+      return holder;
     }
 
-    mobileHolder = createMobileHolder();
-    if (!mobileHolder) return;
+    function moveEyebrowForMobile() {
+      if (!eyebrowBlock) {
+        eyebrowBlock = findEyebrowBlock();
+        if (!eyebrowBlock) return;
 
-    if (eyebrowBlock.parentNode !== mobileHolder) {
-      mobileHolder.appendChild(eyebrowBlock);
+        originalParent = eyebrowBlock.parentNode;
+        originalNextSibling = eyebrowBlock.nextSibling;
+      }
+
+      mobileHolder = createMobileHolder();
+      if (!mobileHolder) return;
+
+      if (eyebrowBlock.parentNode !== mobileHolder) {
+        mobileHolder.appendChild(eyebrowBlock);
+      }
     }
-  }
 
-  function restoreEyebrowForDesktop() {
-    if (!eyebrowBlock || !originalParent) return;
+    function restoreEyebrowForDesktop() {
+      if (!eyebrowBlock || !originalParent) return;
 
-    if (eyebrowBlock.parentNode !== originalParent) {
-      originalParent.insertBefore(eyebrowBlock, originalNextSibling);
+      if (eyebrowBlock.parentNode !== originalParent) {
+        originalParent.insertBefore(eyebrowBlock, originalNextSibling);
+      }
     }
-  }
 
-  function handleLayoutChange() {
-    if (mobileQuery.matches) {
-      moveEyebrowForMobile();
+    function handleLayoutChange() {
+      if (mobileQuery.matches) {
+        moveEyebrowForMobile();
+      } else {
+        restoreEyebrowForDesktop();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handleLayoutChange);
     } else {
-      restoreEyebrowForDesktop();
+      handleLayoutChange();
     }
-  }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handleLayoutChange);
-  } else {
-    handleLayoutChange();
-  }
-
-  mobileQuery.addEventListener('change', handleLayoutChange);
-})();
+    mobileQuery.addEventListener('change', handleLayoutChange);
+  })();
 </script>

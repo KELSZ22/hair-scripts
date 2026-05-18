@@ -391,7 +391,7 @@
       "name": "HairScripts Playlists",
       "settings": {
         "heading": "EXPLORE BEV’S PLAYLISTS",
-        "text": "<p>The science, simplified. So you finally understand what’s happening at the follicle, &lt;br&gt; why most products keep failing you, and what your hair actually needs to recover.<br/><br/><br/></p>",
+        "text": "<p>The science, simplified. So you finally understand what’s happening at the follicle, </p><p>why most products keep failing you, and what your hair actually needs to recover.<br/><br/><br/></p>",
         "button_label": "Watch All Playlist",
         "button_link": "https://www.youtube.com/@hairscriptsbybevy/playlists",
         "background_color_left": "#4e9b97",
@@ -444,7 +444,7 @@
         "heading": "JOIN HAIRSCRIPTS COMMUNITY",
         "text": "<p>A growing community of women learning what’s really happening with their hair — directly from someone who’s lived it and studied it professionally. This is where hair recovery starts making sense again.<br/></p>",
         "button_label": "Join Community",
-        "button_link": "shopify://pages/contact",
+        "button_link": "#hs-footer",
         "background_color": "#f3f3f3",
         "star_color": "#63144f",
         "check_color": "#63144f",

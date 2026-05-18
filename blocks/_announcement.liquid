@@ -1,14 +1,11 @@
-
-
 {%- assign block_settings = block.settings -%}
 {%- assign plain_text = block_settings.text | strip_newlines | strip_html | strip -%}
-{%- assign block_index = section.blocks | find_index: 'id', block.id -%}
 
 {%- unless plain_text == '' -%}
-  <slideshow-slide
-    ref="slides[]"
+  <div
     class="
       announcement-bar__slide
+      announcement-bar__item
       text-block
       text-block--{{ block.id }}
       text-block--align-center
@@ -19,44 +16,99 @@
     "
     style="
       {% render 'typography-style', settings: block_settings, preset: 'custom' %}
-      --width: 100%;
+      --width: auto;
       --text-align: center;
       --line-height: 1;
     "
     {{ block.shopify_attributes }}
-    aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
   >
     <p class="announcement-bar__text">
       {{ block.settings.text }}
-      <a
-        class="text-link"
-        href="{{ block_settings.link }}"
-      >
-        <span>
-          {{ block.settings.textlink | strip_html }}
-        </span>
-      </a>
-    </p>
 
-    
-      
-    
-  </slideshow-slide>
+      {% if block_settings.textlink != blank and block_settings.link != blank %}
+        <a
+          class="text-link"
+          href="{{ block_settings.link }}"
+        >
+          <span>{{ block.settings.textlink | strip_html }}</span>
+        </a>
+      {% endif %}
+    </p>
+  </div>
 {%- endunless -%}
-{% style %}
-  aside.announcement-bar.spacing-style.section.section--page-width {
-    background-color: {{ block.settings.bg-color }};
-    z-index: 99;
-  }
-{% endstyle %}
+
 {% stylesheet %}
-  a.text-link:hover{
-    color: #fff !important;
-  }
   .announcement-bar {
     margin-top: 0 !important;
     margin-block-start: 0 !important;
   }
+
+  aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-1 {
+    background: #3D7E7A;
+  }
+
+  /* make announcement text side by side, but NOT far apart */
+  aside.announcement-bar slideshow-component,
+  aside.announcement-bar slideshow-container,
+  aside.announcement-bar slideshow-slides,
+  aside.announcement-bar .slideshow,
+  aside.announcement-bar .slideshow__slides,
+  aside.announcement-bar .slideshow-slides,
+  aside.announcement-bar .announcement-bar__slider,
+  aside.announcement-bar .announcement-bar__slides {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 30px !important;
+    transform: none !important;
+    animation: none !important;
+    overflow: visible !important;
+    width: 100% !important;
+    
+  }
+  .announcement-bar__slide {
+    margin-inline: unset !important;
+  }
+
+  aside.announcement-bar .announcement-bar__slide,
+  aside.announcement-bar .announcement-bar__item {
+    display: flex !important;
+    width: auto !important;
+    max-width: max-content !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: static !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  aside.announcement-bar .announcement-bar__slide[aria-hidden="true"] {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* hide arrows / controls */
+  aside.announcement-bar .slideshow-controls,
+  aside.announcement-bar .slideshow__controls,
+  aside.announcement-bar .announcement-bar__controls,
+  aside.announcement-bar button[name="previous"],
+  aside.announcement-bar button[name="next"],
+  aside.announcement-bar .slideshow-control,
+  aside.announcement-bar .slideshow-navigation-button,
+  aside.announcement-bar .announcement-bar__navigation,
+  aside.announcement-bar .flickity-button,
+  aside.announcement-bar .slider-button {
+    display: none !important;
+  }
+
   a.text-link {
     color: #FFAC86;
     font-weight: 700;
@@ -66,22 +118,31 @@
     text-decoration-thickness: auto;
     text-underline-offset: auto;
     text-underline-position: from-font;
-}
+  }
+
+  a.text-link:hover {
+    color: #fff !important;
+  }
+
   p.announcement-bar__text {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 13px;
+    margin: 0;
     color: #FFF9F4;
     font-family: Fustat;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-}
+    text-align: center;
+    white-space: nowrap;
+  }
+
   .text-block:not(.text-block--full-width).rte,
   .text-block:not(.text-block--full-width).paragraph {
-    /* Safari doesn't support pretty, so fallback to balance */
     text-wrap: balance;
     text-wrap: pretty;
   }
@@ -95,7 +156,6 @@
     text-wrap: balance;
   }
 
-  /* Hide underline unless text is using paragraph styles. */
   .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) a {
     text-decoration-color: transparent;
   }
@@ -148,11 +208,46 @@
     margin-inline-start: auto;
   }
 
+  @media (max-width: 768px) {
+    aside.announcement-bar slideshow-component,
+    aside.announcement-bar slideshow-container,
+    aside.announcement-bar slideshow-slides,
+    aside.announcement-bar .slideshow,
+    aside.announcement-bar .slideshow__slides,
+    aside.announcement-bar .slideshow-slides,
+    aside.announcement-bar .announcement-bar__slider,
+    aside.announcement-bar .announcement-bar__slides {
+      gap: 24px !important;
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+    }
+
+    aside.announcement-bar .announcement-bar__slide,
+    aside.announcement-bar .announcement-bar__item {
+      flex: 0 0 auto !important;
+      max-width: max-content !important;
+    }
+
+    p.announcement-bar__text {
+      white-space: normal;
+    }
+  }
+
   @media (max-width: 400px) {
-    p.announcement-bar__text{
-          flex-direction: column;
-          align-items: center;
-    gap: 0;
+    aside.announcement-bar slideshow-component,
+    aside.announcement-bar slideshow-container,
+    aside.announcement-bar slideshow-slides,
+    aside.announcement-bar .slideshow,
+    aside.announcement-bar .slideshow__slides,
+    aside.announcement-bar .slideshow-slides,
+    aside.announcement-bar .announcement-bar__slider,
+    aside.announcement-bar .announcement-bar__slides {
+      gap: 10px !important;
+    }
+
+    p.announcement-bar__text {
+      flex-direction: column;
+      gap: 2px;
     }
   }
 {% endstylesheet %}
