@@ -9,6 +9,8 @@
   {% render 'predictive-search-empty-state', shadow_opacity: 0.1, products_test_id: 'empty-state' %}
 {% enddoc %}
 
+{% assign hidden_handles = 'hairscripts™-shedding-thinning-support-30-days,hairscripts™-shedding-thinning-support-90-days-1,hairscripts™-shedding-thinning-support-180-days' | split: ',' %}
+
 <div
   id="predictive-search-results"
   class="predictive-search-dropdown"
@@ -23,14 +25,20 @@
         assign default_title = 'content.search_results_resource_products' | t
         assign title = settings.empty_state_collection.title | default: default_title
       %}
-      {% paginate collection.products by 4 %}
-        {% assign products = collection.products %}
-        {% comment %} Only show products section if there are products to display {% endcomment %}
-        {% if products.size > 0 %}
+      {% paginate collection.products by 20 %}
+        {% assign filtered_products = '' %}
+        {% assign filtered_array = '' | split: '' %}
+        {% for product in collection.products %}
+          {% unless hidden_handles contains product.handle %}
+            {% assign filtered_array = filtered_array | concat: product %}
+          {% endunless %}
+        {% endfor %}
+
+        {% if filtered_array.size > 0 %}
           {% render 'predictive-search-products-list',
             products_test_id: products_test_id,
             title: title,
-            products: products,
+            products: filtered_array,
             limit: 4
           %}
         {% else %}

@@ -307,49 +307,6 @@
   "fields": {
     "separator": "to"
   },
-  "gift_cards": {
-    "issued": {
-      "how_to_use_gift_card": "Use the gift card code online or QR code in-store",
-      "title": "Here's your {{ value }} gift card balance for {{ shop }}!",
-      "subtext": "Your gift card",
-      "shop_link": "Visit online store",
-      "add_to_apple_wallet": "Add to Apple Wallet",
-      "qr_image_alt": "QR code — scan to redeem gift card",
-      "copy_code": "Copy gift card code",
-      "expiration_date": "Expires {{ expires_on }}",
-      "copy_code_success": "Code copied successfully",
-      "expired": "Expired"
-    }
-  },
-  "placeholders": {
-    "password": "Password",
-    "search": "Search",
-    "product_title": "Product title",
-    "collection_title": "Collection title",
-    "blog_posts": "Blog posts",
-    "blog_post_title": "Title",
-    "blog_post_author": "Author",
-    "blog_post_date": "Date",
-    "blog_post_description": "An excerpt of your blog post's content"
-  },
-  "products": {
-    "product": {
-      "add_to_cart": "Add to cart",
-      "adding_to_cart": "Adding...",
-      "added_to_cart": "Added to cart",
-      "add_to_cart_error": "Error adding to cart",
-      "quantity_error_max": "This item has a maximum of {{ maximum }}",
-      "sold_out": "Sold out",
-      "unavailable": "Unavailable",
-      "quantity": "Quantity",
-      "quantity_increments": "Increments of {{ increment }}",
-      "quantity_minimum": "Minimum of {{ minimum }}",
-      "quantity_maximum": "Maximum of {{ maximum }}",
-      "in_cart": "in cart",
-      "default_title": "Default Title",
-      "sticky_add_to_cart": "Quick add to cart bar"
-    }
-  },
   "gempages": {
     "Carousel": {
       "no_slider": "No Slider"
@@ -394,6 +351,49 @@
     },
     "Breadcrumb": {
       "home": "Home"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "how_to_use_gift_card": "Use the gift card code online or QR code in-store",
+      "title": "Here's your {{ value }} gift card balance for {{ shop }}!",
+      "subtext": "Your gift card",
+      "shop_link": "Visit online store",
+      "add_to_apple_wallet": "Add to Apple Wallet",
+      "qr_image_alt": "QR code — scan to redeem gift card",
+      "copy_code": "Copy gift card code",
+      "expiration_date": "Expires {{ expires_on }}",
+      "copy_code_success": "Code copied successfully",
+      "expired": "Expired"
+    }
+  },
+  "placeholders": {
+    "password": "Password",
+    "search": "Search",
+    "product_title": "Product title",
+    "collection_title": "Collection title",
+    "blog_posts": "Blog posts",
+    "blog_post_title": "Title",
+    "blog_post_author": "Author",
+    "blog_post_date": "Date",
+    "blog_post_description": "An excerpt of your blog post's content"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "adding_to_cart": "Adding...",
+      "added_to_cart": "Added to cart",
+      "add_to_cart_error": "Error adding to cart",
+      "quantity_error_max": "This item has a maximum of {{ maximum }}",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "quantity_increments": "Increments of {{ increment }}",
+      "quantity_minimum": "Minimum of {{ minimum }}",
+      "quantity_maximum": "Maximum of {{ maximum }}",
+      "in_cart": "in cart",
+      "default_title": "Default Title",
+      "sticky_add_to_cart": "Quick add to cart bar"
     }
   }
 }

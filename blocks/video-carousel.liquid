@@ -27,8 +27,6 @@
 
 <script>
   (() => {
-    const MODAL_ID = 'video-carousel-block-global-modal';
-
     function escapeAttr(value) {
       return String(value || '')
         .replace(/&/g, '&amp;')
@@ -182,79 +180,11 @@
       }
 
       return `
-        <div class="video-carousel-block__modal-message">
+        <div class="video-carousel-block__inline-message">
           <p>This video link cannot be embedded directly.</p>
           <a href="${safeUrl}" target="_blank" rel="noopener noreferrer">Open video</a>
         </div>
       `;
-    }
-
-    function createGlobalModal() {
-      let modal = document.getElementById(MODAL_ID);
-
-      if (modal) return modal;
-
-      modal = document.createElement('div');
-      modal.id = MODAL_ID;
-      modal.className = 'video-carousel-block__modal';
-      modal.setAttribute('aria-hidden', 'true');
-
-      modal.innerHTML = `
-        <div class="video-carousel-block__modal-overlay" data-video-modal-close></div>
-
-        <div class="video-carousel-block__modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
-          <button type="button" class="video-carousel-block__modal-close" data-video-modal-close aria-label="Close video">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M5.5 5.5L16.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-              <path d="M16.5 5.5L5.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-            </svg>
-          </button>
-
-          <div class="video-carousel-block__modal-player" data-video-modal-player></div>
-        </div>
-      `;
-
-      document.body.appendChild(modal);
-
-      modal.querySelectorAll('[data-video-modal-close]').forEach((button) => {
-        button.addEventListener('click', closeVideoModal);
-      });
-
-      return modal;
-    }
-
-    function openVideoModal(videoUrl) {
-      const modal = createGlobalModal();
-      const player = modal.querySelector('[data-video-modal-player]');
-
-      if (!player || !videoUrl) return;
-
-      player.innerHTML = buildVideoMarkup(videoUrl);
-
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('video-carousel-block-modal-open');
-
-      const closeButton = modal.querySelector('.video-carousel-block__modal-close');
-
-      if (closeButton) {
-        closeButton.focus();
-      }
-    }
-
-    function closeVideoModal() {
-      const modal = document.getElementById(MODAL_ID);
-      if (!modal) return;
-
-      const player = modal.querySelector('[data-video-modal-player]');
-
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('video-carousel-block-modal-open');
-
-      if (player) {
-        player.innerHTML = '';
-      }
     }
 
     function getValidVideoUrlFromElement(element) {
@@ -279,14 +209,104 @@
       return '';
     }
 
+    function stopActiveInlineVideo() {
+      const activeContainer = window.videoCarouselBlockActiveContainer;
+
+      if (!activeContainer) return;
+
+      const carousel = activeContainer.closest('.video-carousel-block');
+
+      activeContainer.querySelectorAll('.video-carousel-block__inline-player').forEach((player) => {
+        player.remove();
+      });
+
+      activeContainer.classList.remove('is-playing');
+
+      if (carousel && !carousel.querySelector('.video-carousel-block__inline-player')) {
+        carousel.classList.remove('has-playing-video');
+      }
+
+      window.videoCarouselBlockActiveContainer = null;
+    }
+
+    function getPlaybackContainer(clickedItem, track) {
+      const card = clickedItem.closest('.video-carousel-block__card');
+
+      if (card && track.contains(card)) {
+        return card;
+      }
+
+      const link = clickedItem.closest('.video-carousel-block__link');
+
+      if (link && track.contains(link)) {
+        return link;
+      }
+
+      return clickedItem;
+    }
+
+    function playVideoInline(clickedItem, videoUrl, track) {
+      const playbackContainer = getPlaybackContainer(clickedItem, track);
+
+      if (!playbackContainer || !videoUrl) return;
+
+      stopActiveInlineVideo();
+
+      const player = document.createElement('div');
+      player.className = 'video-carousel-block__inline-player';
+
+      player.innerHTML = `
+        <button type="button" class="video-carousel-block__inline-close" data-video-inline-close aria-label="Close video">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 22 22" fill="none">
+            <path d="M5.5 5.5L16.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M16.5 5.5L5.5 16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="video-carousel-block__inline-player-media">
+          ${buildVideoMarkup(videoUrl)}
+        </div>
+      `;
+
+      playbackContainer.classList.add('is-playing');
+      playbackContainer.appendChild(player);
+
+      const carousel = playbackContainer.closest('.video-carousel-block');
+
+      if (carousel) {
+        carousel.classList.add('has-playing-video');
+      }
+
+      window.videoCarouselBlockActiveContainer = playbackContainer;
+
+      const closeButton = player.querySelector('[data-video-inline-close]');
+
+      if (closeButton) {
+        closeButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          stopActiveInlineVideo();
+        });
+      }
+
+      const directVideo = player.querySelector('video');
+
+      if (directVideo) {
+        directVideo.play().catch(() => {});
+      }
+    }
+
     function prepareVideoLinks(track) {
       const links = track.querySelectorAll('a[href], [data-video-url]');
       const cards = track.querySelectorAll('.video-carousel-block__card, .video-carousel-block__link');
 
       links.forEach((link) => {
+        if (link.closest('.video-carousel-block__inline-player')) return;
+
         const videoUrl = getValidVideoUrlFromElement(link);
 
         link.classList.remove('video-carousel-block__modal-trigger');
+        link.classList.remove('video-carousel-block__inline-trigger');
 
         if (!videoUrl || videoUrl === '#') {
           link.removeAttribute('data-video-url');
@@ -299,7 +319,7 @@
         }
 
         link.setAttribute('data-video-url', videoUrl);
-        link.classList.add('video-carousel-block__modal-trigger');
+        link.classList.add('video-carousel-block__inline-trigger');
 
         if (link.tagName.toLowerCase() === 'a') {
           link.setAttribute('href', '#');
@@ -310,9 +330,12 @@
       });
 
       cards.forEach((card) => {
+        if (card.closest('.video-carousel-block__inline-player')) return;
+
         const videoUrl = getValidVideoUrlFromElement(card);
 
         card.classList.remove('video-carousel-block__modal-trigger');
+        card.classList.remove('video-carousel-block__inline-trigger');
 
         if (!videoUrl || videoUrl === '#') {
           card.removeAttribute('data-video-url');
@@ -322,7 +345,7 @@
         }
 
         card.setAttribute('data-video-url', videoUrl);
-        card.classList.add('video-carousel-block__modal-trigger');
+        card.classList.add('video-carousel-block__inline-trigger');
         card.setAttribute('role', 'button');
 
         if (!card.hasAttribute('tabindex')) {
@@ -332,6 +355,17 @@
     }
 
     function handleGlobalVideoClick(event) {
+      const closeButton = event.target.closest('[data-video-inline-close]');
+
+      if (closeButton) {
+        event.preventDefault();
+        event.stopPropagation();
+        stopActiveInlineVideo();
+        return;
+      }
+
+      if (event.target.closest('.video-carousel-block__inline-player')) return;
+
       const carousel = event.target.closest('.video-carousel-block');
 
       if (!carousel) return;
@@ -356,7 +390,7 @@
         return;
       }
 
-      openVideoModal(videoUrl);
+      playVideoInline(clickedItem, videoUrl, track);
     }
 
     function handleGlobalVideoKeydown(event) {
@@ -373,7 +407,7 @@
       if (!videoUrl || videoUrl === '#') return;
 
       event.preventDefault();
-      openVideoModal(videoUrl);
+      playVideoInline(event.target, videoUrl, track);
     }
 
     function initVideoCarouselBlock(carousel) {
@@ -460,8 +494,15 @@
         while (track.scrollWidth < track.clientWidth * 3 && safetyCount < 12) {
           originalCards.forEach((card) => {
             const clone = card.cloneNode(true);
+
             clone.setAttribute('data-video-carousel-clone', 'true');
             clone.setAttribute('aria-hidden', 'true');
+            clone.classList.remove('is-playing');
+
+            clone.querySelectorAll('.video-carousel-block__inline-player').forEach((player) => {
+              player.remove();
+            });
+
             track.appendChild(clone);
           });
 
@@ -500,9 +541,9 @@
         if (
           !isPaused &&
           !isDragging &&
+          !carousel.classList.contains('has-playing-video') &&
           loopWidth > 0 &&
-          track.scrollWidth > track.clientWidth &&
-          !document.body.classList.contains('video-carousel-block-modal-open')
+          track.scrollWidth > track.clientWidth
         ) {
           track.scrollLeft += speed * (delta / 1000);
           normalizeScroll();
@@ -645,23 +686,20 @@
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
-          closeVideoModal();
+          stopActiveInlineVideo();
         }
       });
     }
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
-        createGlobalModal();
         initAllVideoCarouselBlocks(document);
       });
     } else {
-      createGlobalModal();
       initAllVideoCarouselBlocks(document);
     }
 
     document.addEventListener('shopify:section:load', (event) => {
-      createGlobalModal();
       initAllVideoCarouselBlocks(event.target);
     });
   })();
@@ -742,6 +780,7 @@
   }
 
   .video-carousel-block__card {
+    position: relative;
     flex: 0 0 155px;
     width: 155px;
     scroll-snap-align: start;
@@ -797,7 +836,7 @@
       box-shadow 0.28s ease;
   }
 
-  .video-carousel-block__modal-trigger::after {
+  .video-carousel-block__inline-trigger::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -819,7 +858,7 @@
     box-shadow: 0 10px 24px rgba(33, 27, 24, 0.14);
   }
 
-  .video-carousel-block__modal-trigger:hover::after {
+  .video-carousel-block__inline-trigger:hover::after {
     transform: translate(-50%, -50%) scale(1.08);
   }
 
@@ -856,52 +895,50 @@
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
   }
 
-  .video-carousel-block__modal {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
+  .video-carousel-block__card.is-playing .video-carousel-block__link {
     visibility: hidden;
     pointer-events: none;
-    transition:
-      opacity 0.22s ease,
-      visibility 0.22s ease;
   }
 
-  .video-carousel-block__modal.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+  .video-carousel-block__link.is-playing > :not(.video-carousel-block__inline-player) {
+    visibility: hidden;
   }
 
-  .video-carousel-block__modal-overlay {
+  .video-carousel-block__inline-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    width: 100%;
+    height: 222px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #000;
+  }
+
+  .video-carousel-block__inline-player-media,
+  .video-carousel-block__inline-player iframe,
+  .video-carousel-block__inline-player video {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(3px);
-  }
-
-  .video-carousel-block__modal-dialog {
-    position: relative;
-    z-index: 2;
-    width: min(920px, 100%);
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
     background: #000;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
   }
 
-  .video-carousel-block__modal-close {
+  .video-carousel-block__inline-player video {
+    object-fit: cover;
+  }
+
+  .video-carousel-block__inline-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 4;
-    width: 38px;
-    height: 38px;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
     border: 0;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.92);
@@ -913,34 +950,16 @@
     padding: 0;
   }
 
-  .video-carousel-block__modal-close:hover {
+  .video-carousel-block__inline-close:hover {
     opacity: 0.85;
   }
 
-  .video-carousel-block__modal-player {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
-  }
-
-  .video-carousel-block__modal-player iframe,
-  .video-carousel-block__modal-player video {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
+  .video-carousel-block__inline-message {
     height: 100%;
-    border: 0;
-    background: #000;
-  }
-
-  .video-carousel-block__modal-message {
-    min-height: 260px;
-    padding: 40px 24px;
+    padding: 20px 12px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -948,27 +967,23 @@
     font-family: "DM Sans", sans-serif;
   }
 
-  .video-carousel-block__modal-message p {
+  .video-carousel-block__inline-message p {
     margin: 0;
-    font-size: 16px;
+    font-size: 13px;
   }
 
-  .video-carousel-block__modal-message a {
+  .video-carousel-block__inline-message a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 42px;
-    padding: 12px 22px;
+    min-height: 36px;
+    padding: 9px 16px;
     border-radius: 999px;
     background: #ffffff;
     color: #211B18;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-  }
-
-  body.video-carousel-block-modal-open {
-    overflow: hidden;
   }
 
   @media screen and (max-width: 749px) {
@@ -1001,7 +1016,11 @@
       height: 205px;
     }
 
-    .video-carousel-block__modal-trigger::after {
+    .video-carousel-block__inline-player {
+      height: 205px;
+    }
+
+    .video-carousel-block__inline-trigger::after {
       width: 39px;
       height: 39px;
     }
@@ -1011,27 +1030,12 @@
       box-shadow: none;
     }
 
-    .video-carousel-block__modal-trigger:hover::after {
+    .video-carousel-block__inline-trigger:hover::after {
       transform: translate(-50%, -50%);
     }
 
     .video-carousel-block__link:hover .video-carousel-block__image {
       transform: none;
-    }
-
-    .video-carousel-block__modal {
-      padding: 15px;
-    }
-
-    .video-carousel-block__modal-dialog {
-      border-radius: 10px;
-    }
-
-    .video-carousel-block__modal-close {
-      top: 8px;
-      right: 8px;
-      width: 34px;
-      height: 34px;
     }
   }
 
@@ -1046,7 +1050,7 @@
       transition: none !important;
     }
 
-    .video-carousel-block__modal-trigger::after {
+    .video-carousel-block__inline-trigger::after {
       transform: translate(-50%, -50%) !important;
     }
 

@@ -44,8 +44,8 @@
       </p>
     {%- endif -%}
 
-    <a
-      class="button cart-items__empty-button"
+    
+    <a  class="button cart-items__empty-button"
       href="{{ settings.empty_cart_button_link | default: routes.all_products_collection_url }}"
     >
       <span class="button-text">
@@ -150,8 +150,8 @@
                         assign ratio = item.image.aspect_ratio
                       endif
                     %}
-                    <a
-                      href="{{ item.url }}"
+                    
+                    <a  href="{{ item.url }}"
                       class="cart-items__media-container"
                       style="--ratio:{{ ratio }};"
                     >
@@ -168,8 +168,8 @@
                 >
                   <div class="cart-items__product-info">
                     <p>
-                      <a
-                        href="{{ item.url }}"
+                      
+                      <a  href="{{ item.url }}"
                         class="cart-items__title"
                         {% if item.parent_relationship.parent != null %}
                           aria-label="{{ 'accessibility.nested_product' | t: product_title: item.product.title, parent_title: item.parent_relationship.parent.title | escape }}"
@@ -277,6 +277,9 @@
                             {{ item.original_price | money }}
                           {% endif %}
                         </s>
+                        {% if item.product.handle == 'hairscripts-by-bevy-supplement-90-days' %}
+                          
+                        {% endif %}
                       {% else %}
                         {% if item.variant.compare_at_price > item.original_price %}
                           <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
@@ -289,6 +292,9 @@
                         {% if item.variant.compare_at_price > item.original_price %}
                           <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
                           <s class="compare-at-price">{{ item.variant.compare_at_price | money }}</s>
+                          {% if item.product.handle == 'hairscripts-by-bevy-supplement-90-days' %}
+                            
+                          {% endif %}
                         {% endif %}
                       {% endif %}
                     </div>
@@ -299,7 +305,6 @@
                   role="cell"
                   headers="quantity"
                 >
-                  {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
                   {% assign can_update_quantity = item.instructions.can_update_quantity
                     | default: true, allow_false: true
                   %}
@@ -437,7 +442,6 @@
     margin-bottom: var(--margin-lg);
   }
 
-  /* Cart drawer: separate grid areas for variants and unit price */
   .cart-drawer .cart-items__table-row--full-width-variants {
     grid-template-columns: clamp(2.5rem, 15cqi, 7.5rem) minmax(0, 1fr) auto;
     grid-template-rows: repeat(4, min-content) 1fr;
@@ -488,7 +492,6 @@
   }
 
   html:active-view-transition-type(page-navigation) .cart-items__table-row {
-    /* stylelint-disable-next-line declaration-no-important */
     view-transition-name: none !important;
   }
 
@@ -563,7 +566,6 @@
     display: block;
   }
 
-
   .cart-items__variant {
     display: inline;
   }
@@ -632,7 +634,6 @@
     line-height: var(--line-height);
   }
 
-
   .cart-items__price-unit {
     font-size: var(--font-size--xs);
     padding-block-start: var(--padding-2xs);
@@ -660,7 +661,6 @@
     padding-block: var(--padding-lg);
   }
 
-  /* Error message */
   .cart-items__error {
     display: flex;
     align-items: flex-start;
@@ -695,8 +695,22 @@
     margin-block-start: var(--margin-3xs);
   }
 
+  .cart-items__save-badge {
+    display: inline-block;
+    background-color: #e53e3e;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 20px;
+    margin-inline-start: 4px;
+    vertical-align: middle;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
   @container cart-items (min-width: 720px) {
-    /* Cart page: original layout */
     .cart-items__table-row {
       --cart-item-price-width: 6rem;
 
@@ -723,7 +737,6 @@
       align-items: flex-end;
     }
 
-    /* Cart drawer: separate areas for variants and unit price */
     .cart-drawer .cart-items__table-row--full-width-variants {
       grid-template-rows: min-content min-content min-content 1fr;
       grid-template-areas:
@@ -825,7 +838,6 @@
     --shopify-accelerated-checkout-row-gap: var(--checkout-button-gap, 10px);
   }
 
-  /* Remove animation */
   .remove-icon-bottom,
   .remove-icon-top {
     transition: transform var(--animation-speed) var(--animation-easing);

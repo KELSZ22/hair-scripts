@@ -37,7 +37,13 @@
     --search-border-radius: var(--style-border-radius-inputs);
     --search-border-width: var(--style-border-width-inputs);
 
-    display: flex;
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header__columns .search-action, #header-component[data-menu-style='drawer'] .header__columns .search-action {
+      display: none !important;
+    }
   }
 
   @media screen and (max-width: 749px) {

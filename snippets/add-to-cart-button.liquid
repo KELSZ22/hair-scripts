@@ -1,5 +1,8 @@
 {%- doc -%}
-  Renders an "Add to cart" button with dynamic text and state. It shows different text based on whether the product can be added to the cart and provides visual feedback when an item is added.
+  Renders an "Add to cart" button with dynamic text and state.
+  Temporary setup:
+  - force_notify_mode = true  → show Notify Me form
+  - force_notify_mode = false → show normal Add to Cart button
 
   @param {boolean} can_add_to_cart - Whether the product can be added to the cart.
   @param {string} add_to_cart_text - The text to display on the button.
@@ -8,81 +11,401 @@
   @param {string} [class] - Additional CSS classes to apply to the button.
   @param {string} [id] - The ID attribute for the button.
   @param {string} [data_testid] - The data-testid attribute for testing.
-  @param {boolean} [show_variant_price] - When `false`, omits variant price next to the label (default: show price).
+  @param {boolean} [show_variant_price] - When `false`, omits variant price next to the label.
 {%- enddoc -%}
 
 {%- liquid
+  assign force_notify_mode = true
+
   assign default_add_to_cart_text = 'actions.add_to_cart' | t
   assign current_variant = product.selected_or_first_available_variant
+  assign button_text = add_to_cart_text | default: default_add_to_cart_text
+
+  assign is_disabled = false
+
+  if can_add_to_cart == false or can_add_to_cart == 'false'
+    assign is_disabled = true
+    assign button_text = 'Sold out'
+  endif
+
   assign product_variant_media = current_variant.featured_media.preview_image | image_url: width: 100
 
   if current_variant.featured_media.preview_image == blank
     assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
   endif
+
+  assign notify_id = 'notify-' | append: product.id | append: '-' | append: current_variant.id
 -%}
 
-<add-to-cart-component
-  ref="addToCartButtonContainer"
-  data-product-variant-media="{{ product_variant_media }}"
-  data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
-  class="custom-add-to-cart-wrapper"
->
-  <button
-    {% if id != blank %}
-      id="{{ id }}"
-    {% endif %}
-    type="submit"
-    name="add"
-    ref="addToCartButton"
-    on:click="/handleClick"
-    class="button {{ class }}"
-    {% if data_testid %}
-      data-testid="{{ data_testid }}"
-    {% endif %}
-    {% unless can_add_to_cart %}
-      disabled
-    {% endunless %}
-  >
-    <span class="add-to-cart-text">
-      {% comment %}
-        {% if can_add_to_cart %}
-          <span
-            aria-hidden="true"
-            class="svg-wrapper add-to-cart-icon"
-          >
-            {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-          </span>
-        {% endif %}
-      {% endcomment %}
+{% if force_notify_mode %}
+  <div id="wrapper-{{ notify_id }}" class="notify-me-wrapper">
+    <input
+      type="checkbox"
+      id="toggle-{{ notify_id }}"
+      class="notify-me-toggle"
+    >
 
-      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
-        <span class="add-to-cart-text__label">
-          {{- add_to_cart_text | default: default_add_to_cart_text -}}
-        </span>
+    <label
+      for="toggle-{{ notify_id }}"
+      id="btn-{{ notify_id }}"
+      class="notify-me-trigger-btn"
+    >
+      Notify Me When Available
+    </label>
 
-        {% unless show_variant_price == false %}
-          {% if current_variant != blank %}
-            <span class="add-to-cart-text__price">
-              {{ current_variant.price | money }}
-            </span>
-          {% endif %}
-        {% endunless %}
-      </span>
-    </span>
+    <div id="form-{{ notify_id }}" class="notify-me-form">
+      <div
+        id="success-{{ notify_id }}"
+        class="notify-me-success"
+        style="display: none;"
+      >
+        Thank you! We'll let you know when it's back in stock.
+      </div>
 
-    <span class="add-to-cart__added">
-      <span class="svg-wrapper add-to-cart__added-icon">
-        {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
-      </span>
-    </span>
-  </button>
+      <div
+        id="error-{{ notify_id }}"
+        class="notify-me-error"
+        style="display: none;"
+      ></div>
 
-  <div class="custom-add-to-cart-shipping-text">
-    Ships in the <span class="custom-add-to-cart-shipping-text__flag" aria-hidden="true">🇺🇸</span> United States in estimated 6-7 days
+      <input
+        type="email"
+        id="email-{{ notify_id }}"
+        class="notify-me-input"
+        placeholder="Enter your email address"
+        autocomplete="email"
+        inputmode="email"
+        required
+      >
+
+      <button
+        type="button"
+        id="submit-{{ notify_id }}"
+        class="notify-me-submit-btn"
+      >
+        Notify Me When Available
+      </button>
+    </div>
   </div>
-</add-to-cart-component>
+
+  <script>
+    (function() {
+      var notifyId = {{ notify_id | json }};
+      var productTitle = {{ product.title | json }};
+      var productUrl = {{ product.url | json }};
+      var variantTitle = {{ current_variant.title | json }};
+      var shopUrl = {{ shop.url | json }};
+
+      function getFullProductUrl() {
+        if (!productUrl) {
+          return window.location.href;
+        }
+
+        if (productUrl.indexOf('http://') === 0 || productUrl.indexOf('https://') === 0) {
+          return productUrl;
+        }
+
+        return shopUrl + productUrl;
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function showError(errorEl, message) {
+        if (!errorEl) return;
+
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+      }
+
+      function hideError(errorEl) {
+        if (!errorEl) return;
+
+        errorEl.textContent = '';
+        errorEl.style.display = 'none';
+      }
+
+      function createHiddenInput(name, value) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value || '';
+        return input;
+      }
+
+      function initNotifyForm() {
+        var emailEl = document.getElementById('email-' + notifyId);
+        var submitBtn = document.getElementById('submit-' + notifyId);
+        var successEl = document.getElementById('success-' + notifyId);
+        var errorEl = document.getElementById('error-' + notifyId);
+
+        if (!emailEl || !submitBtn || !successEl || !errorEl) {
+          return;
+        }
+
+        submitBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+
+          var email = emailEl.value.trim();
+          var cleanVariantTitle = variantTitle && variantTitle !== 'Default Title' ? variantTitle : '';
+          var fullProductUrl = getFullProductUrl();
+
+          hideError(errorEl);
+
+          if (!email || !isValidEmail(email)) {
+            showError(errorEl, 'Please enter a valid email address.');
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+
+          var productLine = productTitle;
+
+          if (cleanVariantTitle) {
+            productLine += ' — ' + cleanVariantTitle;
+          }
+
+          var bodyMessage =
+            'Back In Stock Request\n\n' +
+            'Customer Email: ' + email + '\n' +
+            'Product: ' + productLine + '\n' +
+            'Variant: ' + cleanVariantTitle + '\n' +
+            'URL: ' + fullProductUrl;
+
+          var iframeName = 'notify-frame-' + notifyId;
+          var oldIframe = document.querySelector('iframe[name="' + iframeName + '"]');
+          var oldForm = document.getElementById('shopify-contact-' + notifyId);
+
+          if (oldIframe) {
+            oldIframe.remove();
+          }
+
+          if (oldForm) {
+            oldForm.remove();
+          }
+
+          var iframe = document.createElement('iframe');
+          iframe.name = iframeName;
+          iframe.style.display = 'none';
+          iframe.style.width = '1px';
+          iframe.style.height = '1px';
+          iframe.style.border = '0';
+
+          var contactForm = document.createElement('form');
+          contactForm.id = 'shopify-contact-' + notifyId;
+          contactForm.method = 'post';
+          contactForm.action = '/contact#contact_form';
+          contactForm.target = iframeName;
+          contactForm.acceptCharset = 'UTF-8';
+          contactForm.style.display = 'none';
+
+          contactForm.appendChild(createHiddenInput('form_type', 'contact'));
+          contactForm.appendChild(createHiddenInput('utf8', '✓'));
+          contactForm.appendChild(createHiddenInput('contact[email]', email));
+          contactForm.appendChild(createHiddenInput('contact[Subject]', 'Back In Stock Request: ' + productLine));
+          contactForm.appendChild(createHiddenInput('contact[Request Type]', 'Back In Stock Request'));
+          contactForm.appendChild(createHiddenInput('contact[Product]', productLine));
+          contactForm.appendChild(createHiddenInput('contact[Variant]', cleanVariantTitle));
+          contactForm.appendChild(createHiddenInput('contact[Product URL]', fullProductUrl));
+          contactForm.appendChild(createHiddenInput('contact[body]', bodyMessage));
+
+          document.body.appendChild(iframe);
+          document.body.appendChild(contactForm);
+
+          var hasSubmitted = false;
+
+          iframe.addEventListener('load', function() {
+            if (!hasSubmitted) return;
+
+            emailEl.style.display = 'none';
+            submitBtn.style.display = 'none';
+            successEl.style.display = 'block';
+            hideError(errorEl);
+
+            setTimeout(function() {
+              contactForm.remove();
+              iframe.remove();
+            }, 800);
+          });
+
+          hasSubmitted = true;
+          contactForm.submit();
+
+          setTimeout(function() {
+            if (emailEl.style.display !== 'none') {
+              emailEl.style.display = 'none';
+              submitBtn.style.display = 'none';
+              successEl.style.display = 'block';
+              hideError(errorEl);
+            }
+          }, 1800);
+        }, true);
+
+        emailEl.addEventListener('keydown', function(event) {
+          event.stopPropagation();
+
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            submitBtn.click();
+          }
+        }, true);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNotifyForm);
+      } else {
+        initNotifyForm();
+      }
+    })();
+  </script>
+{% else %}
+  <div class="custom-add-to-cart-wrapper">
+    <add-to-cart-component
+      ref="addToCartButtonContainer"
+      data-product-variant-media="{{ product_variant_media }}"
+    >
+      <button
+        id="{{ id }}"
+        type="submit"
+        name="add"
+        ref="addToCartButton"
+        class="{{ class }}"
+        {% if data_testid %}
+          data-testid="{{ data_testid }}"
+        {% endif %}
+        {% if is_disabled %}
+          disabled
+          aria-disabled="true"
+        {% endif %}
+      >
+        <span class="add-to-cart-text">
+          <span class="add-to-cart-text__content">
+            <span class="add-to-cart-text__label">
+              {{ button_text }}
+            </span>
+
+            {% if show_variant_price != false and current_variant.price %}
+              <span class="add-to-cart-text__price">
+                {{ current_variant.price | money }}
+              </span>
+            {% endif %}
+          </span>
+        </span>
+      </button>
+    </add-to-cart-component>
+  </div>
+{% endif %}
 
 {% stylesheet %}
+  .notify-me-wrapper {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .notify-me-toggle {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .notify-me-trigger-btn,
+  .notify-me-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 20px;
+    margin: 0;
+    border: 0;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #725270 0% 42.83%, #371834) !important;
+    color: #ffffff;
+    font-family: var(--font-body-family), inherit;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    box-shadow: none;
+  }
+
+  .notify-me-trigger-btn:hover,
+  .notify-me-submit-btn:hover {
+    opacity: 0.92;
+  }
+
+  .notify-me-form {
+    display: none;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .notify-me-toggle:checked ~ .notify-me-form {
+    display: block;
+  }
+
+  .notify-me-toggle:checked ~ .notify-me-trigger-btn {
+    display: none;
+  }
+
+  .notify-me-input {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .notify-me-input:focus {
+    border-color: #725270;
+    box-shadow: 0 0 0 2px rgba(114, 82, 112, 0.15);
+  }
+
+  .notify-me-submit-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .notify-me-success {
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    background: #f0faf0;
+    border: 1px solid #c3e6c3;
+    border-radius: 8px;
+    color: #2d6a2d;
+    font-size: 14px;
+  }
+
+  .notify-me-error {
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    background: #fff5f5;
+    border: 1px solid #f5c6c6;
+    border-radius: 8px;
+    color: #c0392b;
+    font-size: 14px;
+  }
+
   .custom-add-to-cart-wrapper {
     display: block;
     width: 100%;
@@ -106,10 +429,7 @@
     width: 100%;
     margin-top: 10px;
     text-align: center !important;
-
     color: var(--Old-colors-Scheme-1-Shadow, #9F9F9F) !important;
-
-    /* Old Typography/Paragraph/Regular */
     font-family: Fustat, sans-serif !important;
     font-size: 14px !important;
     font-style: normal !important;

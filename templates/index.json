@@ -179,7 +179,7 @@
         "heading": "SCIENCE DESIGNED FOR VISIBLY <br> FULLER HEALTHIER HAIR",
         "description": "If nothing has worked, it’s because most products only target one cause of hair loss. HairScripts™ addresses all 9 root causes of thinning — including stress, hormones, inflammation, circulation, nutrient depletion, and follicle miniaturization — in one daily formula.",
         "button_label": "Stop My Hair From Thinning Now",
-        "button_link": "shopify://products/hairscripts-by-bevy-supplement-1",
+        "button_link": "shopify://products/hairscripts-by-bevy-supplement",
         "button_label_2": "Learn the Science",
         "button_link_2": "shopify://pages/the-science",
         "creator_text": "Created by Bevy."
@@ -760,40 +760,40 @@
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "Is this just another biotin pill?’",
-            "answer": "<p>No. Period. HairScripts™ contains 19 clinically-dosed ingredients addressing 9 root causes of hair loss. Biotin is one piece of one root cause. This is the whole system.</p>"
+            "question": " How soon will I see results?",
+            "answer": "<p>Most women notice less shedding within 4–8 weeks, and visible density improvements between 90 days and 6 months. Hair grows in months, not days — that’s not a marketing limitation, that’s how the growth cycle actually works. It takes at least 90 days to biohack your body from a cellular level.</p><p>Consistency is the variable that determines your timeline. Take 4 capsules daily without skipping. Most women who quit at week 6 quit right before the results would have started showing up. Don’t be one of them.</p>"
           }
         },
         "faq_item_9N7nmg": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "How soon will I see results?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "Will this work for my specific situation?",
+            "answer": "<p>Likely yes. HairScripts™ was specifically formulated for women navigating hormonal hair loss — the patterns that show up during postpartum, perimenopause, menopause, stress-driven shedding, GLP-1 medication use, PCOS/PMOS, heavy menstrual cycles, post-illness recovery, and nutritional deficiency.</p><p>The formula addresses all 9 root causes of hormonal hair loss simultaneously — so you’re covered at every level, even if you haven’t identified your specific trigger yet. Visit our product page to see the 12 customer profiles HairScripts™ was built for, and find the one that fits you.</p>"
           }
         },
         "faq_item_EgJCKP": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "Will this make me shed more before it gets better?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "What makes HairScripts™ different from other hair growth supplements?",
+            "answer": "<p>Three things. First, HairScripts™ addresses all 9 root causes of hormonal hair loss simultaneously — not one pathway at a time. Most supplements on the market focus on a single ingredient or one or two pathways. That’s why they fail for most women whose hair loss is being driven by 3–5 root causes at once.</p><p>Second, every ingredient is clinically dosed at levels research actually supports — not micro-dosed for marketing appeal. Many supplements list impressive-sounding ingredients in doses too small to do anything.</p><p>Third, this formula was developed by a pharmaceutical industry expert who personally lost nearly 60% of her hair and had the clinical training to understand exactly why. That combination — multi-pathway formulation, clinical dosing, and pharmaceutical-grade development — is the entire difference.</p>"
           }
         },
         "faq_item_mx9ryW": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "Can men use this too?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "Can I take this with other supplements or prescription medications?",
+            "answer": "<p>HairScripts™ is generally compatible with most supplements and medications. However, since the formula contains iron, zinc, and clinically-active ingredients like Saw Palmetto and Ashwagandha, please review the ingredient list with your healthcare provider if you are on prescription medications — especially blood thinners, hormone therapies, thyroid medications, sedatives, immunosuppressants, or antidepressants.</p><p>If you’re already taking a separate iron or multivitamin, you may not need it anymore once you start HairScripts™. Check with your provider to avoid stacking.</p>"
           }
         },
         "faq_item_BTdhYT": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "What if I’ve had thinning for years?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "What’s your return and refund policy?",
+            "answer": "<p>All sales are final. Because HairScripts™ is a consumable supplement product, we do not offer refunds once an order has shipped — opened or unopened.</p><p>You have a 12-hour window from the moment you place your order to cancel and receive a full refund. After 12 hours, your order enters our fulfillment queue and the sale is final. No exceptions.</p><p>The only other exceptions: (1) damaged or defective products are eligible for replacement when reported within 7 days of delivery with photo documentation, and (2) subscription renewals processed due to a verified system error on our end will be refunded or credited within 5 business days.</p><p>Hair growth takes time — most women don’t see meaningful results until the 90-day mark. We encourage you to read through our science page, customer testimonials, and ingredient breakdown before purchasing. For complete details, please see our Returns & Refunds policy.</p>"
           }
         }
       },
@@ -999,9 +999,9 @@
         "background_image_450": "shopify://shop_images/Frame_1000009396.png",
         "heading": "Join the HairScripts Community",
         "subheading": "Science-backed education, real conversations, and a founder who shows up and explains things without the marketing script.",
-        "button_label": "Join Community",
-        "scroll_to_footer": true,
-        "button_link": ""
+        "button_label": "Stop My Hair From Thinning Now",
+        "scroll_to_footer": false,
+        "button_link": "shopify://products/hairscripts-by-bevy-supplement"
       }
     },
     "hairscripts_review_carousel_PX4qXD": {
@@ -1092,10 +1092,10 @@
         "background_image": "shopify://shop_images/Frame_1000009497.webp",
         "background_image_1024": "shopify://shop_images/Frame_1000009400.png",
         "badge_text": "",
-        "heading": "READY TO START? <br> YOUR PROTOCOL IS ONE CLICK AWAY.",
+        "heading": "READY TO START?  YOUR PROTOCOL IS ONE CLICK AWAY.",
         "subheading": "Nine root causes. One formula. So no matter what’s driving your hair loss — you’re covered from day one. Start the protocol built to address every pathway in your follicle environment.",
         "button_label": "Stop My Hair From Thinning Now",
-        "button_link": "https://bevyscripts.com/products/hairscripts-by-bevy-supplement",
+        "button_link": "shopify://products/hairscripts-by-bevy-supplement",
         "button_label2": "Learn the Science ",
         "button_link2": "shopify://pages/the-science"
       }

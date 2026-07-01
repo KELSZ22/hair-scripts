@@ -214,7 +214,7 @@
       "name": "HairScripts Hair Cycle",
       "settings": {
         "eyebrow": "HOW HAIR ACTUALLY GROWS",
-        "heading": "First, Understand the Cycle They’re Disrupting. Your Hair Grows in Three Phases. FOUR-PHASE CYCLE.",
+        "heading": "FIRST, UNDERSTAND THE CYCLE THEY’RE DISRUPTING. YOUR HAIR GROWS IN THREE PHASES.",
         "text": "<p><em>Hormones, stress, and nutrient gaps are collapsing all three.</em></p>",
         "main_image": "shopify://shop_images/image_73.png",
         "main_image_alt": "Woman holding a hair brush",
@@ -351,19 +351,69 @@
             "description": "<p>Free radical damage at the dermal papilla impairs the cells that direct hair growth. Poor scalp circulation reduces the nutrient delivery follicles need to complete a full growth cycle.</p>",
             "result": "Follicle miniaturization, reduced growth speed"
           }
+        },
+        "cause_ARdjxV": {
+          "type": "cause",
+          "settings": {
+            "number": "05",
+            "title": "DHT & Androgen Activity",
+            "description": "<p>DHT binds to hormone-sensitive follicles and turns them down — cycle by cycle. The follicle isn’t gone. It’s being quietly suppressed into producing strands that are finer, shorter, and weaker each time.</p>",
+            "result": "Widening part, thinning crown, finer strands"
+          }
+        },
+        "cause_XYkAnb": {
+          "type": "cause",
+          "settings": {
+            "number": "06",
+            "title": " Circulation & Nutrient Delivery",
+            "description": "<p>Every follicle is fed by a tiny blood supply at its base. When scalp circulation drops, oxygen and nutrients can’t reach the follicle — so it doesn’t matter how well you’re supplementing if the delivery system is blocked.</p>",
+            "result": "Hair that grows then stalls before it gets anywhere"
+          }
+        },
+        "cause_rfjegg": {
+          "type": "cause",
+          "settings": {
+            "number": "07",
+            "title": "Insulin & Metabolic Signaling",
+            "description": "<p>Elevated insulin amplifies androgen activity at the follicle and frees up more testosterone for DHT conversion. This is a whole-body driver — no serum or shampoo can reach it. You have to go upstream.</p>",
+            "result": "Sugar cravings, energy crashes, midsection changes"
+          }
+        },
+        "cause_KHJYpc": {
+          "type": "cause",
+          "settings": {
+            "number": "08",
+            "title": " Inflammation",
+            "description": "<p>Picture your scalp as soil. Inflammatory signals flood the follicle environment, shorten the growth phase, and weaken the root structure. The itching or flaking on the surface is the signal — the disruption is happening underneath.</p>",
+            "result": "Itchy, tender, flaky, or inflamed scalp"
+          }
+        },
+        "cause_GP6P9n": {
+          "type": "cause",
+          "settings": {
+            "number": "09",
+            "title": "Structural Strand Weakness",
+            "description": "<p>Sometimes the follicle is working fine — but the strand it builds is weak. When the building blocks (collagen, sulfur, amino acids) run low, hair breaks before it ever reaches length. That’s breakage disguised as “hair that won’t grow.”</p>",
+            "result": "Breakage, wispy ends, length that never builds"
+          }
         }
       },
       "block_order": [
         "cause_aEz4Gd",
         "cause_jx34P4",
         "cause_KcJ8ym",
-        "cause_TYWy9R"
+        "cause_TYWy9R",
+        "cause_ARdjxV",
+        "cause_XYkAnb",
+        "cause_rfjegg",
+        "cause_KHJYpc",
+        "cause_GP6P9n"
       ],
       "name": "HairScripts Root Causes",
       "settings": {
         "eyebrow": "WHY HAIR THINS",
-        "heading": "NINE ROOT CAUSES.\nONE FORMULA THAT ADDRESSES THEM ALL.",
-        "text": "<p>Hair thinning is rarely one thing. It's a convergence of biological stressors disrupting the follicle's </p><p>ability to complete a healthy growth cycle.</p>",
+        "heading": "NINE ROOT CAUSES. ONE FORMULA THAT MEETS EVERY ONE OF THEM.",
+        "text": "<p>Your hair loss was never one thing. It’s nine biological drivers working against you at the same time — quietly collapsing your follicle’s ability to finish a healthy growth cycle. Most formulas pick one and hope. We didn’t.</p>",
         "background_color_left": "#3f8f89",
         "background_color_right": "#55c6be",
         "heading_color": "#ffffff",
@@ -380,22 +430,22 @@
     "key_ingredients_grid_drWHkt": {
       "type": "key-ingredients-grid",
       "blocks": {
-        "ingredient_d8Em4R": {
-          "type": "ingredient",
-          "settings": {
-            "icon": "shopify://shop_images/Vector.svg",
-            "icon_symbol": "✦",
-            "title": "Ashwagandha Root Extract",
-            "text": "<p>Helps reduce stress-related hair loss by supporting cortisol balance.</p>"
-          }
-        },
         "ingredient_jDEQ7D": {
           "type": "ingredient",
           "settings": {
             "icon": "shopify://shop_images/Vector_1.svg",
             "icon_symbol": "✦",
-            "title": "Saw Palmetto Extract",
-            "text": "<p>Helps reduce DHT by supporting healthy hormone balance.</p>"
+            "title": "Saw Palmetto + Beta-Sitosterol",
+            "text": "<p>The DHT block — the #1 driver for our women 35+. Two actives, one mechanism.</p>"
+          }
+        },
+        "ingredient_fRdpd3": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.42.53_PM_1_Vectorized.svg",
+            "icon_symbol": "✦",
+            "title": "Ferrochel® Iron + Albion® Zinc + Vitamin D",
+            "text": "<p>The deficiency trio. Chelated = far more bioavailable. This is the GLP-1 + heavy-period angle.</p>"
           }
         },
         "ingredient_Wi6pzN": {
@@ -403,12 +453,13 @@
           "settings": {
             "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.40.21_PM_1_Vectorized.svg",
             "icon_symbol": "✦",
-            "title": "Hydrolyzed Marine Collagen",
-            "text": "<p>Supports skin elasticity, follicles, and hair structure.</p>"
+            "title": "Hydrolyzed Marine Collagen+ MSM",
+            "text": "<p>Rebuilds the strand so hair stops breaking before length. The “grows but won’t retain” fix.</p>"
           }
         },
         "ingredient_eAYjVX": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.43.07_PM_1_Vectorized.svg",
             "icon_symbol": "✦",
@@ -418,6 +469,7 @@
         },
         "ingredient_7QiwfJ": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.40.28_PM_1_Vectorized.svg",
             "icon_symbol": "✦",
@@ -430,44 +482,49 @@
           "settings": {
             "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.43.35_PM_1_Vectorized.svg",
             "icon_symbol": "✦",
-            "title": "Coenzyme Q10 (CoQ10)",
-            "text": "<p>Supports cellular energy and healthier scalp function.</p>"
-          }
-        },
-        "ingredient_fRdpd3": {
-          "type": "ingredient",
-          "settings": {
-            "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.42.53_PM_1_Vectorized.svg",
-            "icon_symbol": "✦",
-            "title": "Zinc Bisglycinate Chelate",
-            "text": "<p>Supports growth, oil balance, and immune resilience.</p>"
+            "title": "L-Citrulline + CoQ10",
+            "text": "<p>Scalp microcirculation + follicle energy. The delivery-system actives.</p>"
           }
         },
         "ingredient_UjMjwU": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.43.14_PM_1_Vectorized.svg",
             "icon_symbol": "✦",
             "title": "Grape Seed Extract",
             "text": "<p>Helps protect follicles through antioxidant support.</p>"
           }
+        },
+        "ingredient_d8Em4R": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "shopify://shop_images/Vector.svg",
+            "icon_symbol": "✦",
+            "title": "Ashwagandha",
+            "text": "<p>Highest single dose in the formula. Owns the telogen-effluvium / postpartum story.</p>"
+          }
         }
       },
       "block_order": [
-        "ingredient_d8Em4R",
         "ingredient_jDEQ7D",
+        "ingredient_fRdpd3",
         "ingredient_Wi6pzN",
         "ingredient_eAYjVX",
         "ingredient_7QiwfJ",
         "ingredient_ThAwA7",
-        "ingredient_fRdpd3",
-        "ingredient_UjMjwU"
+        "ingredient_UjMjwU",
+        "ingredient_d8Em4R"
       ],
       "name": "Key ingredients grid",
       "settings": {
         "eyebrow": "",
         "heading": "Key Ingredients",
         "description": "",
+        "bottom_heading": "CLINICIAN-INFORMED + ROOT-CAUSE FORMULA + SCIENCE-BACKED BLEND",
+        "bottom_text": "Formulated with clinically studied ingredients shown to support hair health and fuller function",
+        "research_label": "View Research",
+        "research_link": "shopify://pages/research",
         "section_bg": "#2f6665",
         "heading_color": "#f5efe4",
         "text_color": "#d9e7e2",
@@ -475,7 +532,10 @@
         "item_text_color": "#d9e7e2",
         "icon_bg": "#f5efe4",
         "icon_color": "#2f6665",
-        "divider_color": "#4e817f"
+        "divider_color": "#4e817f",
+        "footer_heading_color": "#ffffff",
+        "footer_text_color": "#ffffff",
+        "footer_link_color": "#ffffff"
       }
     },
     "hairscripts_growth_timeline_zAd8Mn": {
@@ -565,8 +625,8 @@
         "text_color": "#faf7f2",
         "item_text_color": "#211b18",
         "eyebrow": "",
-        "heading": "NINE PATThis Is Why It Works When Everything Else Didn’tHWAYS. ONE FORMULA.",
-        "text": "<p>Not because it has more ingredients. Because it has the right mechanisms — all nine of them — working simultaneously inside your follicle. The same way your hair loss has been operating. Nine pathways. Nineteen ingredients. One formula built around what’s actually happening inside your body.</p>",
+        "heading": "NINE PATHWAYS. NINETEEN INGREDIENTS. ONE FORMULA — AND THIS IS WHY IT WORKS WHEN NOTHING ELSE DID.",
+        "text": "<p>Not because it has more ingredients. Because it has the right mechanisms — all nine — working at once inside your follicle. The same way your hair loss has been operating against you. Built around what’s actually happening in your body. Not a guess.</p>",
         "button_label": "",
         "button_link": "",
         "image": "shopify://shop_images/Frame_1000009525.webp"

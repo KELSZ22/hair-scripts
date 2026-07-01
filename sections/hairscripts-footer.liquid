@@ -92,7 +92,6 @@
           {%- assign hs_footer_newsletter_form_id = 'hs-footer-newsletter-' | append: section.id -%}
           {% form 'customer', id: hs_footer_newsletter_form_id, class: 'hs-footer__newsletter-form' %}
             <input type="hidden" name="contact[tags]" value="newsletter">
-            <input type="hidden" name="return_to" value="{{ request.path }}{{ request.search }}#hs-footer">
 
             <div class="hs-footer__newsletter-field">
               <input
@@ -123,7 +122,10 @@
                 class="hs-footer__form-message hs-footer__form-message--success"
                 data-hs-newsletter-status="success"
               >
-                Thank you! You are now subscribed.
+                <span>Hello, thank you for subscribing.</span>
+                <span class="hs-footer__discount-code">
+                  Use code <strong>HAIRSCRIPTS10</strong> to get 10% off your order.
+                </span>
               </div>
             {% endif %}
 
@@ -522,6 +524,21 @@
     color: #f0c8c8;
   }
 
+  #section-{{ section.id }} .hs-footer__discount-code {
+    display: block;
+    margin-top: 5px;
+    color: #FFFFFF;
+    font-family: "DM Sans";
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  #section-{{ section.id }} .hs-footer__discount-code strong {
+    font-weight: 700;
+  }
+
+
   #section-{{ section.id }} .hs-footer__social-heading {
     margin: 0 0 8px;
     color: #FFFFFF;
@@ -779,192 +796,165 @@
 
 <script>
   (function () {
-    function initHsFooterNewsletter(scope) {
-      const root = scope || document;
-      const forms = root.querySelectorAll('.hs-footer__newsletter-form');
+    /*
+      Footer newsletter AJAX submit.
+      This uses one delegated submit listener so it still works if Shopify
+      reloads or re-renders the footer section in the theme editor.
+    */
+    if (window.hsFooterNewsletterAjaxReady) return;
+    window.hsFooterNewsletterAjaxReady = true;
 
-      forms.forEach(function (form) {
-        if (form.dataset.hsFooterNewsletterReady === 'true') return;
+    function getFormParts(form) {
+      return {
+        input: form.querySelector('.hs-footer__newsletter-input'),
+        button: form.querySelector('.hs-footer__newsletter-button'),
+        message: form.querySelector('.hs-footer__form-message')
+      };
+    }
 
-        form.dataset.hsFooterNewsletterReady = 'true';
+    function setLoading(button, isLoading) {
+      if (!button) return;
+      button.disabled = isLoading;
+      button.classList.toggle('is-loading', isLoading);
+    }
 
-        const input = form.querySelector('.hs-footer__newsletter-input');
-        const button = form.querySelector('.hs-footer__newsletter-button');
-        const message = form.querySelector('.hs-footer__form-message');
+    function clearMessage(message) {
+      if (!message) return;
+      message.textContent = '';
+      message.classList.remove('is-visible', 'is-success', 'is-error');
+    }
+
+    function showMessage(message, type, text) {
+      if (!message) return;
+
+      message.textContent = '';
+      message.classList.remove('is-success', 'is-error');
+      message.classList.add('is-visible', type === 'success' ? 'is-success' : 'is-error');
+
+      const messageText = document.createElement('span');
+      messageText.textContent = text;
+      message.appendChild(messageText);
+
+      if (type === 'success') {
+        const discountText = document.createElement('span');
+        discountText.className = 'hs-footer__discount-code';
+        discountText.innerHTML = 'Use code <strong>HAIRSCRIPTS10</strong> to get 10% off your order.';
+        message.appendChild(discountText);
+      }
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function cleanText(element) {
+      return element ? element.textContent.replace(/\s+/g, ' ').trim() : '';
+    }
+
+    function isAlreadySubscribedMessage(text) {
+      return /already|subscribed|member|unavailable/i.test(text || '');
+    }
+
+    function readShopifyResponse(html) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const challenge = doc.querySelector('.shopify-challenge__container');
+      const error =
+        doc.querySelector('.hs-footer__form-message--error') ||
+        doc.querySelector('.errors') ||
+        doc.querySelector('.form__message--error');
+      const success =
+        doc.querySelector('[data-hs-newsletter-status="success"]') ||
+        doc.querySelector('.hs-footer__form-message--success');
+
+      return {
+        needsCaptcha: Boolean(challenge),
+        errorText: cleanText(error),
+        successText: cleanText(success)
+      };
+    }
+
+    document.addEventListener(
+      'submit',
+      function (event) {
+        const form = event.target.closest('.hs-footer__newsletter-form');
+        if (!form) return;
+
+        /*
+          Stop Shopify's normal customer-form post before it can refresh
+          the page or jump back to the footer.
+        */
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        if (form.dataset.hsSubmitting === 'true') return;
+
+        const parts = getFormParts(form);
+        const input = parts.input;
+        const button = parts.button;
+        const message = parts.message;
 
         if (!input || !button || !message) return;
 
-        function setLoading(isLoading) {
-          button.disabled = isLoading;
-          button.classList.toggle('is-loading', isLoading);
+        const email = input.value.trim();
+
+        clearMessage(message);
+
+        if (!email || !isValidEmail(email)) {
+          showMessage(message, 'error', 'Please enter a valid email address.');
+          return;
         }
 
-        function clearMessage() {
-          message.textContent = '';
-          message.classList.remove('is-visible', 'is-success', 'is-error');
-        }
+        form.dataset.hsSubmitting = 'true';
+        setLoading(button, true);
 
-        function showMessage(type, text) {
-          message.textContent = text;
-          message.classList.remove('is-success', 'is-error');
-          message.classList.add('is-visible', type === 'success' ? 'is-success' : 'is-error');
-        }
-
-        function isValidEmail(email) {
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        function getSectionId() {
-          const shopifySection = form.closest('.shopify-section');
-          if (!shopifySection || !shopifySection.id) return 'hairscripts-footer';
-          return shopifySection.id.replace(/^shopify-section-/, '');
-        }
-
-        function urlHasCustomerPosted(url) {
-          return /[?&]customer_posted=true(?:&|$)/.test(url || '');
-        }
-
-        function parseNewsletterFormState(html) {
-          const doc = new DOMParser().parseFromString(html, 'text/html');
-          const responseForm = doc.querySelector('.hs-footer__newsletter-form');
-
-          if (!responseForm) {
-            return {
-              needsCaptcha: doc.querySelector('.shopify-challenge__container') !== null,
-              successText: '',
-              errorText: ''
-            };
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          credentials: 'same-origin',
+          headers: {
+            Accept: 'text/html',
+            'X-Requested-With': 'XMLHttpRequest'
           }
-
-          const successEl = responseForm.querySelector('[data-hs-newsletter-status="success"]');
-          const errorEl = responseForm.querySelector('[data-hs-newsletter-status="error"]');
-
-          return {
-            needsCaptcha: doc.querySelector('.shopify-challenge__container') !== null,
-            successText: successEl ? successEl.textContent.trim() : '',
-            errorText: errorEl ? errorEl.textContent.trim() : ''
-          };
-        }
-
-        function fetchSectionHtml(pageUrl) {
-          const sectionUrl = new URL(pageUrl || window.location.href, window.location.origin);
-          sectionUrl.searchParams.set('section_id', getSectionId());
-          return fetch(sectionUrl.toString(), {
-            credentials: 'same-origin',
-            headers: { Accept: 'text/html' }
-          }).then(function (response) {
+        })
+          .then(function (response) {
             return response.text();
-          });
-        }
+          })
+          .then(function (html) {
+            const state = readShopifyResponse(html);
 
-        function isAlreadySubscribedMessage(text) {
-          return /already|subscribed|member|unavailable/i.test(text);
-        }
-
-        function applyNewsletterState(state) {
-          if (state.needsCaptcha) {
-            showMessage('error', 'Please complete the verification and try again.');
-            return;
-          }
-
-          if (state.successText) {
-            showMessage('success', state.successText);
-            form.reset();
-            return;
-          }
-
-          if (state.errorText) {
-            if (isAlreadySubscribedMessage(state.errorText)) {
-              showMessage('success', 'Thank you! You are now subscribed.');
-              form.reset();
+            if (state.needsCaptcha) {
+              showMessage(message, 'error', 'Verification is required before subscribing.');
               return;
             }
 
-            showMessage('error', state.errorText);
-            return;
-          }
+            if (state.errorText) {
+              if (isAlreadySubscribedMessage(state.errorText)) {
+                showMessage(message, 'success', 'Hello, thank you for subscribing.');
+                form.reset();
+                return;
+              }
 
-          showMessage('success', 'Thank you! You are now subscribed.');
-          form.reset();
-        }
-
-        form.addEventListener('submit', function (event) {
-          event.preventDefault();
-
-          const email = input.value.trim();
-
-          clearMessage();
-
-          if (!email || !isValidEmail(email)) {
-            showMessage('error', 'Please enter a valid email address.');
-            return;
-          }
-
-          setLoading(true);
-
-          const formData = new FormData(form);
-
-          fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            credentials: 'same-origin',
-            headers: {
-              Accept: 'text/html'
+              showMessage(message, 'error', state.errorText);
+              return;
             }
+
+            showMessage(
+              message,
+              'success',
+              state.successText || 'Hello, thank you for subscribing.'
+            );
+            form.reset();
           })
-            .then(function (response) {
-              const responseUrl = response.url || '';
-
-              if (urlHasCustomerPosted(responseUrl)) {
-                return { posted: true, url: responseUrl, html: '' };
-              }
-
-              return response.text().then(function (html) {
-                return {
-                  posted: false,
-                  url: responseUrl,
-                  html: html
-                };
-              });
-            })
-            .then(function (result) {
-              if (urlHasCustomerPosted(result.url)) {
-                applyNewsletterState({ needsCaptcha: false, successText: 'Thank you! You are now subscribed.', errorText: '' });
-                return;
-              }
-
-              const pageState = parseNewsletterFormState(result.html || '');
-
-              if (pageState.successText || pageState.errorText || pageState.needsCaptcha) {
-                applyNewsletterState(pageState);
-                return;
-              }
-
-              return fetchSectionHtml(result.url).then(function (sectionHtml) {
-                applyNewsletterState(parseNewsletterFormState(sectionHtml));
-              });
-            })
-            .catch(function () {
-              showMessage('error', 'Something went wrong. Please try again.');
-            })
-            .finally(function () {
-              setLoading(false);
-            });
-        });
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function () {
-        initHsFooterNewsletter(document);
-      });
-    } else {
-      initHsFooterNewsletter(document);
-    }
-
-    document.addEventListener('shopify:section:load', function (event) {
-      initHsFooterNewsletter(event.target);
-    });
+          .catch(function () {
+            showMessage(message, 'error', 'Something went wrong. Please try again.');
+          })
+          .finally(function () {
+            form.dataset.hsSubmitting = 'false';
+            setLoading(button, false);
+          });
+      },
+      true
+    );
   })();
 </script>
 

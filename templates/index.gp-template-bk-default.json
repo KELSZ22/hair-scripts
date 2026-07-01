@@ -106,7 +106,7 @@
       "settings": {
         "media_type_1": "image",
         "mobile_media_type_1": "image",
-        "image_1": "shopify://shop_images/Frame_1000008726.webp",
+        "image_1": "shopify://shop_images/home-hero-desktop.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -143,7 +143,7 @@
         "proof_MDU78m": {
           "type": "proof",
           "settings": {
-            "text": "10+ Years Pharmaceutical Dermatology Expert"
+            "text": "10+ Years Pharmaceutical Industry Expert"
           }
         },
         "proof_6CNga7": {
@@ -161,7 +161,7 @@
         "proof_Q7fMaP": {
           "type": "proof",
           "settings": {
-            "text": "Trusted by 44,000+ women in the HairScripts community"
+            "text": "Trusted by a growing community of women in the HairScripts family"
           }
         }
       },
@@ -173,15 +173,15 @@
       ],
       "name": "Hair Home Hero",
       "settings": {
-        "background_image": "shopify://shop_images/Frame_1000008726_b098d438-2992-4c59-b8fd-a28b35e211ac.webp",
-        "background_image_1024": "shopify://shop_images/h1_2.webp",
-        "creator_image": "shopify://shop_images/eae8a874cf8e026171eb565b9fc56dbd8eeef396_1.png",
+        "background_image": "shopify://shop_images/home-hero-desktop.webp",
+        "background_image_1024": "shopify://shop_images/Frame_1000009463_1.png",
+        "creator_image": "shopify://shop_images/Frame_1000009061.png",
         "heading": "SCIENCE DESIGNED FOR VISIBLY <br> FULLER HEALTHIER HAIR",
-        "description": "If nothing has worked, it’s because most products only target one cause of hair loss. HairScripts™ targets all 9 major biological causes of thinning including stress signaling, androgen activity, inflammation, circulation, nutrient depletion, and follicle miniaturization.",
+        "description": "If nothing has worked, it’s because most products only target one cause of hair loss. HairScripts™ addresses all 9 root causes of thinning — including stress, hormones, inflammation, circulation, nutrient depletion, and follicle miniaturization — in one daily formula.",
         "button_label": "Stop My Hair From Thinning Now",
-        "button_link": "#",
-        "button_label_2": "Find My Hair Plan - Free Quiz",
-        "button_link_2": "#",
+        "button_link": "shopify://products/hairscripts-by-bevy-supplement",
+        "button_label_2": "Learn the Science",
+        "button_link_2": "shopify://pages/the-science",
         "creator_text": "Created by Bevy."
       }
     },
@@ -238,7 +238,7 @@
       ],
       "name": "Results columns",
       "settings": {
-        "heading": "BACKED BY SCIENCE AND RESULTS.<br> DESIGNED FOR REAL CHANGE",
+        "heading": "ROOT-CAUSE FORMULATION. MEASURABLE OUTCOMES.",
         "bg": "shopify://shop_images/background.webp"
       }
     },
@@ -340,11 +340,11 @@
       "settings": {
         "image": "shopify://shop_images/Hair.webp",
         "heading": "If Your Hair Keeps Falling Out, <br>Read This.",
-        "description": "<p>Here’s why. Most supplements target one cause of hair loss.<br/>But your hair loss isn’t one thing — it’s nine biological drivers working against you at the same time.</p>",
+        "description": "<p>Here’s why. Most supplements target one cause of hair loss. But your hair isn’t one thing — it’s nine root causes working against you at the same time.</p>",
         "subheading": "You’re not imagining it. And you’re not failing.",
         "description2": "<p>HairScripts™ addresses all nine simultaneously.<br/>So you’re covered whether you’ve identified your root cause or not.<br/>It does the heavy lifting for you.</p>",
         "button_label": "Find What’s Actually Causing It",
-        "button_link": ""
+        "button_link": "shopify://pages/the-science"
       }
     },
     "hairscripts_advanced_support_m9TkNL": {
@@ -452,7 +452,7 @@
         "bottom_heading": "CLINICIAN-INFORMED + ROOT-CAUSE FORMULA + SCIENCE-BACKED BLEND",
         "bottom_text": "Formulated with clinically studied ingredients shown to support hair health and fuller function",
         "research_label": "View Research",
-        "research_link": "#"
+        "research_link": "shopify://pages/research"
       }
     },
     "hairscripts_founder_quote_GPB8pX": {
@@ -462,16 +462,16 @@
           "type": "stat",
           "settings": {
             "icon": "shopify://shop_images/Pill.svg",
-            "title": "10+ Years Pharma",
-            "text": "Clinical data & drug pharmacology training"
+            "title": "10+ Years Pharmaceutical Industry Expert",
+            "text": "10+ Years Pharma Clinical data & drug pharmacology training"
           }
         },
         "stat_883CnK": {
           "type": "stat",
           "settings": {
             "icon": "shopify://shop_images/YouTube_68d9975e-8e28-4e94-89bb-522628454dc5.svg",
-            "title": "45,000+ YouTube Community",
-            "text": "Tens of thousands educated on hair biology"
+            "title": "Active YouTube Educator with a Growing Community",
+            "text": "Teaching women the science behind hair loss"
           }
         },
         "stat_FA7igM": {
@@ -490,10 +490,10 @@
       ],
       "name": "Founder quote",
       "settings": {
-        "person_image": "shopify://shop_images/Mask_group.png",
+        "person_image": "shopify://shop_images/Bevy_Picture.png",
         "person_name": "Bevy",
-        "person_title": "10+ Years Pharmaceutical Professional",
-        "heading": "You don’t have to have all the answers yet.Your follicles just need to be supported while you find them.",
+        "person_title": "10+ Years Pharmaceutical Industry Expert",
+        "heading": "You don’t have to have all the answers yet. Your follicles just need to be supported while you find them.",
         "description": "<p><em>Bevy lost over 60% of her own hair. She lived the panic. The shedding. The devastation of watching her identity change in real time. And she had a decade inside pharmaceutical dermatology to understand exactly why it was happening — and what the industry was getting wrong.</em></p><p><em>     <br/>She didn’t find a solution. She built one.</em></p>"
       }
     },
@@ -701,7 +701,7 @@
             "month_label": "MONTH",
             "month_number": "01",
             "phase_label": "Foundation Phase",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "image": "shopify://shop_images/Frame_1000008877_1.webp",
             "card_title": "Follicle Nourishment Begins",
             "bullets": "Nutrients are reaching your hair follicles\nYour scalp environment is being optimized for growth\nNo visible changes yet but that’s completely normal\nThis is where most people quit... don’t be one of them"
           }
@@ -712,7 +712,7 @@
             "month_label": "MONTH",
             "month_number": "02",
             "phase_label": "Transition Phase",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "image": "shopify://shop_images/Frame_1000008878_2.webp",
             "card_title": "Shedding Slows",
             "bullets": "Notice less hair in the shower\nLess buildup on your brush\nFollicles shift back to growth phase\nYour first real sign it’s working\nDaily shedding feels under control\nYou’re no longer afraid to touch your hair"
           }
@@ -723,9 +723,9 @@
             "month_label": "MONTH",
             "month_number": "03",
             "phase_label": "Result Phase",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "image": "shopify://shop_images/Frame_1000008877_1_1.webp",
             "card_title": "Visible Density Returns",
-            "bullets": "Hair looks fuller and thicker\nEdges start filling back in\n90 days in — results become visible\nBefore & after differences are noticeable\nResults you can actually see (or your money back)"
+            "bullets": "Hair looks fuller and thicker\nEdges start filling back in\n90 days in — results become visible\nStrands feel stronger when you touch them\nDensity compounds with consistent use"
           }
         },
         "timeline_item_CU9mgB": {
@@ -734,7 +734,7 @@
             "month_label": "MONTH",
             "month_number": "06",
             "phase_label": "Long-Term Phase",
-            "image": "shopify://shop_images/Frame_1000008877.png",
+            "image": "shopify://shop_images/Frame_1000008878_1_1.webp",
             "card_title": "Transformation Locked In",
             "bullets": "Hair feels stronger and healthier\nNoticeably longer, fuller strands\nDensity restored beyond pre-thinning\n6 months in — full transformation achieved\nHair you don’t have to worry about anymore"
           }
@@ -748,8 +748,8 @@
       ],
       "name": "Hairscripts timeline",
       "settings": {
-        "heading": "YOUR 90-DAY TIMELINE",
-        "subheading": "Small changes each week lead to noticeable improvements in shedding, strength, and overall hair health.",
+        "heading": "YOUR RECOVERY TIMELINE",
+        "subheading": "Real recovery takes time. Real recovery also compounds. Here’s exactly what’s happening inside your follicles — month by month.",
         "bg_image": "shopify://shop_images/hairscript-background.webp"
       }
     },
@@ -760,40 +760,40 @@
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "Is this for all hair types and textures?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": " How soon will I see results?",
+            "answer": "<p>Most women notice less shedding within 4–8 weeks, and visible density improvements between 90 days and 6 months. Hair grows in months, not days — that’s not a marketing limitation, that’s how the growth cycle actually works. It takes at least 90 days to biohack your body from a cellular level.</p><p>Consistency is the variable that determines your timeline. Take 4 capsules daily without skipping. Most women who quit at week 6 quit right before the results would have started showing up. Don’t be one of them.</p>"
           }
         },
         "faq_item_9N7nmg": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "How soon will I see results?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "Will this work for my specific situation?",
+            "answer": "<p>Likely yes. HairScripts™ was specifically formulated for women navigating hormonal hair loss — the patterns that show up during postpartum, perimenopause, menopause, stress-driven shedding, GLP-1 medication use, PCOS/PMOS, heavy menstrual cycles, post-illness recovery, and nutritional deficiency.</p><p>The formula addresses all 9 root causes of hormonal hair loss simultaneously — so you’re covered at every level, even if you haven’t identified your specific trigger yet. Visit our product page to see the 12 customer profiles HairScripts™ was built for, and find the one that fits you.</p>"
           }
         },
         "faq_item_EgJCKP": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "Will this make me shed more before it gets better?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "What makes HairScripts™ different from other hair growth supplements?",
+            "answer": "<p>Three things. First, HairScripts™ addresses all 9 root causes of hormonal hair loss simultaneously — not one pathway at a time. Most supplements on the market focus on a single ingredient or one or two pathways. That’s why they fail for most women whose hair loss is being driven by 3–5 root causes at once.</p><p>Second, every ingredient is clinically dosed at levels research actually supports — not micro-dosed for marketing appeal. Many supplements list impressive-sounding ingredients in doses too small to do anything.</p><p>Third, this formula was developed by a pharmaceutical industry expert who personally lost nearly 60% of her hair and had the clinical training to understand exactly why. That combination — multi-pathway formulation, clinical dosing, and pharmaceutical-grade development — is the entire difference.</p>"
           }
         },
         "faq_item_mx9ryW": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "Can men use this too?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "Can I take this with other supplements or prescription medications?",
+            "answer": "<p>HairScripts™ is generally compatible with most supplements and medications. However, since the formula contains iron, zinc, and clinically-active ingredients like Saw Palmetto and Ashwagandha, please review the ingredient list with your healthcare provider if you are on prescription medications — especially blood thinners, hormone therapies, thyroid medications, sedatives, immunosuppressants, or antidepressants.</p><p>If you’re already taking a separate iron or multivitamin, you may not need it anymore once you start HairScripts™. Check with your provider to avoid stacking.</p>"
           }
         },
         "faq_item_BTdhYT": {
           "type": "faq_item",
           "settings": {
             "category": "category_1",
-            "question": "What if I’ve had thinning for years?",
-            "answer": "<p>Yes — HairScripts works on all hair types, textures, and patterns. Hair biology is universal. If your follicles are weakened, this formula supports regrowth at the root level.</p>"
+            "question": "What’s your return and refund policy?",
+            "answer": "<p>All sales are final. Because HairScripts™ is a consumable supplement product, we do not offer refunds once an order has shipped — opened or unopened.</p><p>You have a 12-hour window from the moment you place your order to cancel and receive a full refund. After 12 hours, your order enters our fulfillment queue and the sale is final. No exceptions.</p><p>The only other exceptions: (1) damaged or defective products are eligible for replacement when reported within 7 days of delivery with photo documentation, and (2) subscription renewals processed due to a verified system error on our end will be refunded or credited within 5 business days.</p><p>Hair growth takes time — most women don’t see meaningful results until the 90-day mark. We encourage you to read through our science page, customer testimonials, and ingredient breakdown before purchasing. For complete details, please see our Returns & Refunds policy.</p>"
           }
         }
       },
@@ -806,7 +806,7 @@
       ],
       "name": "FAQ split image",
       "settings": {
-        "left_image": "shopify://shop_images/bevy_2b71f94c-88cc-4c0d-8810-a05f513ca590.webp",
+        "left_image": "shopify://shop_images/Frame_1000008863.webp",
         "desktop_order": "image_first",
         "mobile_order": "faq_first",
         "heading": "FAQs",
@@ -815,10 +815,9 @@
         "category_2": "",
         "category_3": "",
         "category_4": "",
-        "open_first_item": true,
         "footer_text": "Still have questions?",
         "button_label": "View More FAQs",
-        "button_link": ""
+        "button_link": "shopify://pages/faq"
       }
     },
     "hairscripts_video_carousel_Fq6r97": {
@@ -827,46 +826,61 @@
         "video_card_8NrQtV": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
-            "video_link": "https://www.youtube.com/watch?v=eAPLILi3JKs&list=PLQbfzTW_CftNWx04MzUXhVz4liZja-9Xn",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/62yR32tBUCM"
           }
         },
         "video_card_nYj77j": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_3.png",
-            "video_link": "",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/B48I8yMpWxQ"
           }
         },
         "video_card_pbnWRt": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_4.png",
-            "video_link": "",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/FKR3qsJEHjE"
           }
         },
         "video_card_L7VcRD": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_5.png",
-            "video_link": "",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/IblrcC4GDVE"
           }
         },
         "video_card_YpUapX": {
           "type": "video_card",
           "settings": {
-            "thumbnail": "shopify://shop_images/Rectangle_513_6.png",
-            "video_link": "",
-            "title": "Your Hair Isn’t Dry... It’s Leaking",
-            "subtitle": "Moisture"
+            "video_link": "https://www.youtube.com/shorts/j96ncvazk1Y"
+          }
+        },
+        "video_card_94DAwQ": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/jXrx6q-ed30"
+          }
+        },
+        "video_card_xUF8YM": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/KrnuZSNhqp8"
+          }
+        },
+        "video_card_PyenVr": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/UVcH5smb_l4"
+          }
+        },
+        "video_card_ikJDMB": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/wMMC_3R_sxo"
+          }
+        },
+        "video_card_kj3h4x": {
+          "type": "video_card",
+          "settings": {
+            "video_link": "https://www.youtube.com/shorts/xdDkR4VhqVo"
           }
         }
       },
@@ -875,11 +889,16 @@
         "video_card_nYj77j",
         "video_card_pbnWRt",
         "video_card_L7VcRD",
-        "video_card_YpUapX"
+        "video_card_YpUapX",
+        "video_card_94DAwQ",
+        "video_card_xUF8YM",
+        "video_card_PyenVr",
+        "video_card_ikJDMB",
+        "video_card_kj3h4x"
       ],
       "name": "Video carousel",
       "settings": {
-        "heading": "NOT SURE WHAT’S CAUSING YOUR HAIR THINNING?",
+        "heading": "YOUR HAIR IS TELLING YOU SOMETHING. LET’S DECODE IT.",
         "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding and what to do next."
       }
     },
@@ -952,13 +971,13 @@
         "point_tJ6ARQ": {
           "type": "point",
           "settings": {
-            "text": "Real talk about the biology behind your hair loss"
+            "text": "Real talk about what’s actually causing your hair loss"
           }
         },
         "point_G6tRgj": {
           "type": "point",
           "settings": {
-            "text": "Education from a pharmaceutical dermatology expert — not a marketing team"
+            "text": "Education from a pharmaceutical industry expert"
           }
         },
         "point_G84443": {
@@ -981,6 +1000,7 @@
         "heading": "Join the HairScripts Community",
         "subheading": "Science-backed education, real conversations, and a founder who shows up and explains things without the marketing script.",
         "button_label": "Join Community",
+        "scroll_to_footer": true,
         "button_link": ""
       }
     },
@@ -990,61 +1010,61 @@
         "review_WxmzNK": {
           "type": "review",
           "settings": {
-            "title": "Less Shedding",
-            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
-            "name": "Maria L.",
-            "age": "36",
-            "label": "Verified Buyer Review"
+            "title": "Excited to See My Further Results",
+            "review": "<p>Hey Bevy! Silent supporter for years. I’m 9 months post hair transplant and having great results. Just started oral spiralactone and oral minoxidil. Thanks again for sharing all the wonderful, science driven information. Excited to see my further results.</p>",
+            "name": "@Ashfrmthe205",
+            "age": "",
+            "label": ""
           }
         },
         "review_XwPNyi": {
           "type": "review",
           "settings": {
-            "title": "Less Shedding",
-            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
-            "name": "Maria L.",
-            "age": "36",
-            "label": "Verified Buyer Review"
+            "title": "No One Has Explained in Depth the Scientific",
+            "review": "<p>In all my years on YouTube university, no one has explained in depth the scientific 🧪 reason of using a product except you and another girl from UK. Your hard work will pay off.</p>",
+            "name": "@soappreneur",
+            "age": "",
+            "label": ""
           }
         },
         "review_ydYx77": {
           "type": "review",
           "settings": {
-            "title": "Less Shedding",
-            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
-            "name": "Maria L.",
-            "age": "36",
-            "label": "Verified Buyer Review"
+            "title": "I Love That You Focus on the Scientific Side",
+            "review": "<p>“This video was exactly what I needed. I love that you focus on the scientific side of the products you bring to us. Thanks Bevy!”</p>",
+            "name": "@gigijohn316",
+            "age": "",
+            "label": ""
           }
         },
         "review_jJ97aW": {
           "type": "review",
           "settings": {
-            "title": "Healthier Growth",
-            "review": "<p>With consistent use, my hair looks healthier and feels much more resilient.</p>",
-            "name": "Danielle R.",
-            "age": "28",
-            "label": "Verified Buyer Review"
+            "title": "Thank You for Being Transparent",
+            "review": "<p>Thank you for being transparent. I’m glad you’re bringing us along on this journey.</p>",
+            "name": "@amisainfort924",
+            "age": "",
+            "label": ""
           }
         },
         "review_TtQyLP": {
           "type": "review",
           "settings": {
-            "title": "Stronger Hair",
-            "review": "<p>My hair kept breaking before it could grow longer, and nothing I tried seemed to help. Now my strands feel stronger and healthier, and I’m finally seeing real length.</p>",
-            "name": "Nicole T.",
-            "age": "38",
-            "label": "Verified Buyer Review"
+            "title": "You Have Helped Me Revive My Hair",
+            "review": "<p>You have help me revive my hair thank you for all the information you have given over the yrs you dont gate you are a blessing </p>",
+            "name": "@shawandasmith7615",
+            "age": "",
+            "label": ""
           }
         },
         "review_Vf9cyW": {
           "type": "review",
           "settings": {
-            "title": "Fuller Ponytail",
-            "review": "<p>My hair looks fuller and my ponytail finally feels thicker again.</p>",
-            "name": "Jessica P.",
-            "age": "44",
-            "label": "Verified Buyer Review"
+            "title": "My Hair Has Been Brought Back to Life!!!",
+            "review": "<p>Thank you for saving my hair! Uh, MAAM!!! My hair has been brought back to life!!! Shine, softness, manageability, no breakage! </p>",
+            "name": "@sds1011974",
+            "age": "",
+            "label": ""
           }
         }
       },
@@ -1059,26 +1079,25 @@
       "name": "Review carousel",
       "settings": {
         "show_stars": true,
-        "heading": "RESULTS WOMEN ARE TALKING ABOUT",
-        "subheading": "Women navigating postpartum shedding, hormonal thinning, and stress-related loss  sharing what actually happened. Thousands in the community. Here’s what they’re saying.",
+        "heading": "TRANSFORMATIONS WITHIN HAIRSCRIPTS COMMUNITY",
+        "subheading": "Women navigating postpartum shedding, hormonal thinning, and stress-related loss — sharing what actually happened. Here’s what they’re saying.",
         "button_label": "View All Reviews",
-        "button_link": ""
+        "button_link": "shopify://pages/faq"
       }
     },
     "hair_assessment_banner_ajTAyL": {
       "type": "hair-assessment-banner",
       "name": "Hair assessment banner",
       "settings": {
-        "background_image": "shopify://shop_images/Frame_1000009479_2.png",
-        "background_image_1024": "shopify://shop_images/Frame_1000009401_2.png",
-        "background_image_450": "shopify://shop_images/Frame_1000009400.png",
-        "badge_text": "FREE • TAKES 2 MINUTES",
-        "heading": "Not sure what's causing your hair thinning? Let's find out.",
-        "subheading": "In 10 questions, get a biological breakdown tailored to your life stage, hormonal pattern, and hair type so you know exactly what's working against your follicles and what to do about it.",
+        "background_image": "shopify://shop_images/Frame_1000009497.webp",
+        "background_image_1024": "shopify://shop_images/Frame_1000009400.png",
+        "badge_text": "",
+        "heading": "READY TO START? <br> YOUR PROTOCOL IS ONE CLICK AWAY.",
+        "subheading": "Nine root causes. One formula. So no matter what’s driving your hair loss — you’re covered from day one. Start the protocol built to address every pathway in your follicle environment.",
         "button_label": "Stop My Hair From Thinning Now",
-        "button_link": "#",
-        "button_label2": "Take the Free Hair Assessment",
-        "button_link2": ""
+        "button_link": "https://bevyscripts.com/products/hairscripts-by-bevy-supplement",
+        "button_label2": "Learn the Science ",
+        "button_link2": "shopify://pages/the-science"
       }
     }
   },

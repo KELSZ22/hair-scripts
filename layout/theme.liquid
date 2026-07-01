@@ -392,5 +392,162 @@
     subtree: true
   });
 </script>
+
+  <script>
+(function () {
+  var HIDDEN_HANDLES = [
+    'hairscripts-by-bevy-supplement-30-days',
+    'hairscripts-by-bevy-supplement-90-days',
+    'hairscripts-by-bevy-supplement-180-days'
+  ];
+
+  function isHiddenProductUrl(url) {
+    if (!url) return false;
+    var decoded = decodeURIComponent(url).toLowerCase();
+    return HIDDEN_HANDLES.some(function (handle) {
+      return decoded.indexOf('/products/' + decodeURIComponent(handle).toLowerCase()) !== -1;
+    });
+  }
+
+  function isCartOrDrawer(el) {
+    var current = el;
+    while (current && current !== document.body) {
+      var id = (current.id || '').toLowerCase();
+      var cls = (current.className || '').toLowerCase();
+      if (
+        id.indexOf('cart') !== -1 ||
+        cls.indexOf('cart') !== -1 ||
+        id.indexOf('drawer') !== -1 ||
+        cls.indexOf('drawer') !== -1 ||
+        id.indexOf('side-cart') !== -1 ||
+        cls.indexOf('side-cart') !== -1 ||
+        cls.indexOf('cart-drawer') !== -1 ||
+        cls.indexOf('cart-notification') !== -1
+      ) {
+        return true;
+      }
+      current = current.parentElement;
+    }
+    return false;
+  }
+
+  function findProductCard(el) {
+    var CARD_SELECTORS = [
+      '.product-card', '.product-item', '.grid__item', '.grid-product',
+      '.card-wrapper', '.product-card-wrapper', '[data-product-card]',
+      'li.product', '.collection-product-card', 'li'
+    ];
+    var current = el;
+    while (current && current !== document.body) {
+      for (var s = 0; s < CARD_SELECTORS.length; s++) {
+        if (current.matches && current.matches(CARD_SELECTORS[s])) return current;
+      }
+      current = current.parentElement;
+    }
+    return el;
+  }
+
+  function scrubContainer(container) {
+    if (!container) return;
+    container.querySelectorAll('a[href]').forEach(function (link) {
+      if (isHiddenProductUrl(link.getAttribute('href'))) {
+        if (isCartOrDrawer(link)) return;
+        var item = link.closest('li, article, .product-card, .product-item, .card-wrapper, [class*="product"]') || link.parentElement;
+        item.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
+
+  function scrubAllSearchContainers() {
+    scrubContainer(document.getElementById('predictive-search-results'));
+    document.querySelectorAll('.predictive-search-dropdown, .predictive-search-form__content, .search__results, [data-search-results]').forEach(scrubContainer);
+  }
+
+  function hideExistingCards() {
+    document.querySelectorAll('a[href*="/products/"]').forEach(function (link) {
+      if (isHiddenProductUrl(link.getAttribute('href'))) {
+        if (isCartOrDrawer(link)) return;
+        findProductCard(link).style.setProperty('display', 'none', 'important');
+      }
+    });
+    scrubAllSearchContainers();
+  }
+
+  function blockDirectAccess() {
+    if (window.location.pathname.indexOf('/products/') !== -1 && isHiddenProductUrl(window.location.href)) {
+      window.location.replace('/404');
+    }
+  }
+
+  function observeDynamicContent() {
+    if (!window.MutationObserver) return;
+
+    new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          var links = node.querySelectorAll ? node.querySelectorAll('a[href*="/products/"]') : [];
+          links.forEach(function (link) {
+            if (isHiddenProductUrl(link.getAttribute('href'))) {
+              if (isCartOrDrawer(link)) return;
+              var item = link.closest('li, article, .product-card, .product-item, .card-wrapper, [class*="product"]') || link.parentElement;
+              item.style.setProperty('display', 'none', 'important');
+            }
+          });
+          if (node.tagName === 'A' && isHiddenProductUrl(node.getAttribute('href'))) {
+            if (!isCartOrDrawer(node)) {
+              findProductCard(node).style.setProperty('display', 'none', 'important');
+            }
+          }
+        });
+      });
+
+      scrubAllSearchContainers();
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+
+  function interceptFetch() {
+    var originalFetch = window.fetch;
+    window.fetch = function (input) {
+      var url = typeof input === 'string' ? input : (input && input.url) || '';
+      return originalFetch.apply(this, arguments).then(function (response) {
+        if (url.indexOf('predictive_search') === -1 && url.indexOf('/search') === -1) return response;
+        return response.clone().text().then(function (text) {
+          HIDDEN_HANDLES.forEach(function (handle) {
+            text = text.split(decodeURIComponent(handle)).join('__REMOVED__');
+            text = text.split(handle).join('__REMOVED__');
+          });
+          return new Response(text, { status: response.status, statusText: response.statusText, headers: response.headers });
+        });
+      });
+    };
+  }
+
+  blockDirectAccess();
+  interceptFetch();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { hideExistingCards(); observeDynamicContent(); });
+  } else {
+    hideExistingCards();
+    observeDynamicContent();
+  }
+
+  window.addEventListener('load', hideExistingCards);
+})();
+</script>
+
+
+  {% if template == 'product' %}
+<style>
+  header-component {
+    position: static !important;
+  }
+  #header-group {
+    position: static !important;
+  }
+</style>
+{% endif %}
+
   </body>
 </html>

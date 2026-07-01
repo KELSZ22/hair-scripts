@@ -63,42 +63,60 @@
           </p>
 
           <div class="hs-sticky-atc__selectors">
-            <select
-              class="hs-sticky-atc__select hs-sticky-atc__select--purchase"
-              aria-label="Purchase option"
-              data-sticky-selling-plan-select
-            >
-              {% assign ninety_day_plan = blank %}
-              {% assign thirty_day_plan = blank %}
+            <div class="hs-sticky-atc__purchase-dropdown" data-sticky-purchase-dropdown>
+              <button
+                type="button"
+                class="hs-sticky-atc__dropdown-toggle"
+                aria-label="Purchase option"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                data-sticky-purchase-toggle
+              >
+                <span data-sticky-purchase-current-label>90-day Subscription</span>
+                <span class="hs-sticky-atc__save" data-sticky-purchase-current-save>(Save 34%)</span>
+                <span class="hs-sticky-atc__chevron" aria-hidden="true"></span>
+              </button>
 
-              {% for selling_plan_group in sticky_product.selling_plan_groups %}
-                {% for selling_plan in selling_plan_group.selling_plans %}
-                  {% if selling_plan.name contains '90' %}
-                    {% assign ninety_day_plan = selling_plan %}
-                  {% endif %}
+              <div
+                class="hs-sticky-atc__dropdown-menu"
+                role="listbox"
+                aria-label="Purchase option"
+                data-sticky-purchase-menu
+                hidden
+              >
+                <button
+                  type="button"
+                  class="hs-sticky-atc__dropdown-option is-selected"
+                  role="option"
+                  aria-selected="true"
+                  data-sticky-plan-option="sub90"
+                >
+                  <span>90-day Subscription</span>
+                  <span class="hs-sticky-atc__save">(Save 34%)</span>
+                </button>
 
-                  {% if selling_plan.name contains '30' %}
-                    {% assign thirty_day_plan = selling_plan %}
-                  {% endif %}
-                {% endfor %}
-              {% endfor %}
+                <button
+                  type="button"
+                  class="hs-sticky-atc__dropdown-option"
+                  role="option"
+                  aria-selected="false"
+                  data-sticky-plan-option="sub30"
+                >
+                  <span>30-day Subscription</span>
+                  <span class="hs-sticky-atc__save">(Save 28%)</span>
+                </button>
+              </div>
 
-              {% if ninety_day_plan != blank %}
-                <option value="{{ ninety_day_plan.id }}">
-                  90-day Supply
-                </option>
-              {% endif %}
-
-              {% if thirty_day_plan != blank %}
-                <option value="{{ thirty_day_plan.id }}">
-                  30-day Supply
-                </option>
-              {% endif %}
-
-              <option value="">
-                One-time Purchase
-              </option>
-            </select>
+              <select
+                class="hs-sticky-atc__native-select"
+                aria-hidden="true"
+                tabindex="-1"
+                data-sticky-selling-plan-select
+              >
+                <option value="sub90" selected>90-day Subscription (Save 34%)</option>
+                <option value="sub30">30-day Subscription (Save 28%)</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -128,11 +146,14 @@
           </button>
         </div>
 
+        {% comment %}
+          ORIGINAL STICKY ADD TO CART BUTTON - TEMPORARILY DISABLED
+
         <button
           type="button"
           class="sticky-add-to-cart__button add-to-cart-button button hs-sticky-atc__button"
           ref="addToCartButton"
-          on:click="/handleAddToCartClick"
+          data-sticky-atc-btn
           {% unless sticky_current_variant.available %}
             disabled
           {% endunless %}
@@ -177,6 +198,22 @@
             </span>
           </span>
         </button>
+        {% endcomment %}
+
+        <button
+          type="button"
+          class="sticky-add-to-cart__button add-to-cart-button button hs-sticky-atc__button hs-sticky-atc__sold-out-button"
+          disabled
+          aria-disabled="true"
+        >
+          <span class="add-to-cart-text">
+            <span class="add-to-cart-text__content">
+              <span class="hs-sticky-atc__button-inner">
+                <span>Sold out</span>
+              </span>
+            </span>
+          </span>
+        </button>
       </div>
     </div>
   </sticky-add-to-cart>
@@ -204,12 +241,10 @@
       box-shadow: var(--hs-atc-shadow);
       border-radius: 0;
       font-family: var(--hs-atc-body-font);
-
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none;
       transform: translateX(-50%) translateY(110%) !important;
-
       display: flex !important;
       align-items: center;
       justify-content: space-between;
@@ -221,7 +256,7 @@
       visibility: visible !important;
       pointer-events: auto;
       transform: translateX(-50%) translateY(0) !important;
-      display: flex !important;
+      display: none !important;
     }
 
     #{{ sticky_id }}[data-at-page-bottom='true'] .hs-sticky-atc__bar {
@@ -327,7 +362,101 @@
     }
 
     #{{ sticky_id }} .hs-sticky-atc__select--purchase {
-      width: 205px;
+      width: auto;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__purchase-dropdown {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      font-family: var(--hs-atc-body-font);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__native-select {
+      display: none !important;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-toggle {
+      width: 268px;
+      max-width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--hs-atc-border);
+      border-radius: 3px;
+      background: #ffffff;
+      color: #222222;
+      font-family: var(--hs-atc-body-font);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__save {
+      color: #d40000;
+      font-weight: 500;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__chevron {
+      width: 7px;
+      height: 7px;
+      margin-left: auto;
+      border-right: 1px solid #222222;
+      border-bottom: 1px solid #222222;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-toggle[aria-expanded='true'] .hs-sticky-atc__chevron {
+      transform: rotate(225deg) translateY(-2px);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-menu {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0;
+      z-index: 20;
+      width: 268px;
+      max-width: calc(100vw - 32px);
+      padding: 5px;
+      border: 1px solid var(--hs-atc-border);
+      border-radius: 3px;
+      background: #ffffff;
+      box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.13);
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-menu[hidden] {
+      display: none !important;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-option {
+      width: 100%;
+      min-height: 38px;
+      padding: 0 8px;
+      border: 0;
+      background: transparent;
+      color: #222222;
+      font-family: var(--hs-atc-body-font);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-option:hover,
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-option:focus-visible,
+    #{{ sticky_id }} .hs-sticky-atc__dropdown-option.is-selected {
+      background: #f6f1f4;
+      outline: none;
     }
 
     #{{ sticky_id }} .hs-sticky-atc__right {
@@ -423,6 +552,25 @@
     #{{ sticky_id }} .hs-sticky-atc__button[disabled] {
       opacity: 0.55;
       cursor: not-allowed;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button,
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button:hover,
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button:focus,
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button:disabled {
+      background: linear-gradient(90deg, #725270 0% 42.83%, #371834) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      opacity: 0.5 !important;
+      cursor: not-allowed !important;
+      pointer-events: auto !important;
+    }
+
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button .add-to-cart-text,
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button .add-to-cart-text__content,
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button .hs-sticky-atc__button-inner,
+    #{{ sticky_id }} .hs-sticky-atc__sold-out-button .hs-sticky-atc__button-inner span {
+      color: #ffffff !important;
     }
 
     #{{ sticky_id }} .hs-sticky-atc__button-inner {
@@ -532,6 +680,16 @@
         line-height: 1;
       }
 
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-toggle,
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-menu {
+        width: 254px;
+        font-size: 12px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-option {
+        font-size: 12px;
+      }
+
       #{{ sticky_id }} .hs-sticky-atc__right {
         width: 100%;
         display: flex;
@@ -585,6 +743,11 @@
         height: 38px;
       }
 
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-toggle,
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-menu {
+        width: 254px;
+      }
+
       #{{ sticky_id }} .hs-sticky-atc__qty {
         min-width: 86px;
         height: 44px;
@@ -592,7 +755,7 @@
 
       #{{ sticky_id }} .hs-sticky-atc__button {
         height: 44px;
-        padding: 0 14px;
+        padding: 0 12px;
       }
     }
 
@@ -600,6 +763,11 @@
       #{{ sticky_id }} .hs-sticky-atc__select,
       #{{ sticky_id }} .hs-sticky-atc__select--purchase {
         width: 190px;
+      }
+
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-toggle,
+      #{{ sticky_id }} .hs-sticky-atc__dropdown-menu {
+        width: 248px;
       }
 
       #{{ sticky_id }} .hs-sticky-atc__qty {
@@ -616,46 +784,69 @@
   <script>
     (() => {
       const root = document.getElementById({{ sticky_id | json }});
-
       if (!root || root.dataset.hsStickyReady === 'true') return;
-
       root.dataset.hsStickyReady = 'true';
 
-      const stickyBar = root.querySelector('.hs-sticky-atc__bar');
-      const variantSelect = null;
-      const qtyMinus = root.querySelector('[data-sticky-qty-minus]');
-      const qtyPlus = root.querySelector('[data-sticky-qty-plus]');
-      const qtyNumber = root.querySelector('[data-sticky-qty-number]');
-      const themeQtyNumber = root.querySelector('[data-sticky-theme-qty-number]');
-      const price = root.querySelector('[data-sticky-price]');
-      const productImage = root.querySelector('[data-testid="sticky-product-image"]');
-      const addButton = root.querySelector('[ref="addToCartButton"]');
-      const buttonLabel = root.querySelector('[data-sticky-button-label]');
+      const PRODUCTS = {
+        sub90:   { variantId: 43232223789161, planId: 2124218473, qty: 1 },
+        sub30:   { variantId: 43232206454889, planId: 2124185705, qty: 1 },
+        onetime: { variantId: 43231934775401, planId: null,       qty: 1 }
+      };
+
+      const PRICE_MAP = {
+        sub90:   '$135.00',
+        sub30:   '$49.00',
+        onetime: '$69.00'
+      };
+
+      const PLAN_DISPLAY = {
+        sub90:   { label: '90-day Subscription', save: '(Save 34%)' },
+        sub30:   { label: '30-day Subscription', save: '(Save 28%)' },
+        onetime: { label: 'One-time Purchase',    save: '' }
+      };
+
+      const ITEM_DATA = {
+        sub90:   { title: 'HairScripts by Bevy Supplement - 90 Days', variant: '90-day subscription', price: '$135.00', compareAt: '$207.00', save: 'SAVE 34%', href: '/products/hairscripts-by-bevy-supplement-90-days?selling_plan=2124218473&variant=43232223789161' },
+        sub30:   { title: 'HairScripts by Bevy Supplement',           variant: '30-day subscription', price: '$49.00',  compareAt: '',        save: '',         href: '/products/hairscripts-by-bevy-supplement?selling_plan=2124185705&variant=43232206454889' },
+        onetime: { title: 'HairScripts by Bevy Supplement',           variant: '30-Day Supply',       price: '$69.00',  compareAt: '',        save: '',         href: '/products/hairscripts-by-bevy-supplement?variant=43231934775401' }
+      };
+
+      const IMG_SRC = '//bevyscripts.com/cdn/shop/files/2_9ca31d72-534f-49c8-891a-640bc47b1731.png?v=1778765354&width=250';
+
+      const stickyBar          = root.querySelector('.hs-sticky-atc__bar');
+      const planSelect         = root.querySelector('[data-sticky-selling-plan-select]');
+      const purchaseDropdown   = root.querySelector('[data-sticky-purchase-dropdown]');
+      const purchaseToggle     = root.querySelector('[data-sticky-purchase-toggle]');
+      const purchaseMenu       = root.querySelector('[data-sticky-purchase-menu]');
+      const currentPlanLabel   = root.querySelector('[data-sticky-purchase-current-label]');
+      const currentPlanSave    = root.querySelector('[data-sticky-purchase-current-save]');
+      const purchaseOptions    = Array.from(root.querySelectorAll('[data-sticky-plan-option]'));
+      const qtyMinus           = root.querySelector('[data-sticky-qty-minus]');
+      const qtyPlus            = root.querySelector('[data-sticky-qty-plus]');
+      const qtyNumber          = root.querySelector('[data-sticky-qty-number]');
+      const themeQtyNumber     = root.querySelector('[data-sticky-theme-qty-number]');
+      const priceEl            = root.querySelector('[data-sticky-price]');
+      const addButton          = root.querySelector('[data-sticky-atc-btn]');
+      const buttonLabel        = root.querySelector('[data-sticky-button-label]');
 
       const addToCartText = {{ 'products.product.add_to_cart' | t | json }};
-      const soldOutText = {{ 'products.product.sold_out' | t | json }};
 
-      let quantity = parseInt(root.dataset.initialQuantity || '1', 10) || 1;
+      let quantity  = parseInt(root.dataset.initialQuantity || '1', 10) || 1;
       let isTicking = false;
+      let isAdding  = false;
+      let guardObs  = null;
 
       const updateStickyVisibility = () => {
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
-        const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-        const pageHeight = Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight
-        );
+        const currentScroll  = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        const pageHeight     = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        const isBelowFold    = currentScroll > viewportHeight;
+        const isAtPageBottom = currentScroll + viewportHeight >= pageHeight - 24;
 
-        const isBelowFold = currentScroll > viewportHeight;
-        const bottomOffset = 24;
-        const isAtPageBottom = currentScroll + viewportHeight >= pageHeight - bottomOffset;
-
-        root.setAttribute('data-below-fold', isBelowFold ? 'true' : 'false');
+        root.setAttribute('data-below-fold',     isBelowFold    ? 'true' : 'false');
         root.setAttribute('data-at-page-bottom', isAtPageBottom ? 'true' : 'false');
 
-        if (stickyBar) {
-          stickyBar.setAttribute('data-stuck', 'true');
-        }
+        if (stickyBar) stickyBar.setAttribute('data-stuck', 'true');
       };
 
       const requestStickyVisibilityUpdate = () => {
@@ -670,40 +861,12 @@
       };
 
       updateStickyVisibility();
-
       window.addEventListener('scroll', requestStickyVisibilityUpdate, { passive: true });
       window.addEventListener('resize', requestStickyVisibilityUpdate);
       window.addEventListener('pageshow', updateStickyVisibility);
 
-      const getSelectedOption = () => {
-        if (!variantSelect) return null;
-        return variantSelect.options[variantSelect.selectedIndex] || null;
-      };
-
-      const getQuantityRules = () => {
-        const selectedOption = getSelectedOption();
-
-        const min = parseInt(selectedOption?.dataset.min || '1', 10) || 1;
-        const max = parseInt(selectedOption?.dataset.max || '', 10);
-        const step = parseInt(selectedOption?.dataset.step || '1', 10) || 1;
-
-        return {
-          min,
-          max: Number.isNaN(max) ? null : max,
-          step
-        };
-      };
-
-      const setQuantity = (nextQuantity) => {
-        const rules = getQuantityRules();
-
-        let newQuantity = Math.max(rules.min, nextQuantity);
-
-        if (rules.max && rules.max > 0) {
-          newQuantity = Math.min(rules.max, newQuantity);
-        }
-
-        quantity = newQuantity;
+      const setQuantity = (nextQty) => {
+        quantity = Math.max(1, nextQty);
 
         if (qtyNumber) {
           qtyNumber.textContent = quantity;
@@ -716,52 +879,401 @@
         root.dataset.initialQuantity = String(quantity);
       };
 
-      if (qtyMinus) {
-        qtyMinus.addEventListener('click', () => {
-          const rules = getQuantityRules();
-          setQuantity(quantity - rules.step);
+      const updatePrice = () => {
+        if (!priceEl || !planSelect) return;
+
+        priceEl.textContent = PRICE_MAP[planSelect.value] || PRICE_MAP.onetime;
+      };
+
+      const closePurchaseDropdown = () => {
+        if (!purchaseToggle || !purchaseMenu) return;
+
+        purchaseToggle.setAttribute('aria-expanded', 'false');
+        purchaseMenu.hidden = true;
+      };
+
+      const syncPurchaseDropdown = () => {
+        if (!planSelect) return;
+
+        const selectedValue = planSelect.value || 'onetime';
+        const selectedPlan  = PLAN_DISPLAY[selectedValue] || PLAN_DISPLAY.onetime;
+
+        if (currentPlanLabel) {
+          currentPlanLabel.textContent = selectedPlan.label;
+        }
+
+        if (currentPlanSave) {
+          currentPlanSave.textContent = selectedPlan.save;
+          currentPlanSave.hidden = selectedPlan.save === '';
+        }
+
+        purchaseOptions.forEach((option) => {
+          const isSelected = option.dataset.stickyPlanOption === selectedValue;
+
+          option.classList.toggle('is-selected', isSelected);
+          option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
         });
+      };
+
+      if (qtyMinus) {
+        qtyMinus.addEventListener('click', () => setQuantity(quantity - 1));
       }
 
       if (qtyPlus) {
-        qtyPlus.addEventListener('click', () => {
-          const rules = getQuantityRules();
-          setQuantity(quantity + rules.step);
+        qtyPlus.addEventListener('click', () => setQuantity(quantity + 1));
+      }
+
+      if (purchaseToggle && purchaseMenu) {
+        purchaseToggle.addEventListener('click', () => {
+          const isOpen = purchaseToggle.getAttribute('aria-expanded') === 'true';
+
+          purchaseToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+          purchaseMenu.hidden = isOpen;
         });
       }
 
-      if (variantSelect) {
-        variantSelect.addEventListener('change', () => {
-          const selectedOption = getSelectedOption();
+      purchaseOptions.forEach((option) => {
+        option.addEventListener('click', () => {
+          if (!planSelect) return;
 
-          if (!selectedOption) return;
-
-          const isAvailable = selectedOption.dataset.available === 'true';
-
-          root.setAttribute('data-current-variant-id', selectedOption.value);
-          root.setAttribute('data-variant-available', String(isAvailable));
-
-          if (price && selectedOption.dataset.price) {
-            price.textContent = selectedOption.dataset.price;
-          }
-
-          if (productImage && selectedOption.dataset.image) {
-            productImage.src = selectedOption.dataset.image;
-            productImage.removeAttribute('srcset');
-          }
-
-          if (addButton) {
-            addButton.disabled = !isAvailable;
-          }
-
-          if (buttonLabel) {
-            buttonLabel.textContent = isAvailable ? addToCartText : soldOutText;
-          }
-
-          const rules = getQuantityRules();
-          setQuantity(rules.min);
-          updateStickyVisibility();
+          planSelect.value = option.dataset.stickyPlanOption || 'onetime';
+          planSelect.dispatchEvent(new Event('change', { bubbles: true }));
+          closePurchaseDropdown();
         });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (purchaseDropdown && !purchaseDropdown.contains(event.target)) {
+          closePurchaseDropdown();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closePurchaseDropdown();
+        }
+      });
+
+      if (planSelect) {
+        planSelect.addEventListener('change', () => {
+          updatePrice();
+          syncPurchaseDropdown();
+        });
+
+        updatePrice();
+        syncPurchaseDropdown();
+      }
+
+      const getCurrentCartCount = () => {
+        const el = document.querySelector('.js-cart-drawer-count');
+
+        return el ? (parseInt(el.textContent.trim(), 10) || 0) : 0;
+      };
+
+      const setCartCount = (n) => {
+        document.querySelectorAll(
+          '.js-cart-drawer-count,[data-cart-count],.cart-count-bubble span,.cart-count,#cart-icon-bubble span,.cart-count-bubble'
+        ).forEach((el) => {
+          el.textContent = n;
+        });
+      };
+
+      const buildFakeCartHTML = (mode) => {
+        const data = ITEM_DATA[mode];
+
+        const compareHTML = data.compareAt
+          ? `<s class="compare-at-price">${data.compareAt}</s>${data.save ? `<span class="cart-items__save-badge">${data.save}</span>` : ''}`
+          : '';
+
+        return `
+          <span class="visually-hidden" ref="cartItemCount" aria-hidden="true">1</span>
+          <form action="/cart" class="cart-form" id="cart-form-ghost" method="post">
+            <div class="cart-items spacing-style" style="--cart-items-gap:px;">
+              <table class="cart-items__table" role="table">
+                <caption class="visually-hidden" role="caption">Cart total <span>${data.price} USD</span></caption>
+
+                <thead class="visually-hidden" role="rowgroup">
+                  <tr role="row" class="cart-items__table-row">
+                    <th id="productImage" scope="col" role="columnheader">Product image</th>
+                    <th id="productInformation" scope="col" role="columnheader">Product information</th>
+                    <th id="quantity" scope="col" role="columnheader">Quantity</th>
+                    <th id="productTotal" scope="col" role="columnheader">Product total</th>
+                  </tr>
+                </thead>
+
+                <tbody role="rowgroup">
+                  <tr role="row" class="cart-items__table-row cart-items__table-row--full-width-variants" data-rc-ghost="1">
+                    <td class="cart-items__media" role="cell" headers="productImage">
+                      <a href="${data.href}" class="cart-items__media-container" style="--ratio:1;">
+                        <img
+                          src="${IMG_SRC}"
+                          alt=""
+                          width="250"
+                          height="250"
+                          class="cart-items__media-image border-style"
+                          style="--border-width:1px;--border-style:none;--border-color:rgba(0,0,0,0.5);--border-radius:0px;"
+                        >
+                      </a>
+                    </td>
+
+                    <td class="cart-items__details cart-primary-typography" role="cell" headers="productInformation">
+                      <div class="cart-items__product-info">
+                        <p>
+                          <a href="${data.href}" class="cart-items__title">${data.title}</a>
+                        </p>
+                      </div>
+
+                      <div class="cart-items__variants-wrapper">
+                        <p>${data.variant}</p>
+                      </div>
+
+                      <div class="cart-items__unit-price-wrapper">
+                        <div>
+                          <span>${data.price}</span>${compareHTML}
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="cart-items__quantity" role="cell" headers="quantity">
+                      <div class="cart-items__quantity-controls">
+                        <div class="quantity-selector-wrapper">
+                          <div class="quantity-selector cart-primary-typography" style="display:flex;align-items:center;gap:8px;">
+                            <button class="button quantity-minus button-unstyled" type="button" disabled>−</button>
+                            <input type="number" value="1" min="1" aria-label="Quantity" style="width:36px;text-align:center;" readonly>
+                            <button class="button quantity-plus button-unstyled" type="button">+</button>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="cart-items__price cart-secondary-typography" role="cell" headers="productTotal">
+                      <text-component value="${data.price}">${data.price}</text-component>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </form>`;
+      };
+
+      const getCartWrapper = () =>
+        document.querySelector('cart-items-component .cart-items__wrapper') ||
+        document.querySelector('.cart-items__wrapper');
+
+      const stopGuard = () => {
+        if (guardObs) {
+          guardObs.disconnect();
+          guardObs = null;
+        }
+      };
+
+      const injectGhost = (mode) => {
+        const wrapper = getCartWrapper();
+
+        if (!wrapper) return;
+
+        wrapper.innerHTML = buildFakeCartHTML(mode);
+
+        document.querySelectorAll('.js-cart-drawer-empty').forEach((el) => {
+          el.setAttribute('hidden', '');
+          el.style.setProperty('display', 'none', 'important');
+        });
+
+        document.querySelectorAll('.js-cart-drawer-filled').forEach((el) => {
+          el.removeAttribute('hidden');
+          el.style.removeProperty('display');
+        });
+
+        const finalEl = document.querySelector('.cart-drawer__totals-final');
+
+        if (finalEl) {
+          finalEl.textContent = ITEM_DATA[mode].price;
+        }
+
+        const guardTarget = document.querySelector('cart-items-component') || document.body;
+
+        stopGuard();
+
+        guardObs = new MutationObserver(() => {
+          if (!isAdding) return;
+
+          const w = getCartWrapper();
+
+          if (w && !w.querySelector('[data-rc-ghost]') && !w.querySelector('.cart-form:not(#cart-form-ghost)')) {
+            w.innerHTML = buildFakeCartHTML(mode);
+
+            const fe = document.querySelector('.cart-drawer__totals-final');
+
+            if (fe) {
+              fe.textContent = ITEM_DATA[mode].price;
+            }
+          }
+
+          document.querySelectorAll('.js-cart-drawer-empty').forEach((el) => {
+            el.setAttribute('hidden', '');
+            el.style.setProperty('display', 'none', 'important');
+          });
+
+          document.querySelectorAll('.js-cart-drawer-filled').forEach((el) => {
+            el.removeAttribute('hidden');
+          });
+        });
+
+        guardObs.observe(guardTarget, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['hidden']
+        });
+      };
+
+      const openCartDrawer = () => {
+        const cdc = document.querySelector('cart-drawer-component');
+
+        if (!cdc) return;
+
+        if (typeof cdc.open === 'function') {
+          cdc.open();
+        } else {
+          cdc.removeAttribute('hidden');
+          cdc.setAttribute('open', '');
+          cdc.classList.add('is-open', 'active');
+        }
+
+        document.dispatchEvent(new CustomEvent('cart:open', { bubbles: true }));
+      };
+
+      const refreshCartFromServer = (mode) => {
+        const cic = document.querySelector('cart-items-component[data-drawer]');
+
+        const sid = cic
+          ? cic.getAttribute('data-section-id')
+          : 'sections--19054444937321__header_section';
+
+        fetch('/?sections=' + sid)
+          .then((response) => response.json())
+          .then((data) => {
+            const html = data[sid] || data[Object.keys(data)[0]];
+
+            if (!html) return;
+
+            const doc   = new DOMParser().parseFromString(html, 'text/html');
+            const fresh = doc.querySelector('cart-items-component[data-drawer]');
+            const live  = document.querySelector('cart-items-component[data-drawer]');
+
+            if (fresh && live) {
+              stopGuard();
+              isAdding = false;
+              live.innerHTML = fresh.innerHTML;
+            }
+          })
+          .catch(() => {
+            stopGuard();
+            isAdding = false;
+          })
+          .finally(() => {
+            fetch('/cart.js')
+              .then((response) => response.json())
+              .then((cart) => {
+                setCartCount(cart.item_count);
+
+                document.dispatchEvent(new CustomEvent('cart:update', {
+                  bubbles: true,
+                  detail: {
+                    data: {
+                      itemCount: cart.item_count,
+                      source: 'product-form-component'
+                    }
+                  }
+                }));
+
+                import('@theme/events')
+                  .then(({ CartUpdateEvent }) => {
+                    document.dispatchEvent(new CartUpdateEvent(cart, 'manual-trigger', {
+                      itemCount: cart.item_count,
+                      source: 'hs-sticky-atc',
+                      sections: {}
+                    }));
+                  })
+                  .catch(() => {});
+              });
+          });
+      };
+
+      const handleAddToCart = () => {
+        if (!planSelect || !addButton || isAdding) return;
+
+        isAdding = true;
+
+        const mode    = planSelect.value || 'onetime';
+        const product = PRODUCTS[mode] || PRODUCTS.onetime;
+        const item    = {
+          id: product.variantId,
+          quantity
+        };
+
+        if (product.planId) {
+          item.selling_plan = product.planId;
+        }
+
+        addButton.disabled = true;
+
+        if (buttonLabel) {
+          buttonLabel.textContent = 'Adding...';
+        }
+
+        setCartCount(getCurrentCartCount() + quantity);
+        injectGhost(mode);
+        openCartDrawer();
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({ items: [item] })
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.json().then((data) => {
+                throw new Error(data.description || data.message || 'Could not add to cart.');
+              });
+            }
+
+            return response.json();
+          })
+          .then(() => {
+            if (buttonLabel) {
+              buttonLabel.textContent = 'Added!';
+            }
+
+            refreshCartFromServer(mode);
+
+            setTimeout(() => {
+              if (buttonLabel) {
+                buttonLabel.textContent = addToCartText;
+              }
+
+              addButton.disabled = false;
+            }, 2000);
+          })
+          .catch((error) => {
+            stopGuard();
+            isAdding = false;
+            setCartCount(Math.max(0, getCurrentCartCount() - quantity));
+
+            if (buttonLabel) {
+              buttonLabel.textContent = addToCartText;
+            }
+
+            addButton.disabled = false;
+            alert(error.message || 'Error adding to cart. Please try again.');
+          });
+      };
+
+      if (addButton) {
+        addButton.addEventListener('click', handleAddToCart);
       }
 
       setQuantity(quantity);

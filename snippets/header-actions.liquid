@@ -494,6 +494,50 @@
   })();
 </script>
 
+<script>
+  (function () {
+    const shopLoginButtonCss =
+      '.bg-purple-primary{background-color:#3D7E7A!important}' +
+      '.hover_enabled_bg-purple-d0:enabled:hover{background-color:#3D7E7A!important}' +
+      '.group:hover .group-hover_bg-purple-d0{background-color:#3D7E7A!important}' +
+      '.font-sans,.text-branded-button,button.bg-purple-primary{font-family:"DM Sans",sans-serif!important}';
+
+    function injectShopLoginButtonStyles(root) {
+      if (!root || !root.querySelectorAll) return;
+      ['shop-login', 'shop-login-button'].forEach(function (tag) {
+        root.querySelectorAll(tag).forEach(function (el) {
+          var shadow = el.shadowRoot;
+          if (!shadow || shadow.querySelector('[data-hs-shop-login-brand]')) return;
+          var style = document.createElement('style');
+          style.dataset.hsShopLoginBrand = '';
+          style.textContent = shopLoginButtonCss;
+          shadow.appendChild(style);
+        });
+      });
+    }
+
+    function scanShopLoginButtons() {
+      injectShopLoginButtonStyles(document);
+      document.querySelectorAll('shopify-account').forEach(function (el) {
+        if (el.shadowRoot) injectShopLoginButtonStyles(el.shadowRoot);
+      });
+    }
+
+    function whenDefined(name) {
+      if (typeof customElements === 'undefined' || !customElements.whenDefined) return Promise.resolve();
+      return customElements.whenDefined(name).catch(function () {});
+    }
+
+    Promise.all([whenDefined('shop-login'), whenDefined('shop-login-button')]).then(scanShopLoginButtons);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scanShopLoginButtons);
+    } else {
+      scanShopLoginButtons();
+    }
+    new MutationObserver(scanShopLoginButtons).observe(document.body, { childList: true, subtree: true });
+  })();
+</script>
+
 {% stylesheet %}
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
@@ -506,6 +550,7 @@
     --cd-summary-bg: #FFF9F4;
     --cd-btn-gradient-solid: linear-gradient(180deg, #725270 0%, #371834 100%);
     --cd-font: "Cormorant Garamond", Georgia, serif;
+    --cd-font-body: "DM Sans", sans-serif;
   }
 
   .header {
@@ -530,18 +575,21 @@
   }
 
   shopify-account {
-    --shopify-account-font-heading: var(--font-heading--family);
-    --shopify-account-font-heading-weight: var(--font-heading--weight);
-    --shopify-account-font-body: var(--font-body--family);
-    --shopify-account-font-body-weight: var(--font-body--weight);
+    --shopify-account-font-heading: var(--cd-font);
+    --shopify-account-font-heading-weight: 700;
+    --shopify-account-font-body: var(--cd-font-body);
+    --shopify-account-font-body-weight: 400;
+    --font-paragraph--family: var(--cd-font-body);
+    --font-body--family: var(--cd-font-body);
     --shopify-account-radius-base: var(--style-border-radius-popover);
     --shopify-account-radius-button: var(--style-border-radius-buttons-primary);
     --shopify-account-radius-button-small: var(--style-border-radius-buttons-primary);
     --shopify-account-radius-input: var(--style-border-radius-buttons-primary);
     --shopify-account-color-background: var(--color-background);
     --shopify-account-color-text: var(--color-foreground);
-    --shopify-account-color-accent: var(--color-primary-button-background);
-    --shopify-account-color-accent-text: var(--color-primary-button-text);
+    --shopify-account-color-accent: var(--cd-teal);
+    --shopify-account-color-accent-hover: var(--cd-teal-light);
+    --shopify-account-color-accent-text: #ffffff;
     --shopify-account-dialog-position-top: var(--account-offset-top);
 
     &:not(:defined) {

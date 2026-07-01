@@ -1,9 +1,5 @@
 {%- doc -%}
   Promotional upsell below the empty-cart message in the drawer.
-  Similar logic to product-page Recharge widget:
-  - Uses hardcoded selling plan ID
-  - Adds hidden selling_plan input
-  - JS keeps selling_plan synced before add-to-cart
 {%- enddoc -%}
 
 {%- liquid
@@ -27,7 +23,7 @@
 
     assign heading = '90-Day Subscription'
 
-    assign subscription_selling_plan_id = '2117107817'
+    assign subscription_selling_plan_id = '2124218473'
     assign subscription_price_text = '$45/month'
     assign subscription_button_price_text = '$45.00'
     assign subscription_billing_note = 'Billed $135 every 12 weeks'
@@ -65,7 +61,7 @@
     class="cart-drawer-empty-upsell"
     data-cart-add-url="{{ routes.cart_add_url | append: '.js' }}"
     data-selling-plan-id="{{ subscription_selling_plan_id }}"
-    data-variant-id="{{ variant.id }}"
+    data-variant-id="43232223789161"
   >
     {%- if section.settings.cart_drawer_upsell_banner_text != blank -%}
       <div
@@ -110,10 +106,7 @@
             </div>
 
             <div class="cart-drawer-empty-upsell__prices">
-              <span class="cart-drawer-empty-upsell__price">
-                {{ subscription_price_text }}
-              </span>
-
+              <span class="cart-drawer-empty-upsell__price"></span>
               <span class="cart-drawer-empty-upsell__unit">
                 {{ subscription_unit_note }}
               </span>
@@ -176,164 +169,277 @@
         class="cart-drawer-empty-upsell__form-wrap"
         data-cart-drawer-upsell-product-id="{{ upsell_product.id }}"
       >
-        {%- form 'product',
-          upsell_product,
-          id: product_form_id,
-          class: 'shopify-product-form cart-drawer-empty-upsell__form',
-          novalidate: 'novalidate',
-          data-type: 'add-to-cart-form'
-        -%}
-          <input
-            type="hidden"
-            name="id"
-            value="{{ variant.id }}"
-            {% unless variant.available %}
-              disabled
-            {% endunless %}
-          >
+        {% comment %}
+          ORIGINAL SUBSCRIBE BUTTON - TEMPORARILY DISABLED
 
-          <input
-            type="hidden"
-            name="quantity"
-            value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
-          >
+        <button
+          type="button"
+          class="button cart-drawer-empty-upsell__submit"
+          data-testid="cart-drawer-upsell-add"
+          {% unless can_add_to_cart %}disabled{% endunless %}
+        >
+          Subscribe
+        </button>
+        {% endcomment %}
 
-          <input
-            type="hidden"
-            name="selling_plan"
-            value="{{ subscription_selling_plan_id }}"
-            {% unless variant.available %}
-              disabled
-            {% endunless %}
-          >
-
-          <button
-            type="submit"
-            name="add"
-            class="button cart-drawer-empty-upsell__submit"
-            data-testid="cart-drawer-upsell-add"
-            {% unless can_add_to_cart %}
-              disabled
-            {% endunless %}
-          >
-            Subscribe
-          </button>
-        {%- endform -%}
+        <button
+          type="button"
+          class="button cart-drawer-empty-upsell__submit cart-drawer-empty-upsell__sold-out-button"
+          disabled
+          aria-disabled="true"
+        >
+          Sold out
+        </button>
       </div>
 
       <div class="cart-drawer-empty-upsell__status" hidden></div>
+    </div>
+  </div>
 
-     <script>
+  <script>
   (function() {
-    if (window.__cartDrawerEmptyUpsellAjaxBoundV6 === true) return;
-    window.__cartDrawerEmptyUpsellAjaxBoundV6 = true;
+    if (window.__cartDrawerEmptyUpsellAjaxBoundV8 === true) return;
+    window.__cartDrawerEmptyUpsellAjaxBoundV8 = true;
 
-    var DRAWER_SELECTORS = [
-      'cart-drawer-component',
-      'cart-drawer',
-      '#CartDrawer',
-      '#cart-drawer',
-      '.cart-drawer',
-      '[data-cart-drawer]'
-    ];
+    var UPSELL_VARIANT_ID = 43232223789161;
+    var UPSELL_PLAN_ID    = 2124218473;
+    var UPSELL_QTY        = 1;
+    var IMG_SRC           = '//bevyscripts.com/cdn/shop/files/2_9ca31d72-534f-49c8-891a-640bc47b1731.png?v=1778765354&width=250';
+    var ITEM_HREF         = '/products/hairscripts-by-bevy-supplement-90-days?selling_plan=2124218473&variant=43232223789161';
+    var ITEM_TITLE        = 'HairScripts by Bevy Supplement - 90 Days';
+    var ITEM_VARIANT      = '90-day subscription';
+    var ITEM_PRICE        = '$135.00';
+    var ITEM_COMPARE      = '$207.00';
+    var ITEM_SAVE         = 'SAVE 34%';
 
-    var BUBBLE_SELECTORS = [
-      '#cart-icon-bubble',
-      '[data-cart-icon-bubble]',
-      '.cart-count-bubble',
-      '.header__cart-count',
-      '[data-cart-count]'
-    ];
+    var isAdding  = false;
+    var guardObs  = null;
 
-    function findFirst(root, selectors) {
-      for (var i = 0; i < selectors.length; i++) {
-        var el = root.querySelector(selectors[i]);
+    function getCartWrapper() {
+      return document.querySelector('cart-items-component .cart-items__wrapper')
+          || document.querySelector('.cart-items__wrapper');
+    }
 
-        if (el) {
-          return {
-            el: el,
-            selector: selectors[i]
-          };
+    function buildFakeCartHTML() {
+      return [
+        '<span class="visually-hidden" ref="cartItemCount" aria-hidden="true">1</span>',
+        '<form action="/cart" class="cart-form" id="cart-form-ghost" method="post">',
+          '<div class="cart-items spacing-style" style="--cart-items-gap:px;">',
+            '<table class="cart-items__table" role="table">',
+              '<caption class="visually-hidden" role="caption">Cart total <span>' + ITEM_PRICE + ' USD</span></caption>',
+              '<thead class="visually-hidden" role="rowgroup">',
+                '<tr role="row" class="cart-items__table-row">',
+                  '<th id="productImage" scope="col" role="columnheader">Product image</th>',
+                  '<th id="productInformation" scope="col" role="columnheader">Product information</th>',
+                  '<th id="quantity" scope="col" role="columnheader">Quantity</th>',
+                  '<th id="productTotal" scope="col" role="columnheader">Product total</th>',
+                '</tr>',
+              '</thead>',
+              '<tbody role="rowgroup">',
+                '<tr role="row" class="cart-items__table-row cart-items__table-row--full-width-variants" data-rc-ghost="1">',
+                  '<td class="cart-items__media" role="cell" headers="productImage">',
+                    '<a href="' + ITEM_HREF + '" class="cart-items__media-container" style="--ratio:1;">',
+                      '<img src="' + IMG_SRC + '" alt="" width="250" height="250" class="cart-items__media-image border-style" style="--border-width:1px;--border-style:none;--border-color:rgba(0,0,0,0.5);--border-radius:0px;">',
+                    '</a>',
+                  '</td>',
+                  '<td class="cart-items__details cart-primary-typography" role="cell" headers="productInformation">',
+                    '<div class="cart-items__product-info">',
+                      '<p><a href="' + ITEM_HREF + '" class="cart-items__title">' + ITEM_TITLE + '</a></p>',
+                    '</div>',
+                    '<div class="cart-items__variants-wrapper"><p>' + ITEM_VARIANT + '</p></div>',
+                    '<div class="cart-items__unit-price-wrapper">',
+                      '<div>',
+                        '<span>' + ITEM_PRICE + '</span>',
+                        '<s class="compare-at-price">' + ITEM_COMPARE + '</s>',
+                        '<span class="cart-items__save-badge">' + ITEM_SAVE + '</span>',
+                      '</div>',
+                    '</div>',
+                  '</td>',
+                  '<td class="cart-items__quantity" role="cell" headers="quantity">',
+                    '<div class="cart-items__quantity-controls">',
+                      '<div class="quantity-selector-wrapper">',
+                        '<div class="quantity-selector cart-primary-typography" style="display:flex;align-items:center;gap:8px;">',
+                          '<button class="button quantity-minus button-unstyled" type="button" disabled>−</button>',
+                          '<input type="number" value="1" min="1" aria-label="Quantity" style="width:36px;text-align:center;" readonly>',
+                          '<button class="button quantity-plus button-unstyled" type="button">+</button>',
+                        '</div>',
+                      '</div>',
+                    '</div>',
+                  '</td>',
+                  '<td class="cart-items__price cart-secondary-typography" role="cell" headers="productTotal">',
+                    '<text-component value="' + ITEM_PRICE + '">' + ITEM_PRICE + '</text-component>',
+                  '</td>',
+                '</tr>',
+              '</tbody>',
+            '</table>',
+          '</div>',
+        '</form>'
+      ].join('');
+    }
+
+    function enforceFilledState() {
+      document.querySelectorAll('.js-cart-drawer-empty').forEach(function(el) {
+        el.setAttribute('hidden', '');
+        el.style.setProperty('display', 'none', 'important');
+      });
+
+      document.querySelectorAll('.js-cart-drawer-filled').forEach(function(el) {
+        el.removeAttribute('hidden');
+        el.style.removeProperty('display');
+      });
+
+      var finalEl = document.querySelector('.cart-drawer__totals-final');
+
+      if (finalEl) finalEl.textContent = ITEM_PRICE;
+    }
+
+    function injectGhost() {
+      var wrapper = getCartWrapper();
+
+      if (!wrapper) return;
+
+      wrapper.innerHTML = buildFakeCartHTML();
+      enforceFilledState();
+    }
+
+    function stopGuard() {
+      if (guardObs) {
+        guardObs.disconnect();
+        guardObs = null;
+      }
+    }
+
+    function startGuard() {
+      stopGuard();
+
+      var target = document.querySelector('cart-items-component') || document.body;
+
+      guardObs = new MutationObserver(function() {
+        if (!isAdding) return;
+
+        enforceFilledState();
+
+        var wrapper = getCartWrapper();
+
+        if (wrapper && !wrapper.querySelector('[data-rc-ghost]') && !wrapper.querySelector('.cart-form:not(#cart-form-ghost)')) {
+          wrapper.innerHTML = buildFakeCartHTML();
         }
-      }
+      });
 
-      return {
-        el: null,
-        selector: ''
-      };
+      guardObs.observe(target, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['hidden']
+      });
     }
 
-    function getCartDrawer() {
-      return findFirst(document, DRAWER_SELECTORS).el;
+    function setCartCount(n) {
+      document.querySelectorAll(
+        '.js-cart-drawer-count,[data-cart-count],.cart-count-bubble span,.cart-count,#cart-icon-bubble span,.cart-count-bubble'
+      ).forEach(function(el) {
+        el.textContent = n;
+      });
     }
 
-    function getWrapperFromForm(form) {
-      return form ? form.closest('.cart-drawer-empty-upsell') : null;
+    function getCurrentCartCount() {
+      var el = document.querySelector('.js-cart-drawer-count');
+
+      return el ? (parseInt(el.textContent.trim(), 10) || 0) : 0;
     }
 
-    function getFormFromTarget(target) {
-      if (!target || !target.closest) return null;
+    function openCartDrawerElement() {
+      var cdc = document.querySelector('cart-drawer-component');
 
-      var button = target.closest('.cart-drawer-empty-upsell__submit');
+      if (!cdc) return;
 
-      if (button) {
-        return button.closest('.cart-drawer-empty-upsell__form');
+      if (typeof cdc.open === 'function') {
+        cdc.open();
+      } else {
+        cdc.removeAttribute('hidden');
+        cdc.setAttribute('open', '');
+        cdc.classList.add('is-open', 'active');
       }
 
-      if (target.matches && target.matches('.cart-drawer-empty-upsell__form')) {
-        return target;
-      }
+      document.dispatchEvent(new CustomEvent('cart:open', { bubbles: true }));
+    }
 
-      return null;
+    function refreshCartFromServer() {
+      var cic = document.querySelector('cart-items-component[data-drawer]');
+
+      var sid = cic
+        ? cic.getAttribute('data-section-id')
+        : 'sections--19054444937321__header_section';
+
+      fetch('/?sections=' + sid)
+        .then(function(r) {
+          return r.json();
+        })
+        .then(function(data) {
+          var html = data[sid] || data[Object.keys(data)[0]];
+
+          if (!html) return;
+
+          var doc   = new DOMParser().parseFromString(html, 'text/html');
+          var fresh = doc.querySelector('cart-items-component[data-drawer]');
+          var live  = document.querySelector('cart-items-component[data-drawer]');
+
+          if (fresh && live) {
+            stopGuard();
+            isAdding = false;
+            live.innerHTML = fresh.innerHTML;
+          }
+        })
+        .catch(function() {
+          stopGuard();
+          isAdding = false;
+        })
+        .finally(function() {
+          fetch('/cart.js')
+            .then(function(r) {
+              return r.json();
+            })
+            .then(function(cart) {
+              setCartCount(cart.item_count);
+
+              document.dispatchEvent(new CustomEvent('cart:update', {
+                bubbles: true,
+                detail: {
+                  data: {
+                    itemCount: cart.item_count,
+                    source: 'product-form-component'
+                  }
+                }
+              }));
+
+              import('@theme/events')
+                .then(function(m) {
+                  document.dispatchEvent(new m.CartUpdateEvent(cart, 'manual-trigger', {
+                    itemCount: cart.item_count,
+                    source: 'rc-upsell-widget',
+                    sections: {}
+                  }));
+                })
+                .catch(function() {});
+            });
+        });
     }
 
     function showStatus(wrapper, type, message) {
       var statusEl = wrapper ? wrapper.querySelector('.cart-drawer-empty-upsell__status') : null;
+
       if (!statusEl) return;
 
       statusEl.hidden = false;
       statusEl.classList.remove('is-error', 'is-success');
-
-      if (type === 'error') statusEl.classList.add('is-error');
-      if (type === 'success') statusEl.classList.add('is-success');
-
+      statusEl.classList.add(type === 'error' ? 'is-error' : 'is-success');
       statusEl.textContent = message;
     }
 
-    function getSellingPlanInput(form) {
-      return form.querySelector('input[name="selling_plan"]');
-    }
-
-    function ensureSellingPlanInput(form) {
-      var sellingPlanInput = getSellingPlanInput(form);
-
-      if (!sellingPlanInput) {
-        sellingPlanInput = document.createElement('input');
-        sellingPlanInput.type = 'hidden';
-        sellingPlanInput.name = 'selling_plan';
-        form.appendChild(sellingPlanInput);
-      }
-
-      return sellingPlanInput;
-    }
-
-    function syncSellingPlanInput(form, wrapper) {
-      var sellingPlanInput = ensureSellingPlanInput(form);
-      var sellingPlanId = wrapper ? wrapper.dataset.sellingPlanId : '';
-
-      if (sellingPlanId) {
-        sellingPlanInput.disabled = false;
-        sellingPlanInput.value = sellingPlanId;
-      } else {
-        sellingPlanInput.value = '';
-        sellingPlanInput.disabled = true;
-      }
-    }
-
-    function setLoading(button, isLoading) {
+    function setLoading(button, loading) {
       if (!button) return;
 
-      if (isLoading) {
+      if (loading) {
         button.disabled = true;
         button.classList.add('is-loading');
 
@@ -352,335 +458,84 @@
       }
     }
 
-    function buildFormData(form, wrapper) {
-      syncSellingPlanInput(form, wrapper);
+    function addToCartAjax(button, wrapper) {
+      if (isAdding) return;
 
-      var formData = new FormData();
+      isAdding = true;
 
-      var idInput = form.querySelector('input[name="id"]');
-      var quantityInput = form.querySelector('input[name="quantity"]');
-      var sellingPlanInput = getSellingPlanInput(form);
-
-      if (!idInput || !idInput.value) {
-        throw new Error('Missing variant ID.');
-      }
-
-      formData.set('id', idInput.value);
-      formData.set('quantity', quantityInput && quantityInput.value ? quantityInput.value : '1');
-
-      if (sellingPlanInput && sellingPlanInput.value) {
-        formData.set('selling_plan', sellingPlanInput.value);
-      }
-
-      console.log('Upsell AJAX add data:');
-
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ':', pair[1]);
-      }
-
-      return formData;
-    }
-
-    function fetchCart() {
-      return fetch('/cart.js', {
-        method: 'GET',
-        credentials: 'same-origin',
-        headers: {
-          Accept: 'application/json'
-        }
-      }).then(function(response) {
-        if (!response.ok) {
-          throw new Error('Unable to fetch cart JSON.');
-        }
-
-        return response.json();
-      });
-    }
-
-    function fetchFreshPageHTML() {
-      var url = window.location.pathname;
-
-      if (window.location.search) {
-        url += window.location.search + '&_cart_refresh=' + Date.now();
-      } else {
-        url += '?_cart_refresh=' + Date.now();
-      }
-
-      return fetch(url, {
-        method: 'GET',
-        credentials: 'same-origin',
-        headers: {
-          Accept: 'text/html'
-        }
-      }).then(function(response) {
-        if (!response.ok) {
-          throw new Error('Unable to fetch updated page HTML.');
-        }
-
-        return response.text();
-      });
-    }
-
-    function parseHTML(html) {
-      return new DOMParser().parseFromString(html, 'text/html');
-    }
-
-    function replaceCartDrawerFromHTML(html) {
-      var doc = parseHTML(html);
-
-      var currentMatch = findFirst(document, DRAWER_SELECTORS);
-      var freshMatch = findFirst(doc, DRAWER_SELECTORS);
-
-      if (!currentMatch.el || !freshMatch.el) {
-        throw new Error('Could not find cart drawer HTML to refresh.');
-      }
-
-      var freshDrawer = freshMatch.el;
-
-      currentMatch.el.replaceWith(freshDrawer);
-
-      freshDrawer.setAttribute('open', '');
-      freshDrawer.removeAttribute('hidden');
-      freshDrawer.classList.add('active', 'is-open', 'drawer--is-open', 'animate');
-
-      console.log('Cart drawer replaced using selector:', currentMatch.selector);
-
-      return freshDrawer;
-    }
-
-    function replaceCartBubbleFromHTML(html) {
-      var doc = parseHTML(html);
-
-      BUBBLE_SELECTORS.forEach(function(selector) {
-        var currentEls = document.querySelectorAll(selector);
-        var freshEls = doc.querySelectorAll(selector);
-
-        currentEls.forEach(function(currentEl, index) {
-          var freshEl = freshEls[index] || freshEls[0];
-
-          if (currentEl && freshEl) {
-            currentEl.innerHTML = freshEl.innerHTML;
-          }
-        });
-      });
-    }
-
-    function updateCartCount(cart) {
-      if (!cart || typeof cart.item_count === 'undefined') return;
-
-      var countEls = document.querySelectorAll(
-        '[data-cart-count], .cart-count-bubble span, #cart-icon-bubble span, .header__cart-count'
-      );
-
-      countEls.forEach(function(el) {
-        el.textContent = cart.item_count;
-      });
-    }
-
-    function openSideCartOnly() {
-      var cartDrawer = getCartDrawer();
-
-      if (!cartDrawer) {
-        console.warn('Cart drawer element not found after refresh.');
-        return;
-      }
-
-      if (typeof cartDrawer.open === 'function') {
-        cartDrawer.open();
-      }
-
-      if (typeof cartDrawer.show === 'function') {
-        cartDrawer.show();
-      }
-
-      cartDrawer.setAttribute('open', '');
-      cartDrawer.removeAttribute('hidden');
-      cartDrawer.classList.add('active', 'is-open', 'drawer--is-open', 'animate');
-
-      document.body.classList.add('overflow-hidden', 'cart-drawer-open');
-      document.documentElement.classList.add('cart-drawer-open');
-    }
-
-    function publishCartEvents(cart, addedData) {
-      var detail = {
-        source: 'cart-drawer-empty-upsell',
-        cart: cart,
-        item: addedData
-      };
-
-      document.dispatchEvent(new CustomEvent('cart:refresh', {
-        bubbles: true,
-        detail: detail
-      }));
-
-      document.dispatchEvent(new CustomEvent('cart:updated', {
-        bubbles: true,
-        detail: detail
-      }));
-
-      document.dispatchEvent(new CustomEvent('cart:update', {
-        bubbles: true,
-        detail: detail
-      }));
-
-      window.dispatchEvent(new CustomEvent('cart:updated', {
-        detail: detail
-      }));
-    }
-
-    function verifyCartItem(cart, wrapper) {
-      if (!cart || !Array.isArray(cart.items) || !wrapper) return;
-
-      var expectedSellingPlanId = Number(wrapper.dataset.sellingPlanId);
-
-      var subscriptionItem = cart.items.find(function(item) {
-        var itemSellingPlanId =
-          item.selling_plan_allocation &&
-          item.selling_plan_allocation.selling_plan &&
-          item.selling_plan_allocation.selling_plan.id;
-
-        return Number(itemSellingPlanId) === expectedSellingPlanId;
-      });
-
-      if (!subscriptionItem) {
-        console.error('Selling plan was sent, but no matching selling_plan_allocation was found in cart.');
-        return;
-      }
-
-      console.log('Subscription item found in cart:', {
-        product_title: subscriptionItem.product_title,
-        variant_id: subscriptionItem.variant_id,
-        final_price: subscriptionItem.final_price,
-        original_price: subscriptionItem.original_price,
-        line_price: subscriptionItem.line_price,
-        final_line_price: subscriptionItem.final_line_price,
-        selling_plan_allocation: subscriptionItem.selling_plan_allocation
-      });
-    }
-
-    function refreshOnlySideCart(cart, addedData, wrapper) {
-      return fetchFreshPageHTML()
-        .then(function(html) {
-          replaceCartDrawerFromHTML(html);
-          replaceCartBubbleFromHTML(html);
-          updateCartCount(cart);
-          publishCartEvents(cart, addedData);
-          openSideCartOnly();
-          verifyCartItem(cart, wrapper);
-        });
-    }
-
-    function addToCart(form) {
-      var wrapper = getWrapperFromForm(form);
-      var button = form ? form.querySelector('[type="submit"], button[name="add"]') : null;
-
-      if (!form || !wrapper || !button) return;
-      if (form.dataset.cartDrawerUpsellAdding === 'true') return;
-
-      var formData;
-
-      try {
-        syncSellingPlanInput(form, wrapper);
-        formData = buildFormData(form, wrapper);
-      } catch (error) {
-        console.error('Upsell error:', error);
-        showStatus(wrapper, 'error', error.message);
-        return;
-      }
-
-      form.dataset.cartDrawerUpsellAdding = 'true';
       setLoading(button, true);
       showStatus(wrapper, 'success', 'Adding subscription to cart...');
 
-      fetch(wrapper.dataset.cartAddUrl || '/cart/add.js', {
+      setCartCount(getCurrentCartCount() + UPSELL_QTY);
+
+      injectGhost();
+      startGuard();
+      openCartDrawerElement();
+
+      fetch('/cart/add.js', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
-          Accept: 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
         },
-        body: formData
+        body: JSON.stringify({
+          items: [{
+            id: UPSELL_VARIANT_ID,
+            quantity: UPSELL_QTY,
+            selling_plan: UPSELL_PLAN_ID
+          }]
+        })
       })
-        .then(function(response) {
-          return response.json().then(function(data) {
-            if (!response.ok) {
-              console.error('Add to cart error:', data);
-              throw new Error(data.description || data.message || 'Unable to add item to cart.');
-            }
-
-            return data;
+      .then(function(res) {
+        if (!res.ok) {
+          return res.json().then(function(d) {
+            throw new Error(d.description || d.message || 'Could not add to cart.');
           });
-        })
-        .then(function(addedData) {
-          return fetchCart().then(function(cart) {
-            console.log('Added item:', addedData);
-            console.log('Cart after add:', cart);
+        }
 
-            return refreshOnlySideCart(cart, addedData, wrapper);
-          });
-        })
-        .catch(function(error) {
-          console.error('Upsell AJAX error:', error);
-          showStatus(wrapper, 'error', error.message || 'Unable to add item to cart.');
-        })
-        .finally(function() {
-          form.dataset.cartDrawerUpsellAdding = 'false';
-          setLoading(button, false);
-        });
-    }
+        return res.json();
+      })
+      .then(function() {
+        showStatus(wrapper, 'success', 'Added to cart!');
+        refreshCartFromServer();
 
-    function prepareAllForms() {
-      var forms = document.querySelectorAll('.cart-drawer-empty-upsell__form');
+        setTimeout(function() {
+          var statusEl = wrapper ? wrapper.querySelector('.cart-drawer-empty-upsell__status') : null;
 
-      forms.forEach(function(form) {
-        var wrapper = getWrapperFromForm(form);
-        if (!wrapper) return;
-
-        form.setAttribute('data-ajax-cart-upsell', 'true');
-        form.setAttribute('action', wrapper.dataset.cartAddUrl || '/cart/add.js');
-
-        ensureSellingPlanInput(form);
-        syncSellingPlanInput(form, wrapper);
+          if (statusEl) statusEl.hidden = true;
+        }, 3000);
+      })
+      .catch(function(err) {
+        stopGuard();
+        isAdding = false;
+        setCartCount(Math.max(0, getCurrentCartCount() - UPSELL_QTY));
+        showStatus(wrapper, 'error', err.message || 'Error adding to cart. Please try again.');
+      })
+      .finally(function() {
+        button.dataset.adding = 'false';
+        setLoading(button, false);
       });
     }
 
     document.addEventListener('click', function(event) {
       var button = event.target.closest('.cart-drawer-empty-upsell__submit');
+
       if (!button) return;
 
-      var form = button.closest('.cart-drawer-empty-upsell__form');
-      if (!form) return;
-
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
 
-      addToCart(form);
+      var wrapper = button.closest('.cart-drawer-empty-upsell');
+
+      addToCartAjax(button, wrapper);
     }, true);
 
-    document.addEventListener('submit', function(event) {
-      var form = getFormFromTarget(event.target);
-      if (!form) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-
-      addToCart(form);
-    }, true);
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', prepareAllForms);
-    } else {
-      prepareAllForms();
-    }
-
-    document.addEventListener('shopify:section:load', prepareAllForms);
-    document.addEventListener('cart:updated', prepareAllForms);
-    document.addEventListener('cart:update', prepareAllForms);
   })();
-</script>
-    </div>
-  </div>
+  </script>
+
 {%- elsif request.design_mode and section != blank and section.settings.cart_drawer_upsell_enable != false -%}
   <div
     class="cart-drawer-empty-upsell cart-drawer-empty-upsell--theme-editor-note"
@@ -739,11 +594,12 @@
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    display: none;
   }
 
   .cart-drawer-empty-upsell__body {
     padding: 1.25rem 1.5rem 1.5rem;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 0.75rem;
   }
@@ -880,12 +736,6 @@
     width: 100%;
   }
 
-  .cart-drawer-empty-upsell__form-wrap form {
-    display: block;
-    width: fit-content;
-    max-width: 100%;
-  }
-
   .cart-drawer-empty-upsell__submit {
     width: fit-content;
     max-width: 100%;
@@ -915,6 +765,17 @@
   .cart-drawer-empty-upsell__submit.is-loading {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  .cart-drawer-empty-upsell__sold-out-button,
+  .cart-drawer-empty-upsell__sold-out-button:hover,
+  .cart-drawer-empty-upsell__sold-out-button:focus,
+  .cart-drawer-empty-upsell__sold-out-button:disabled {
+    background: linear-gradient(90deg, #725270 0% 42.83%, #371834) !important;
+    color: #ffffff !important;
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
   }
 
   .cart-drawer-empty-upsell__status {

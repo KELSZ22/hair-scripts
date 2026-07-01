@@ -10,6 +10,9 @@
     --kig-icon-bg: {{ section.settings.icon_bg }};
     --kig-icon-color: {{ section.settings.icon_color }};
     --kig-divider-color: {{ section.settings.divider_color }};
+    --kig-footer-heading-color: {{ section.settings.footer_heading_color }};
+    --kig-footer-text-color: {{ section.settings.footer_text_color }};
+    --kig-footer-link-color: {{ section.settings.footer_link_color }};
   "
 >
   <div class="key-ingredients-grid__wrap">
@@ -63,6 +66,44 @@
             </div>
           </div>
         {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.bottom_heading != blank or section.settings.bottom_text != blank or section.settings.research_label != blank %}
+      <div class="key-ingredients-grid__footer">
+        {% if section.settings.bottom_heading != blank %}
+          <p class="key-ingredients-grid__footer-heading">
+            {{ section.settings.bottom_heading }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.bottom_text != blank or section.settings.research_label != blank %}
+          <p class="key-ingredients-grid__footer-text">
+            {% if section.settings.bottom_text != blank %}
+              <span>{{ section.settings.bottom_text }}</span>
+            {% endif %}
+
+            {% if section.settings.bottom_text != blank and section.settings.research_label != blank %}
+              <span class="key-ingredients-grid__footer-separator" aria-hidden="true"> – </span>
+            {% endif %}
+
+            {% if section.settings.research_label != blank %}
+              <a
+                {% if section.settings.research_link != blank %}
+                  href="{{ section.settings.research_link }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                {% else %}
+                  role="link"
+                  aria-disabled="true"
+                {% endif %}
+                class="key-ingredients-grid__research-link"
+              >
+                {{ section.settings.research_label }}
+              </a>
+            {% endif %}
+          </p>
+        {% endif %}
       </div>
     {% endif %}
   </div>
@@ -128,14 +169,22 @@
     }
 
     #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__grid {
+      --kig-grid-column-gap: 60px;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 60px;
+      column-gap: var(--kig-grid-column-gap);
       row-gap: 40px;
       margin: 0 auto;
       box-sizing: border-box;
       max-width: 900px;
       width: auto;
+    }
+
+    /* If there is an odd number of ingredients, center the final item */
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      width: calc((100% - var(--kig-grid-column-gap)) / 2);
+      justify-self: center;
     }
 
     #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item {
@@ -214,13 +263,62 @@
       margin: 0;
     }
 
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer {
+      margin: 58px auto 0;
+      text-align: center;
+    }
+
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-heading {
+      margin: 0 0 7px;
+      color: var(--kig-footer-heading-color);
+      font-family: "DM Sans";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-text {
+      margin: 0;
+      color: var(--kig-footer-text-color);
+      font-family: "DM Sans";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-separator {
+      color: var(--kig-footer-text-color);
+    }
+
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__research-link {
+      color: var(--kig-footer-link-color);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s ease;
+    }
+
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__research-link:hover {
+      opacity: 0.75;
+    }
+
+    #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__research-link[aria-disabled="true"] {
+      cursor: default;
+    }
+
     @media screen and (max-width: 989px) {
       #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__header {
         margin-bottom: 42px;
       }
 
       #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__grid {
-        column-gap: 36px;
+        --kig-grid-column-gap: 36px;
         row-gap: 24px;
       }
 
@@ -234,6 +332,14 @@
 
       #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item-text {
         font-size: 14px;
+      }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer {
+        margin-top: 50px;
+      }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-heading {
+        font-size: 17px;
       }
     }
 
@@ -260,6 +366,13 @@
         row-gap: 24px;
       }
 
+      /* Mobile is already one column, so the last item stays full-width */
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item:last-child:nth-child(odd) {
+        grid-column: auto;
+        width: 100%;
+        justify-self: stretch;
+      }
+
       #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item {
         grid-template-columns: 42px minmax(0, 1fr);
         gap: 14px;
@@ -283,6 +396,20 @@
       #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item-text {
         font-size: 14px;
       }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer {
+        margin-top: 44px;
+      }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-heading {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-text {
+        font-size: 13px;
+        line-height: 1.55;
+      }
     }
 
     @media screen and (max-width: 450px) {
@@ -300,6 +427,14 @@
 
       #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__item-text {
         font-size: 14px;
+      }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-heading {
+        font-size: 14px;
+      }
+
+      #key-ingredients-grid-{{ section.id }} .key-ingredients-grid__footer-text {
+        font-size: 12px;
       }
     }
   </style>
@@ -326,6 +461,37 @@
       "id": "description",
       "label": "Description",
       "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Bottom research footer"
+    },
+    {
+      "type": "text",
+      "id": "bottom_heading",
+      "label": "Bottom heading",
+      "default": "CLINICIAN-INFORMED + ROOT-CAUSE FORMULA + SCIENCE-BACKED BLEND"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Formulated with clinically studied ingredients shown to support hair health and fuller function"
+    },
+    {
+      "type": "text",
+      "id": "research_label",
+      "label": "Research link label",
+      "default": "View Research"
+    },
+    {
+      "type": "url",
+      "id": "research_link",
+      "label": "Research link"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
     },
     {
       "type": "color",
@@ -374,6 +540,28 @@
       "id": "divider_color",
       "label": "Divider color",
       "default": "#4e817f"
+    },
+    {
+      "type": "header",
+      "content": "Bottom research footer colors"
+    },
+    {
+      "type": "color",
+      "id": "footer_heading_color",
+      "label": "Bottom heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Bottom text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "footer_link_color",
+      "label": "Research link color",
+      "default": "#ffffff"
     }
   ],
   "blocks": [

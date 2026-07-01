@@ -64,21 +64,21 @@
         },
         "comparison_row_cpyq3r": {
           "settings": {
-            "left_text": "Education-led brand",
+            "left_text": "Education-first approach rooted in real science",
             "right_text": "Marketing-first approach"
           },
           "type": "comparison_row"
         },
         "comparison_row_hgrmkz": {
           "settings": {
-            "left_text": "Science-informed, root-cause approach",
+            "left_text": "Built around what’s actually causing the thinning — not just the symptoms",
             "right_text": "Surface-level, symptom-focused"
           },
           "type": "comparison_row"
         },
         "comparison_row_kmpRhw": {
           "settings": {
-            "left_text": "Backed by pharmacology expertise",
+            "left_text": "Formulated by a pharmaceutical industry expert",
             "right_text": "Often trend or influencer-driven"
           },
           "type": "comparison_row"
@@ -117,56 +117,155 @@
         "faq_item_y9G46i",
         "faq_item_f9kX8M",
         "faq_item_GKB4im",
-        "faq_item_PTjY4e",
-        "faq_item_BCMQHb",
-        "faq_item_dxcBVP"
+        "faq_item_RpnNPV",
+        "faq_item_nYby3L",
+        "faq_item_pQm46w",
+        "faq_item_EUEXYB",
+        "faq_item_aJF68w",
+        "faq_item_ADAJ8V",
+        "faq_item_JPhaGC",
+        "faq_item_E3fMcP",
+        "faq_item_9B3reD",
+        "faq_item_8NUxxt",
+        "faq_item_FwhhAV",
+        "faq_item_aGFG4h",
+        "faq_item_X78DKQ",
+        "faq_item_GwtExV"
       ],
       "blocks": {
-        "faq_item_BCMQHb": {
+        "faq_item_8NUxxt": {
           "settings": {
-            "answer": "<p>This depends on the formula and positioning of the product, but many of the supportive ingredients can be relevant more broadly.</p>",
-            "category": "category-3",
-            "question": "Can men use this too?"
+            "answer": "<p>Yes, it's drug-free. No, it does not contain minoxidil — or any prescription pharmaceutical. HairScripts™ is a science-backed dietary supplement formulated with clinically-studied vitamins, minerals, botanical extracts, and amino acids.<br/><br/>Minoxidil works for some women, but it requires lifelong topical application, can cause rebound shedding when stopped, and only addresses one pathway. HairScripts™ is the alternative — a multi-pathway system that supports your follicles from the inside without prescription side effects.</p>",
+            "category": "category-2",
+            "question": "Is this drug-free? Does it contain minoxidil?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_9B3reD": {
+          "settings": {
+            "answer": "<p>Because clinical dosing requires it. To deliver Ashwagandha at 350mg, Saw Palmetto at 320mg, Hydrolyzed Collagen at 300mg, L-Citrulline at 250mg, and the full spectrum of supporting nutrients at levels that research actually supports — 4 capsules is what fits the volume.<br/><br/>Single-capsule formulas exist, but they exist by under-dosing every ingredient. We chose to dose at clinical levels instead. Take all 4 daily, with or without food, for best results.</p>",
+            "category": "category-2",
+            "question": "Why does HairScripts™ require 4 capsules per day?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_ADAJ8V": {
+          "settings": {
+            "answer": "<p>Three things. First, HairScripts™ addresses all 9 root causes of hormonal hair loss simultaneously — not one pathway at a time. Second, every ingredient is clinically dosed at levels research actually supports — not micro-dosed for marketing. Third, this formula was developed by a pharmaceutical industry expert who personally lost nearly 60% of her hair and had the clinical training to understand exactly why.<br/><br/>That combination — multi-pathway formulation, clinical dosing, and pharmaceutical-grade development — is the entire difference.</p>",
+            "category": "category-2",
+            "question": "What makes HairScripts™ different from Nutrafol or Viviscal?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_E3fMcP": {
+          "settings": {
+            "answer": "<p>This is exactly the kind of question I want you to ask. Ashwagandha is one of the most clinically studied adaptogens in modern science — with over 3,000 years of traditional use and dozens of peer-reviewed studies on cortisol reduction, stress-related shedding, and follicle recovery. The research is robust.<br/><br/>That said, transparency matters. Ashwagandha is not the right fit for everyone. Women with hyperthyroidism or Graves' disease should avoid it. Women on thyroid replacement medication should speak with their provider first. Women who are pregnant should also consult their healthcare provider before starting.<br/><br/>For everyone else — and especially for women navigating stress-related shedding, postpartum recovery, perimenopause, and burnout — Ashwagandha is one of the most powerful tools in the formula. At 350mg, HairScripts™ delivers a clinically-effective dose using KSM-66®, the most studied standardized extract on the market.</p><p>If you have any underlying condition or you're on prescription medications, please review the full ingredient list with your healthcare provider before starting. That goes for every supplement, not just this one.</p>",
+            "category": "category-2",
+            "question": "I've read concerns about Ashwagandha. Is it safe in this formula?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_EUEXYB": {
+          "settings": {
+            "answer": "<p>Because most of what you tried was built around one pathway. Biotin focuses on a single vitamin. Most leading brands focus on one or two pathways. Meanwhile your hair loss is probably being driven by 3–5 root causes simultaneously — stress, hormones, nutrient depletion, inflammation, and circulation.<br/><br/>HairScripts™ was built differently. It addresses all 9 root causes of hormonal hair loss in one formula — so you're covered at every level, even if you haven't identified the specific trigger yet. The formula didn't fail you before. The formulas you tried were built for one problem and you have nine.</p>",
+            "category": "category-1",
+            "question": "I've tried everything — Nutrafol, Viviscal, biotin, oils, serums. Why would this be different?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_FwhhAV": {
+          "settings": {
+            "answer": "<p>Yes. HairScripts™ is manufactured in a GMP-certified facility and undergoes third-party testing for purity, potency, and contaminant screening. The formula was reviewed and approved by a licensed healthcare provider before launch.<br/><br/>You deserve to know exactly what's going into your body — and that the dose on the label matches what's actually in the capsule. We take that responsibility seriously.</p>",
+            "category": "category-2",
+            "question": "Is HairScripts™ third-party tested?"
           },
           "type": "faq_item"
         },
         "faq_item_GKB4im": {
           "settings": {
-            "answer": "<p>Some people notice early changes in how their hair feels within the first month, while fuller visible changes often take longer.</p>",
+            "answer": "<p>Postpartum yes, breastfeeding requires a conversation with your provider. The formula was designed with postpartum recovery in mind — it addresses the iron depletion, hormonal crash, and stress-related shedding that typically appear 3–6 months after delivery.<br/><br/>If you're currently breastfeeding, please review the ingredients with your healthcare provider before starting. While the ingredients are generally well-tolerated, your individual situation should be evaluated by someone who knows your medical history.</p>",
             "category": "category-1",
+            "question": "I'm postpartum or breastfeeding — can I take this?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_GwtExV": {
+          "settings": {
+            "answer": "<p>Most women notice less shedding within 4–8 weeks, and visible density improvements between 90 days and 6 months. Hair grows in months, not days — that's not a marketing limitation, that's how the growth cycle actually works. It takes at least 90 days to biohack your body from a cellular level.<br/><br/>Consistency is the variable that determines your timeline. Take 4 capsules daily without skipping. Most women who quit at week 6 quit right before the results would have started showing up. Don't be one of them.</p>",
+            "category": "category-3",
             "question": "How soon will I see results?"
           },
           "type": "faq_item"
         },
-        "faq_item_PTjY4e": {
+        "faq_item_JPhaGC": {
           "settings": {
-            "answer": "<p>Not usually, but everyone is different. Hair cycles take time, so consistency matters more than overnight expectations.</p>",
+            "answer": "<p>No. Biotin alone fails for most women because hair growth requires far more than one vitamin. Your follicles rely on iron, zinc, Vitamin D, selenium, copper, and absorption cofactors working together — alongside hormonal balance, cortisol regulation, scalp circulation, and antioxidant defense.<br/><br/>HairScripts™ was built as a coordinated system, not a single-ingredient shortcut. Biotin alone is like trying to build a house with only one tool.</p>",
             "category": "category-2",
-            "question": "Will this make me shed more before it gets better?"
+            "question": "Is this just another biotin pill?"
           },
           "type": "faq_item"
         },
-        "faq_item_dxcBVP": {
+        "faq_item_RpnNPV": {
           "settings": {
-            "answer": "<p>Long-term shedding can have several causes. That is exactly why a root-cause, long-view approach matters.</p>",
-            "category": "category-4",
-            "question": "What if I've had shedding for years?"
+            "answer": "<p>become more sensitive to androgen activity. At the same time, cortisol regulation shifts, antioxidant defense drops, and the protective hormonal environment that kept your follicles in the growth phase starts to disappear.<br/><br/>HairScripts™ supports healthy DHT activity, cortisol balance, scalp circulation, and the antioxidant layer your body loses access to during this transition. All in one daily formula.</p>",
+            "category": "category-1",
+            "question": "I'm in perimenopause or menopause. Will this work for me?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_X78DKQ": {
+          "settings": {
+            "answer": "<p>Every ingredient is listed on the label with its specific clinical dose — no proprietary blends, no hidden actives, no marketing-only ingredients. The core formula includes Ashwagandha KSM-66 at 350mg, Saw Palmetto at 320mg, Hydrolyzed Collagen at 300mg, L-Citrulline at 250mg, MSM at 150mg, Beta-Sitosterol at 120mg, Alpha-Lipoic Acid at 100mg, CoQ10 at 80mg, plus Vitamin D, Niacin, Ferrochel® iron, Albion® zinc, Selenium, Copper, and additional supporting nutrients.<br/><br/>Full transparency is a non-negotiable brand standard. You can see every ingredient and dose on the product page.</p>",
+            "category": "category-2",
+            "question": "What's in HairScripts™? Is the formula transparent?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_aGFG4h": {
+          "settings": {
+            "answer": "<p>HairScripts™ is manufactured in the United States in a GMP-certified facility. Every batch is tested for purity, potency, and contaminants before shipping.<br/><br/>Manufacturing transparency matters in the supplement industry — and we believe you should be able to trust that what's on the label is what's in the bottle.</p>",
+            "category": "category-2",
+            "question": "Where is HairScripts™ manufactured?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_aJF68w": {
+          "settings": {
+            "answer": "<p>The formula was specifically developed for women navigating hormonal hair loss — the patterns that show up during postpartum, perimenopause, stress, and metabolic shifts. While men can technically take it, the dosing and ingredient profile were calibrated around female hormonal biology.<br/><br/>For men experiencing hair loss, the underlying drivers are typically different and may require a different formulation strategy. We don't currently have a men's formula, but it may be on the horizon.</p>",
+            "category": "category-1",
+            "question": "Can men use this too?"
           },
           "type": "faq_item"
         },
         "faq_item_f9kX8M": {
           "settings": {
-            "answer": "<p>HairScript focuses on root-cause support with a more complete, science-led approach instead of surface-level claims.</p>",
+            "answer": "<p>Yes — and you may actually need this more than most. GLP-1 medications significantly reduce appetite, which often means a significant drop in protein, iron, zinc, and Vitamin D intake. Combined with the metabolic stress of rapid weight loss, this triggers a delayed shedding pattern that shows up 2–4 months in.<br/><br/>HairScripts™ was formulated to address exactly this kind of nutritional gap. Bioavailable iron, zinc, Vitamin D, collagen, and pea protein directly replace what GLP-1 users tend to lose. Ashwagandha supports the cortisol response to major metabolic shifts.</p>",
             "category": "category-1",
-            "question": "How is HairScript different from other brands?"
+            "question": "I'm on Ozempic, Wegovy, or another GLP-1 medication. Will this work for me?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_nYby3L": {
+          "settings": {
+            "answer": "<p>Yes for most situations, with one important nuance worth being transparent about. PCOS and insulin resistance raise androgen activity at the follicle, and thyroid dysfunction slows follicle cell division — these root causes need to be addressed at the source, not at the strand. HairScripts™ supports insulin sensitivity, healthy DHT activity, and the selenium and zinc pathways that support thyroid-related follicle function.<br/><br/>The transparency piece: HairScripts™ contains Ashwagandha, which has clinical research supporting subclinical and underactive thyroid function (hypothyroidism, Hashimoto's). However, women with hyperthyroidism or Graves' disease should speak with their provider before starting — Ashwagandha can increase thyroid hormone production, which is helpful when your thyroid is underactive and a concern when it's overactive. The same conversation applies if you're currently on thyroid replacement medication like levothyroxine.<br/><br/>This isn't a brand-wide contraindication. It's a ‘talk to your provider first’ conversation for one specific subset of thyroid patients. Please continue any prescribed medications — HairScripts™ is designed to work alongside them, not replace them.</p>",
+            "category": "category-1",
+            "question": "Will this work if I have PCOS, insulin resistance, or thyroid issues?"
+          },
+          "type": "faq_item"
+        },
+        "faq_item_pQm46w": {
+          "settings": {
+            "answer": "<p>HairScripts™ is generally compatible with most supplements and medications. However, since the formula contains iron, zinc, and clinically-active ingredients like Saw Palmetto and Ashwagandha, please review the ingredient list with your healthcare provider if you are on prescription medications — especially blood thinners, hormone therapies, thyroid medications, sedatives, immunosuppressants, or antidepressants.<br/><br/>If you're already taking a separate iron or multivitamin, you may not need it anymore once you start HairScripts™. Check with your provider to avoid stacking.</p>",
+            "category": "category-1",
+            "question": "Can I take this with other supplements or prescription medications?"
           },
           "type": "faq_item"
         },
         "faq_item_y9G46i": {
           "settings": {
-            "answer": "<p>Yes. This formula is designed for a wide range of hair types, textures, and concerns, from shedding to hormonal or stress-related thinning.</p>",
+            "answer": "<p>Yes. HairScripts™ works on all hair types, textures, and patterns — straight, wavy, curly, coily, fine, or thick. The science behind hair growth is the same for everyone. Your follicles need the same nutrients, the same circulation, the same hormonal balance, and the same protection from oxidative stress regardless of what your strands look like above the scalp. <br/><br/>This formula was built to support the root cause of thinning, not the strand itself. That means it works underneath your texture — supporting follicle health from the inside out.</p>",
             "category": "category-1",
-            "question": "Is this for all hair types and textures?"
+            "question": "Will this work on my hair type or texture?"
           },
           "type": "faq_item"
         }
@@ -176,12 +275,12 @@
         "answer_color": "#ffffff",
         "button_bg": "#d4ad6b",
         "button_label": "Contact us",
-        "button_link": "",
+        "button_link": "shopify://pages/contact",
         "button_text": "#ffffff",
-        "category_1_label": "Category 1",
-        "category_2_label": "Category 2",
-        "category_3_label": "Category 3",
-        "category_4_label": "Category 4",
+        "category_1_label": " IS THIS RIGHT FOR ME?",
+        "category_2_label": "HOW IT WORKS & WHAT'S INSIDE",
+        "category_3_label": " WHAT TO EXPECT",
+        "category_4_label": "ORDERING, SHIPPING & SUBSCRIPTION",
         "footer_text": "Still have questions?",
         "heading": "Frequently Asked Questions",
         "heading_color": "#6a5b51",
@@ -206,12 +305,12 @@
         "background_image": "shopify://shop_images/Frame_1000009052.webp",
         "background_image_1024": "shopify://shop_images/Frame_1000009347_1.webp",
         "badge_text": "",
-        "button_label": "TAKE FREE HAIR ASSESSMENT",
+        "button_label": "START MY PROTOCOL",
         "button_label2": "",
-        "button_link": "#",
+        "button_link": "https://bevyscripts.com/products/hairscripts-by-bevy-supplement",
         "button_link2": "",
-        "heading": "Not sure which pattern fits you?",
-        "subheading": "Take the free Hair Assessment — 10 questions that map your specific profile to the right support you."
+        "heading": "Ready to Start? Your Protocol Is One Click Away.",
+        "subheading": "Nine root causes. One formula. So no matter what’s driving your hair loss — you’re covered from day one."
       },
       "type": "hair-assessment-banner"
     },
@@ -270,7 +369,7 @@
         "bottom_text": "Without addressing the root cause, whether hormonal, nutrient, or stress-related shedding continues.",
         "icon_color": "#6a5c50",
         "main_heading": "HAIRSCRIPT'S WAS BUILT TO CHANGE THAT.",
-        "section_bg": "#f5efe7",
+        "section_bg": "#ffffff",
         "subtext_color": "#6d6259",
         "top_bar_color": "#2d6a68",
         "top_heading": "IS THIS WHAT YOU'RE GOING THROUGH?"
@@ -284,8 +383,7 @@
         "review_fka6Kb",
         "review_9gECQD",
         "review_BxcHbT",
-        "review_3KeTMH",
-        "review_hyLzh6"
+        "review_3KeTMH"
       ],
       "blocks": {
         "review_3KeTMH": {
@@ -300,61 +398,51 @@
         },
         "review_9gECQD": {
           "settings": {
-            "age": "28",
-            "label": "Verified Buyer Review",
-            "name": "Danielle R.",
-            "review": "<p>With consistent use, my hair looks healthier and feels much more resilient.</p>",
-            "title": "Healthier Growth"
+            "age": "",
+            "label": "",
+            "name": "@amisainfort924",
+            "review": "<p>Thank you for being transparent. I’m glad you’re bringing us along on this journey.</p>",
+            "title": "Thank You for Being Transparent"
           },
           "type": "review"
         },
         "review_BxcHbT": {
           "settings": {
-            "age": "38",
-            "label": "Verified Buyer Review",
-            "name": "Nicole T.",
-            "review": "<p>My hair kept breaking before it could grow longer, and nothing I tried seemed to help. Now my strands feel stronger and healthier, and I’m finally seeing real length.</p>",
-            "title": "Stronger Hair"
+            "age": "",
+            "label": "",
+            "name": "@sds1011974",
+            "review": "<p>Thank you for saving my hair! Uh, MAAM!!! My hair has been brought back to life!!! Shine, softness, manageability, no breakage! </p>",
+            "title": "My Hair Has Been Brought Back to Life!!!"
           },
           "type": "review"
         },
         "review_fka6Kb": {
           "settings": {
-            "age": "36",
-            "label": "Verified Buyer Review",
-            "name": "Maria L.",
-            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
-            "title": "Less Shedding"
+            "age": "",
+            "label": "",
+            "name": "@gigijohn316",
+            "review": "<p>This video was exactly what I needed. I love that you focus on the scientific side of the products you bring to us. Thanks Bevy!</p>",
+            "title": "I Love That You Focus on the Scientific Side"
           },
           "type": "review"
         },
         "review_fqHV7D": {
           "settings": {
-            "age": "36",
-            "label": "Verified Buyer Review",
-            "name": "Maria L.",
-            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
-            "title": "Less Shedding"
-          },
-          "type": "review"
-        },
-        "review_hyLzh6": {
-          "settings": {
-            "age": "32",
-            "label": "Verified Buyer Review",
-            "name": "Ashley M.",
-            "review": "<p>I felt self-conscious about my thinning hair and avoided certain hairstyles.</p>",
-            "title": "Confidence Back"
+            "age": "",
+            "label": "",
+            "name": "@soappreneur",
+            "review": "<p>In all my years on YouTube university, no one has explained in depth the scientific 🧪 reason of using a product except you and another girl from UK. Your hard work will pay off.</p>",
+            "title": "No One Has Explained in Depth the Scientific"
           },
           "type": "review"
         },
         "review_xkRFC6": {
           "settings": {
-            "age": "36",
-            "label": "Verified Buyer Review",
-            "name": "Maria L.",
-            "review": "<p>After a few months of HairScripts, the shedding noticeably reduced and my hair feels stronger.</p>",
-            "title": "Less Shedding"
+            "age": "",
+            "label": "",
+            "name": "@Ashfrmthe205",
+            "review": "<p>Hey Bevy! Silent supporter for years. I’m 9 months post hair transplant and having great results. Just started oral spiralactone and oral minoxidil. Thanks again for sharing all the wonderful, science driven information. Excited to see my further results.</p>",
+            "title": "Excited to See My Further Results"
           },
           "type": "review"
         }
@@ -363,7 +451,7 @@
       "settings": {
         "button_label": "View All Reviews",
         "button_link": "",
-        "heading": "RESULTS WOMEN ARE TALKING ABOUT",
+        "heading": "TRANSFORMATIONS WITHIN HAIRSCRIPTS COMMUNITY",
         "show_stars": true,
         "subheading": "Thousands are supporting their hair health with HairScripts."
       },
@@ -371,14 +459,14 @@
     },
     "key_ingredients_grid_JqJxJf": {
       "block_order": [
-        "ingredient_n3bMJY",
         "ingredient_qc3ADF",
         "ingredient_iLynnK",
-        "ingredient_XRkHpG",
         "ingredient_dLzb78",
         "ingredient_fKinDL",
         "ingredient_EPtNay",
-        "ingredient_jW4tf7"
+        "ingredient_XRkHpG",
+        "ingredient_jW4tf7",
+        "ingredient_n3bMJY"
       ],
       "blocks": {
         "ingredient_EPtNay": {
@@ -404,7 +492,7 @@
             "icon": "shopify://shop_images/Screenshot_2026-03-25_at_4.40.28_PM_1_Vectorized.svg",
             "icon_symbol": "✦",
             "text": "<p>Supports natural keratin production for stronger hair.</p>",
-            "title": "Methylsulfonylmethane"
+            "title": "Methylsulfonylmethane (MSM)"
           },
           "type": "ingredient"
         },
@@ -456,7 +544,7 @@
       },
       "name": "Key ingredients grid",
       "settings": {
-        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+        "description": "",
         "divider_color": "#4e817f",
         "eyebrow": "",
         "heading": "Key Ingredients",
@@ -508,6 +596,8 @@
             "two_image_text_AC7Uic",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "recharge_subscriptions_subscription_widget_v2_UX7egK",
+            "custom_liquid_TpAyia",
             "buy_buttons_eYQEYi",
             "custom_product_accordion_ft7p9j",
             "video_carousel_B3UbdW"
@@ -550,9 +640,16 @@
               },
               "type": "buy-buttons"
             },
+            "custom_liquid_TpAyia": {
+              "blocks": {},
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "{% render 'recharge', product: product %}"
+              },
+              "type": "custom-liquid"
+            },
             "custom_product_accordion_ft7p9j": {
               "block_order": [
-                "custom_product_accordion_row_gjeNDa",
                 "custom_product_accordion_row_aY6cUn",
                 "custom_product_accordion_row_KDgHXK"
               ],
@@ -561,7 +658,8 @@
                   "blocks": {},
                   "name": "Accordion row",
                   "settings": {
-                    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>",
+                    "content": "<p>You deserve to know exactly what’s going into your body — and exactly why.</p><p><strong>Saw Palmetto Extract</strong><br/>Helps reduce DHT by supporting healthy hormone balance</p><p><strong>Hydrolyzed Marine Collagen<br/></strong>Supports skin elasticity, follicles, and hair structure.</p><p><strong>Methylsulfonylmethane (MSM)</strong><br/>Supports natural keratin production for stronger hair.</p><p><strong>Coenzyme Q10 (CoQ10)</strong><br/>Supports cellular energy and healthier scalp function.</p><p><strong>Zinc Bisglycinate Chelate</strong><br/>Supports growth, oil balance, and immune resilience.</p><p><strong>Hyaluronic Acid</strong><br/>Helps hydrate the scalp and support elasticity.</p><p><strong>Grape Seed Extract</strong><br/>Helps protect follicles through antioxidant support.</p><p><strong>Ashwagandha Root Extract</strong><br/>Helps reduce stress-related hair loss by supporting cortisol balance.</p>",
+                    "content_list_style": "default",
                     "heading": "Ingredients"
                   },
                   "type": "custom-product-accordion-row"
@@ -570,17 +668,9 @@
                   "blocks": {},
                   "name": "Accordion row",
                   "settings": {
-                    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>",
+                    "content": "<ul><li>Supports visibly fuller-looking hair   </li><li>Helps reduce excess shedding  </li><li>Supports healthy hair growth cycles  </li><li>Helps support healthy DHT activity  </li><li>Supports scalp circulation and nutrient delivery  </li><li>Reinforces weak, fragile strands  </li><li>Supports stress-related shedding recovery  </li><li>Drug-free formula with no minoxidil  </li><li>Designed for long-term follicle support</li></ul>",
+                    "content_list_style": "default",
                     "heading": "Key Benefits"
-                  },
-                  "type": "custom-product-accordion-row"
-                },
-                "custom_product_accordion_row_gjeNDa": {
-                  "blocks": {},
-                  "name": "Accordion row",
-                  "settings": {
-                    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>",
-                    "heading": "Title"
                   },
                   "type": "custom-product-accordion-row"
                 }
@@ -604,6 +694,8 @@
             },
             "group_icgrde": {
               "block_order": [
+                "text_JKmqQk",
+                "review_badge_eVzNDY",
                 "text_xrnftG",
                 "text_Q6BCJN",
                 "product_description_797Lzd",
@@ -652,12 +744,48 @@
                     "padding-block-start": 0,
                     "padding-inline-end": 0,
                     "padding-inline-start": 0,
-                    "text": "{{ closest.product.description }}",
+                    "text": "<p>Most hair supplements focus on one cause of thinning. But your hair doesn’t work that way. Stress, hormones, inflammation, circulation, nutrient depletion, and follicle miniaturization can all happen at the same time. HairScripts™ was designed to support all of them together. So even if you don’t know what’s triggering your shedding yet — you’re covered.</p>",
                     "type_preset": "rte",
                     "width": "100%",
                     "wrap": "pretty"
                   },
                   "type": "product-description"
+                },
+                "review_badge_eVzNDY": {
+                  "blocks": {},
+                  "disabled": true,
+                  "name": "Review badge",
+                  "settings": {
+                    "review_text": "5.0 from 20,000+ Reviews",
+                    "star_count": 5
+                  },
+                  "type": "review-badge"
+                },
+                "text_JKmqQk": {
+                  "blocks": {},
+                  "name": "t:names.text",
+                  "settings": {
+                    "alignment": "left",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "corner_radius": 0,
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "letter_spacing": "normal",
+                    "line_height": "normal",
+                    "max_width": "normal",
+                    "padding-block-end": 0,
+                    "padding-block-start": 0,
+                    "padding-inline-end": 0,
+                    "padding-inline-start": 0,
+                    "text": "<p>For women 18+ experiencing hair thinning and hair loss</p>",
+                    "type_preset": "rte",
+                    "width": "fit-content",
+                    "wrap": "pretty"
+                  },
+                  "type": "text"
                 },
                 "text_Q6BCJN": {
                   "blocks": {},
@@ -678,7 +806,7 @@
                     "padding-block-start": 0,
                     "padding-inline-end": 0,
                     "padding-inline-start": 0,
-                    "text": "<p>{{ closest.product.metafields.custom.supply_label.value }}</p>",
+                    "text": "<p>180 Tablets | 3-Month Supply</p>",
                     "type_preset": "rte",
                     "width": "fit-content",
                     "wrap": "pretty"
@@ -726,7 +854,7 @@
                 "custom_height": 100,
                 "custom_width": 100,
                 "custom_width_mobile": 100,
-                "gap": 12,
+                "gap": 10,
                 "gradient_direction": "to top",
                 "height": "fit",
                 "horizontal_alignment": "flex-start",
@@ -751,8 +879,14 @@
               },
               "type": "group"
             },
+            "recharge_subscriptions_subscription_widget_v2_UX7egK": {
+              "disabled": true,
+              "settings": {},
+              "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e"
+            },
             "take_our_quiz_qyiEBr": {
               "blocks": {},
+              "disabled": true,
               "name": "Take our quiz",
               "settings": {
                 "quiz_link": "",
@@ -764,8 +898,8 @@
               "blocks": {},
               "name": "Two image text",
               "settings": {
-                "image_1": "shopify://shop_images/Frame_1000009321.png",
-                "image_2": "shopify://shop_images/Frame_1000008953.png",
+                "image_1": "shopify://shop_images/Frame_1000009321_762e5b98-b140-45a1-bf7c-cba4bdfecaaf.svg",
+                "image_2": "shopify://shop_images/Frame_1000008953_e026cdf7-5ad2-4bca-9a62-3eb0bba0918c.svg",
                 "text_1": "Clinically Proven Ingredients",
                 "text_2": "Scalp Health & Density Support"
               },
@@ -773,6 +907,7 @@
             },
             "variant_picker_R3rGDr": {
               "blocks": {},
+              "disabled": true,
               "settings": {
                 "alignment": "left",
                 "padding-block-end": 0,
@@ -790,7 +925,12 @@
                 "video_carousel_item_NwT7Bc",
                 "video_carousel_item_RqTHgH",
                 "video_carousel_item_8TUER3",
-                "video_carousel_item_P3KBrk"
+                "video_carousel_item_P3KBrk",
+                "video_carousel_item_qJYc3V",
+                "video_carousel_item_RBR3Ce",
+                "video_carousel_item_NezPnN",
+                "video_carousel_item_tHJnnh",
+                "video_carousel_item_HHhQ6p"
               ],
               "blocks": {
                 "video_carousel_item_8TUER3": {
@@ -798,8 +938,25 @@
                   "name": "Video item",
                   "settings": {
                     "card_text": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_5.png",
-                    "youtube_link": ""
+                    "youtube_link": "https://www.youtube.com/shorts/IblrcC4GDVE"
+                  },
+                  "type": "video-carousel-item"
+                },
+                "video_carousel_item_HHhQ6p": {
+                  "blocks": {},
+                  "name": "Video item",
+                  "settings": {
+                    "card_text": "",
+                    "youtube_link": "https://www.youtube.com/shorts/xdDkR4VhqVo"
+                  },
+                  "type": "video-carousel-item"
+                },
+                "video_carousel_item_NezPnN": {
+                  "blocks": {},
+                  "name": "Video item",
+                  "settings": {
+                    "card_text": "",
+                    "youtube_link": "https://www.youtube.com/shorts/UVcH5smb_l4"
                   },
                   "type": "video-carousel-item"
                 },
@@ -808,8 +965,7 @@
                   "name": "Video item",
                   "settings": {
                     "card_text": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_3.png",
-                    "youtube_link": ""
+                    "youtube_link": "https://www.youtube.com/shorts/B48I8yMpWxQ"
                   },
                   "type": "video-carousel-item"
                 },
@@ -818,8 +974,16 @@
                   "name": "Video item",
                   "settings": {
                     "card_text": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_6.png",
-                    "youtube_link": ""
+                    "youtube_link": "https://www.youtube.com/shorts/j96ncvazk1Y"
+                  },
+                  "type": "video-carousel-item"
+                },
+                "video_carousel_item_RBR3Ce": {
+                  "blocks": {},
+                  "name": "Video item",
+                  "settings": {
+                    "card_text": "",
+                    "youtube_link": "https://www.youtube.com/shorts/KrnuZSNhqp8"
                   },
                   "type": "video-carousel-item"
                 },
@@ -828,8 +992,7 @@
                   "name": "Video item",
                   "settings": {
                     "card_text": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_4.png",
-                    "youtube_link": ""
+                    "youtube_link": "https://www.youtube.com/shorts/FKR3qsJEHjE"
                   },
                   "type": "video-carousel-item"
                 },
@@ -838,16 +1001,33 @@
                   "name": "Video item",
                   "settings": {
                     "card_text": "",
-                    "thumbnail": "shopify://shop_images/Rectangle_513_2.png",
-                    "youtube_link": ""
+                    "youtube_link": "https://www.youtube.com/shorts/62yR32tBUCM"
+                  },
+                  "type": "video-carousel-item"
+                },
+                "video_carousel_item_qJYc3V": {
+                  "blocks": {},
+                  "name": "Video item",
+                  "settings": {
+                    "card_text": "",
+                    "youtube_link": "https://www.youtube.com/shorts/jXrx6q-ed30"
+                  },
+                  "type": "video-carousel-item"
+                },
+                "video_carousel_item_tHJnnh": {
+                  "blocks": {},
+                  "name": "Video item",
+                  "settings": {
+                    "card_text": "",
+                    "youtube_link": "https://www.youtube.com/shorts/wMMC_3R_sxo"
                   },
                   "type": "video-carousel-item"
                 }
               },
               "name": "Video carousel",
               "settings": {
-                "heading": "Not Sure What’s Causing Your Hair Thinning?",
-                "subheading": "Watch short, expert-led videos that break down the real reasons behind shedding—and what to do next."
+                "heading": "YOUR HAIR IS TELLING YOU SOMETHING. LET’S DECODE IT.",
+                "subheading": "Watch short, expert-led videos that explain what’s actually driving your shedding — and what to do about it."
               },
               "type": "video-carousel"
             }
@@ -1053,8 +1233,8 @@
         },
         "stat_B69EbH": {
           "settings": {
-            "eyebrow": "UP TO",
-            "label": "Users saw improved scalp health",
+            "eyebrow": "REDUCTION",
+            "label": "IN STRESS SHEDDING",
             "number": "35%"
           },
           "type": "stat"
@@ -1062,23 +1242,23 @@
         "stat_UUzPJR": {
           "settings": {
             "eyebrow": "UP TO",
-            "label": "Users saw less shedding",
+            "label": "LESS SHEDDING IN 8 WEEKS",
             "number": "34%"
           },
           "type": "stat"
         },
         "stat_VMxEfe": {
           "settings": {
-            "eyebrow": "UP TO",
-            "label": "Users noticed stronger strands",
+            "eyebrow": "INCREASE",
+            "label": "IN ACTIVE GROWTH PHASE",
             "number": "78%"
           },
           "type": "stat"
         },
         "stat_xpGjre": {
           "settings": {
-            "eyebrow": "UP TO",
-            "label": "Visible satisfaction",
+            "eyebrow": "MORE THAN JUST A BIOTIN",
+            "label": "MULTI-PATHWAY FOLLICLE SUPPORT",
             "number": "9X"
           },
           "type": "stat"
@@ -1086,15 +1266,15 @@
       },
       "name": "Real results women",
       "settings": {
-        "after_image": "shopify://shop_images/image_5.png",
+        "after_image": "shopify://shop_images/Frame_1000008878_1_1.webp",
         "after_label": "After",
-        "before_image": "shopify://shop_images/image_6.png",
+        "before_image": "shopify://shop_images/Frame_1000008877_1.webp",
         "before_label": "Before",
         "border_color": "#d8cfc5",
         "card_bg": "#f8f4ee",
-        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>",
+        "description": "<p>Every ingredient in HairScripts™ was selected for results that have been clinically studied. Here’s what the science shows.</p>",
         "eyebrow": "",
-        "heading": "Real Results, From Real Women",
+        "heading": "What to expect",
         "heading_color": "#5e5147",
         "muted_color": "#8b7f74",
         "section_bg": "#ffffff",
@@ -1163,31 +1343,231 @@
     "who_this_is_for_HXUUtf": {
       "block_order": [
         "tab_HT6hPz",
-        "tab_ybTrBa"
+        "tab_ybTrBa",
+        "tab_Eqptd3",
+        "tab_FK3FPA",
+        "tab_P6KAdN",
+        "tab_AdLNeq",
+        "tab_JxHx7K",
+        "tab_6FcTgM",
+        "tab_hpVtkx",
+        "tab_RVUy6Y",
+        "tab_BrnfXX",
+        "tab_NNnCeN"
       ],
       "blocks": {
+        "tab_6FcTgM": {
+          "settings": {
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/TEXTURED_NATURAL_HAIR.webp",
+            "image_overlay_heading": "Growth means nothing if the strand can’t hold onto length.",
+            "image_overlay_text": "Key Ingredients: Hydrolyzed Collagen 300mg · MSM 150mg · L-Citrulline 250mg · Pea Protein 100mg · Hyaluronic Acid 50mg",
+            "label": "Textured & Natural Hair",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>Textured hair is already more vulnerable to dryness, breakage, and tension-related stress at the strand level. So when thinning starts, retention becomes just as important as growth.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW WE SOLVE IT",
+            "solution_text": "<p>HairScripts™ supports strand integrity, scalp health, and structural retention from within — helping support stronger-looking hair over time. Because growth means nothing if the strand can’t hold onto length.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_AdLNeq": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/HEAVY_MENSTRUAL_CYCLES.webp",
+            "image_overlay_heading": "Heavy periods quietly drain your ferritin. Your follicles feel it before your labs do.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Vitamin D · Zinc Bisglycinate 15mg · Hydrolyzed Collagen 300mg",
+            "label": "Heavy Menstrual Cycles",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>Heavy menstrual cycles deplete iron stores month after month. Your standard lab may still call your ferritin ‘normal’ — but your follicles need it above 70 ng/mL to stay in the active growth phase. That gap has been silently stalling your hair growth, sometimes for years, without anyone connecting your hair to your cycle.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ uses Ferrochel® — a chelated form of iron that’s 4x more bioavailable than ferrous sulfate. So your body actually absorbs the iron you’re taking, instead of passing most of it through. Combined with the cofactors iron needs to do its job at the follicle.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_BrnfXX": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/HIGH-PERFORMING_WOMEN_IN_DEMANDING_CAREERS.webp",
+            "image_overlay_heading": "Chronic stress is the quiet driver of cortisol-mediated shedding.",
+            "image_overlay_text": "Key Ingredients: Ashwagandha 350mg · Tocopherols & Tocotrienols 25mg · L-Citrulline 250mg · Alpha-Lipoic Acid 100mg · Grape Seed Extract 100mg",
+            "label": "High-Performing Women",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>If you’re running a business, a household, a team — or all three — your cortisol has been elevated for longer than you realize. Chronic sympathetic nervous system dominance pushes follicles out of the growth phase, reduces scalp circulation, and accelerates oxidative damage at the follicle. The shedding doesn’t feel acute. It feels like a slow decline you can’t pinpoint.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ supports the cortisol regulation, circulation, and antioxidant defense your follicles lose access to under chronic stress. So you can keep performing without losing your hair as the cost.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_Eqptd3": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/HORMONAL_THINNING.webp",
+            "image_overlay_heading": "Hormonal thinning is rarely just hormonal.",
+            "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · L-Citrulline 250mg · CoQ10 80mg",
+            "label": "Hormonal Thinning",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>As hormone patterns shift, follicles can become more sensitive to androgen activity over time. That’s when thinning around the part, crown, and edges usually starts becoming more noticeable.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ supports healthy DHT activity, scalp circulation, and follicle energy production — helping support fuller-looking density at the root. Because hormonal thinning is rarely just hormonal.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_FK3FPA": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/STRESS-RELATED_SHEDDING.webp",
+            "image_overlay_heading": "High stress doesn’t always show up immediately in your hair.",
+            "image_overlay_text": "Key Ingredients: Ashwagandha 350mg · Tocopherols & Tocotrienols 25mg · L-Citrulline 250mg · Alpha-Lipoic Acid 100mg",
+            "label": " Stress-related Shedding",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>High stress doesn’t always show up immediately in your hair. The shedding usually comes months later — after prolonged cortisol signaling has already pushed follicles into early dormancy.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ was formulated to support stress-related shedding at the source. It helps support healthy cortisol balance while reinforcing the growth environment follicles depend on.</p>"
+          },
+          "type": "tab"
+        },
         "tab_HT6hPz": {
           "settings": {
-            "image": "shopify://shop_images/Rectangle_534_1.webp",
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/POSTPARTUM_SHEDDING.webp",
+            "image_overlay_heading": "YOUR HAIR DIDN’T BETRAY YOU.\nYOUR HORMONES JUST DROPPED OFF A CLIFF.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Ashwagandha 350mg · Vitamin D · Hydrolyzed Collagen 300mg",
             "label": "Postpartum shedding",
             "problem_heading": "Hair Loss",
             "problem_label": "THE PROBLEM",
-            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "problem_text": "<p>After pregnancy, hormone levels shift fast. At the same time, iron stores are often depleted. That combination can push follicles out of the growth phase early which is why shedding suddenly feels excessive weeks or months later.</p>",
             "solution_heading": "More Than One Formula",
-            "solution_label": "HAIRSCRIPT",
-            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ supports both pathways simultaneously. It helps support healthy follicle cycling, iron-dependent growth signaling, and stress-related shedding support without making you figure it all out yourself.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_JxHx7K": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/PCOS_INSULIN_RESISTANCE.webp",
+            "image_overlay_heading": "Elevated androgens. Insulin sensitivity issues. Thinning at the crown.",
+            "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · Alpha-Lipoic Acid 100mg · Zinc Bisglycinate 15mg · Vitamin D",
+            "label": "PCOS & Insulin Resistance",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>PCOS and insulin resistance both raise androgen activity at the follicle, even in women who don’t have a formal PCOS diagnosis. Elevated insulin signals the body to overproduce androgens and lowers the protein that keeps free testosterone in check. The result: more DHT activity at your follicles, concentrated thinning at the crown and part, and a hair loss pattern that doesn’t respond to topical treatments alone.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ goes upstream. It supports healthy DHT activity at the follicle while simultaneously supporting insulin sensitivity — because you cannot out-topical a metabolic driver.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_NNnCeN": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/WOMEN_WHO_HAVE_TRIED_EVERYTHING_ELSE.webp",
+            "image_overlay_heading": "Starting over keeps feeling exhausting because the formula was wrong.",
+            "image_overlay_text": "Key Ingredients: All 19 ingredients in the formula — working across 9 biological pathways simultaneously",
+            "label": "Women Who Have Tried Everything Else",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>Most products only target one pathway. Meanwhile your hair may be dealing with stress, hormones, inflammation, circulation issues, and nutrient depletion — all at once. That’s why starting over keeps feeling exhausting.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ was built differently. Instead of forcing you to figure out the exact trigger first, it addresses every root cause of thinning simultaneously. So even when you don’t have all the answers yet — you’re still covered.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_P6KAdN": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/GLP-1_MEDICATION_USERS.webp",
+            "image_overlay_heading": "Rapid weight loss can trigger nutrient depletion and shedding 2–4 months in.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Zinc Bisglycinate 15mg · Vitamin D 125% DV · Hydrolyzed Collagen 300mg · Pea Protein 100mg · Ashwagandha 350mg",
+            "label": "GLP-1 Medication Users",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>LP-1 medications like Ozempic, Wegovy, Mounjaro, and Zepbound work by significantly reducing appetite — which often means significantly reducing protein, iron, zinc, and Vitamin D intake. Combined with the metabolic stress of rapid weight loss, this triggers telogen effluvium that shows up 2–4 months in. Most women don’t connect their shedding to the medication until it’s already significant.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ was built to address exactly this gap. Bioavailable iron, zinc, and Vitamin D directly replace what GLP-1 users lose. Collagen and pea protein support strand structure when daily protein intake drops. Ashwagandha addresses the cortisol response that accompanies major metabolic shifts.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_RVUy6Y": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/POST-ILLNESS_OR_POST-SURGERY_RECOVERY.webp",
+            "image_overlay_heading": "Major physical stress pushes follicles into mass dormancy. The shedding comes later.",
+            "image_overlay_text": "Key Ingredients: Vitamin D 125% DV · Ferrochel® Iron · Zinc · Ashwagandha 350mg · Hydrolyzed Collagen 300mg · Pea Protein 100mg · CoQ10 80mg",
+            "label": "Post-Illness or Post-Surgery Recovery",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>After a major illness, surgery, COVID, or significant medical event, your body redirects every available resource to survival and healing. Your follicles — biologically non-essential during recovery — get pushed into the resting phase in large numbers. The shedding doesn’t show up during the recovery itself. It shows up 2–4 months later, just when you thought you were getting back to normal.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ was formulated to address exactly this kind of acute physical stress shedding. It supports the full nutritional foundation your body depleted during recovery, the cortisol axis that’s been running on overdrive, and the follicle environment that needs to be reactivated.</p>"
+          },
+          "type": "tab"
+        },
+        "tab_hpVtkx": {
+          "settings": {
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/NUTRITIONAL_DEFICIENCY-DRIVEN_THINNING.webp",
+            "image_overlay_heading": "Your follicles may not be getting what they need — even with a healthy diet.",
+            "image_overlay_text": "Key Ingredients: Ferrochel® Iron · Zinc Bisglycinate · Vitamin D 125% DV · Selenium 127% DV · Copper · Niacin · Black Pepper Fruit Extract (absorption)",
+            "label": "Nutritional Deficiency",
+            "problem_heading": "Hair Loss",
+            "problem_label": "THE PROBLEM",
+            "problem_text": "<p>Even with a healthy diet, your follicles may still not be getting what they need. Low iron, low Vitamin D, poor absorption, and chronic stress can all interfere with healthy growth signaling.</p>",
+            "solution_heading": "More Than One Formula",
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ uses bioavailable ingredients your body can actually utilize — helping support nutrient absorption, follicle energy, and healthy growth support simultaneously. No guessing. No piecing together multiple supplements.</p>"
           },
           "type": "tab"
         },
         "tab_ybTrBa": {
           "settings": {
-            "label": "Postpartum shedding",
+            "bottom_box_logo": "shopify://shop_images/logo_2.svg",
+            "bottom_box_logo_width": 160,
+            "bottom_box_logo_width_mobile": 140,
+            "image": "shopify://shop_images/PERIMENOPAUSE_MENOPAUSE.webp",
+            "image_overlay_heading": "Estrogen drops. Androgen sensitivity climbs. Your hair feels it first.",
+            "image_overlay_text": "Key Ingredients: Saw Palmetto 320mg · Beta-Sitosterol 120mg · Ashwagandha 350mg · Selenium · Vitamin D · Tocopherols & Tocotrienols 25mg",
+            "label": " Perimenopause & Menopause",
             "problem_heading": "Hair Loss",
             "problem_label": "THE PROBLEM",
-            "problem_text": "<p>The hair loss after delivery usually is a hormonal event followed within depletion that hits follicles from two directions at once.</p>",
+            "problem_text": "<p>As estrogen declines during perimenopause and menopause, the protective hormonal environment that kept your follicles in the growth phase starts to disappear. At the same time, your follicles become more sensitive to androgen activity. That’s why thinning at the part, crown, and edges shows up exactly when everything else feels like it’s shifting too.</p>",
             "solution_heading": "More Than One Formula",
-            "solution_label": "HAIRSCRIPT",
-            "solution_text": "<p>HairScripts was formulated to support both pathways, not just one.</p>"
+            "solution_label": "HOW HAIRSCRIPTS™ SUPPORTS IT:",
+            "solution_text": "<p>HairScripts™ supports healthy DHT activity, hormonal balance, cortisol regulation, and the antioxidant defense your follicles lose access to as estrogen drops — all in one daily formula.</p>"
           },
           "type": "tab"
         }
@@ -1207,7 +1587,7 @@
         "pill_border_color": "#d8d1c4",
         "pill_text_color": "#f7efe4",
         "section_bg": "#6e9fa4",
-        "text": "<p>Formulated for her specific experience. Hair thinning has a root cause. This formula was built around the patterns they see most.</p>",
+        "text": "<p>Formulated for her specific experience. Hair thinning has a root cause — and almost every woman has one. This formula was built around the 12 patterns Bevy sees most. If you see yourself anywhere on this page, you’re in the right place.</p>",
         "text_color": "#f5f0e8",
         "top_box_bg": "#f4eee5",
         "top_box_text": "#6c6257"

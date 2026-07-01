@@ -46,7 +46,10 @@
           "blocks": {}
         }
       },
-      "block_order": ["announcement_CnJyLh", "announcement_BxgCk9"],
+      "block_order": [
+        "announcement_CnJyLh",
+        "announcement_BxgCk9"
+      ],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -133,7 +136,7 @@
         "cart_drawer_upsell_enable": true,
         "cart_drawer_upsell_banner_text": "SAVE UP TO 30% OFF",
         "cart_drawer_upsell_banner_color": "#237b84",
-        "cart_drawer_upsell_product": "hairscripts-by-bevy-supplement",
+        "cart_drawer_upsell_product": "hairscripts-by-bevy-supplement-90-days",
         "cart_drawer_upsell_product_handle": "",
         "cart_drawer_upsell_heading": "",
         "cart_drawer_upsell_billing_note": "Billed at $387.00 after 12 weeks",
@@ -154,5 +157,8 @@
       }
     }
   },
-  "order": ["header_announcements_9jGBFp", "header_section"]
+  "order": [
+    "header_announcements_9jGBFp",
+    "header_section"
+  ]
 }
